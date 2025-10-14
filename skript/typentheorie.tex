@@ -1,0 +1,101 @@
+Eine Gemeinsamkeit mit der Ihnen vertrauten Art Mathematik zu betreiben, ist, dass wir auch weiterhin Buchstaben verwenden, um komplexere Ausdrücke abzukürzen und Funktionen zu definieren - etwa ``$x\mapsto x+1$''. In der Typentheorie gibt es Terme, die wir auch Elemente nennen werden, und Typen. Ein Term hat stets einen Typ. Zum Beispiel werden wir mit ``$n:\N$'' später ausdrücke können, dass $n$ ein Term des Typs $\N$ der natürlichen Zahlen. ``$n:\N$'' ist ein \begriff{Urteil}.
+In der Homotopietypentheorie gibt es vier grundlegende Urteile:
+
+\begin{center}
+  \begin{tabular}{ll}
+    Urteil                        & Bedeutung \\
+    \hline
+    $ t : A$         & $t$ ist ein Term vom Typ $A$ \\
+    $ A$ Typ         & $A$ ist ein Typ \\
+    $ A\equiv B$     & $A$ und $B$ sind (urteils-)gleiche Typen \\
+    $ t\equiv s : A$ & $t$ und $s$ sind (urteils-)gleiche Terme des Typs $A$ \\
+  \end{tabular}
+  \label{tab:urteile}
+\end{center}
+
+\subsection{Einfache Typentheorie zum Einstieg}
+Wir werden in diesem Abschnitt eine einfache Typentheorie betrachten.
+Typentheorien bestehen aus einer Liste von Regeln - unsere erste Regel ist:
+\begin{center}
+ Wenn $A$ und $B$ Typen sind, dann ist $A\to B$ ein Typ.
+\end{center}
+Regeln, die es erlauben neue Typen zu produzieren, werden auch \begriff{Typformer} genannt.
+Das Urteil $f:A\to B$ bedeutet nun dass $f$ ein Term des Typs $A\to B$ ist (also eine Funktion).
+Um Terme des Typs $A\to B$ zu konstruieren, muss unter der Annahme $x:A$ ein Term $b(x):B$ angegeben werden:
+\begin{center}
+  Ist unter der Annahme $x:A$ ein Term $b(x):B$ gegeben, so ist $x\mapsto b(x) : A\to B$.
+\end{center}
+Regeln die Terme konstruieren nennen wir \begriff{Konstruktoren}\footnote{In der literatur ``Introduction rules''.}.
+Schließlich gibt es eine Regel, die es erlaubt Terme des Typs $A\to B$ zu \emph{verwenden}:
+\begin{center}
+  Seien $f:A\to B$ und $x:A$, dann gibt es einen Term $f(x):B$.
+\end{center}
+Regeln dieser Art werden \begriff{Eliminatoren} genannt.
+\begin{beispiel}
+\begin{enumerate}[(a)]
+\item Für Typen $A,B,C$ gibt es stets eine Funktion $s$ des Typs
+  \[
+    (A\to (B\to C)) \to (B\to (A\to C))
+  \]
+  gegeben durch $f\mapsto (x\mapsto (y \mapsto f(y)(x))$.
+\item Wenn wir für einen Moment annehmen, wir hätten bereits einen Typ $\N$ der natürlichen Zahlen und $+:\N\to(\N\to \N)$ dann können wir die folgende Funktion definieren:
+\begin{align*}
+  d:&\N\to\N \\
+    & x\mapsto x+x
+\end{align*}
+\end{enumerate}
+\end{beispiel}
+Wir verwenden das Zeichen $\colonequiv$ für Definitionen.
+Der Text im Beispiel entspricht also der Definition $s\colonequiv f\mapsto (x\mapsto (y \mapsto f(y)(x))$.
+Das Symbol $\colonequiv$ passt zusammen mit der definitionalen Gleichheit in der Homotopietypentheorie $\equiv$. Solche Gleichheiten bekommen wir mit den folgenden Regeln:
+\begin{center}
+  Für $b(x):B$ unter der Annahme $x:A$ und $a:A$ gilt $(x\mapsto b(x))(a)\equiv b(a)$.
+\end{center}
+Regeln, die auf diese Art Konstruktoren und Eliminatoren verbinden heißen \begriff{Berechnungsregeln}\footnote{In der Literatur ``computation rules''.}
+Speziell für Funktionen gibt es noch die sogenannte ``$\eta$-rule'':
+\begin{center}
+  Für $f:A\to B$ gilt $f\equiv x\mapsto f(x)$.
+\end{center}
+
+\subsection{Abhängige Funktionen}
+Wir wollen nun die Regeln des letzten Abschnitts verallgemeinern.
+Dafür gibt es verschiedene Gründe. Der wichtigste ist, dass wir Prädikate in der Typentheorie haben wollen und einen verallgemeinerten Funktionstyp als $\forall$-quantor verwenden wollen.
+
+Ein abhängiger Typ ist nichts weiter als ein Ausdruck $B(x)$, der unter der Annahme $x:A$ ein Typ ist.
+
+\begin{beispiel}
+  Wir greifen etwas vorweg um konkrete Beispiele zu geben.
+  Für $n:\N$ werden wir noch einen Typ $L(n)$ der Listen der Länge $n$ von natürlichen Zahlen konstruieren. Weiter wird es später auch möglich sein, etwa den Typ der Teiler einer natürlichen Zahl zu definieren. Oder einen Typ, der genau dann Terme hat, wenn eine natürliche Zahl eine andere teilt.
+\end{beispiel}
+
+Die Regeln für Funktionstypen aus dem letzten Abschnitt lassen sich nun wie folgt für \begriff{abhängige Funktionen} verallgemeinern:
+
+\begin{center}
+\begin{tabular}{l}
+  Sei für $x:A$ ein Typ $B(x)$ gegeben, dann ist $(x:A)\to B(x)$\index{$(x:A)\to B(x)$} ein Typ. \\
+  Sei für $x:A$ ein Term $b(x):B(x)$ gegeben, dann ist $x\mapsto b(x) : (x:A)\to B(x)$\index{$x\mapsto b(x)$}. \\
+  Für $f:(x:A)\to B(x)$ und $a:A$ gibt es $f(a):B(a)$. \\
+  Sei für $x:A$ ein Term $b(x):B(x)$ gegeben und $a:A$, dann $(x\mapsto b(x))(a)\equiv b(a)$. \\
+  Für $f:(x:A)\to B(x)$ ist $(x\mapsto f(x))\equiv f$.
+\end{tabular}
+\end{center}
+
+Statt $(x:A)\to B(x)$ schreiben wir auch $\prod_{x:A}B(x)$.
+Falls $B(x)$ konstant ein Typ $C$ ist, schreiben wir auch $A\to C$ und sind damit kompatibel zum vorangegangenen Abschnitt.
+Außerdem ist es manchmal hilfreich mehr Typen anzugeben als unbedingt notwendig - zum Beispiel hilft es zur Lesbarkeit den Typ der Variable in Funktionsausdrücken anzugeben: $(x:A)\mapsto b(x)$\index{$(x:A)\mapsto b(x)$}.
+
+\subsection{Natürliche Zahlen}
+Ähnlich wie bei dem Funktionstyp beschreiben wir die natürlichen Zahlen auch darüber, wie man Elemente erzeugen und verwenden kann.
+Die Formierungsregel ist denkbar einfach: Es gibt einen Typ $\N$\index{$\N$}.
+
+Die \begriff{natürlichen Zahlen} $\N$ haben \emph{zwei} Konstruktoren:
+\begin{center}
+\begin{tabular}{l}
+  Es gibt $0:\N$. \\
+  Für jedes $n:\N$ gibt es einen Nachfolger $S(n):\N$.
+\end{tabular}
+\end{center}
+Dass wir hier ``Nachfolger'' schreiben hat keine formale Bedeutung.
+\begin{beispiel}
+Wir können nun natürliche Zahlen angeben: $0$, $1\colonequiv S(0)$, $2\colonequiv S(1)$, \dots.
+\end{beispiel}
