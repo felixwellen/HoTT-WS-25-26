@@ -13,8 +13,8 @@ In der Homotopietypentheorie gibt es vier grundlegende Urteile:
   \label{tab:urteile}
 \end{center}
 
-\subsection{Einfache Typentheorie zum Einstieg}
-Wir werden in diesem Abschnitt eine einfache Typentheorie betrachten.
+\subsection{Funktionen in einfacher Typentheorie}
+Wir werden in diesem Abschnitt ein Fragment einer einfachen Typentheorie betrachten - ``einfach'' bedeutet hier, dass es sich noch nicht um eine abhängige Typentheorie handelt.
 Typentheorien bestehen aus einer Liste von Regeln - unsere erste Regel ist:
 \begin{center}
  Wenn $A$ und $B$ Typen sind, dann ist $A\to B$ ein Typ.
@@ -45,6 +45,11 @@ Regeln dieser Art werden \begriff{Eliminatoren} genannt.
 \end{align*}
 \end{enumerate}
 \end{beispiel}
+
+Im ersten Beispiel haben wir gesehen, dass sich Funktionen in zwei Argumenten durch iterierte Typformierung ``$A\to (B\to C)$'' ausdrücken lassen. Man beachte dass das nicht der gleiche Typ wie ``$(A\to B)\to C$'' ist.
+\begin{konvention}
+  Seien $A,B,C$ Typen. $A\to B\to C$ bezeichnet den Typ $A\to (B\to C)$.
+\end{konvention}
 Wir verwenden das Zeichen $\colonequiv$ für Definitionen.
 Der Text im Beispiel entspricht also der Definition $s\colonequiv f\mapsto (x\mapsto (y \mapsto f(y)(x))$.
 Das Symbol $\colonequiv$ passt zusammen mit der definitionalen Gleichheit in der Homotopietypentheorie $\equiv$. Solche Gleichheiten bekommen wir mit den folgenden Regeln:
@@ -56,6 +61,26 @@ Speziell für Funktionen gibt es noch die sogenannte ``$\eta$-rule'':
 \begin{center}
   Für $f:A\to B$ gilt $f\equiv x\mapsto f(x)$.
 \end{center}
+
+Wir kommen nun zu unseren ersten Definitionen:
+\begin{definition}
+  Sei $A$ ein Typ. Dann bezeichnen wir den Term $x\mapsto x:A\to A$ mit $\id_A$.
+\end{definition}
+
+\begin{definition}
+  Seien $A,B,C$ Typen. Dann ist $\circ:(B\to C)\to (A\to B) \to (A\to C)$ gegeben durch
+  \[
+    g\mapsto (f\mapsto (x\mapsto g(f(x))))
+  \]
+  Wir schreiben wie gewohnt $g\circ f$ statt $\circ(g)(f)$.
+\end{definition}
+
+\begin{bemerkung}
+\begin{enumerate}
+\item Für $f:A\to B$ gilt stets $f\circ \id_A\equiv f\equiv \id_B\circ f$. 
+\item In den Übungen werden wir sehen: $h \circ (g\circ f)\equiv (h\circ g)\circ f$.
+\end{enumerate}
+\end{bemerkung}
 
 \subsection{Abhängige Funktionen}
 Wir wollen nun die Regeln des letzten Abschnitts verallgemeinern.
@@ -92,10 +117,67 @@ Die \begriff{natürlichen Zahlen} $\N$ haben \emph{zwei} Konstruktoren:
 \begin{center}
 \begin{tabular}{l}
   Es gibt $0:\N$. \\
-  Für jedes $n:\N$ gibt es einen Nachfolger $S(n):\N$.
+  Für jedes $n:\N$ gibt es einen Nachfolger $S(n):\N$\index{$S(n)$}.
 \end{tabular}
 \end{center}
 Dass wir hier ``Nachfolger'' schreiben hat keine formale Bedeutung.
 \begin{beispiel}
 Wir können nun natürliche Zahlen angeben: $0$, $1\colonequiv S(0)$, $2\colonequiv S(1)$, \dots.
 \end{beispiel}
+Der Eliminator ist auf den ersten Blick vielleicht etwas undurchsichtig, wird aber sicher schnell klarer durch Beispiele:
+\begin{center}
+  Sei $P(x)$ ein Typ für $x:\N$.
+  Seien weiter $p_0:P(0)$ und $p_S:(x:\N)\to (P(x)\to P(S(x)))$ dann gibt es
+  $\elim_\N(p_0,p_S):(x:\N)\to P(x)$.
+\end{center}
+Wir betrachten zunächst den Fall, dass $P(x)$ konstant ein Typ $A$ ist.
+Dann sind die ``Eingangsdaten'' für den Eliminator ein $a:A$ und eine Funktion $\N\to (A\to A)$.
+In diesem Fall spricht man auch von \begriff{Rekursion}.
+Wenn man eine Funktion $f:\N\to A$ durch Rekursion definiert, gibt man üblicherweise an, was im Fall $n\equiv 0$ passiert und wie man aus $f(n)$ den nächsten Wert $f(n+1)$ konstruiert.
+Diese beiden Fälle entsprechen genau den Daten $a:A$ und $r:\N\to (A\to A)$.
+\begin{beispiel}
+  Wir können Verdopplung $d:\N\to \N$ von natürlichen Zahlen definieren durch:
+  \[d\colonequiv \elim_\N(0,n\mapsto (k\mapsto S(S(k))))\rlap{.}\]
+\end{beispiel}
+Um die soeben definierte Funktion testen zu können, benötigen wir die Berechnungsregel für $\N$:
+\begin{center}
+  Sei $P(x)$ ein Typ für $x:\N$.
+  Seien weiter $p_0:P(0)$, $p_S:(x:\N)\to (P(x)\to P(S(x)))$ und $n:\N$
+  dann gelten $\elim_\N(p_0,p_S)(0)\equiv p_0$ und $\elim_\N(p_0,p_S)(S(n))\equiv p_S(n)(\elim_\N(p_0,p_S)(n))$.
+\end{center}
+Damit können wir nun zum Beispiel berechnen:
+\begin{align*}
+  d(2)&\equiv \elim_\N(0,n\mapsto (k\mapsto S(S(k))))(S(1)) \\
+      &\equiv (n\mapsto (k\mapsto S(S(k))))(1)(\elim_\N(0,n\mapsto (k\mapsto S(S(k))))) \\
+      &\equiv (k\mapsto S(S(k)))(\elim_\N(0,n\mapsto (k\mapsto S(S(k))))(1)) \\
+      &\equiv S(S(\elim_\N(0,n\mapsto (k\mapsto S(S(k))))(S(0)))) \\
+      &\equiv S(S((n\mapsto (k\mapsto S(S(k))))(0)(\elim_\N(0,n\mapsto (k\mapsto S(S(k))))(0)))) \\
+      &\equiv S(S((k\mapsto S(S(k)))(\elim_\N(0,n\mapsto (k\mapsto S(S(k))))(0)))) \\
+      &\equiv S(S(S(S(0)))) \\
+      &\equiv 4
+\end{align*}
+
+Um definitionen übersichtlicher darzustellen, verwenden wir \begriff{Pattern-matching}:
+
+\begin{konvention}
+  Definitionen wie in obigem Beispiel schreiben wir auch in der folgenden Form
+  \begin{align*}
+    d(0)&\colonequiv 0 \\
+    d(S(n))&\colonequiv S(S(d(n))) 
+  \end{align*}
+  - wenn die Übersetzung in Eliminatoraufrufe klar ist.
+\end{konvention}
+
+Mit $A\equiv \N\to\N$ wählen und die Addition definieren.
+\begin{definition}
+  Die Funktion $+:\N\to (\N\to \N)$ ist gegeben durch
+  \begin{align*}
+    +:&\N\to (\N\to \N) \\
+      +(0)&\colonequiv \id_\N \\
+     +(S(n))&\colonequiv k\mapsto S(+(n)(k))
+  \end{align*}
+  Wir schreiben wie gewohnt auch ``$a+b$''.
+\end{definition}
+
+\subsection{Der Beweisassistent Agda}
+Agda ist ein Programm, in dem wir Terme und Typen in abhängiger Typentheorie eingeben und prüfen können, ob diese den Regeln entsprechen. Agda kann man hier online testen: \url{https://agdapad.quasicoherent.io/}. Und hier findet man eine Anleitung zur Installation: \url{https://agda.readthedocs.io/en/latest/getting-started/installation.html}. Für die meisten Linux-Distributionen sollte es einfach genügen aktuelle Pakete geben.

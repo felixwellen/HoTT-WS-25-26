@@ -23,6 +23,10 @@
 \RequirePackage{polyglossia}
 \setdefaultlanguage{german}
 
+% Referenzen
+\RequirePackage[backend=biber,style=alphabetic, backref, backrefstyle=none]{biblatex}
+\addbibresource{../util/literatur.bib}
+
 % Grafiken
 \RequirePackage{tikz}
 \usetikzlibrary{arrows, cd, babel}
