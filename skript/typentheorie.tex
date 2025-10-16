@@ -77,7 +77,16 @@ Wir kommen nun zu unseren ersten Definitionen:
 
 \begin{bemerkung}
 \begin{enumerate}
-\item Für $f:A\to B$ gilt stets $f\circ \id_A\equiv f\equiv \id_B\circ f$. 
+\item Für $h:A\to B$ gilt stets $h\circ \id_A\equiv h\equiv \id_B\circ h$.
+  Das lässt sich durch auffalten der Definitionen von ``$\circ$'' und ``$\id_A$'', mehrfaches Anwenden der Berechnungsregel und schließlich einer Anwendung der $\eta$-Regel zeigen - wir zeigen nur $h\circ \id_A\equiv h$:
+  \begin{align*}
+    h\circ \id_A &\equiv (g\mapsto (f\mapsto (x\mapsto g(f(x)))))(h)(\id_A) \\
+    &\equiv (f\mapsto (x\mapsto h(f(x))))(\id_A) \\
+    &\equiv x\mapsto h(\id_A(x)) \\
+    &\equiv x\mapsto h((y\mapsto y)(x)) \\
+    &\equiv x\mapsto h(x) \\
+    &\equiv h
+  \end{align*}
 \item In den Übungen werden wir sehen: $h \circ (g\circ f)\equiv (h\circ g)\circ f$.
 \end{enumerate}
 \end{bemerkung}
@@ -95,15 +104,15 @@ Ein abhängiger Typ ist nichts weiter als ein Ausdruck $B(x)$, der unter der Ann
 
 Die Regeln für Funktionstypen aus dem letzten Abschnitt lassen sich nun wie folgt für \begriff{abhängige Funktionen} verallgemeinern:
 
-\begin{center}
-\begin{tabular}{l}
-  Sei für $x:A$ ein Typ $B(x)$ gegeben, dann ist $(x:A)\to B(x)$\index{$(x:A)\to B(x)$} ein Typ. \\
-  Sei für $x:A$ ein Term $b(x):B(x)$ gegeben, dann ist $x\mapsto b(x) : (x:A)\to B(x)$\index{$x\mapsto b(x)$}. \\
-  Für $f:(x:A)\to B(x)$ und $a:A$ gibt es $f(a):B(a)$. \\
-  Sei für $x:A$ ein Term $b(x):B(x)$ gegeben und $a:A$, dann $(x\mapsto b(x))(a)\equiv b(a)$. \\
-  Für $f:(x:A)\to B(x)$ ist $(x\mapsto f(x))\equiv f$.
-\end{tabular}
-\end{center}
+\begin{regeln}
+\begin{itemize}
+\item Sei für $x:A$ ein Typ $B(x)$ gegeben, dann ist $(x:A)\to B(x)$\index{$(x:A)\to B(x)$} ein Typ. 
+\item Sei für $x:A$ ein Term $b(x):B(x)$ gegeben, dann ist $x\mapsto b(x) : (x:A)\to B(x)$\index{$x\mapsto b(x)$}. 
+\item Für $f:(x:A)\to B(x)$ und $a:A$ gibt es $f(a):B(a)$. 
+\item Sei für $x:A$ ein Term $b(x):B(x)$ gegeben und $a:A$, dann $(x\mapsto b(x))(a)\equiv b(a)$. 
+\item Für $f:(x:A)\to B(x)$ ist $(x\mapsto f(x))\equiv f$.
+\end{itemize}
+\end{regeln}
 
 Statt $(x:A)\to B(x)$ schreiben wir auch $\prod_{x:A}B(x)$.
 Falls $B(x)$ konstant ein Typ $C$ ist, schreiben wir auch $A\to C$ und sind damit kompatibel zum vorangegangenen Abschnitt.
@@ -160,24 +169,99 @@ Damit können wir nun zum Beispiel berechnen:
 Um definitionen übersichtlicher darzustellen, verwenden wir \begriff{Pattern-matching}:
 
 \begin{konvention}
-  Definitionen wie in obigem Beispiel schreiben wir auch in der folgenden Form
+\begin{enumerate}[(a)]
+\item Definitionen der Form $f\colonequiv x\mapsto b(x)$ erlauben wir uns von nun an auch als
+  \begin{align*}
+    f(x)\colonequiv b(x)
+  \end{align*}
+  zu schreiben. 
+\item Definitionen wie in obigem Beispiel schreiben wir auch in der folgenden Form
   \begin{align*}
     d(0)&\colonequiv 0 \\
     d(S(n))&\colonequiv S(S(d(n))) 
   \end{align*}
   - wenn die Übersetzung in Eliminatoraufrufe klar ist.
+  Diese Form einer Definition nennen wir \begriff{Pattern-Matching}.
+\item (a) und (b) dürfen kombiniert werden, wie in der folgenden Definition von ``$+$''.
+\end{enumerate}
 \end{konvention}
 
-Mit $A\equiv \N\to\N$ wählen und die Addition definieren.
+Nun wählen wir $\N\to\N$ für den Zieltyp im Eliminator um die Addition zu definieren.
+Wie bei der Komposition ``$\circ$'' wollen wir eine Operatorschreibweise verwenden.
+Wir geben von nun an durch Untertriche vor, wo die Argumente eines Operators stehen sollen (``$\_+\_$'' unten) und verwenden die Operatorschreibweise direkt in der Definition.
 \begin{definition}
-  Die Funktion $+:\N\to (\N\to \N)$ ist gegeben durch
+  Die Funktion $\_+\_:\N\to (\N\to \N)$ ist gegeben durch
   \begin{align*}
-    +:&\N\to (\N\to \N) \\
-      +(0)&\colonequiv \id_\N \\
-     +(S(n))&\colonequiv k\mapsto S(+(n)(k))
+    \_+\_:&\N\to (\N\to \N) \\
+      0+n&\colonequiv n \\
+     S(n)+k&\colonequiv S(n+k)
   \end{align*}
-  Wir schreiben wie gewohnt auch ``$a+b$''.
 \end{definition}
 
+\begin{bemerkung}
+  Per Definition gilt $0+n\equiv n$, aber wir können nicht erwarten, dass auch $n+0\equiv n$ gilt.
+  Um die üblichen Gesetze der Addition auf den natürlichen Zahlen zu zeigen, brauchen wir die Objektgleichheit ``$=$'', die wir später einführen werden.
+\end{bemerkung}
+
+\subsection{Weitere induktive Typen}
+Die natürlichen Zahlen wie sie im letzten Abschnitt eingeführt wurden, sind ein Spezialfall eines
+\begriff{induktiven Typen}s. In diesem Abschnitt werden wir weitere Beispiele kennen lernen.
+
+Der \begriff{Einstyp} $\mathbf{1}$\index{$\mathbf{1}$} hat einen Konstruktor ohne Argumente.
+Daraus ergeben sich die folgenden Regeln:
+
+\begin{regeln}
+\begin{itemize}
+\item Es gibt den Typ $\mathbf{1}$. 
+\item Es gibt $\ast:\mathbf{1}$. 
+\item Für einen Typ $A(x)$ unter der Annahme $x:\mathbf{1}$ und $a:A(\ast)$
+gibt es $\elim_{\mathbf{1}}(a):(x:\mathbf{1})\to A(x)$.
+\item Für einen Typ $A(x)$ unter der Annahme $x:\mathbf{1}$ und $a:A(\ast)$
+gilt $\elim_{\mathbf{1}}(a)(\ast)\equiv a$.
+\end{itemize}
+\end{regeln}
+
+Ein noch minimalerer Fall ist der \begriff{leere Typ} $\emptyset$\index{$\emptyset$},
+der keinen Konstruktor hat und damit nur zwei Regeln:
+
+\begin{regeln}
+\begin{itemize}
+\item Es gibt den Typ $\emptyset$. 
+\item Sei $A(x)$ ein Typ für $x:\emptyset$, dann gibt es $\elim_\emptyset:(x:\emptyset)\to A(x)$.
+\end{itemize}
+\end{regeln}
+
+Es ist möglich, Typen als Parameter für induktive Definitionen zu verwenden.
+Ein wichtiges Beispiel, das uns noch begleiten wird, ist das \begriff{Koprodukt} $A\sqcup B$\index{$A\sqcup B$}, das ein induktiver Typ mit zwei Konstruktoren ist.
+
+\begin{regeln}
+Seien $A,B$ Typen.
+\begin{itemize}
+\item Es gibt den Typ $A\sqcup B$.
+\item Für jedes $a:A$ gibt es $\iota_1(a):A\sqcup B$.
+  Und für jedes $b:B$ gibt es $\iota_2(b):A\sqcup B$.
+\item Sei $P(x)$ ein Typ für $x:A\sqcup B$.
+  Für $p_1:(y:A)\to P(\iota_1(y))$ und $p_2:(z:A)\to P(\iota_2(z))$
+  gibt es $\elim_\sqcup(p_1,p_2):(x:A\sqcup B)\to P(x)$.
+\item Sei $P(x)$ ein Typ für $x:A\sqcup B$.
+  Für $p_1:(y:A)\to P(\iota_1(y))$ und $p_2:(z:A)\to P(\iota_2(z))$
+  gilt $\elim_\sqcup(p_1,p_2)(\iota_1(y))\equiv p_1(y)$ für $y:A$
+  und  $\elim_\sqcup(p_1,p_2)(\iota_2(z))\equiv p_1(z)$ für $z:B$.
+\end{itemize}
+\end{regeln}
+
+\begin{bemerkung}
+  Sei $A$ ein Typ. Es gibt Funktionen
+  \begin{center}
+  \begin{align*}
+    \varphi: &A\to \emptyset\sqcup A &\psi:\emptyset\sqcup A \to A \\
+    \varphi(a)&\colonequiv \iota_2(a) &\psi(\iota_2(a))\colonequiv a 
+\end{align*}
+\end{center}
+Die Pattern-Matching-Definition auf der rechten Seite ist vollständig, weil wir im Fall ``$\iota_1$'' auf den leeren Typ matchen und damit null Fälle zu klären haben.
+\end{bemerkung}
+
 \subsection{Der Beweisassistent Agda}
-Agda ist ein Programm, in dem wir Terme und Typen in abhängiger Typentheorie eingeben und prüfen können, ob diese den Regeln entsprechen. Agda kann man hier online testen: \url{https://agdapad.quasicoherent.io/}. Und hier findet man eine Anleitung zur Installation: \url{https://agda.readthedocs.io/en/latest/getting-started/installation.html}. Für die meisten Linux-Distributionen sollte es einfach genügen aktuelle Pakete geben.
+Agda ist ein Programm, in dem wir Terme und Typen in abhängiger Typentheorie eingeben und prüfen können, ob diese den Regeln entsprechen. Agda kann man hier online testen: \url{https://agdapad.quasicoherent.io/}. Und hier findet man eine Anleitung zur Installation: \url{https://agda.readthedocs.io/en/latest/getting-started/installation.html}. Für die meisten Linux-Distributionen sollte es einfach genügend aktuelle Pakete geben. Für Windows-Nutzer (und Leute die nicht in Emacs/Vi arbeiten möchten) ist es wahrscheinlich eine gute Idee, ``VS Code'' mit dem agda-mode plugin zu verwenden.
+
+In der ersten Übung werden wir uns Agda anschauen und mit diesen Aufgaben starten: \url{https://felix-cherubini.de/HoTT.agda}.
