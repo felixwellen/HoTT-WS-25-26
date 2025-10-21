@@ -286,10 +286,10 @@ Wir werden nun die Regeln für Gleichheit vorstellen und danach im Einzelnen erk
 \begin{itemize}
 \item Sei $A$ ein Typ und seinen weiter $x,y:A$. Dann ist $x=_Ay$\index{$x=_Ay$} ein Typ -- der \begriff{Gleichheitstyp}. Zur Abgrenzung von Urteilsgleichheit sprechen wir hier auch vom \begriff{Identitätstyp} oder \begriff{Objektgleichheit}\footnote{In der Literatur sind noch verbreitet: ``Propositional equality'', ``Paths'' und ``Typal equality''}. Wir schreiben manchmal auch nur $x=y$.
 \item Für $x:A$ gibt es $\refl_x:x=_Ax$\index{$\refl_x$}. Wir schreiben auch einfach $\refl$\index{$\refl$}.
-\item Sei $P(x,y,\gamma)$ ein Typ für $x,y:A$ und $\gamma:x=_Ay$.
+\item Sei $P(x,y, p)$ ein Typ für $x,y:A$ und $ p:x=_Ay$.
   Für $p_{x}:P(x,x,\refl_x)$ gibt es
   \[
-    \elim_{=,P}:(x\ y : A) \to (\gamma : x=_Ay) \to P(x,y,\gamma)\rlap{.}
+    \elim_{=,P}:(x\ y : A) \to ( p : x=_Ay) \to P(x,y, p)\rlap{.}
   \]
 \item \dots und es gilt $\elim_=(x,x,\refl_x)\equiv p_x$.
 \end{itemize}
@@ -329,7 +329,7 @@ Die folgenden zwei Operationen können einerseits als die übliche Symmetrie und
     \_^{-1} &: x=_Ay\to y=_Ax \\
     \refl_x^{-1}&\colonequiv \refl_x 
   \end{align*}
-  Wir können diese Definition mit dem Eliminator äquivalent wie folgt angeben ($P(x,y,\gamma)$ ist hier $y=_Ax$):
+  Wir können diese Definition mit dem Eliminator äquivalent wie folgt angeben ($P(x,y, p)$ ist hier $y=_Ax$):
   \[
      \_^{-1}\colonequiv \elim_=((x:A) \mapsto \refl_x)\rlap{.}
   \]
@@ -340,7 +340,7 @@ Die folgenden zwei Operationen können einerseits als die übliche Symmetrie und
   Die \begriff{Konkatenation} von Gleichheiten ist gegeben durch
   \begin{align*}
     \_\kon\_&:x=y\to y=z\to x=z \\
-    \refl_x\kon\gamma &\colonequiv \gamma
+    \refl_x\kon p &\colonequiv  p
   \end{align*}
   Als Eliminator: $\_\kon\_\colonequiv \elim_=((x:A)\mapsto \id_{x=z})$.
 \end{definition}
@@ -348,16 +348,16 @@ Die folgenden zwei Operationen können einerseits als die übliche Symmetrie und
 In der klassischen Mathematik ist es klar, dass Funktionen Gleichheit erhalten -- in der Typentheorie müssen wir das zeigen.
 Genauer gesagt, wollen wir eine Operation definieren, die Gleichheiten zwischen zwei Werten auf Gleichheiten zwischen den Bildern abbildet.
 Diese Operation wird typischerweise mit ``$\ap$'' wie ``application'' bezeichnet, weil man eine Funktion auf Gleichheiten anwendet. 
-Wir wollen das auch direkt in der Schreibweise ausdrücken und $f(\gamma)$ für eine Funktion $f:A\to B$ und eine Gleichheit $\gamma:x=y$ schreiben.
+Wir wollen das auch direkt in der Schreibweise ausdrücken und $f( p)$ für eine Funktion $f:A\to B$ und eine Gleichheit $ p:x=y$ schreiben.
 
 \begin{definition}\index{$\ap_f$}
-  Seien $f:A\to B$ eine Funktion $x,y:A$ und $\gamma:x=_Ay$.
+  Seien $f:A\to B$ eine Funktion $x,y:A$ und $ p:x=_Ay$.
   Dann ist
   \begin{align*}
     f(\_) &: x=_Ay\to f(x)=_Bf(y) \\
     f(\refl_x)&\colonequiv \refl_{f(x)}
   \end{align*}
-  die Anwendung von $f$ auf $\gamma$. Wir schreiben auch $\ap_f$ für $f(\_)$.
+  die Anwendung von $f$ auf $ p$. Wir schreiben auch $\ap_f$ für $f(\_)$.
 \end{definition}
 
 Nun können wir mehr konkrete Gleichheiten zeigen.
@@ -374,10 +374,10 @@ Nun können wir mehr konkrete Gleichheiten zeigen.
 \item Die zweite Gleichung gilt per Definition von $+$,
   für die erste, $n+0=n$, verwenden wir Induktion.
   Per Definition von $+$ haben wir $0+0\equiv 0$ und können diesen Fall somit durch $\refl_0$ klären.
-  Es bleit also ein Term in $S(n)+0=S(n)$ zu konstruieren, wobei wir $\gamma:n+0=n$ verwenden dürfen.
+  Es bleit also ein Term in $S(n)+0=S(n)$ zu konstruieren, wobei wir $ p:n+0=n$ verwenden dürfen.
   Per Definition von $+$ ist $S(n)+0\equiv S(n+0)$, womit unser Ziel eigentlich $S(n+0)=S(n)$ ist.
-  Das bekommen wir jetzt durch Anwenden der Funktion $S$ auf die Gleichheit $\gamma$, i.e.\ $S(\gamma):S(n+0)=S(n)$.
-\item Wir zeigen zunächst: Für alle $n,k:\N$ haben wir $\gamma_{n,k}S(n+k)=n+S(k)$.
+  Das bekommen wir jetzt durch Anwenden der Funktion $S$ auf die Gleichheit $ p$, i.e.\ $S( p):S(n+0)=S(n)$.
+\item Wir zeigen zunächst: Für alle $n,k:\N$ haben wir $ p_{n,k}S(n+k)=n+S(k)$.
   Wir verwenden Induktion über $n$.
   Für den ersten Fall müssen wir $S(0+k)=0+S(k)\equiv S(k)$ zeigen, wofür wir (a) verwenden können.
   Für $S(S(n)+k)=S(n)+S(k)$,
@@ -388,8 +388,19 @@ Nun können wir mehr konkrete Gleichheiten zeigen.
   Wir verwenden wieder Induktion über $n$.
   Der Fall für $0$ ist $k=k+0$, was durch Inversion aus (a) hervor geht.
   Für den Fall $S(n+k)=k+S(n)$ wenden wir zunächst $S$
-  auf die Induktionvoraussetzung an um $\zeta:S(n+k)=S(k+n)$ zu bekommen.
-  Damit ist $\zeta\kon\gamma_{k,n}$ eine Lösung.
+  auf die Induktionvoraussetzung an um $ r:S(n+k)=S(k+n)$ zu bekommen.
+  Damit ist $ r\kon p_{k,n}$ eine Lösung.
 \item Wird eine Aufgabe auf Übungsblatt 2 sein.
 \end{enumerate}
 \end{beweis}
+
+Die Gleichheitstypen eines jeden Typs tragen eine ähnliche Struktur bzgl $\kon$ wie wir gerade für $\N$ und $+$ gesehen haben -- bis auf die Kommutativität, dafür haben wir so etwas wie Inverse:
+
+\begin{lemma}
+\begin{enumerate}
+\item Für alle $ p:x=_Ay$ gilt: $ p\kon\refl_y=_{x=_Ay} p$ und $\refl_x\kon p= p$.
+\item Für alle $ p:x=_Ay$, $ q:y=_Az$, $ r:z=_Au$ gilt
+   $( p\kon q)\kon r= p\kon( q\kon r)$.
+\item Für alle $ p:x=y$ haben wir $ p\kon p^{-1}=\refl_x= p^{-1}\kon p$.
+\end{enumerate}
+\end{lemma}
