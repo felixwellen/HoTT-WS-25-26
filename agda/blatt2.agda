@@ -71,8 +71,14 @@ n+0≈n : (n : ℕ) → n + O ≈ n
 n+0≈n O = refl
 n+0≈n (S n) = ap S (n+0≈n n)
 
-{-
 n+k≈k+n : (n k : ℕ) → n + k ≈ k + n
 n+k≈k+n O k = n+0≈n k ⁻¹
-n+k≈k+n (S n) k = {!!}
--}
+n+k≈k+n (S n) k = ap S (n+k≈k+n n k) ∙ lemma k n
+  where
+  lemma : (n k : ℕ) → S(n + k) ≈ n + S k
+  lemma O k = refl
+  lemma (S n) k = ap S (lemma n k)
+
+test : (n k l : ℕ) → (n + k) + l ≈ n + (k + l)
+test O k l = refl
+test (S n) k l = ap S (test n k l)

@@ -362,13 +362,34 @@ Wir wollen das auch direkt in der Schreibweise ausdrücken und $f(\gamma)$ für 
 
 Nun können wir mehr konkrete Gleichheiten zeigen.
 
-\begin{bemerkung}
-  Für all $n:\N$ gilt $n+0=n$.
-\end{bemerkung}
+\begin{lemma}
+\begin{enumerate}[(a)]
+\item Für alle $n:\N$ gilt $n+0=n$ und $0+n=n$.
+\item Für alle $n,k:\N$ gilt $n+k=k+n$.
+\item Für alle $n,k,l:\N$ gilt $(n+k)+l=n+(k+l)$.
+\end{enumerate}
+\end{lemma}
 \begin{beweis}
-  Wir verwenden Induktion.
+\begin{enumerate}[(a)]
+\item Die zweite Gleichung gilt per Definition von $+$,
+  für die erste, $n+0=n$, verwenden wir Induktion.
   Per Definition von $+$ haben wir $0+0\equiv 0$ und können diesen Fall somit durch $\refl_0$ klären.
   Es bleit also ein Term in $S(n)+0=S(n)$ zu konstruieren, wobei wir $\gamma:n+0=n$ verwenden dürfen.
   Per Definition von $+$ ist $S(n)+0\equiv S(n+0)$, womit unser Ziel eigentlich $S(n+0)=S(n)$ ist.
-  Das bekommen wir jetzt durch anwenden der Funktion $S$ auf die Gleichheit $\gamma$, i.e.\ $S(\gamma):S(n+0)=S(n)$.
+  Das bekommen wir jetzt durch Anwenden der Funktion $S$ auf die Gleichheit $\gamma$, i.e.\ $S(\gamma):S(n+0)=S(n)$.
+\item Wir zeigen zunächst: Für alle $n,k:\N$ haben wir $\gamma_{n,k}S(n+k)=n+S(k)$.
+  Wir verwenden Induktion über $n$.
+  Für den ersten Fall müssen wir $S(0+k)=0+S(k)\equiv S(k)$ zeigen, wofür wir (a) verwenden können.
+  Für $S(S(n)+k)=S(n)+S(k)$,
+  was mit den Urteilsgleichheiten der Definition von $+$ zu $S(S(n+k))=S(n+S(k))$ wird,
+  wenden wir auf die ``Induktionsvoraussetzung'' $S(n+k)=n+S(k)$ die Funktion $S$ an.
+
+  Nun zur eigentlichen Gleichung $n+k=k+n$.
+  Wir verwenden wieder Induktion über $n$.
+  Der Fall für $0$ ist $k=k+0$, was durch Inversion aus (a) hervor geht.
+  Für den Fall $S(n+k)=k+S(n)$ wenden wir zunächst $S$
+  auf die Induktionvoraussetzung an um $\zeta:S(n+k)=S(k+n)$ zu bekommen.
+  Damit ist $\zeta\kon\gamma_{k,n}$ eine Lösung.
+\item Wird eine Aufgabe auf Übungsblatt 2 sein.
+\end{enumerate}
 \end{beweis}
