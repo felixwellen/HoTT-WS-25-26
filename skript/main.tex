@@ -1,6 +1,5 @@
 % latexmk -pdflatex='xelatex %O %S' -pvc -pdf main.tex
 \documentclass{../util/hott}
-
 \setenumerate[1]{label=(\alph*),topsep=0pt}
 \setenumerate[2]{label=(\roman*),topsep=0pt}
 
@@ -37,6 +36,14 @@ Diese werden wir noch um Axiome für \begriff{Funktionsextensionalität} und \be
 
 \section{Abhängige Typentheorie}
 \input{typentheorie.tex}
+
+\pagebreak
+\section{Homotopietypentheorie}
+
+\pagebreak
+\appendix
+\section{Appendix}
+\input{appendix.tex}
 
 \printindex
 

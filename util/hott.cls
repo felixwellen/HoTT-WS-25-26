@@ -58,4 +58,6 @@
 \theoremsymbol{\ensuremath{\Box}}
     \newtheorem{beweis}{Beweis}
 
+\raggedbottom
+
 \RequirePackage{../util/hott}

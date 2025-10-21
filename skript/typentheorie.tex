@@ -251,17 +251,124 @@ Seien $A,B$ Typen.
 \end{regeln}
 
 \begin{bemerkung}
-  Sei $A$ ein Typ. Es gibt Funktionen
-  \begin{center}
+Sei $A$ ein Typ. Es gibt Funktionen
   \begin{align*}
     \varphi: &A\to \emptyset\sqcup A &\psi:\emptyset\sqcup A \to A \\
     \varphi(a)&\colonequiv \iota_2(a) &\psi(\iota_2(a))\colonequiv a 
 \end{align*}
-\end{center}
 Die Pattern-Matching-Definition auf der rechten Seite ist vollständig, weil wir im Fall ``$\iota_1$'' auf den leeren Typ matchen und damit null Fälle zu klären haben.
 \end{bemerkung}
 
-\subsection{Der Beweisassistent Agda}
-Agda ist ein Programm, in dem wir Terme und Typen in abhängiger Typentheorie eingeben und prüfen können, ob diese den Regeln entsprechen. Agda kann man hier online testen: \url{https://agdapad.quasicoherent.io/}. Und hier findet man eine Anleitung zur Installation: \url{https://agda.readthedocs.io/en/latest/getting-started/installation.html}. Für die meisten Linux-Distributionen sollte es einfach genügend aktuelle Pakete geben. Für Windows-Nutzer (und Leute die nicht in Emacs/Vi arbeiten möchten) ist es wahrscheinlich eine gute Idee, ``VS Code'' mit dem agda-mode plugin zu verwenden.
+\subsection{Gleichheit}
+\begin{konvention}
+\begin{enumerate}[(a)]
+\item Statt $f(x)(y)$ schreiben wir auch $f(x,y)$.
+\item Typformer für Induktive Typen binden stärker als ``$\to$''. Wir können als zum Beispiel $A\to B\sqcup C$'' schreiben für Funktionen in ein Koprodukt.
+\item Wir sagen nun auch gelegentlich, dass wir \begriff{Induktion} verwenden und meinen damit, dass wir den Eliminator eines induktiven Typs verwenden.
+\end{enumerate}
+\end{konvention}
 
-In der ersten Übung werden wir uns Agda anschauen und mit diesen Aufgaben starten: \url{https://felix-cherubini.de/HoTT.agda}.
+Für die Addition auf den natürlichen Zahlen $\N$ gilt per definition für alle $n:\N$:
+\[
+  0+n\equiv n
+\]
+Jedoch ist es nicht möglich $n+0\equiv n$ zu zeigen, auch wenn wir für jedes konkrete $k:\N$ wie zum Beispiel 17 sehr wohl zeigen können, dass diese Urteilsgleichheit gilt.
+Wir können die Induktion nicht auf das Problem $n+0\equiv n$ anwenden, da es sich dabei nicht um einen abhängigen Typen, sondern um ein Urteil handelt.
+
+Wir wollen uns nun der eigentlichen Gleichheit zuwenden und von nun an mit ``gleich'' die im folgenden eingeführte Gleichheit meinen und nicht die Urteilsgleichheit.
+Die Gleichheit in der Homotopietypentheorie ist ein Typ, der nur für zwei Terme des gleichen Typs überhaupt geformt werden kann.
+So können wir etwa Fragen, ob zwei natürliche Zahlen gleich sind -- und in diesem Fall wird sich auch herausstellen, dass das eine entscheidbare Frage ist.
+
+Am Ende des letzten Abschnitts hatten wir bereits gesehen, dass Typen von anderen Typen abhängen können. Gleichheit ist ein Typ, der von \emph{Termen} eines Typs abhängt.
+Wir werden nun die Regeln für Gleichheit vorstellen und danach im Einzelnen erklären.
+
+\begin{regeln}
+\begin{itemize}
+\item Sei $A$ ein Typ und seinen weiter $x,y:A$. Dann ist $x=_Ay$\index{$x=_Ay$} ein Typ -- der \begriff{Gleichheitstyp}. Zur Abgrenzung von Urteilsgleichheit sprechen wir hier auch vom \begriff{Identitätstyp} oder \begriff{Objektgleichheit}\footnote{In der Literatur sind noch verbreitet: ``Propositional equality'', ``Paths'' und ``Typal equality''}. Wir schreiben manchmal auch nur $x=y$.
+\item Für $x:A$ gibt es $\refl_x:x=_Ax$\index{$\refl_x$}. Wir schreiben auch einfach $\refl$\index{$\refl$}.
+\item Sei $P(x,y,\gamma)$ ein Typ für $x,y:A$ und $\gamma:x=_Ay$.
+  Für $p_{x}:P(x,x,\refl_x)$ gibt es
+  \[
+    \elim_{=,P}:(x\ y : A) \to (\gamma : x=_Ay) \to P(x,y,\gamma)\rlap{.}
+  \]
+\item \dots und es gilt $\elim_=(x,x,\refl_x)\equiv p_x$.
+\end{itemize}
+\end{regeln}
+
+Der Eliminator wird auch Gleichheitsinduktion oder ``J-Rule'' genannt -- wir wollen uns für diesen Eliminator die Option lassen, das Motiv, $P$ im Index mit anzugeben.
+In Worten sagt dieser inetwa, dass es genug ist eine Konstruktion, die eine Gleichheit verwendet, für die reflexive Gleichheit ``$\refl_x:x=x$'' anzugeben.
+Umso erstaunlicher ist es, dass es möglich ist, diese Gleichheiten als Pfade in Räumen zu interpretieren. Wir werden immer mal wieder auf diese Sicht eingehen.
+
+Wir können nun Aussagen über die induktiven Typen aus dem vorangegangenen Abschnitt machen.
+\begin{bemerkung}
+  Für jedes $x:\eins$ gilt $x=\ast$.
+  Damit meinen wir, dass es einen Term des Typs $(x:\eins)\to x=\ast$ gibt.
+\end{bemerkung}
+\begin{beweis}
+  Wir verwenden den Eliminator für $\eins$.
+  Als Motiv verwenden wir $P(x)\colonequiv x=\ast$. Also müssen wir, um $(x:\eins)\to P(x)$ zu zeigen einen Term $P(\ast)$ finden. Der ist durch $\refl_\ast$ gegeben. 
+\end{beweis}
+
+\begin{bemerkung}
+  Sei $\zwei$ analog zu $\eins$ definiert, mit Konstruktoren $0_\zwei$ und $1_\zwei$.
+  Dann gilt $(x:\zwei)\to (x=0_\zwei)\sqcup (x=1_\zwei)$.
+\end{bemerkung}
+\begin{beweis}
+  Wir müssen ein Element des Typs $(x=0_\zwei)\sqcup (x=1_\zwei)$ prozieren.
+  Mit dem Eliminator, reicht es das für die Fälle $0_\zwei$ und $1_\zwei$ zu machen.
+  Das ist mit den Termen $\iota_1(\refl_{0_\zwei})$ und $\iota_2(\refl_{1_\zwei})$ erledigt.
+\end{beweis}
+
+Nun werden wir einige allgemeine Operationen auf Gleichheitstypen konstruieren.
+Die folgenden zwei Operationen können einerseits als die übliche Symmetrie und Transitivität von Äquivalenzrelationen gesehen werden, aber auch als Umdrehen und Aneinanderhängen von Pfaden in einem Raum.
+
+\begin{definition}
+  Seien $A$ ein Typ und $x,y:A$.
+  Die \begriff{Inversion}\index{$\_^{-1}$} von Gleichheiten ist gegeben durch
+  \begin{align*}
+    \_^{-1} &: x=_Ay\to y=_Ax \\
+    \refl_x^{-1}&\colonequiv \refl_x 
+  \end{align*}
+  Wir können diese Definition mit dem Eliminator äquivalent wie folgt angeben ($P(x,y,\gamma)$ ist hier $y=_Ax$):
+  \[
+     \_^{-1}\colonequiv \elim_=((x:A) \mapsto \refl_x)\rlap{.}
+  \]
+\end{definition}
+
+\begin{definition}
+  Seien $A$ ein Typ und $x,y,z:A$.
+  Die \begriff{Konkatenation} von Gleichheiten ist gegeben durch
+  \begin{align*}
+    \_\kon\_&:x=y\to y=z\to x=z \\
+    \refl_x\kon\gamma &\colonequiv \gamma
+  \end{align*}
+  Als Eliminator: $\_\kon\_\colonequiv \elim_=((x:A)\mapsto \id_{x=z})$.
+\end{definition}
+
+In der klassischen Mathematik ist es klar, dass Funktionen Gleichheit erhalten -- in der Typentheorie müssen wir das zeigen.
+Genauer gesagt, wollen wir eine Operation definieren, die Gleichheiten zwischen zwei Werten auf Gleichheiten zwischen den Bildern abbildet.
+Diese Operation wird typischerweise mit ``$\ap$'' wie ``application'' bezeichnet, weil man eine Funktion auf Gleichheiten anwendet. 
+Wir wollen das auch direkt in der Schreibweise ausdrücken und $f(\gamma)$ für eine Funktion $f:A\to B$ und eine Gleichheit $\gamma:x=y$ schreiben.
+
+\begin{definition}\index{$\ap_f$}
+  Seien $f:A\to B$ eine Funktion $x,y:A$ und $\gamma:x=_Ay$.
+  Dann ist
+  \begin{align*}
+    f(\_) &: x=_Ay\to f(x)=_Bf(y) \\
+    f(\refl_x)&\colonequiv \refl_{f(x)}
+  \end{align*}
+  die Anwendung von $f$ auf $\gamma$. Wir schreiben auch $\ap_f$ für $f(\_)$.
+\end{definition}
+
+Nun können wir mehr konkrete Gleichheiten zeigen.
+
+\begin{bemerkung}
+  Für all $n:\N$ gilt $n+0=n$.
+\end{bemerkung}
+\begin{beweis}
+  Wir verwenden Induktion.
+  Per Definition von $+$ haben wir $0+0\equiv 0$ und können diesen Fall somit durch $\refl_0$ klären.
+  Es bleit also ein Term in $S(n)+0=S(n)$ zu konstruieren, wobei wir $\gamma:n+0=n$ verwenden dürfen.
+  Per Definition von $+$ ist $S(n)+0\equiv S(n+0)$, womit unser Ziel eigentlich $S(n+0)=S(n)$ ist.
+  Das bekommen wir jetzt durch anwenden der Funktion $S$ auf die Gleichheit $\gamma$, i.e.\ $S(\gamma):S(n+0)=S(n)$.
+\end{beweis}

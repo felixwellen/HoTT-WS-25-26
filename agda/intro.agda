@@ -148,7 +148,7 @@ S n + k = S (n + k)
 
 
 
-
+{-
 -- 1
 _∘_ : {A B C : Set} → (B → C) → (A → B) → (A → C)
 g ∘ f = λ x → g (f x)
@@ -171,3 +171,4 @@ even (S n) = not (even n)
 =? O (S n) = false
 =? (S k) O = false
 =? (S k) (S n) = =? k n
+-}
