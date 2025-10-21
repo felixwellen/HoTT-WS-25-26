@@ -78,7 +78,3 @@ n+k≈k+n (S n) k = ap S (n+k≈k+n n k) ∙ lemma k n
   lemma : (n k : ℕ) → S(n + k) ≈ n + S k
   lemma O k = refl
   lemma (S n) k = ap S (lemma n k)
-
-test : (n k l : ℕ) → (n + k) + l ≈ n + (k + l)
-test O k l = refl
-test (S n) k l = ap S (test n k l)
