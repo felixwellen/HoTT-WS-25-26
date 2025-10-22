@@ -265,10 +265,11 @@ Die Pattern-Matching-Definition auf der rechten Seite ist vollständig, weil wir
 \item Statt $f(x)(y)$ schreiben wir auch $f(x,y)$.
 \item Typformer für Induktive Typen binden stärker als ``$\to$''. Wir können als zum Beispiel $A\to B\sqcup C$'' schreiben für Funktionen in ein Koprodukt.
 \item Wir sagen nun auch gelegentlich, dass wir \begriff{Induktion} verwenden und meinen damit, dass wir den Eliminator eines induktiven Typs verwenden.
+\item Gelegentlich schreiben wir das Motiv eines Eliminators, also $P(x)$ an den Eliminator: $\elim_{\N,P}(\dots)$.
 \end{enumerate}
 \end{konvention}
 
-Für die Addition auf den natürlichen Zahlen $\N$ gilt per definition für alle $n:\N$:
+Für die Addition auf den natürlichen Zahlen $\N$ gilt per Definition für alle $n:\N$:
 \[
   0+n\equiv n
 \]
@@ -287,16 +288,16 @@ Wir werden nun die Regeln für Gleichheit vorstellen und danach im Einzelnen erk
 \item Sei $A$ ein Typ und seinen weiter $x,y:A$. Dann ist $x=_Ay$\index{$x=_Ay$} ein Typ -- der \begriff{Gleichheitstyp}. Zur Abgrenzung von Urteilsgleichheit sprechen wir hier auch vom \begriff{Identitätstyp} oder \begriff{Objektgleichheit}\footnote{In der Literatur sind noch verbreitet: ``Propositional equality'', ``Paths'' und ``Typal equality''}. Wir schreiben manchmal auch nur $x=y$.
 \item Für $x:A$ gibt es $\refl_x:x=_Ax$\index{$\refl_x$}. Wir schreiben auch einfach $\refl$\index{$\refl$}.
 \item Sei $P(x,y, p)$ ein Typ für $x,y:A$ und $ p:x=_Ay$.
-  Für $p_{x}:P(x,x,\refl_x)$ gibt es
+  Für $r_{x}:P(x,x,\refl_x)$ gibt es
   \[
-    \elim_{=,P}:(x\ y : A) \to ( p : x=_Ay) \to P(x,y, p)\rlap{.}
+    \elim_{=,P}(r):(x\ y : A) \to ( p : x=_Ay) \to P(x,y, p)\rlap{.}
   \]
-\item \dots und es gilt $\elim_=(x,x,\refl_x)\equiv p_x$.
+\item \dots und es gilt $\elim_{=,P}(r)(x,x,\refl_x)\equiv r_x$.
 \end{itemize}
 \end{regeln}
 
-Der Eliminator wird auch Gleichheitsinduktion oder ``J-Rule'' genannt -- wir wollen uns für diesen Eliminator die Option lassen, das Motiv, $P$ im Index mit anzugeben.
-In Worten sagt dieser inetwa, dass es genug ist eine Konstruktion, die eine Gleichheit verwendet, für die reflexive Gleichheit ``$\refl_x:x=x$'' anzugeben.
+Der Eliminator wird auch Gleichheitsinduktion oder ``J-Rule'' genannt -- wie am Anfang des Abschnitts angekündigt, wollen wir uns die Möglichkeit lassen, das Motiv $P$ als Index anzugeben.
+In Worten sagt der Eliminator inetwa, dass es genug ist eine Konstruktion, die eine Gleichheit verwendet, für die reflexive Gleichheit ``$\refl_x:x=x$'' anzugeben.
 Umso erstaunlicher ist es, dass es möglich ist, diese Gleichheiten als Pfade in Räumen zu interpretieren. Wir werden immer mal wieder auf diese Sicht eingehen.
 
 Wir können nun Aussagen über die induktiven Typen aus dem vorangegangenen Abschnitt machen.
@@ -314,7 +315,7 @@ Wir können nun Aussagen über die induktiven Typen aus dem vorangegangenen Absc
   Dann gilt $(x:\zwei)\to (x=0_\zwei)\sqcup (x=1_\zwei)$.
 \end{bemerkung}
 \begin{beweis}
-  Wir müssen ein Element des Typs $(x=0_\zwei)\sqcup (x=1_\zwei)$ prozieren.
+  Wir müssen ein Element des Typs $(x=0_\zwei)\sqcup (x=1_\zwei)$ produzieren.
   Mit dem Eliminator, reicht es das für die Fälle $0_\zwei$ und $1_\zwei$ zu machen.
   Das ist mit den Termen $\iota_1(\refl_{0_\zwei})$ und $\iota_2(\refl_{1_\zwei})$ erledigt.
 \end{beweis}
@@ -331,16 +332,16 @@ Die folgenden zwei Operationen können einerseits als die übliche Symmetrie und
   \end{align*}
   Wir können diese Definition mit dem Eliminator äquivalent wie folgt angeben ($P(x,y, p)$ ist hier $y=_Ax$):
   \[
-     \_^{-1}\colonequiv \elim_=((x:A) \mapsto \refl_x)\rlap{.}
+     \_^{-1}\colonequiv \elim_=((z:A) \mapsto \refl_z)(x,y)\rlap{.}
   \]
 \end{definition}
 
 \begin{definition}
   Seien $A$ ein Typ und $x,y,z:A$.
-  Die \begriff{Konkatenation} von Gleichheiten ist gegeben durch
+  Die \begriff{Konkatenation}\index{$\_\kon\_$} von Gleichheiten ist gegeben durch
   \begin{align*}
     \_\kon\_&:x=y\to y=z\to x=z \\
-    \refl_x\kon p &\colonequiv  p
+    \refl_x\kon \refl_x &\colonequiv  \refl_x
   \end{align*}
   Als Eliminator: $\_\kon\_\colonequiv \elim_=((x:A)\mapsto \id_{x=z})$.
 \end{definition}
@@ -361,8 +362,20 @@ Wir wollen das auch direkt in der Schreibweise ausdrücken und $f( p)$ für eine
 \end{definition}
 
 Nun können wir mehr konkrete Gleichheiten zeigen.
+Zum Beispiel können wir mehr über den Identitätstyp von $\eins$ sagen.
 
 \begin{lemma}
+  Für $x,y:\eins$ gilt stets $x=y$.  
+\end{lemma}
+\begin{beweis}
+ Das könnte man durch Induktion nach $x$ und $y$ zeigen,
+ aber zur Übung verwenden wir die Gleichheitsoperationen und dass wir bereits $\varphi:(z:\eins)\to z=\ast$ haben.
+ Wir haben also $\varphi(x):x=\ast$ und $\varphi(y):y=\ast$.
+ Und damit: $\varphi(x)\kon\varphi(y)^{-1}:x=y$.
+\end{beweis}
+
+\begin{lemma}
+\label{nat-wild-monoid}
 \begin{enumerate}[(a)]
 \item Für alle $n:\N$ gilt $n+0=n$ und $0+n=n$.
 \item Für alle $n,k:\N$ gilt $n+k=k+n$.
@@ -394,6 +407,8 @@ Nun können wir mehr konkrete Gleichheiten zeigen.
 \end{enumerate}
 \end{beweis}
 
+\Cref{nat-wild-monoid} zeigt, dass $(\N,+,0)$ ein sogenanntes \begriff{wildes Monoid} ist -- um ein Monoid zu sein, müsste es neben den Gleichungen oben auch eine Menge sein. Den Begriff Menge werden wir erst im nächsten Kapitel definieren.
+
 Die Gleichheitstypen eines jeden Typs tragen eine ähnliche Struktur bzgl $\kon$ wie wir gerade für $\N$ und $+$ gesehen haben -- bis auf die Kommutativität, dafür haben wir so etwas wie Inverse:
 
 \begin{lemma}
@@ -404,3 +419,6 @@ Die Gleichheitstypen eines jeden Typs tragen eine ähnliche Struktur bzgl $\kon$
 \item Für alle $ p:x=y$ haben wir $ p\kon p^{-1}=\refl_x= p^{-1}\kon p$.
 \end{enumerate}
 \end{lemma}
+\begin{beweis}
+  Induktion.
+\end{beweis}
