@@ -157,7 +157,7 @@ Um die soeben definierte Funktion testen zu können, benötigen wir die Berechnu
 Damit können wir nun zum Beispiel berechnen:
 \begin{align*}
   d(2)&\equiv \elim_\N(0,n\mapsto (k\mapsto S(S(k))))(S(1)) \\
-      &\equiv (n\mapsto (k\mapsto S(S(k))))(1)(\elim_\N(0,n\mapsto (k\mapsto S(S(k))))) \\
+      &\equiv (n\mapsto (k\mapsto S(S(k))))(1)(\elim_\N(0,n\mapsto (k\mapsto S(S(k))))(1)) \\
       &\equiv (k\mapsto S(S(k)))(\elim_\N(0,n\mapsto (k\mapsto S(S(k))))(1)) \\
       &\equiv S(S(\elim_\N(0,n\mapsto (k\mapsto S(S(k))))(S(0)))) \\
       &\equiv S(S((n\mapsto (k\mapsto S(S(k))))(0)(\elim_\N(0,n\mapsto (k\mapsto S(S(k))))(0)))) \\
@@ -241,10 +241,10 @@ Seien $A,B$ Typen.
 \item Für jedes $a:A$ gibt es $\iota_1(a):A\sqcup B$.
   Und für jedes $b:B$ gibt es $\iota_2(b):A\sqcup B$.
 \item Sei $P(x)$ ein Typ für $x:A\sqcup B$.
-  Für $p_1:(y:A)\to P(\iota_1(y))$ und $p_2:(z:A)\to P(\iota_2(z))$
+  Für $p_1:(y:A)\to P(\iota_1(y))$ und $p_2:(z:B)\to P(\iota_2(z))$
   gibt es $\elim_\sqcup(p_1,p_2):(x:A\sqcup B)\to P(x)$.
 \item Sei $P(x)$ ein Typ für $x:A\sqcup B$.
-  Für $p_1:(y:A)\to P(\iota_1(y))$ und $p_2:(z:A)\to P(\iota_2(z))$
+  Für $p_1:(y:A)\to P(\iota_1(y))$ und $p_2:(z:B)\to P(\iota_2(z))$
   gilt $\elim_\sqcup(p_1,p_2)(\iota_1(y))\equiv p_1(y)$ für $y:A$
   und  $\elim_\sqcup(p_1,p_2)(\iota_2(z))\equiv p_1(z)$ für $z:B$.
 \end{itemize}
