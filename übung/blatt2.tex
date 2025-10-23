@@ -9,25 +9,23 @@
 \blatt
 
 \aufgabe{}
-Analog zum Typ $\eins$ aus der Vorlesung gibt es auch einen induktiven Typ $\zwei$,
-mit zwei Konstruktoren, die jeweils keine Argumente haben.
+Analog zum Typ $\eins$ aus der Vorlesung gibt es auch einen induktiven Typ $\zwei$, mit zwei Konstruktoren, die jeweils keine Argumente haben.
 Finde passende Regeln für diesen Typ, insbesondere einen Eliminator.\\
 \emph{Bemerkung:} Wir hatten diesen Typ in Agda als ``Bool'' kennen gelernt. 
 
 \aufgabe{}
 Zeige, dass die Addition $+$ auf $\N$ assoziativ ist:
 Für alle $n,k,l:\N$ haben wir $(n+k)+l=_\N n+(k+l)$.
-Ganz formal ausgedrückt ist die Aufgabe also, einen Term des Typs
+Ganz formal ausgedrückt ist die Aufgabe also, einen Term des folgenden Typs zu konstruieren.
 \[
   (n,k,l:\N) \to (n+k)+l=_\N n+(k+l)
 \]
-zu konstruieren.
 
 \aufgabe{}
 Sei $A$ ein Typ. Zeige:
 \begin{enumerate}[(a)]
-\item Für alle $ p:x=y$ haben wir $ p\kon p^{-1}=\refl_x= p^{-1}\kon p$.
-\item Für alle $ p:x=_Ay$, $ q:y=_Az$, $ r:z=_Au$ gilt
+\item Für alle $x,y : A$ und $ p:x=_A y$ haben wir $ p\kon p^{-1}=\refl_x= p^{-1}\kon p$.
+\item Für alle $x,y,z : A$ und $ p:x=_Ay$, $ q:y=_Az$, $ r:z=_Au$ gilt
    $( p\kon q)\kon r= p\kon( q\kon r)$.
 \end{enumerate}
 
@@ -37,5 +35,30 @@ zusammen mit Termen in
 \[
   (x:\eins\sqcup \eins)\to \psi (\varphi(x))=x\quad \text{ und }\quad (x:\zwei)\to \varphi(\psi(x))=x
 \]
+
+\bonus{}
+  Sei \(A\) ein Typ, $a,b,c,d,e:A$ Terme und $p:a=b$, $q:b=c$, $r:c=d$, $s:d=e$ Gleichheiten.
+  Verwende den in Aufgabe 3 (b) konstruierten \emph{Assoziator}
+  \[\ass:(p:x=y)\to (q:y=z)\to (r:z=w) \to (p\kon q)\kon r = p \kon (q\kon r)\]
+  um die 5 Gleichheiten $\alpha_1,\dots,\alpha_5$ im sogenannten \emph{MacLane-Pentagon} zu konstruieren:
+  \begin{equation*}
+    \begin{tikzcd}[column sep={between origins,1.4cm},row sep={between origins,1.5cm}]
+      & (p \kon (q \kon r)) \kon s
+      \arrow[rr,equal,"\alpha_2"]
+      && p \kon ((q \kon r) \kon s)
+      \arrow[dr,equal,"\alpha_3"]
+      &
+      \\
+      ((p \kon q) \kon r) \kon s
+      \arrow[ur,equal,"\alpha_1"]
+      \arrow[drr,equal,"\alpha_4"']
+      &&&& p \kon (q \kon (r \kon s))
+      \\
+      && (p \kon q) \kon (r \kon s)
+      \arrow[urr,equal,"\alpha_5"']
+      &&
+    \end{tikzcd}
+  \end{equation*}
+  Zeige anschließend, dass $(\alpha_1\kon\alpha_2)\kon\alpha_3 = \alpha_4\kon\alpha_5$ ist.
 
 \end{document}
