@@ -9,9 +9,16 @@
 \blatt
 
 \aufgabe{}
-Analog zum Typ $\eins$ aus der Vorlesung gibt es auch einen induktiven Typ $\zwei$, mit zwei Konstruktoren, die jeweils keine Argumente haben.
+\begin{enumerate}[(a)]
+\item Analog zum Typ $\eins$ aus der Vorlesung gibt es auch einen induktiven Typ $\zwei$, mit zwei Konstruktoren, die jeweils keine Argumente haben.
 Finde passende Regeln für diesen Typ, insbesondere einen Eliminator.\\
 \emph{Bemerkung:} Wir hatten diesen Typ in Agda als ``Bool'' kennen gelernt. 
+\item Konstruiere Abbildungen $\varphi:\eins\sqcup \eins\to \zwei$ und $\psi:\zwei\to \eins\sqcup \eins$
+zusammen mit Termen in
+\[
+  (x:\eins\sqcup \eins)\to \psi (\varphi(x))=x\quad \text{ und }\quad (x:\zwei)\to \varphi(\psi(x))=x
+\]
+\end{enumerate}
 
 \aufgabe{}
 Zeige, dass die Addition $+$ auf $\N$ assoziativ ist:
@@ -30,10 +37,11 @@ Sei $A$ ein Typ. Zeige:
 \end{enumerate}
 
 \aufgabe{}
-Konstruiere Abbildungen $\varphi:\eins\sqcup \eins\to \zwei$ und $\psi:\zwei\to \eins\sqcup \eins$
-zusammen mit Termen in
+Seien $A$ ein Typ und $B(x)$ ein Typ für $x:A$.
+Finde für beliebige $x,y:A$ und $p:x=y$ eine Funktion $\psi_{x,y,p}:B(y)\to B(x)$
+sodass 
 \[
-  (x:\eins\sqcup \eins)\to \psi (\varphi(x))=x\quad \text{ und }\quad (x:\zwei)\to \varphi(\psi(x))=x
+  (b:B(x))\to \psi_{x,y,p} (\transp_B(p)(b))=b\rlap{.}
 \]
 
 \bonus{}
