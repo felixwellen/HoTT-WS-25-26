@@ -1,0 +1,88 @@
+\documentclass[12pt]{scrarticle}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage[autostyle=true,german=quotes]{csquotes}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{tabularray}
+
+\definecolor{info}{HTML}{479422}
+\definecolor{math}{HTML}{006B63}
+
+\geometry{
+  top=2cm,
+  bottom=3cm,
+  left=3cm,
+  right=3cm
+}
+
+\addtokomafont{title}{\rmfamily}
+\setkomafont{subtitle}{\rmfamily}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+
+\begin{document}
+
+\begin{center}
+  \begin{minipage}{0.6\textwidth}
+  \includegraphics[width=\textwidth]{img/unilogo_mntf.pdf}
+  \vspace{0pt}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.38\textwidth}
+  \raggedleft
+  \textsc{Felix Cherubini\\Lukas Stoll}
+  \end{minipage}
+\end{center}
+
+\begin{center}
+  \vspace{2em}
+  {\Huge Homotopietypentheorie \par}
+  \vspace{1em}
+  {\large\itshape Vorlesung im Wintersemester 25/26 \par}
+  \vspace{2em}
+\end{center}
+
+Die Homotopietypentheorie ist eine formale Sprache, die nicht nur als Grundlage der Mathematik, sondern auch als Sprache verwendet werden kann, die für manche Aspekte der modernen Mathematik eine sonst unerreichte Klarheit und Kürze ermöglicht.
+Diese neuen Möglichkeiten wurden erst vor etwa 15 Jahren entdeckt -- durch Verbindungen zwischen Typentheorien, welche sonst hauptsächlich in Informatik und Logik eine Rolle spielten, und der Homotopietheorie, die Strukturen aus mehreren Teilgebieten der reinen Mathematik, wie etwa der Topologie abstrahiert.
+
+\vspace{1em}
+
+Die grundlegenden Bausteine der Homotopietypentheorie, Typen und Terme, können als Räume und Punkte interpretiert werden.
+Eine sehr wichtige Rolle spielt die Gleichheit, die in dieser Interpretation Wegen zwischen Punkten in Räumen entspricht.
+Diese räumliche Interpretation vereinfacht es, sich die Regeln der Homotopietypentheorie zu erschließen, welche der Gleichheit die Rolle eines Datums anstatt einer bloßen Aussage geben.
+Diese Sicht auf Gleichheit oder Identifikationen taucht an vielen Stellen der modernen Mathematik auf und wird üblicherweise mit höherer Kategorientheorie und Homotopietheorie umgesetzt.
+Durch die niedrige Komplexität, mit der manche Konzepte der Homotopietheorie in Homotopietypentheorie ausgedrückt werden kann, bietet sich diese Sprache auch für spezialisierte Formalisierungsprojekte mit Beweisassistenten an.
+
+\vspace{1em}
+
+In der Vorlesung werden die Grundlagen der Homotopietypentheorie behandelt.
+Es wird einen Einblick in Beweisassistenten geben und schließlich werden grundlegende Objekte der Homotopietheorie, wie Sphären, konstruiert und ihre Invarianten berechnet.
+Erfahrung in reiner Mathematik, insbesondere algebraischer Topologie und Erfahrung in typisierter funktionaler Programmierung sind sicher hilfreich, aber nicht notwendig.
+
+\vfill
+
+\begin{minipage}{0.75\textwidth}
+  \itshape
+  \begin{tblr}{l l}
+  Vorlesung: & Mittwoch, von 15:45--17:15 Uhr in Raum 1008/L \\
+  & Freitag, von 10:00--11:30 Uhr in Raum 1007/L \\
+  Übung: & Freitag, von 08:15--09:45 Uhr in Raum 1009/L
+  \end{tblr}
+\end{minipage}
+\hfill
+\begin{minipage}{0.2\textwidth}
+  \begin{flushright}
+  \includegraphics[scale=0.23]{img/qr-code.png}
+  \end{flushright}
+\end{minipage}
+\hfill
+
+\end{document}

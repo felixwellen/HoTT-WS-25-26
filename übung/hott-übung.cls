@@ -18,6 +18,7 @@
 \RequirePackage{wrapfig}
 \RequirePackage{hyperref}
 \RequirePackage{tikz}
+  \usetikzlibrary{babel,cd}
 
 \RequirePackage{lmodern}
 
@@ -52,6 +53,10 @@
   \textbf{Aufgabe \theaufgabennummer} \emph{#1} \par
 }{\par\vspace{\aufgabenskip}}
 
+\newenvironment{bonus}[1][]{
+  \vspace{10pt}
+  \textbf{Bonusaufgabe} \emph{{#1}}\par
+}{\par\vspace{\aufgabenskip}}
 
 \clubpenalty=10000
 \widowpenalty=10000
