@@ -412,6 +412,7 @@ Zum Beispiel können wir mehr über den Identitätstyp von $\eins$ sagen.
 Die Gleichheitstypen eines jeden Typs tragen eine ähnliche Struktur bzgl $\kon$ wie wir gerade für $\N$ und $+$ gesehen haben -- bis auf die Kommutativität, dafür haben wir so etwas wie Inverse:
 
 \begin{lemma}
+\label{gliecheits-gruppoid}
 \begin{enumerate}[(a)]
 \item Für alle $ p:x=_Ay$ gilt: $ p\kon\refl_y=_{x=_Ay} p$ und $\refl_x\kon p= p$.
 \item Für alle $ p:x=y$ haben wir $ p\kon p^{-1}=\refl_x= p^{-1}\kon p$.
@@ -468,8 +469,8 @@ Einen Anfang machen wir mit Transporten in Gleichheitstypen.
   \label{transport-gleichheitstyp}
   Seien $A$ ein Typ und $x_0,x_0:A$.
   \begin{enumerate}[(a)]
-  \item Sei $B(x)\colonequiv x=y_0$. Für alle $p:u=_Av$ und alle $q:u=y_0$ gilt $\transp_B(p)(q)=p^{-1}\kon q$.
-  \item Sei $C(y)\colonequiv x_0=y$. Für alle $p:u=_Av$ und alle $q:x_0=v$ gilt $\transp_C(p)(q)=p^{-1}\kon q$.
+  \item Sei $B(x)\colonequiv x=y_0$. Für alle $p:u=_Av$ und alle $q:u=y_0$ gilt $\transp_B(p)(q)=q^{-1}\kon p$.
+  \item Sei $C(y)\colonequiv x_0=y$. Für alle $p:u=_Av$ und alle $q:x_0=u$ gilt $\transp_C(p)(q)=q\kon p$.
   \end{enumerate}
 \end{lemma}
 \begin{beweis}
@@ -525,6 +526,24 @@ Nun können wir - ähnlich wie bei einfacheren induktiven Typen - auch für die 
   Für den Fall $0$ verwenden wir $\iota_1(\refl_0)$ und für $n\equiv S(k)$ verwenden wir $\iota_2((k,\refl_{S(k)}))$.
 \end{bemerkung}
 
+Wir können nun auch in Definitionen Existenz im starken Sinn der abhängigen Summe verwenden.
+
+\begin{definition}
+  Ein Typ $A$ heißt \begriff{kontrahierbar}\index{$\isContr$}, wenn der folgenden Typ bewohnt ist:
+\[
+  \mathrm{\isContr}(A)\colonequiv (x:A)\times ((y:A)\to y=x)\rlap{.}
+\]
+  Für einen Zeugen $z:\isContr(A)$ nennt man $\pi_1(z)$ das \begriff{(Kontraktions-)zentrum}
+  und $\pi_2(z)$ die \begriff{Kontraktion}.
+\end{definition}
+
+Wir haben bereits ein Beispiel:
+\begin{beispiel}
+  Der Typ $\eins$ ist kontrahierbar: Als Zentrum nehmen wir $\ast:\eins$ und
+  eine Kontraktion $k$ können wir durch $k(\ast)\colonequiv \refl_\ast$ definieren.
+\end{beispiel}
+
+Nachdem wir etwas mehr über Gleicheit in abhängigen Summen wissen, werden wir ein wichtiges Beispiel für einen Kontrahierbaren Typ sehen.
 Interessanterweise lassen sich die Gleichheitstypen einer abhängigen Summe durch abhängige Summen beschreiben.
 Wir werden hier erstmal nur eine Konstruktion angeben, die es uns erleichtert Gleichheiten in abhängigen Summen zu konstruieren.
 Diese kann man als Verallgemeinerung des Fakts sehen, dass Gleichheiten in Produkten durch Paare von Gleichheiten gegeben sind.
@@ -538,3 +557,27 @@ Diese kann man als Verallgemeinerung des Fakts sehen, dass Gleichheiten in Produ
   gegeben durch Induktion über das Argument und $p$ oder als Pattern-Matching:
   $(\refl_u,q)_=\colonequiv \ap_{t\mapsto (u,t)}q$ wobei auch $(\refl_u,\refl_z)_=\colonequiv \refl_{(u,z)}$ funktionieren würde.
 \end{definition}
+
+Das können wir in folgendem Lemma benutzen:
+
+\begin{lemma}
+  Sei $A$ ein Typ und $x:A$.
+  Der Typ
+  \[
+     (y:A)\times (y=x)
+  \]
+  ist kontrahierbar.
+\end{lemma}
+
+\begin{beweis}
+  Als Kontraktionszentrum verwenden wir $(x,\refl_x)$.
+  Um die Kontraktion zu konstruieren, müssen wir für $(y,p):(y:A)\times y=x$ eine Gleichheit in
+  $(y,p)=(x,\refl_x)$ angeben.
+  Das werden wir mittels der Funktion $(\_,\_)_=$ schaffen.
+  Wir brauchen also passende Argumente, einmal eine Gleichheit $y=x$, die durch $p$ bereits gegeben ist und dann noch eine Gleichheit
+  \[
+    \transp_{y\mapsto y=x}(p)(p)=\refl_x
+  \]
+  Die linke Seite ist aber nach \Cref{transport-gleichheitstyp} $p^{-1}\kon p$,
+  was nach \Cref{gliecheits-gruppoid} gleich $\refl_x$ ist.
+\end{beweis}
