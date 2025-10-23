@@ -496,3 +496,45 @@ Die Regeln folgen wieder dem Schema für induktive Typen.
 \end{itemize}
 \end{regeln}
 
+Wir wollen nun die verallgemeinerten Projektionen definieren - analog zu $\pi_1:A\times B\to A$ und $\pi_2:A\times B\to B$.
+
+\begin{definition}
+  Sei $B(x)$ Typ für $x:A$.
+  Dann ist die durch
+  \begin{align*}
+      &\pi_1:((x:A) \times B(x))\to A \\
+      &\pi_1((x,y))\colonequiv x
+  \end{align*}
+  gegebene Abbildung die \begriff{Projektion}\index{$\pi_1$} auf den ersten Faktor.
+  Weiter ist die durch\index{$\pi_2$}
+  \begin{align*}
+      &\pi_2:((x:A) \times B(x))\to B(\pi_1(x)) \\
+      &\pi_2((x,y))\colonequiv y
+  \end{align*}
+  gegebene Abbildung die Projektion auf den zweiten Faktor.
+\end{definition}
+
+\begin{konvention}
+  $\times$ bindet stärker als $\to$ und $\sqcup$.
+\end{konvention}
+
+Nun können wir - ähnlich wie bei einfacheren induktiven Typen - auch für die Natürlichen Zahlen etwas in die Richtung zeigen, dass alle Elemente durch die Konstruktoren gegeben sind.
+
+\begin{bemerkung}
+  Wir haben $(n:\N)\to x=0 \sqcup (k:\N)\times n=S(k)$ per Induktion über $n$.
+  Für den Fall $0$ verwenden wir $\iota_1(\refl_0)$ und für $n\equiv S(k)$ verwenden wir $\iota_2((k,\refl_{S(k)}))$.
+\end{bemerkung}
+
+Interessanterweise lassen sich die Gleichheitstypen einer abhängigen Summe durch abhängige Summen beschreiben.
+Wir werden hier erstmal nur eine Konstruktion angeben, die es uns erleichtert Gleichheiten in abhängigen Summen zu konstruieren.
+Diese kann man als Verallgemeinerung des Fakts sehen, dass Gleichheiten in Produkten durch Paare von Gleichheiten gegeben sind.
+
+\begin{definition}
+  Sei $B(x)$ ein Typ für $x:A$.
+  Dann ist für $(u,z),(v,w):(x:A)\to B(x)$ 
+  \begin{align*}
+    (\_,\_)_=:(p:u=_Av)\times \transp_B(p)(z)=w \to (u,z)=(v,w)
+  \end{align*}
+  gegeben durch Induktion über das Argument und $p$ oder als Pattern-Matching:
+  $(\refl_u,q)_=\colonequiv \ap_{t\mapsto (u,t)}q$ wobei auch $(\refl_u,\refl_z)_=\colonequiv \refl_{(u,z)}$ funktionieren würde.
+\end{definition}
