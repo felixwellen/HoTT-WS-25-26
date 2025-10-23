@@ -1,9 +1,9 @@
-% latexmk -pdf -pvc blatt1.tex
+% latexmk -pdf -pvc blatt2.tex
 \documentclass{hott-übung}
 
 \begin{document}
 
-\setcounter{blattnummer}{1}
+\setcounter{blattnummer}{2}
 \setcounter{aufgabennummer}{0}
 
 \blatt
@@ -11,9 +11,31 @@
 \aufgabe{}
 Analog zum Typ $\eins$ aus der Vorlesung gibt es auch einen induktiven Typ $\zwei$,
 mit zwei Konstruktoren, die jeweils keine Argumente haben.
-Finde passende Regeln für diesen Typ, den wir in Agda auch als ``Bool'' kennen gelernt hatten. 
+Finde passende Regeln für diesen Typ, insbesondere einen Eliminator.\\
+\emph{Bemerkung:} Wir hatten diesen Typ in Agda als ``Bool'' kennen gelernt. 
 
-\aufgabe{Nochmal $\eins+\eins\equiv \zwei$...}
-Konstruiere Abbildungen $\eins\sqcup \eins\to \zwei$ und $\zwei\to \eins\sqcup \eins$
+\aufgabe{}
+Zeige, dass die Addition $+$ auf $\N$ assoziativ ist:
+Für alle $n,k,l:\N$ haben wir $(n+k)+l=_\N n+(k+l)$.
+Ganz formal ausgedrückt ist die Aufgabe also, einen Term des Typs
+\[
+  (n,k,l:\N) \to (n+k)+l=_\N n+(k+l)
+\]
+zu konstruieren.
+
+\aufgabe{}
+Sei $A$ ein Typ. Zeige:
+\begin{enumerate}[(a)]
+\item Für alle $ p:x=y$ haben wir $ p\kon p^{-1}=\refl_x= p^{-1}\kon p$.
+\item Für alle $ p:x=_Ay$, $ q:y=_Az$, $ r:z=_Au$ gilt
+   $( p\kon q)\kon r= p\kon( q\kon r)$.
+\end{enumerate}
+
+\aufgabe{}
+Konstruiere Abbildungen $\varphi:\eins\sqcup \eins\to \zwei$ und $\psi:\zwei\to \eins\sqcup \eins$
+zusammen mit Termen in
+\[
+  (x:\eins\sqcup \eins)\to \psi (\varphi(x))=x\quad \text{ und }\quad (x:\zwei)\to \varphi(\psi(x))=x
+\]
 
 \end{document}
