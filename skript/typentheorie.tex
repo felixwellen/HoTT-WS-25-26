@@ -412,13 +412,87 @@ Zum Beispiel können wir mehr über den Identitätstyp von $\eins$ sagen.
 Die Gleichheitstypen eines jeden Typs tragen eine ähnliche Struktur bzgl $\kon$ wie wir gerade für $\N$ und $+$ gesehen haben -- bis auf die Kommutativität, dafür haben wir so etwas wie Inverse:
 
 \begin{lemma}
-\begin{enumerate}
+\begin{enumerate}[(a)]
 \item Für alle $ p:x=_Ay$ gilt: $ p\kon\refl_y=_{x=_Ay} p$ und $\refl_x\kon p= p$.
+\item Für alle $ p:x=y$ haben wir $ p\kon p^{-1}=\refl_x= p^{-1}\kon p$.
 \item Für alle $ p:x=_Ay$, $ q:y=_Az$, $ r:z=_Au$ gilt
    $( p\kon q)\kon r= p\kon( q\kon r)$.
-\item Für alle $ p:x=y$ haben wir $ p\kon p^{-1}=\refl_x= p^{-1}\kon p$.
 \end{enumerate}
 \end{lemma}
 \begin{beweis}
-  Induktion.
+\begin{enumerate}[(a)]
+\item Mit Induktion über $p$ bleibt zu zeigen:
+ \[
+    (x:A) \to \refl_x\kon\refl_x=\refl_x
+ \]
+ Nach Definition von $\kon$ gilt $\refl_x\kon\refl_x\equiv\refl_x$ also ist für jedes $x:A$ bereits $\refl_{\refl_x}:\refl_x\kon\refl_x=\refl_x$.
+ \item Übungslatt 2.
+ \item Übungslatt 2.
+\end{enumerate}
 \end{beweis}
+
+Später, in der Homotopietypentheorie, werden wir sehen, dass es in manchen Typen mehrere verschiedene Gleichheiten zwischen Elementen gibt.
+Die Struktur, die von den Gleichheitstypen eines festen Typs gebildet wird, nennt man \begriff{$\infty$-Grouppoid}, was den Begriff der Gruppe aus der Algebra verallgemeinert. Erstens brauchen Gleichheiten passende Typen, um überhaupt verknüpfbar zu sein (das ist das ``oid'' in ``Gruppoid'') und zweitens gibt es neben den Gesetzen wie Neutralität und Assoziativität auch sogennante höhere Kohärenzen (das ist das ``$\infty$''), die beschreiben wie sich etwa die Assoziativitäts\emph{operation} unter Konkatenation verhält (siehe Übungsblatt 2, letzte Aufgabe).
+
+Nun wenden wir uns einem weiteren, elemtaren Aspekt der Gleichheit zu.
+Wir können in der klassischen Mathematik gleiche Dinge grundsätzlich durcheinander ersetzen -- das geht in der Typentheorie nur mit der urteilsmäßigen Gleichheit.
+Mit der Objektgleichheit ist das Ersetzen etwas subtiler.
+Statt syntaktischem Ersetzen, wendet man eine Funktion an, den sogenannten \emph{Transport}.
+Dieser Name kommt aus der Topologie, vom Transport, etwa in einem Faserbündel entlang eines Pfades in der Basis.
+
+\begin{definition}
+  Sei $B(x)$ ein Typ für $x:A$.
+  Seien weiter $y:A$ und $p:x=_Ay$, dann ist der \begriff{Transport}\index{$\transp_B(p)$} in $B$ entlang von $p$
+  \[
+    \transp_B(p): B(x)\to B(y)
+  \]
+  gegeben durch $\transp_B(\refl_x)\colonequiv \id_{B(x)}$.  
+\end{definition}
+
+Der Transport verhält sich \emph{funktoriell}, d.h.\ dass zum Beispiel die Konkatenation von Gleichheiten mit der Komposition der Transporte zusammenpasst:
+
+\begin{lemma}
+  Sei $A$ ein Typ und $x,y,z:A$. Für alle $p:x=y$ und $q:y=z$ haben wir
+  \[
+    \transp_B(p\kon q) = \transp_B(q) \circ \transp_B(p)\rlap{.}
+  \]
+\end{lemma}
+\begin{beweis}
+  Induktion über $p$ und $q$.
+\end{beweis}
+
+Wir werden immer wieder für konkrete $B$ auch konkrete Beschreibungen für den Transport in $B$ finden.
+Einen Anfang machen wir mit Transporten in Gleichheitstypen.
+
+\begin{lemma}
+  \label{transport-gleichheitstyp}
+  Seien $A$ ein Typ und $x_0,x_0:A$.
+  \begin{enumerate}[(a)]
+  \item Sei $B(x)\colonequiv x=y_0$. Für alle $p:u=_Av$ und alle $q:u=y_0$ gilt $\transp_B(p)(q)=p^{-1}\kon q$.
+  \item Sei $C(y)\colonequiv x_0=y$. Für alle $p:u=_Av$ und alle $q:x_0=v$ gilt $\transp_C(p)(q)=p^{-1}\kon q$.
+  \end{enumerate}
+\end{lemma}
+\begin{beweis}
+  Induktion über $p$.
+\end{beweis}
+
+\subsection{Abhängige Summen}
+Mit der abhängigen Summe werden wir nun eine etwas zu starke Version des Existenzquantors, aber auch eine Verallgemeinerung des Produkts zweier Mengen ``$A\times B$'' kennen lernen.
+Weiter kann die abhängige Summe auch als Verallgemeinerung des Koprodukts mit beliebigem Index ``$\coprod_{i\in I}X_i$'' verstanden werden.
+In der Homotopietypentheorie kann man die abhängige Summe auch als Totalraum einer Faserung verstehen.
+
+Die Regeln folgen wieder dem Schema für induktive Typen.
+
+\begin{regeln}
+\begin{itemize}
+\item Sei $B(x)$ ein Typ für $x:A$. Dann gibt es den Typ $(x:A)\times B(x)$ oder auch $\sum_{x:A}B(x)$,
+  die \begriff{abhängige Summe}\index{$(x:A)\times B(x)$}\index{$\sum_{x:A}B(x)$}.
+  $(x:A)\times B(x)$ wird auch Typ der \begriff{abhängigen Paare} genannt.
+  Im Fall eines konstanten Typs $B$ schreiben wir auch $A\times B$.
+\item Für $a:A$ und $b:B(a)$ gibt es $(a,b):(x:A)\times B(x)$.
+\item Sei $P(u)$ ein Typ für $u:(x:A)\times B(x)$.
+  Für $p:(x:A) (y : B(x)) \to P((x,y))$ gibt es $\elim_{\sum,P}(p):(u:(x:A)\times B(x))\to P(u)$.
+\item \dots und es gilt $\elim_{\sum,P}(p)((x,y))\equiv p(x,y)$.
+\end{itemize}
+\end{regeln}
+
