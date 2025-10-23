@@ -66,15 +66,42 @@ assoc refl η ι = refl
 ap : {A B : Set} {x y : A} (f : A → B) → x ≈ y → f x ≈ f y
 ap f refl = refl
 
-infixr 22 _+_ -- priorität von + sollte höher als die der Gleichheit sein
+infix 21 _+_ -- priorität von + sollte höher als die der Gleichheit sein
 n+0≈n : (n : ℕ) → n + O ≈ n
 n+0≈n O = refl
 n+0≈n (S n) = ap S (n+0≈n n)
 
 n+k≈k+n : (n k : ℕ) → n + k ≈ k + n
-n+k≈k+n O k = n+0≈n k ⁻¹
+n+k≈k+n O k = (n+0≈n k) ⁻¹
 n+k≈k+n (S n) k = ap S (n+k≈k+n n k) ∙ lemma k n
   where
   lemma : (n k : ℕ) → S(n + k) ≈ n + S k
   lemma O k = refl
   lemma (S n) k = ap S (lemma n k)
+
+refl-linksneutral : {A : Set} {x y : A} (p : x ≈ y) → refl ∙ p ≈ p
+refl-linksneutral refl = refl
+
+refl-rechtsneutral : {A : Set} {x y : A} (p : x ≈ y) → p ∙ refl ≈ p
+refl-rechtsneutral refl = refl
+
+-- transport
+tr : {A : Set} {x y : A} (B : A → Set) (p : x ≈ y) → B(x) → B(y)
+tr B (refl {x = x}) = id (B(x))                                  -- s.u.
+{-
+  wenn man doch mal ein Argument angeben möchte, das man mit {...}
+  für implizit erklärt hat, kann man das z.B. mit {x = x} machen.
+  Das linke "x" ist hier der Name aus der definition von "refl".
+-}
+
+infixr 21 _∘_
+
+tr-functorial : {A : Set} {x y z : A} (B : A → Set) (p : x ≈ y) (q : y ≈ z)
+                → tr B q ∘ tr B p ≈ tr B (p ∙ q)                             -- Zeilenumbrüche sind ok
+tr-functorial B refl refl = refl
+
+infix 22 _⁻¹   -- Inversion sollte höhere Priorität als ∙ haben
+-- dieses Beispiel funktioniert nur, weil wir hier ∙ entsprechend definiert haben
+tr-l≈ : {A : Set} (y₀ : A) {u v : A} (p : u ≈ v)
+        → tr (λ x → x ≈ y₀) p ≈ (λ (q : u ≈ y₀) → p ⁻¹ ∙ q)
+tr-l≈ y₀ refl = refl
