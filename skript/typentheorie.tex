@@ -492,7 +492,7 @@ Die Regeln folgen wieder dem Schema für induktive Typen.
   Im Fall eines konstanten Typs $B$ schreiben wir auch $A\times B$.
 \item Für $a:A$ und $b:B(a)$ gibt es $(a,b):(z:A)\times B(z)$.
 \item Sei $P(u)$ ein Typ für $u:(z:A)\times B(z)$.
-  Für $p:(z:A) (y : B(z)) \to P((z,y))$ gibt es $\elim_{\sum,P}(p):(u:(z:A)\times B(z))\to P(u)$.
+  Für $p:(z:A) \to (y : B(z)) \to P((z,y))$ gibt es $\elim_{\sum,P}(p):(u:(z:A)\times B(z))\to P(u)$.
 \item \dots und es gilt $\elim_{\sum,P}(p)((z,y))\equiv p(z,y)$.
 \end{itemize}
 \end{regeln}
