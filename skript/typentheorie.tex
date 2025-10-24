@@ -519,7 +519,14 @@ Wir wollen nun die verallgemeinerten Projektionen definieren - analog zu $\pi_1:
   $\times$ bindet stärker als $\to$ und $\sqcup$.
 \end{konvention}
 
-Nun können wir - ähnlich wie bei einfacheren induktiven Typen - auch für die Natürlichen Zahlen etwas in die Richtung zeigen, dass alle Elemente durch die Konstruktoren gegeben sind.
+Wie schon bei anderen Typen können wir auch für die abhängige Summe zeigen, dass alle Elemente Konstruktor werte sind - also Paare.
+
+\begin{bemerkung}
+  Für alle $x:(z:A)\times B(z)$ gilt $x=(\pi_1(x),\pi_2(x))$.
+  Mit Induktion über $x$ können wir das auf den Fall: $(a,b)=(\pi_1((a,b)),\pi_2((a,b)))$ reduzieren, der durch $\refl_{(a,b)}$ gelöst wird.
+\end{bemerkung}
+
+Nun wollen wir - ähnlich wie bei einfacheren induktiven Typen - auch für die Natürlichen Zahlen etwas in die Richtung zeigen, dass alle Elemente durch die Konstruktoren gegeben sind.
 
 \begin{bemerkung}
   Wir haben $(n:\N)\to x=0 \sqcup (k:\N)\times n=S(k)$ per Induktion über $n$.
