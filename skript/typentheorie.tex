@@ -576,7 +576,7 @@ Das können wir in folgendem Lemma benutzen:
   ist kontrahierbar.
 \end{lemma}
 
-\begin{beweis}
+\begin{beweis}[Wie in der Vorlesung]
   Als Kontraktionszentrum verwenden wir $(x,\refl_x)$.
   Um die Kontraktion zu konstruieren, müssen wir für $(y,p):(y:A)\times y=x$ eine Gleichheit in
   $(y,p)=(x,\refl_x)$ angeben.
@@ -588,3 +588,51 @@ Das können wir in folgendem Lemma benutzen:
   Die linke Seite ist aber nach \Cref{transport-gleichheitstyp} $p^{-1}\kon p$,
   was nach \Cref{gliecheits-gruppoid} gleich $\refl_x$ ist.
 \end{beweis}
+
+Tatsächlich hatte ich in der Vorlesung eine Gleichheitsinduktion verpasst, die den Beweis vereinfacht.
+
+\subsection{Universen}
+Ein \begriff{Universum} kann man sich erstmal als Typ aller Typen vorstellen.
+Problematisch ist dabei, wie in der Mengenlehre, dass das zu Widersprüchen führt.
+Eine einfach Lösung, die wir hier verwenden werden ist die leichte Abwandlung zu sagen, dass jeder Typ in \emph{einem} Universum liegt und Universen unter möglichst vielen Konstruktionen abgeschlossen sind.
+Genauer fordern wir eine abzählbare Hierarchie von Universen:
+\[
+  \mU_0, \mU_1, \dots
+\]
+Dabei sind die Indizes allerdings nicht unsere natürlichen Zahlen, sondern sogenannte \emph{Universenlevel}.
+Dabei handelt es sich um eine Variante der natürlichen Zahlen, die implizit durch Regeln gegeben ist.
+Das verhindert zum Beispiel die Konstruktion von aufsteigenden Folgen von Universen.
+
+Da es mit Universen möglich ist, auszudrücken, dass etwas ein Typ ist, können wir von nun auf dieses Urteil verzichten.
+Wir verwenden also in Zukunft ``$A:\mU_i$'' synonym mit ``$A$ ist ein Typ''.
+
+\begin{regeln}
+\begin{itemize}
+\item Es gibt ein Universum $\mU_0$.
+\item Zu jedem Universum $\mU_i$ gibt es ein Nachfolgeruniversum $\mU_{i+1}$.
+\item Wir können nun in allen Regeln Urteile der ``$A$ Typ'' ersetzen durch ``$A:\mU_i$''.
+  Dadurch können wir abhängige Typen jetzt als Funktionen $P:A\to\mU_i$ schreiben.
+\item All Typformer erhalten Universenlevel bzw. hat ein geformter Typ als Universenleven midestens das Maximum der Universenlevel der eingehenden Typen.
+\item Die Motive von Eliminatoren haben belibiges Universenlevel.
+\end{itemize}
+\end{regeln}
+
+\begin{konvention}
+  Meistens werden wir den Index der Universen weglassen, also etwa nur $A:\mU$ schreiben.
+  Situationen in denen die Universenlevel wichtig sind, werden eher selten sein, kommen aber vor.
+\end{konvention}
+
+\begin{beispiel}
+\begin{enumerate}[()]
+\item Dank Universen können wir nun abhängige Typen über Rekursion definieren:
+  \begin{align*}
+    B&:\zwei\to\mU \\
+    B(0_{\zwei})&\colonequiv \leer \\
+    B(1_{\zwei})&\colonequiv \einheit
+  \end{align*}
+\item Wir können mit dem Eliminator von $\N$ \emph{nicht} einfach eine Funktion definieren,
+  die $n$ auf $\mU_n$ abbildet. Zum einen dürfen wir $n$ nicht als Universenlevel verwenden -
+  das $i$ in $\mU_i$ ist nichtmal ein Term, zum anderen können wir kein Motiv hinschreiben,
+  das einen passenden Typ hätte.
+\end{enumerate}
+\end{beispiel}

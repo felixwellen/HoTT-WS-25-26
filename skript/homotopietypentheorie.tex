@@ -1,0 +1,163 @@
+\subsection{$n$-Typen}
+
+Wir sind bereits auf den Begriff der Kontrahierbarkeit gestoßen.
+Die kontrahierbaren Typen bilden die unterste Stufe einer Hierarchie
+von Typen mit zunehmen komplizierteren Identitätstypen.
+Die nächste Stufe in dieser Hierarchie, der sogenannten $n$-Typen bilden die Aussagen.
+
+\begin{definition}
+  Ein Typ $A$ heißt \begriff{Aussage}\index{$\isProp(A)$}, wenn der folgende Typ bewohnt ist
+  \[
+    \isProp(A)\colonequiv (x\ y : A)\to x=y\rlap{.}
+  \]
+\end{definition}
+
+Kontrahierbare Typen sind stets Aussagen.
+Durch eine ``Zusatzbedingung'' wird jede Aussage kontrahierbar und tatsächlich haben wir auch die sehr nützliche Umkehrung diese Prinzips.
+
+\begin{bemerkung}
+  Sei $A:\mU$.
+  \begin{enumerate}[(a)]
+  \item Wenn $A$ kontrahierbar ist, dann ist $A$ eine Aussage.
+  \item Wenn $A$ eine Aussage ist und wir $a:A$ haben, dann ist $A$ kontrahierbar.
+  \item Wenn wir eine Funktion des Typs $A\to \isContr(A)$ haben, dann ist $A$ bereits eine Aussage. 
+  \end{enumerate}
+\end{bemerkung}
+
+\begin{beweis}
+  Manche als Übung, andere hier?
+\end{beweis}
+
+Eine Aussage ist auch dadurch charakterisiert, dass alle Gleichheitstypen kontrahierbar sind \Cref{prop-id-contractible}.
+Dafür benötigen wir noch eine verallgemeinerung des Anwendens von Funktionen auf Gleichheiten:
+
+\begin{definition}
+  Seien $B:A\to \mU$ und $f:(z:A)\to B(z)$.
+  Für $x,y:A$ gibt es\index{$\apd_f$}
+  \begin{align*}
+    &\apd_f : (p:x=y) \to \transp_B(p)(f(x))=f(y) \\
+    &\apd_f(\refl)\colonequiv \refl
+  \end{align*}
+\end{definition}
+
+\begin{lemma}
+  \label{prop-id-contractible}
+  Sei $A$ eine Aussage, dann haben wir
+  \[
+    (x\ y :A)\to \isContr(x=y)\rlap{.}
+  \]
+\end{lemma}
+
+\begin{beweis}
+  Sei $h:(x\ y : A)\to x=y$ ein Zeuge, dass $A$ eine Aussage ist.
+  Wir werden zunächst zeigen, dass wir $(x\ y : A)\to \isProp(x=y)$ haben.
+  Seien dazu $x,y:A$ und $p,q:x=y$. Dann wenden wir $h(x):(z:A)\to x=z$ an auf $p$ und $q$:
+  \[
+  \apd_{h(x)}(p):\transp_{z\mapsto x=z}(p)(h(x,x))=h(x,y)\text{ und }
+  \apd_{h(x)}(q):\transp_{z\mapsto x=z}(q)(h(x,x))=h(x,y)
+  \]
+  Nach \Cref{transport-gleichheitstyp} haben wir also:
+  \[
+    h(x,x)\kon p=h(x,y)=h(x,x)\kon q
+  \]
+  und (per Gleichheitsinduktion können) wir kürzen: $p=q$.
+
+  Nun ist $x=y$ stets eine bewohnte Aussage und damit kontrahierbar.
+\end{beweis}
+
+\begin{definition}
+  Sei $A$ ein Typ und $\N_{-2}$ ein induktiv definierter Typ,
+  mit Konstruktoren $-2$ und $S:\N_{-2}\to\N_{-2}$\index{$\N_{-2}$}.
+  Für $n:\N_{-2}$ definieren wir induktiv $\isNType{n}(A)$\index{$\isNType{n}(A)$}:
+  \begin{align*}
+    \isNType{(-2)}(A)&\colonequiv \isContr(A) \\
+    \isNType{(n+1)}(A)&\colonequiv (x\ y : A)\to \isNType{n}(x=y)
+  \end{align*}
+  $0$-Typen werden auch \begriff{Mengen} genannt und $\isNType{0}(A)$ wird auch als $\isSet(A)$\index{$\isSet(A)$} geschrieben.
+\end{definition}
+
+\begin{beispiel}
+  Wir haben bereits gesehen, dass $\eins$ kontrahierbar ist.
+  Weiter sind $\leer$ und $\eins$ Aussagen.
+\end{beispiel}
+
+Für weitere Beispiele und um zu sehen, dass nicht alle Typen Aussagen sind, sollten wir erst folgende Definition machen:
+
+\begin{definition}
+  Sei $A$ ein Typ.\index{$\neg A$}
+  \[
+    \neg A\colonequiv A\to\leer
+    \]
+    Im Fall $A\equiv x=y$ schreiben wir auch $x\neq y$ statt $\neg(x=y)$.
+\end{definition}
+
+\begin{bemerkung}
+  Im Typ $\zwei$ gilt: $0_\zwei\neq 1_\zwei$. Und damit auch $\neg(\isProp(\zwei))$.
+\end{bemerkung}
+\begin{beweis}
+  Wir definieren $f:\zwei\to\mU$ durch:
+  \[
+    f(0_\zwei)\colonequiv \leer\text{ und }f(1_\zwei)\colonequiv \eins
+    \]
+    Für eine Gleichheit $0_\zwei=1_\zwei$ bekommen wir durch transport eine Funktion $\eins\to\leer$.
+\end{beweis}
+
+\subsection{Äquivalenzen}
+
+Wir sind bereits auf Abbildungen $f:A\to B$ und $g:B\to A$ gestoßen, die \emph{zueinander inverse} sind, also sodass die Typen
+\[
+  (x:A)\to g(f(x))=x\quad \text{ und }\quad (y:B)\to f(g(y))=y 
+\]
+bewohnt sind.
+In der Mengenlehre würden analoge Daten zeigen, dass $f$ eine Bijektion ist.
+Das Wort ``Bijektion'' wollen wir nur für - die noch zu definierenden - Mengen verwenden.
+
+Oben fragen wir nach \emph{punktweisen Gleichheiten}, etwa zwischen $g\circ f$ und $\id_A$ und
+nicht direkt nach einem Term in $g\circ f = \id_A$.
+Tatsächlich lässt sich aus den bisher eingeführten Regeln keine Funktion folgenden Typs konstruieren - für $f,g:A\to B$:
+\[
+  ((x:A)\to f(x)=g(x))\to f=g
+\]
+Eine solche Funktion werden wir später durch das Funktionsextensionalitätsaxiom erzwingen,
+aber nun werden wir erstmal nur mit punktweisen Gleichheiten und nicht Gleichheiten von Funktionen arbeiten, die wir auch \emph{Homotopien} nennen.
+
+\begin{definition}
+  Seien $A,B$ Typen und $f,g:A\to B$.
+  Der Typ der \begriff{Homotopien}\index{$f\sim g$}
+  oder \begriff{punktweisen Gleichheiten} zwischen $f$ und $g$
+  ist gegeben durch
+  \[
+    (f\sim g)\colonequiv( (x:A)\to f(x)=g(x))\rlap{.}
+  \]
+\end{definition}
+
+Durch punktweises Andwenden unserer Konstruktionen für die Gleichheit,
+bekommen wir eine sehr ähnliche Struktur auf den Homotopien:
+
+\begin{definition}
+  Seien $A,B$ Typen und $f,g,h:A\to B$.
+  \begin{enumerate}[(a)]
+  \item Für jedes $f$ gibt es stets die Homotopie $\refl_f:f\sim f$ gegeben durch $x\mapsto \refl_{f(x)}$.
+  \item Für eine Homotopie $H:f\sim g$ gibt es stets die Inverse Homotopie $H^{-1}:g\sim f$ gegeben durch $H^{-1}(x)\colonequiv H(x)^{-1}$.
+  \item Für $H:f\sim g$ und $K:g\sim h$ gibt es $H\kon K\colonequiv (x:A)\to H(x)\kon K(x)$.
+  \end{enumerate}
+\end{definition}
+
+Wir werden nun zunächst den Typ der quasi-inversen zu einer gegebenen Funktion definieren
+- dabei gibt es einen subtilen Unterschied zum Äquivalenzbegriff auf den wir noch eingehen werden.
+
+\begin{definition}
+  Seien $A,B$ Typen und $f:A\to B$. Der Typ der \begriff{quasi-Inversen}\index{$\mathrm{qInv}(f)$} von $f$ ist gegeben durch
+  \[
+    \mathrm{qInv}(f)\colonequiv (g:B\to A)\times (f\circ g\sim \id_A\times g\circ f\sim \id_B)\rlap{.}
+  \]
+\end{definition}
+
+Es wird sich noch herausstellen, dass der folgende Typ der Äquivalenz-Nachweise zu einer gegebenen Abbildung im allgemeinen verschieden ist:
+
+\begin{definition}
+  Seien $A,B$ Typen und $f:A\to B$. \index{$\isEquiv(f)$}Der folgende Typ steht für die Eigenschaft von $f$ eine Äquivalenz zu sein:
+  \[
+    \isEquiv(f) \colonequiv ((g:B\to A)\times g\circ f\sim\id_A )\times ((h:B\to A)\times f\circ h\sim\id_B)\rlap{.}
+  \]
+\end{definition}
