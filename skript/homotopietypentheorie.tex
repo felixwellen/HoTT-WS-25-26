@@ -25,11 +25,15 @@ Durch eine ``Zusatzbedingung'' wird jede Aussage kontrahierbar und tatsächlich 
 \end{bemerkung}
 
 \begin{beweis}
-  Manche als Übung, andere hier?
+  \begin{enumerate}[(a)]
+  \item Sei $k:\isContr(A)$. Für $x,y:A$ haben wir $\pi_2(k)(x)\kon\pi_2(k)(y)^{-1}:x=y$.
+  \item Übungsblatt 3.
+  \item Übungsblatt 3.
+  \end{enumerate}
 \end{beweis}
 
 Eine Aussage ist auch dadurch charakterisiert, dass alle Gleichheitstypen kontrahierbar sind \Cref{prop-id-contractible}.
-Dafür benötigen wir noch eine verallgemeinerung des Anwendens von Funktionen auf Gleichheiten:
+Dafür benötigen wir noch eine Verallgemeinerung des Anwendens von Funktionen auf Gleichheiten:
 
 \begin{definition}
   Seien $B:A\to \mU$ und $f:(z:A)\to B(z)$.
@@ -43,19 +47,17 @@ Dafür benötigen wir noch eine verallgemeinerung des Anwendens von Funktionen a
 \begin{lemma}
   \label{prop-id-contractible}
   Sei $A$ eine Aussage, dann haben wir
-  \[
-    (x\ y :A)\to \isContr(x=y)\rlap{.}
-  \]
+   $(x\ y :A)\to \isContr(x=y)$
 \end{lemma}
 
 \begin{beweis}
   Sei $h:(x\ y : A)\to x=y$ ein Zeuge, dass $A$ eine Aussage ist.
-  Wir werden zunächst zeigen, dass wir $(x\ y : A)\to \isProp(x=y)$ haben.
-  Seien dazu $x,y:A$ und $p,q:x=y$. Dann wenden wir $h(x):(z:A)\to x=z$ an auf $p$ und $q$:
-  \[
-  \apd_{h(x)}(p):\transp_{z\mapsto x=z}(p)(h(x,x))=h(x,y)\text{ und }
-  \apd_{h(x)}(q):\transp_{z\mapsto x=z}(q)(h(x,x))=h(x,y)
-  \]
+   Wir werden zeigen, dass wir $(x\ y : A)\to \isProp(x=y)$ haben.
+    Seien dazu $x,y:A$ und $p,q:x=y$. Dann wenden wir $h(x):(z:A)\to x=z$ an auf $p$ und $q$:
+    \begin{align*}
+      &\apd_{h(x)}(p):\transp_{z\mapsto x=z}(p)(h(x,x))=h(x,y)\text{ und } \\
+      &\apd_{h(x)}(q):\transp_{z\mapsto x=z}(q)(h(x,x))=h(x,y)
+    \end{align*}
   Nach \Cref{transport-gleichheitstyp} haben wir also:
   \[
     h(x,x)\kon p=h(x,y)=h(x,x)\kon q
@@ -68,18 +70,40 @@ Dafür benötigen wir noch eine verallgemeinerung des Anwendens von Funktionen a
 \begin{definition}
   Sei $A$ ein Typ und $\N_{-2}$ ein induktiv definierter Typ,
   mit Konstruktoren $-2$ und $S:\N_{-2}\to\N_{-2}$\index{$\N_{-2}$}.
+  Elemente von $\N_{-2}$ nennen wir \begriff{(Abschneidungs-)level}\index{$\N_{-2}$}.
   Für $n:\N_{-2}$ definieren wir induktiv $\isNType{n}(A)$\index{$\isNType{n}(A)$}:
   \begin{align*}
     \isNType{(-2)}(A)&\colonequiv \isContr(A) \\
     \isNType{(n+1)}(A)&\colonequiv (x\ y : A)\to \isNType{n}(x=y)
   \end{align*}
   $0$-Typen werden auch \begriff{Mengen} genannt und $\isNType{0}(A)$ wird auch als $\isSet(A)$\index{$\isSet(A)$} geschrieben.
+  Wir formen auch den Typ aller Typen mit einem gegebenen Level $n:\N_{-2}$\index{$\mathrm{Typ}$}:
+  \[
+    \mathrm{Typ}_n\colonequiv (A : \mU) \times \isNType{n}(A)\rlap{.}
+  \]
 \end{definition}
 
 \begin{beispiel}
   Wir haben bereits gesehen, dass $\eins$ kontrahierbar ist.
   Weiter sind $\leer$ und $\eins$ Aussagen.
 \end{beispiel}
+
+Die Hierarchie der $n$-Typen ist kumulativ:
+
+\begin{lemma}
+  Sei $A$ ein $n$-Typ, dann ist $A$ auch ein $(n+1)$-Typ.
+\end{lemma}
+
+\begin{beweis}
+  Per Induktion über $n$.
+  Für $n\equiv 0$ müssen wir zeigen: Wenn $A$ kontrahierbar ist, dann sind auch alle Gleichheitstypen von $A$ kontrahierbar.
+  Nach \Cref{prop-id-contractible} wissen wir bereits, dass $x=_Ay$ stets eine Aussage ist,
+  da kontrahierbare Typen Aussagen sind.
+  Es bleibt also zu zeigen, dass $x=_Ay$ stets bewohnt ist, aber das ist genau dass $A$ eine Aussage ist.
+
+  Sei nun $n\equiv S(k)$. Hier ist zu zeigen, dass wenn $x=_Ay$ stets ein $k$-Typ ist,
+  dann sind alle $x=_Ay$ auch $S(k)$-Typen. Das gilt aber bereits nach Induktionsvoraussetzung, angewandt auf $x=_Ay$.
+\end{beweis}
 
 Für weitere Beispiele und um zu sehen, dass nicht alle Typen Aussagen sind, sollten wir erst folgende Definition machen:
 
@@ -101,6 +125,8 @@ Für weitere Beispiele und um zu sehen, dass nicht alle Typen Aussagen sind, sol
     \]
     Für eine Gleichheit $0_\zwei=1_\zwei$ bekommen wir durch transport eine Funktion $\eins\to\leer$.
 \end{beweis}
+
+Wir werden noch sehen, dass $\N$ eine Menge ist.
 
 \subsection{Äquivalenzen}
 
@@ -140,6 +166,9 @@ bekommen wir eine sehr ähnliche Struktur auf den Homotopien:
   \item Für jedes $f$ gibt es stets die Homotopie $\refl_f:f\sim f$ gegeben durch $x\mapsto \refl_{f(x)}$.
   \item Für eine Homotopie $H:f\sim g$ gibt es stets die Inverse Homotopie $H^{-1}:g\sim f$ gegeben durch $H^{-1}(x)\colonequiv H(x)^{-1}$.
   \item Für $H:f\sim g$ und $K:g\sim h$ gibt es $H\kon K\colonequiv (x:A)\to H(x)\kon K(x)$.
+  \item Sei $\varphi:A'\to A$ und $H:f\sim g$.
+    Dann ist $H_\varphi:f\circ \varphi \sim g\circ \varphi$ gegeben durch $H_\varphi(x)\colonequiv H_{\varphi(x)}$.
+  \item Sei $\psi:B\to B'$ und $H:f\sim g$. Dann ist $\psi(H)(x)\colonequiv \psi(H(x)):\psi\circ f\sim\psi\circ g$.
   \end{enumerate}
 \end{definition}
 
@@ -149,15 +178,37 @@ Wir werden nun zunächst den Typ der quasi-inversen zu einer gegebenen Funktion 
 \begin{definition}
   Seien $A,B$ Typen und $f:A\to B$. Der Typ der \begriff{quasi-Inversen}\index{$\mathrm{qInv}(f)$} von $f$ ist gegeben durch
   \[
-    \mathrm{qInv}(f)\colonequiv (g:B\to A)\times (f\circ g\sim \id_A\times g\circ f\sim \id_B)\rlap{.}
+    \mathrm{qInv}(f)\colonequiv \sum_{g:B\to A} f\circ g\sim \id_A\times g\circ f\sim \id_B\rlap{.}
   \]
 \end{definition}
 
-Es wird sich noch herausstellen, dass der folgende Typ der Äquivalenz-Nachweise zu einer gegebenen Abbildung im allgemeinen verschieden ist:
+Es wird sich noch herausstellen, dass der folgende Typ der Äquivalenz-Nachweise zu einer gegebenen Abbildung im allgemeinen vom Typ der Quasi-Inversen verschieden ist:
 
 \begin{definition}
   Seien $A,B$ Typen und $f:A\to B$. \index{$\isEquiv(f)$}Der folgende Typ steht für die Eigenschaft von $f$ eine Äquivalenz zu sein:
   \[
-    \isEquiv(f) \colonequiv ((g:B\to A)\times g\circ f\sim\id_A )\times ((h:B\to A)\times f\circ h\sim\id_B)\rlap{.}
-  \]
+    \isEquiv(f) \colonequiv \left(\sum_{g:B\to A} g\circ f\sim\id_A \right)\times \left(\sum_{h:B\to A} f\circ h\sim\id_B\right)\rlap{.}
+    \]
+    Wir nennen $f:A\to B$ also \begriff{Äquivalenz}, wenn $\isEquiv(f)$ bewohnt ist.
+    Außerdem schreiben wir
+    \[
+      A\simeq B\colonequiv \sum_{f:A\to B}\isEquiv(f)
+    \]
 \end{definition}
+
+\begin{bemerkung}
+  Eine Abbildung $f:A\to B$ die eine Quasi-Inverse hat, ist eine Äquivalenz.
+  Wir werden später sehen, dass auch die Umkehrung gilt.
+\end{bemerkung}
+
+Genauer ist $\isEquiv(f)$ stets eine Aussage, aber $\mathrm{qInv}(f)$ nicht.
+Das werden wir allerdings erst später zeigen können.
+
+\begin{beispiel}
+  \begin{enumerate}[(a)]
+  \item Sei $A$ kontrahierbar mit Zentrum $a:A$.
+    Dann ist $t:A\to\eins$, gegeben durch $t(\ast)\colonequiv a$, eine Äquivalenz.
+  \item Seien $A,B$ Aussagen und $f:A\to B$.
+    Gibt es $g:B\to A$, dann ist $f$ bereits eine Äquivalenz.
+  \end{enumerate}
+\end{beispiel}

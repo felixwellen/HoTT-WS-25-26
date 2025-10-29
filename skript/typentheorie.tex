@@ -603,16 +603,17 @@ Dabei sind die Indizes allerdings nicht unsere natürlichen Zahlen, sondern soge
 Dabei handelt es sich um eine Variante der natürlichen Zahlen, die implizit durch Regeln gegeben ist.
 Das verhindert zum Beispiel die Konstruktion von aufsteigenden Folgen von Universen.
 
-Da es mit Universen möglich ist, auszudrücken, dass etwas ein Typ ist, können wir von nun auf dieses Urteil verzichten.
-Wir verwenden also in Zukunft ``$A:\mU_i$'' synonym mit ``$A$ ist ein Typ''.
+Da es mit Universen möglich ist, auszudrücken, dass etwas ein Typ ist, könnten wir von nun auf dieses Urteil verzichten.
+Wir verwenden in Zukunft ``$A:\mU_i$'' synonym mit ``$A$ ist ein Typ''.
 
 \begin{regeln}
 \begin{itemize}
 \item Es gibt ein Universum $\mU_0$.
 \item Zu jedem Universum $\mU_i$ gibt es ein Nachfolgeruniversum $\mU_{i+1}$.
+\item Jedes $A:\mU_i$ ist auch $A:\mU_{i+1}$.
 \item Wir können nun in allen Regeln Urteile der ``$A$ Typ'' ersetzen durch ``$A:\mU_i$''.
   Dadurch können wir abhängige Typen jetzt als Funktionen $P:A\to\mU_i$ schreiben.
-\item All Typformer erhalten Universenlevel bzw. hat ein geformter Typ als Universenleven midestens das Maximum der Universenlevel der eingehenden Typen.
+\item Alle Typformer erhalten Universenlevel bzw. hat ein geformter Typ als Universenleven midestens das Maximum der Universenlevel der eingehenden Typen.
 \item Die Motive von Eliminatoren haben belibiges Universenlevel.
 \end{itemize}
 \end{regeln}
@@ -623,7 +624,7 @@ Wir verwenden also in Zukunft ``$A:\mU_i$'' synonym mit ``$A$ ist ein Typ''.
 \end{konvention}
 
 \begin{beispiel}
-\begin{enumerate}[()]
+\begin{enumerate}[(a)]
 \item Dank Universen können wir nun abhängige Typen über Rekursion definieren:
   \begin{align*}
     B&:\zwei\to\mU \\
