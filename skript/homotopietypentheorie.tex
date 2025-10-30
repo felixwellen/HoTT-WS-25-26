@@ -2,18 +2,18 @@
 
 Wir sind bereits auf den Begriff der Kontrahierbarkeit gestoßen.
 Die kontrahierbaren Typen bilden die unterste Stufe einer Hierarchie
-von Typen mit zunehmen komplizierteren Identitätstypen.
-Die nächste Stufe in dieser Hierarchie, der sogenannten $n$-Typen bilden die Aussagen.
+von Typen mit zunehmend komplizierteren Identitätstypen.
+Die nächste Stufe in dieser Hierarchie der sogenannten $n$-Typen bilden die Aussagen.
 
 \begin{definition}
-  Ein Typ $A$ heißt \begriff{Aussage}\index{$\isProp(A)$}, wenn der folgende Typ bewohnt ist
+  Ein Typ $A$ ist eine \begriff{Aussage}\index{$\isProp(A)$}, wenn der folgende Typ bewohnt ist:
   \[
-    \isProp(A)\colonequiv (x\ y : A)\to x=y\rlap{.}
+    \isProp(A)\colonequiv (x\ y : A)\to x=y
   \]
 \end{definition}
 
 Kontrahierbare Typen sind stets Aussagen.
-Durch eine ``Zusatzbedingung'' wird jede Aussage kontrahierbar und tatsächlich haben wir auch die sehr nützliche Umkehrung diese Prinzips.
+Durch eine ``Zusatzbedingung'' wird jede Aussage kontrahierbar und tatsächlich haben wir auch die sehr nützliche Umkehrung dieses Prinzips.
 
 \begin{bemerkung}
   Sei $A:\mU$.
@@ -32,7 +32,7 @@ Durch eine ``Zusatzbedingung'' wird jede Aussage kontrahierbar und tatsächlich 
   \end{enumerate}
 \end{beweis}
 
-Eine Aussage ist auch dadurch charakterisiert, dass alle Gleichheitstypen kontrahierbar sind \Cref{prop-id-contractible}.
+Eine Aussage ist auch dadurch charakterisiert, dass alle Gleichheitstypen kontrahierbar sind, siehe \Cref{prop-id-contractible}.
 Dafür benötigen wir noch eine Verallgemeinerung des Anwendens von Funktionen auf Gleichheiten:
 
 \begin{definition}
@@ -123,29 +123,29 @@ Für weitere Beispiele und um zu sehen, dass nicht alle Typen Aussagen sind, sol
   \[
     f(0_\zwei)\colonequiv \leer\text{ und }f(1_\zwei)\colonequiv \eins
     \]
-    Für eine Gleichheit $0_\zwei=1_\zwei$ bekommen wir durch transport eine Funktion $\eins\to\leer$.
+    Für eine Gleichheit $0_\zwei=1_\zwei$ bekommen wir durch Transport eine Funktion $\eins\to\leer$.
 \end{beweis}
 
 Wir werden noch sehen, dass $\N$ eine Menge ist.
 
 \subsection{Äquivalenzen}
 
-Wir sind bereits auf Abbildungen $f:A\to B$ und $g:B\to A$ gestoßen, die \emph{zueinander inverse} sind, also sodass die Typen
+Wir sind bereits auf Abbildungen $f:A\to B$ und $g:B\to A$ gestoßen, die \emph{zueinander invers} sind, also sodass die Typen
 \[
   (x:A)\to g(f(x))=x\quad \text{ und }\quad (y:B)\to f(g(y))=y 
 \]
 bewohnt sind.
 In der Mengenlehre würden analoge Daten zeigen, dass $f$ eine Bijektion ist.
-Das Wort ``Bijektion'' wollen wir nur für - die noch zu definierenden - Mengen verwenden.
+Das Wort ``Bijektion'' wollen wir nur für Mengen verwenden.
 
 Oben fragen wir nach \emph{punktweisen Gleichheiten}, etwa zwischen $g\circ f$ und $\id_A$ und
 nicht direkt nach einem Term in $g\circ f = \id_A$.
-Tatsächlich lässt sich aus den bisher eingeführten Regeln keine Funktion folgenden Typs konstruieren - für $f,g:A\to B$:
+Tatsächlich lässt sich aus den bisher eingeführten Regeln keine Funktion folgenden Typs konstruieren -- für $f,g:A\to B$:
 \[
   ((x:A)\to f(x)=g(x))\to f=g
 \]
 Eine solche Funktion werden wir später durch das Funktionsextensionalitätsaxiom erzwingen,
-aber nun werden wir erstmal nur mit punktweisen Gleichheiten und nicht Gleichheiten von Funktionen arbeiten, die wir auch \emph{Homotopien} nennen.
+aber nun werden wir erstmal nur mit punktweisen Gleichheiten, auch \emph{Homotopien} genannt, und nicht mit Gleichheiten von Funktionen arbeiten.
 
 \begin{definition}
   Seien $A,B$ Typen und $f,g:A\to B$.
@@ -157,14 +157,14 @@ aber nun werden wir erstmal nur mit punktweisen Gleichheiten und nicht Gleichhei
   \]
 \end{definition}
 
-Durch punktweises Andwenden unserer Konstruktionen für die Gleichheit,
+Durch punktweises Anwenden unserer Konstruktionen für die Gleichheit,
 bekommen wir eine sehr ähnliche Struktur auf den Homotopien:
 
 \begin{definition}
   Seien $A,B$ Typen und $f,g,h:A\to B$.
   \begin{enumerate}[(a)]
   \item Für jedes $f$ gibt es stets die Homotopie $\refl_f:f\sim f$ gegeben durch $x\mapsto \refl_{f(x)}$.
-  \item Für eine Homotopie $H:f\sim g$ gibt es stets die Inverse Homotopie $H^{-1}:g\sim f$ gegeben durch $H^{-1}(x)\colonequiv H(x)^{-1}$.
+  \item Für eine Homotopie $H:f\sim g$ gibt es stets die inverse Homotopie $H^{-1}:g\sim f$ gegeben durch $H^{-1}(x)\colonequiv H(x)^{-1}$.
   \item Für $H:f\sim g$ und $K:g\sim h$ gibt es $H\kon K\colonequiv (x:A)\to H(x)\kon K(x)$.
   \item Sei $\varphi:A'\to A$ und $H:f\sim g$.
     Dann ist $H_\varphi:f\circ \varphi \sim g\circ \varphi$ gegeben durch $H_\varphi(x)\colonequiv H_{\varphi(x)}$.
@@ -172,11 +172,11 @@ bekommen wir eine sehr ähnliche Struktur auf den Homotopien:
   \end{enumerate}
 \end{definition}
 
-Wir werden nun zunächst den Typ der quasi-inversen zu einer gegebenen Funktion definieren
-- dabei gibt es einen subtilen Unterschied zum Äquivalenzbegriff auf den wir noch eingehen werden.
+Wir werden nun zunächst den Typ der Quasi-Inversen zu einer gegebenen Funktion definieren
+-- dabei gibt es einen subtilen Unterschied zum Äquivalenzbegriff auf den wir noch eingehen werden.
 
 \begin{definition}
-  Seien $A,B$ Typen und $f:A\to B$. Der Typ der \begriff{quasi-Inversen}\index{$\mathrm{qInv}(f)$} von $f$ ist gegeben durch
+  Seien $A,B$ Typen und $f:A\to B$. Der Typ der \begriff{Quasi-Inversen}\index{$\mathrm{qInv}(f)$} von $f$ ist gegeben durch
   \[
     \mathrm{qInv}(f)\colonequiv \sum_{g:B\to A} f\circ g\sim \id_A\times g\circ f\sim \id_B\rlap{.}
   \]
@@ -185,7 +185,7 @@ Wir werden nun zunächst den Typ der quasi-inversen zu einer gegebenen Funktion 
 Es wird sich noch herausstellen, dass der folgende Typ der Äquivalenz-Nachweise zu einer gegebenen Abbildung im allgemeinen vom Typ der Quasi-Inversen verschieden ist:
 
 \begin{definition}
-  Seien $A,B$ Typen und $f:A\to B$. \index{$\isEquiv(f)$}Der folgende Typ steht für die Eigenschaft von $f$ eine Äquivalenz zu sein:
+  Seien $A,B$ Typen und $f:A\to B$. \index{$\isEquiv(f)$}Der folgende Typ steht für die Eigenschaft von $f$ eine \emph{Äquivalenz} zu sein:
   \[
     \isEquiv(f) \colonequiv \left(\sum_{g:B\to A} g\circ f\sim\id_A \right)\times \left(\sum_{h:B\to A} f\circ h\sim\id_B\right)\rlap{.}
     \]
