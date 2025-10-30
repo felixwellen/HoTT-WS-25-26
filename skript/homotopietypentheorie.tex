@@ -176,9 +176,9 @@ Wir werden nun zunächst den Typ der Quasi-Inversen zu einer gegebenen Funktion 
 -- dabei gibt es einen subtilen Unterschied zum Äquivalenzbegriff auf den wir noch eingehen werden.
 
 \begin{definition}
-  Seien $A,B$ Typen und $f:A\to B$. Der Typ der \begriff{Quasi-Inversen}\index{$\mathrm{qInv}(f)$} von $f$ ist gegeben durch
+  Seien $A,B$ Typen und $f:A\to B$. Der Typ der \begriff{Quasi-Inversen}\index{$\qinv(f)$} von $f$ ist gegeben durch
   \[
-    \mathrm{qInv}(f)\colonequiv \sum_{g:B\to A} f\circ g\sim \id_A\times g\circ f\sim \id_B\rlap{.}
+    \qinv(f)\colonequiv \sum_{g:B\to A} f\circ g\sim \id_A\times g\circ f\sim \id_B\rlap{.}
   \]
 \end{definition}
 
@@ -201,14 +201,100 @@ Es wird sich noch herausstellen, dass der folgende Typ der Äquivalenz-Nachweise
   Wir werden später sehen, dass auch die Umkehrung gilt.
 \end{bemerkung}
 
-Genauer ist $\isEquiv(f)$ stets eine Aussage, aber $\mathrm{qInv}(f)$ nicht.
+Genauer ist $\isEquiv(f)$ stets eine Aussage, aber $\qinv(f)$ nicht.
 Das werden wir allerdings erst später zeigen können.
 
 \begin{beispiel}
   \begin{enumerate}[(a)]
+  \item $\id_A$ ist stets eine Äquivalenz.
+  \item Es gibt zwei verschiedene Äquivalenzen $\zwei\simeq \zwei$.
   \item Sei $A$ kontrahierbar mit Zentrum $a:A$.
     Dann ist $t:A\to\eins$, gegeben durch $t(\ast)\colonequiv a$, eine Äquivalenz.
   \item Seien $A,B$ Aussagen und $f:A\to B$.
     Gibt es $g:B\to A$, dann ist $f$ bereits eine Äquivalenz.
   \end{enumerate}
 \end{beispiel}
+
+\begin{lemma}
+  Sei $f:A\to B$ eine Äquivalenz.
+  \begin{enumerate}[(a)]
+  \item Jede Linksiverse von $f$ auch eine Rechtsinverse von $f$:
+     Für jedes $g:B\to A$ mit $g\circ f \sim \id_A$ gibt es $f\circ g\sim \id_B$.
+   \item Jede Rechtsinverse von $f$ ist auch eine Linksinverse.
+   \item Wir haben $\qinv(f)$.
+  \end{enumerate}
+\end{lemma}
+
+\begin{beweis}
+  \begin{enumerate}[(a)]
+  \item Sei $g$ Linksinverse, also $p:g\circ f\sim \id_A$ und $r:B\to A$ eine Rechtsinverse zu $f$, also $q:f\circ r\sim\id_B$ - das gibt es, weil $f$ eine Äquivalenz ist.
+    Für $x:B$ haben wir \[
+    f(p(r(x))):f(g(f(r(x))))=f(r(x))
+    \]
+    Durch Konkatenation von rechts mit $q(x):f(r(x))=x$ und von links mit $f(g(q(x)^{-1})):f(g(x))=f(g(f(r(x))))$ erhalten wir also $f(g(x))=x$ und damit insgesamt die gewünschte Homotopie.
+  \item Analog.
+  \item Wir wissen nun, dass etwa die Linkinverse $l:B\to A$ zu $f$ auch eine Rechtsinverse und damit insgesamt eine Quasi-Inverse ist.
+  \end{enumerate}
+\end{beweis}
+
+Es ist oft angenehmer Elemente von $\qinv(f)$ zu konstruieren, anstatt von $\isEquiv(f)$.
+
+\begin{lemma}
+  \begin{enumerate}[(a)]
+  \item Zu einer Äquivalenz $f:A\simeq B$ gibt es die inverse Äquivalenz $f^{-1}:B\simeq A$.
+  \item Seien $f:A\simeq B$ und $g:B\simeq C$. Dann gibt es $g\circ f:A\simeq C$. Wir überladen also das $\_\circ\_$ für Äquivalenzen.
+  \end{enumerate}
+\end{lemma}
+
+\begin{beweis}
+  \begin{enumerate}[(a)]
+  \item Es reicht, eine Konstruktion für Quasi-Inversen anzugeben: Sei $(g,(p,q)):\qinv(f)$.
+    Dann ist $(f,(q,p)):\qinv(g)$, also haben wir auch $f^{-1}\colonequiv (g,\isEquiv(g))$.
+  \item Übungsblatt 3.
+  \end{enumerate}
+\end{beweis}
+
+Mit dem Begriff der Äquivalenz, können wir nun auch \begriff{Funktionsextensionalität} einführen:
+
+\begin{axiom}
+  Für $A,B:\mU$ ist durch:
+  \begin{align*}
+    &f=_{A\to B}g \to f\sim g \\
+    &\refl\mapsto (x\mapsto \refl)
+  \end{align*}
+  eine Funktion gegeben. Wir fordern, dass diese Funktion eine Äquivalenz ist.
+  Die Inverse bezeichnen wir mit $\funext$\index{$\funext$}.
+\end{axiom}
+
+Wir werden nun in mehreren Schritten, die für sich auch interessant sind zeigen,
+dass eine Äquivalenz $f:A\simeq B$ durch ``$\ap$'' auf Gleichheitstypen wieder Äquivalenzen induziert.
+
+\begin{lemma}
+  \begin{enumerate}[(a)]
+  \item Äquivalenzen erf+llen ``2 aus 3'':
+    Seien $f:A\to B$, $g:B\to C$ und $h:A\to C$
+    sodass $g\circ f\sim h$.
+    Sind zwei der drei Abbildungen $f,g,h$ Äquivalenzen, dann ist auch die dritte eine Äquivalenz.
+  \item Äquivalenzen erfüllen ``2 aus 6'':
+    Sind $f:A\to B$, $g:B\to C$ und $h:C\to D$, sodass $g\circ f$ und $h\circ g$ Äquivalenzen sind,
+    dann sind $f$, $g$ und $h$ Äquivalenzen.
+  \end{enumerate}
+\end{lemma}
+
+\begin{beweis}
+  \begin{enumerate}[(a)]
+  \item Übungsblatt 3.
+  \item Kommt noch.
+  \end{enumerate}
+\end{beweis}
+
+\begin{lemma}
+  Sei $B,C:A\to\mU$ und $e:(x:A)\to B(x)\simeq C(x)$.
+  Dann gibt es
+  \[\sum e : \left(\sum_{x:A}B(x)\right)\simeq \left(\sum_{x:A}C(x)\right)\]
+\end{lemma}
+
+\begin{beweis}
+  Kommt noch.
+\end{beweis}
+

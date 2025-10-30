@@ -1,4 +1,52 @@
+\subsection{Unsere Syntax}
+Dieser Abschnitt ist noch unvollständig.
+
+\subsubsection{Symbole}
+Hier ist eine Liste von grundlegenden Typformern, die mehrere Schreibweisen haben.
+Eine Liste aller Symbole sollte im Index sein.
+\begin{center}
+  \begin{tabular}{lll}
+    Symbol & Alternativ & Namen \\
+    \midrule
+  $(x:A)\to B(x)$ & $\prod_{x:A}B(x)$ & Abhängige Funktionen, $\prod$-Typ \\
+    $(x:A)\times B(x)$ & $\sum_{x:A}B(x)$ & Abhängige Summe, $\Sigma$-Typ, Abhängiger Paar-Typ \\
+    $A\to B$ & & Abhängige Funktionen, im Fall $B(x)$ konstant \\
+    $A\times B$ & & Abhängige Summe, im Fall $B(x)$ konstant
+  \end{tabular}
+\end{center}
+
+\subsubsection{Abkürzungen}
+\begin{center}
+  \begin{tabular}{ll}
+    Original & Abkürzung \\
+    \midrule
+    $A\to (B\to C)$ & $A\to B\to C$ \\
+    $f(x)(y)$ & $f(x,y)$ \\
+    $x\mapsto (y\mapsto b(x,y))$ & $x\ y \mapsto b(x,y)$ \\
+    $(x:A) \to (y : A) \to B(x,y)$ & $(x\ y : A)\to B(x,y)$ \\
+    $\prod_{x:A}\prod_{y:A}B(x,y)$ & $\prod_{x,y:A}B(x,y)$ \\
+    $\sum_{x:A}\sum_{y:A}B(x,y)$ & $\sum_{x,y:A}B(x,y)$
+  \end{tabular}
+\end{center}
+
+\subsubsection{Prioritäten}
+``Höhere Priorität'' bedeutet Vorrang beim Lesen eines Ausdrucks: Wenn ``$\_\ast\_$'' höhere Priorität hat als ``$\_\vee\_$'', dann ist $a\ast b \vee c$ das gleiche wie $(a\ast b) \vee c$.
+
+\begin{itemize}
+\item Funktionsanwendung hat (wenn nichts spezielleres festgelegt wurde) die höchste Priorität.
+\item Induktive Typformer haben höhere Priorität als $\to$, $\times$, $\prod$ und $\sum$.
+\item $\to$ hat höhere Priorität als $\prod$ und $\sum$.
+\item $\times$ hat höhere Priorität als $\to$.
+\item $\sim$ hat höhere Priorität als $\to$.
+\item $\_^{-1}$ hat höhere Priorität als $\_\kon\_$.
+\end{itemize}
+
 \subsection{Der Beweisassistent Agda}
+Hier ist eine Agda-Datei, in der ich den Stand der Vorlesung festhalte/versuche festzuhalten:
+\begin{center}
+  \url{https://felix-cherubini.de/aktuell.agda}
+\end{center}
+
 Agda ist ein Programm, in dem wir Terme und Typen in abhängiger Typentheorie eingeben und prüfen können, ob diese den Regeln entsprechen. Agda kann man hier online testen: \url{https://agdapad.quasicoherent.io/}. Und hier findet man eine Anleitung zur Installation: \url{https://agda.readthedocs.io/en/latest/getting-started/installation.html}. Für die meisten Linux-Distributionen sollte es einfach genügend aktuelle Pakete geben. Für Windows-Nutzer (und Leute die nicht in Emacs/Vi arbeiten möchten) ist es wahrscheinlich eine gute Idee, ``VS Code'' mit dem agda-mode plugin zu verwenden.
 
 In der ersten Übung wir uns Agda angeschaut - mit diesen Aufgaben: \url{https://felix-cherubini.de/HoTT.agda}.
