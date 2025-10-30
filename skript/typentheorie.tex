@@ -390,7 +390,7 @@ Zum Beispiel können wir mehr über den Identitätstyp von $\eins$ sagen.
   Es bleit also ein Term in $S(n)+0=S(n)$ zu konstruieren, wobei wir $ p:n+0=n$ verwenden dürfen.
   Per Definition von $+$ ist $S(n)+0\equiv S(n+0)$, womit unser Ziel eigentlich $S(n+0)=S(n)$ ist.
   Das bekommen wir jetzt durch Anwenden der Funktion $S$ auf die Gleichheit $ p$, i.e.\ $S( p):S(n+0)=S(n)$.
-\item Wir zeigen zunächst: Für alle $n,k:\N$ haben wir $ p_{n,k}S(n+k)=n+S(k)$.
+\item Wir zeigen zunächst: Für alle $n,k:\N$ haben wir $ p_{n,k} : S(n+k)=n+S(k)$.
   Wir verwenden Induktion über $n$.
   Für den ersten Fall müssen wir $S(0+k)=0+S(k)\equiv S(k)$ zeigen, wofür wir (a) verwenden können.
   Für $S(S(n)+k)=S(n)+S(k)$,
@@ -433,7 +433,7 @@ Die Gleichheitstypen eines jeden Typs tragen eine ähnliche Struktur bzgl $\kon$
 \end{beweis}
 
 Später, in der Homotopietypentheorie, werden wir sehen, dass es in manchen Typen mehrere verschiedene Gleichheiten zwischen Elementen gibt.
-Die Struktur, die von den Gleichheitstypen eines festen Typs gebildet wird, nennt man \begriff{$\infty$-Grouppoid}, was den Begriff der Gruppe aus der Algebra verallgemeinert. Erstens brauchen Gleichheiten passende Typen, um überhaupt verknüpfbar zu sein (das ist das ``oid'' in ``Gruppoid'') und zweitens gibt es neben den Gesetzen wie Neutralität und Assoziativität auch sogennante höhere Kohärenzen (das ist das ``$\infty$''), die beschreiben wie sich etwa die Assoziativitäts\emph{operation} unter Konkatenation verhält (siehe Übungsblatt 2, letzte Aufgabe).
+Die Struktur, die von den Gleichheitstypen eines festen Typs gebildet wird, nennt man \begriff{$\infty$-Gruppoid}, was den Begriff der Gruppe aus der Algebra verallgemeinert. Erstens brauchen Gleichheiten passende Typen, um überhaupt verknüpfbar zu sein (das ist das ``oid'' in ``Gruppoid'') und zweitens gibt es neben den Gesetzen wie Neutralität und Assoziativität auch sogennante höhere Kohärenzen (das ist das ``$\infty$''), die beschreiben wie sich etwa die Assoziativitäts\emph{operation} unter Konkatenation verhält (siehe Übungsblatt 2, letzte Aufgabe).
 
 Nun wenden wir uns einem weiteren, elemtaren Aspekt der Gleichheit zu.
 Wir können in der klassischen Mathematik gleiche Dinge grundsätzlich durcheinander ersetzen -- das geht in der Typentheorie nur mit der urteilsmäßigen Gleichheit.
@@ -519,14 +519,14 @@ Wir wollen nun die verallgemeinerten Projektionen definieren - analog zu $\pi_1:
   $\times$ bindet stärker als $\to$ und $\sqcup$.
 \end{konvention}
 
-Wie schon bei anderen Typen können wir auch für die abhängige Summe zeigen, dass alle Elemente Konstruktor werte sind - also Paare.
+Wie schon bei anderen Typen können wir auch für die abhängige Summe zeigen, dass alle Elemente Konstruktorwerte sind -- also Paare.
 
 \begin{bemerkung}
   Für alle $x:(z:A)\times B(z)$ gilt $x=(\pi_1(x),\pi_2(x))$.
   Mit Induktion über $x$ können wir das auf den Fall: $(a,b)=(\pi_1((a,b)),\pi_2((a,b)))$ reduzieren, der durch $\refl_{(a,b)}$ gelöst wird.
 \end{bemerkung}
 
-Nun wollen wir - ähnlich wie bei einfacheren induktiven Typen - auch für die Natürlichen Zahlen etwas in die Richtung zeigen, dass alle Elemente durch die Konstruktoren gegeben sind.
+Nun wollen wir -- ähnlich wie bei einfacheren induktiven Typen -- auch für die natürlichen Zahlen etwas in die Richtung zeigen, dass alle Elemente durch die Konstruktoren gegeben sind.
 
 \begin{bemerkung}
   Wir haben $(n:\N)\to x=0 \sqcup (k:\N)\times n=S(k)$ per Induktion über $n$.
@@ -536,9 +536,9 @@ Nun wollen wir - ähnlich wie bei einfacheren induktiven Typen - auch für die N
 Wir können nun auch in Definitionen Existenz im starken Sinn der abhängigen Summe verwenden.
 
 \begin{definition}
-  Ein Typ $A$ heißt \begriff{kontrahierbar}\index{$\isContr$}, wenn der folgenden Typ bewohnt ist:
+  Ein Typ $A$ heißt \begriff{kontrahierbar}\index{$\isContr$}, wenn der folgende Typ bewohnt ist:
 \[
-  \mathrm{\isContr}(A)\colonequiv (x:A)\times ((y:A)\to y=x)\rlap{.}
+  \mathrm{\isContr}(A)\colonequiv (x:A)\times ((y:A)\to y=x)
 \]
   Für einen Zeugen $z:\isContr(A)$ nennt man $\pi_1(z)$ das \begriff{(Kontraktions-)zentrum}
   und $\pi_2(z)$ die \begriff{Kontraktion}.
@@ -550,9 +550,9 @@ Wir haben bereits ein Beispiel:
   eine Kontraktion $k$ können wir durch $k(\ast)\colonequiv \refl_\ast$ definieren.
 \end{beispiel}
 
-Nachdem wir etwas mehr über Gleicheit in abhängigen Summen wissen, werden wir ein wichtiges Beispiel für einen Kontrahierbaren Typ sehen.
+Nachdem wir etwas mehr über Gleicheit in abhängigen Summen wissen, werden wir ein wichtiges Beispiel für einen kontrahierbaren Typ sehen.
 Interessanterweise lassen sich die Gleichheitstypen einer abhängigen Summe durch abhängige Summen beschreiben.
-Wir werden hier erstmal nur eine Konstruktion angeben, die es uns erleichtert Gleichheiten in abhängigen Summen zu konstruieren.
+Wir werden hier erstmal nur eine Konstruktion angeben, die es uns erleichtert, Gleichheiten in abhängigen Summen zu konstruieren.
 Diese kann man als Verallgemeinerung des Fakts sehen, dass Gleichheiten in Produkten durch Paare von Gleichheiten gegeben sind.
 
 \begin{definition}
@@ -613,8 +613,8 @@ Wir verwenden in Zukunft ``$A:\mU_i$'' synonym mit ``$A$ ist ein Typ''.
 \item Jedes $A:\mU_i$ ist auch $A:\mU_{i+1}$.
 \item Wir können nun in allen Regeln Urteile der ``$A$ Typ'' ersetzen durch ``$A:\mU_i$''.
   Dadurch können wir abhängige Typen jetzt als Funktionen $P:A\to\mU_i$ schreiben.
-\item Alle Typformer erhalten Universenlevel bzw. hat ein geformter Typ als Universenleven midestens das Maximum der Universenlevel der eingehenden Typen.
-\item Die Motive von Eliminatoren haben belibiges Universenlevel.
+\item Alle Typformer erhalten Universenlevel bzw. hat ein geformter Typ als Universenlevel mindestens das Maximum der Universenlevel der eingehenden Typen.
+\item Die Motive von Eliminatoren haben beliebiges Universenlevel.
 \end{itemize}
 \end{regeln}
 
@@ -632,8 +632,8 @@ Wir verwenden in Zukunft ``$A:\mU_i$'' synonym mit ``$A$ ist ein Typ''.
     B(1_{\zwei})&\colonequiv \einheit
   \end{align*}
 \item Wir können mit dem Eliminator von $\N$ \emph{nicht} einfach eine Funktion definieren,
-  die $n$ auf $\mU_n$ abbildet. Zum einen dürfen wir $n$ nicht als Universenlevel verwenden -
-  das $i$ in $\mU_i$ ist nichtmal ein Term, zum anderen können wir kein Motiv hinschreiben,
+  die $n$ auf $\mU_n$ abbildet. Zum einen dürfen wir $n$ nicht als Universenlevel verwenden --
+  das $i$ in $\mU_i$ ist nichtmal ein Term -- zum anderen können wir kein Motiv hinschreiben,
   das einen passenden Typ hätte.
 \end{enumerate}
 \end{beispiel}
