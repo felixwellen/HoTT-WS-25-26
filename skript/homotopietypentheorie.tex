@@ -290,7 +290,7 @@ dass eine Äquivalenz $f:A\simeq B$ durch ``$\ap$'' auf Gleichheitstypen wieder 
 
 \begin{lemma}
   \label{kon-equiv}
-  Seien $x,y:A$ und $p:x=y$. Für alle $z:A$ sind
+  Seien $x,y:A$ und $p:x=y$. Für alle $z:A$ sind die folgenden Abbildungen Äquivalenzen:
   \begin{enumerate}[(i)]
   \item $q\mapsto p\kon q:y=z\to x=z$
   \item $q\mapsto q\kon p:z=x\to z=y$
@@ -298,6 +298,10 @@ dass eine Äquivalenz $f:A\simeq B$ durch ``$\ap$'' auf Gleichheitstypen wieder 
   \item $q\mapsto p^{-1}\kon q:x=z\to y=z$
   \end{enumerate}
 \end{lemma}
+
+\begin{definition}
+  Wenn es Abbildungen $f:A\to B$ und $g:B\to A$ gibt, sagen wir dass $A$ und $B$ \begriff{logisch äquivalent} sind. Oder dass wir $A$ haben, genau dann wenn wir $B$ haben. 
+\end{definition}
 
 \begin{lemma}
   \label{equiv-homotopy-stable}
@@ -333,16 +337,33 @@ dass eine Äquivalenz $f:A\simeq B$ durch ``$\ap$'' auf Gleichheitstypen wieder 
   Wir verwenden Induktion über den Homotopielevel $n$.
   Sei also zunächst $n\equiv -2$.
   Wir hatten bereits auf Übungsblatt 2 gesehen, dass kontrahierbare Typen Äquivalenz zum Typ $\eins$ sind.
-  Also haben wir auch $B\simeq \eins$. Es bleibt also 
+  Also haben wir auch $\varphi:B\simeq \eins$. Es bleibt also zu zeigen, dass daraus die Kontrahierbarkeit von $B$ folgt. Wir haben $(x:\eins)\to x=\ast$, was wir auch als $\id_\eins\sim(x\mapsto \ast)\equiv: c_{\ast}$ schreiben können.
+  Daraus bekommen wir: $\varphi\sim c_{\ast}$ und damit $\varphi^{-1}\circ\varphi=\varphi^{-1}\circ c_\ast$. Darauf kommt man jetzt durch Konkatenation mit $\varphi^{-1}\circ\varphi\sim\id$ auf $\id\sim \varphi^{-1} \circ c_\ast$ - was eine Kontraktion auf $\varphi^{-1}(\ast)$ entspricht.
+
+  Sei nun $n\equiv k+1$.
+  Wir haben eine Äquivalenz $f:A\simeq B$ und $A$ ist ein $n$-Typ.
+  Wir müssen zeigen, dass alle $x=_B y$ bereits $k$-Typen sind.
+  Dazu verwenden wir die Induktionsveraussetzung zusammen mit \Cref{ap-equiv}, der uns eine Äquivalenz $x=_B y\simeq f^{-1}(x)=f^{-1}(y)$ gibt.
 \end{beweis}
 
 Wir bereiten nun den Beweis eines Satzes vor,
 der Äquivalenzen als Abbildungen mit kontrahierbaren Fasern charakterisiert.
 
+\begin{definition}
+  Sei $f:A\to B$. Die \begriff{Faser} von $f$ über $y:B$ ist der Typ\index{$\fib$}
+  \[
+    \fib_f(y)\colonequiv \sum_{x:A}f(x)=y\rlap{.}
+  \]
+  Sind alle Faser von $f$ ein $n$-Typ, so nennt man $f$ \begriff{$n$-abgeschnitten}.
+  Speziell für $n\equiv -2$ und $n\equiv -1$ nennt man $f$ in diesem Fall \begriff{kontrahierbar} bzw.\ \begriff{Einbettung}.
+\end{definition}
+
 \begin{lemma}
   Sei $B,C:A\to\mU$ und $e:(x:A)\to B(x)\simeq C(x)$.
   Dann gibt es
-  \[\sum_{x:A} e(x) : \left(\sum_{x:A}B(x)\right)\simeq \left(\sum_{x:A}C(x)\right)\]
+  \[\sum_{x:A} e(x) : \left(\sum_{x:A}B(x)\right)\simeq \left(\sum_{x:A}C(x)\right)
+  \]
+  mit zugrunde liegender Abbildung $(x,b)\mapsto (x,e_x(b))$.
 \end{lemma}
 
 \begin{beweis}
@@ -352,6 +373,21 @@ der Äquivalenzen als Abbildungen mit kontrahierbaren Fasern charakterisiert.
     \sum_{x:A}g(x):\left(\sum_{x:A}C(x)\right) \to \left(\sum_{x:A}B(x)\right)
     \]
     eine Quasi-Inverse zu $\sum_{x:A}e(x)$ ist.
+\end{beweis}
+
+\begin{theorem}
+  \label{isequiv-iscontr-fib}
+  Eine Funktion $A\to B$ ist genau dann eine Äquivalenz, wenn sie kontrahierbar ist.
+\end{theorem}
+
+\begin{beweis}
+
+  Sei nun $f:A\to B$ eine Äquivalenz.
+  Sei $y:B$. Für die Faser von $f$ ist haben wir
+  \[
+    \left(\sum_{x:A}f(x)=y\right)\simeq \left(\sum_{x:A}f(x)=f(f^{-1}(y))\right)\simeq \left(\sum_{x:A}x=f^{-1}(y)\right)\simeq\eins\rlap{.}
+    \]
+
 \end{beweis}
 
 Mit dem Begriff der Äquivalenz, können wir nun auch \begriff{Funktionsextensionalität} einführen:
