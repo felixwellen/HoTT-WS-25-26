@@ -43,7 +43,7 @@
 
 \theorembodyfont{}
 \theoremstyle{break}
-    \newtheorem{theorem}{Theorem}[subsection]
+    \newtheorem{theorem}{Satz}[subsection]
     \newtheorem{lemma}[theorem]{Lemma}
     \newtheorem{definition}[theorem]{Definition}
     \newtheorem{bemerkung}[theorem]{Bemerkung}

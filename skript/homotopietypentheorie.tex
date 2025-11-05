@@ -258,8 +258,9 @@ Wir werden nun in mehreren Schritten, die für sich auch interessant sind zeigen
 dass eine Äquivalenz $f:A\simeq B$ durch ``$\ap$'' auf Gleichheitstypen wieder Äquivalenzen induziert.
 
 \begin{lemma}
+   \label{2-6}
   \begin{enumerate}[(a)]
-  \item Äquivalenzen erf+llen ``2 aus 3'':
+  \item Äquivalenzen erfüllen ``2 aus 3'':
     Seien $f:A\to B$, $g:B\to C$ und $h:A\to C$
     sodass $g\circ f\sim h$.
     Sind zwei der drei Abbildungen $f,g,h$ Äquivalenzen, dann ist auch die dritte eine Äquivalenz.
@@ -272,20 +273,86 @@ dass eine Äquivalenz $f:A\simeq B$ durch ``$\ap$'' auf Gleichheitstypen wieder 
 \begin{beweis}
   \begin{enumerate}[(a)]
   \item Übungsblatt 3.
-  \item Kommt noch.
+  \item Wir betrachten folgendes Diagramm mit Quasi-Inversen $\varphi,\psi$ zu $gf$ und $hg$:
+    \begin{center}
+      \begin{tikzcd}[nodes={row sep=1.4cm, column sep=1.6cm}]
+        A\ar[d,"f",swap]\ar[dr,"gf",swap] & & \\
+        B\ar[r,"g"]\ar[dr,"hg"] & C\ar[d,"h"]\ar[ul,"\varphi",bend right=40,swap ] & \\
+        & D\ar[ul,"\psi",bend left=40] &
+      \end{tikzcd}
+    \end{center}
+    Nun hat $g$ eine Rechtsinverse $f\circ \varphi:C\to B$ und eine Linksinverse $\psi\circ h:C\to B$,
+    ist also eine Äquivalenz.
+    $h$ hat die Rechtsinverse $g\circ \psi:D\to C$. Damit ist $h$ Linksinverse der Äquivalenz $g\circ \psi$ und damit auch eine Rechtsinverse. Also ist $h$ Äquivalenz.
+    Analog ist $f$ eine Äquivalenz.
   \end{enumerate}
 \end{beweis}
 
 \begin{lemma}
-  Sei $B,C:A\to\mU$ und $e:(x:A)\to B(x)\simeq C(x)$.
-  Dann gibt es
-  \[\sum e : \left(\sum_{x:A}B(x)\right)\simeq \left(\sum_{x:A}C(x)\right)\]
+  \label{kon-equiv}
+  Seien $x,y:A$ und $p:x=y$. Für alle $z:A$ sind
+  \begin{enumerate}[(i)]
+  \item $q\mapsto p\kon q:y=z\to x=z$
+  \item $q\mapsto q\kon p:z=x\to z=y$
+  \item $q\mapsto q\kon p^{-1}:z=y\to z=x$
+  \item $q\mapsto p^{-1}\kon q:x=z\to y=z$
+  \end{enumerate}
+\end{lemma}
+
+\begin{lemma}
+  \label{equiv-homotopy-stable}
+  Seien $f,g:A\to B$ und $f\sim g$. Wenn $f$ eine Äquivalenz ist, dann ist auch $g$ eine Äquivalenz.
 \end{lemma}
 
 \begin{beweis}
-  Kommt noch.
+  Sei $f^{-1}:B\to A$ Quasi-Inverse zu $f$.
+  Es gibt also $H:(f^{-1}\circ f)\sim\id$, $K:(f\circ f^{-1})\sim\id$ und wir haben $L:g\sim f$.
+  Mit dem letzteren auch $f^{-1}(L)\kon H:(f^{-1}\circ g)\sim \id$ und $L_{f^{-1}}\kon K:(g\circ f^{-1})\sim\id$.
 \end{beweis}
 
+\begin{theorem}
+  \label{ap-equiv}
+  Seien $f:A\simeq B$ eine Äquivalenz und $x,y:A$. Dann ist $\ap_f:x=y\to f(x)=f(y)$ auch eine Äquivalenz.  
+\end{theorem}
+
+\begin{beweis}
+  Wir wenden \Cref{2-6} an auf die Abbildungen $\ap_f:x=y\to f(x)=f(y)$, $\ap_g:f(x)=f(y)\to gf(x)=gf(y)$ und $\ap_f:gf(x)=gf(y)\to fgf(x)=fgf(y)$.
+  Um zu zeigen dass $\ap_{f}:x=y\to f(x)=f(y)$ eine Äquivalenz ist, reicht es also zu zeigen dass die beiden Kompositionen $\ap_{gf}:x=y\to gf(x)=gf(y)$ und $\ap_{fg}:u=v\to fg(u)=fg(v)$ für $u,v:B$ Äquivalenzen sind.
+
+  Wir machen das exemplarisch für $\ap_{gf}:x=y\to gf(x)=gf(y)$.
+  Durch \Cref{kon-equiv} haben wir eine Äquivalenz $x=y\to gf(x)=gf(y)$ mittels Konkatenation mit den Gleichheiten $x=g(f(x))$ und $gf(y)=y$.
+  Diese Äquivalenz ist schon punktweise gleich $\ap_{gf}$, was wir durch Induktion über $p:x=y$ berechnen können.
+  Nun können wir mit \Cref{equiv-homotopy-stable} folgern, dass bereits $\ap_{gf}$ eine Äquivalenz ist.
+\end{beweis}
+
+\begin{korollar}
+  Sei $A\simeq B$ und $A$ ein $n$-Typ, dann ist auch $B$ ein $n$-Typ.
+\end{korollar}
+
+\begin{beweis}
+  Wir verwenden Induktion über den Homotopielevel $n$.
+  Sei also zunächst $n\equiv -2$.
+  Wir hatten bereits auf Übungsblatt 2 gesehen, dass kontrahierbare Typen Äquivalenz zum Typ $\eins$ sind.
+  Also haben wir auch $B\simeq \eins$. Es bleibt also 
+\end{beweis}
+
+Wir bereiten nun den Beweis eines Satzes vor,
+der Äquivalenzen als Abbildungen mit kontrahierbaren Fasern charakterisiert.
+
+\begin{lemma}
+  Sei $B,C:A\to\mU$ und $e:(x:A)\to B(x)\simeq C(x)$.
+  Dann gibt es
+  \[\sum_{x:A} e(x) : \left(\sum_{x:A}B(x)\right)\simeq \left(\sum_{x:A}C(x)\right)\]
+\end{lemma}
+
+\begin{beweis}
+  Wir haben eine Quasi-Inverse $g(x):C(x)\to B(x)$ zu $e(x)$ für jedes $x:A$.
+  Mit den Zeugen dafür können wir zeigen dass
+  \[
+    \sum_{x:A}g(x):\left(\sum_{x:A}C(x)\right) \to \left(\sum_{x:A}B(x)\right)
+    \]
+    eine Quasi-Inverse zu $\sum_{x:A}e(x)$ ist.
+\end{beweis}
 
 Mit dem Begriff der Äquivalenz, können wir nun auch \begriff{Funktionsextensionalität} einführen:
 
