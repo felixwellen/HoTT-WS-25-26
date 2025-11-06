@@ -1,0 +1,56 @@
+% latexmk -pdf -pvc blatt3.tex
+\documentclass{hott-übung}
+
+\begin{document}
+
+\setcounter{blattnummer}{3}
+\setcounter{aufgabennummer}{0}
+
+\blatt
+
+\aufgabe{}
+Sei $A:\mU$.
+\begin{enumerate}[(a)]
+\item Wenn $A$ eine Aussage ist und wir $a:A$ haben, dann ist $A$ kontrahierbar.
+\item Wenn wir eine Funktion des Typs $A\to \isContr(A)$ haben, dann ist $A$ bereits eine Aussage. 
+\end{enumerate}
+
+\aufgabe{}
+\begin{enumerate}[(a)]
+\item Zeige $0\neq 1$, für die natürlichen Zahlen $0$ und $1$.  
+\item Zeige $\neg(\eins\simeq \N)$.
+\end{enumerate}
+
+\aufgabe{}
+\begin{enumerate}[(a)]
+\item Seien $A$ ein Typ und $f:A\to A$ sodass $f\sim \id_A$. Zeige, dass $f$ eine Äquivalenz ist.
+\item Seien $A,B,C$ Typen.
+Konstruiere Abbildungen
+\begin{align*}
+\varphi : (A\times B \to C)\to (A\to B\to C)\quad\text{ und }  \quad\psi:(A\to B\to C)\to (A\times B\to C)
+\end{align*}
+zusammen mit $(f:A\times B \to C)\to \psi(\varphi(f))\sim f$ und $(g:A\to B\to C)\to \varphi(\psi(g))\sim g$.
+\end{enumerate}
+
+\aufgabe{2 aus 3}
+Seien $f:A\to B$ und $g:B\to C$.
+\begin{enumerate}[(a)]
+\item Zeige, dass $g\circ f:A\to C$ eine Äquivalenz ist, wenn $f$ und $g$ Äquivalenzen sind.
+\item Zeige, dass $f$ eine Äquivalenz ist, wenn $g$ und $g\circ f$ Äquivalenzen sind.
+\item Zeige, dass $g$ eine Äquivalenz ist, wenn $f$ und $g\circ f$ Äquivalenzen sind.
+\end{enumerate}
+
+\bonus{}
+Seien $A:\mU$ und $B:A\to\mU$. Zeige:
+\begin{enumerate}[(a)]
+\item Wenn $(x:A)\to \isContr(B(x))$, dann haben wir
+  \[
+    \left(\sum_{x:A}B(x)\right)\simeq A\rlap{.}
+  \]
+\item Wenn $A$ kontrahierbar ist, haben wir
+  \[
+    \left(\sum_{x:A}B(x)\right)\simeq B(\ast)\rlap{.}
+  \]
+\end{enumerate}
+
+\end{document}
