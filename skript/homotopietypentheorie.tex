@@ -381,6 +381,10 @@ der Äquivalenzen als Abbildungen mit kontrahierbaren Fasern charakterisiert.
 \end{theorem}
 
 \begin{beweis}
+  Sei $f:A\to B$ kontrahierbar.
+  Durch die Kontraktionszentren der Fasern ist eine Abbildung $g:B\to A$ gegeben, damit haben wir auch direkt $p:(y:B)\to f(g(y))=y$.
+  Für $x:A$ ist $g(f(x))$ also das Kontraktionszentrum der Faser von $f$ über $f(x)$,
+  d.h.\ wir haben $g(f(x))=x$, da die Faser insbesondere eine Aussage ist und $x$ durch $(x,\refl_{f(x)})$ in der Faser liegt.
 
   Sei nun $f:A\to B$ eine Äquivalenz.
   Sei $y:B$. Für die Faser von $f$ ist haben wir
@@ -389,6 +393,103 @@ der Äquivalenzen als Abbildungen mit kontrahierbaren Fasern charakterisiert.
     \]
 
 \end{beweis}
+
+Wir wollen nun eine wichtige Anwendung dieses Satzes vorbereiten: Den Gleichheitssatz (\Cref{gleichheitssatz}).
+Dazu führen wir zunächst mehr Hilfsfunktionen für den Umgang mit abhängigen Summen ein:
+
+\begin{lemma}
+  \begin{enumerate}[(a)]
+  \item   Seien $B:A\to \mU$ und $C:(x:A) \times B(x)\to \mU$. Dann gibt es in
+  \begin{align*}
+     (x:A)\times ((b:B(x))\times C((x,b))) \to  (u:(x:A) \times B(x))\times C(u)
+  \end{align*}
+  die Äquivalenz $(x,(b,c))\mapsto ((x,b),c)$.
+\item   Seien $C:A\to B\to \mU$. Dann gibt es in
+  \[
+    \sum_{x:A}\sum_{y:B}C(x,y)\to \sum_{y:B}\sum_{x:A}C(x,y)
+    \]
+  die Äquivalenz $(x,(y,c))\mapsto (y,(x,c))$.
+\item   Ist $f:A\to B$ eine Äquivalenz und $C:B\to\mU$, so ist
+  \[
+     (x,b)\mapsto (f(x),b) : \sum_{x:A}C(f(x))\to \sum_{y:B}C(y)
+  \]
+  eine Äquivalenz.
+  \end{enumerate}
+\end{lemma}
+
+\begin{beweis}
+  \begin{enumerate}[(a)]
+  \item   Es ist $(u,c)\mapsto (\pi_1(u),(\pi_2(u),\transp_C(p_u)(c)))$ eine Quasi-Inverse, wobei $p:(u:(x:A)\times B(x))\to u=(\pi_1(u),\pi_2(u))$ durch $p(x,b)\colonequiv \refl$ gegeben ist.
+  Beide Homotopien sind direkt durch Induktion über das Argument und anwenden von $(\_,\_)_=$ gegeben.
+\item   Direkte Rechnung zeigt, dass die gegebene Abbildung selbstinvers ist.
+\item Übungsblatt 4.
+  \end{enumerate}
+\end{beweis}
+
+In der Übung hatten wir als Bonusaufgabe,
+dass kontrahierbare Typen in gewissem Sinn neutral bzgl.\ $\sum$ sind:
+
+\begin{lemma}
+  Sei $B:A\to\mU$.
+  \begin{enumerate}[(a)]
+  \item Ist jedes $B(x)$ kontrahierbar, so ist $\pi_1:\sum_{x:A}B(x)\simeq A$ eine Äquivalenz.
+  \item Ist $A$ kontrahierbar mit Zentrum $a:A$ und Kontraktion $k:(x:A)\to x=a$ die Abbildung
+    $(x,b)\mapsto \transp_B(k_x)(b) : \sum_{x:A}B(x)\simeq B(a)$ eine Äquivalenz.
+  \end{enumerate}
+\end{lemma}
+
+\begin{lemma}
+  \label{total-fiberwise-sigma-equiv}
+  Seien $B,C:A\to\mU$ und $f:(x:A)\to B(x)\to C(x)$.
+  Dann gibt es eine kanonische Äquivalenz:
+  \[
+    \fib_{\sum_{x:A}f_x}(x,c)\simeq \fib_{f_x}(c)\rlap{.}
+  \]
+\end{lemma}
+
+\begin{beweis}
+  Wir haben:
+  \begin{align*}
+    \fib_{\sum_{z:A}f_z}(x,c)&\equiv\sum_{u:\sum_{y:A}B(y)}\left(\sum_{z:A}f_z\right)(u)=(x,c) \\
+    &\simeq\sum_{y:A}\sum_{b:B(y)}\left(\sum_{z:A}f_z\right)((y,b))=(x,c) \\
+    &\equiv\sum_{y:A}\sum_{b:B(y)} (y,f_{y}(b))=(x,c) \\
+    &\simeq\sum_{y:A}\sum_{b:B(y)}\sum_{p:y=x}\transp_C(p)(f_{y}(b))=c \\
+    &\simeq\sum_{y:A}\sum_{p:y=x}\sum_{b:B(y)}\transp_C(p)(f_{y}(b))=c \\
+    &\simeq\sum_{b:B(x)}\transp_C(\refl_x)(f_{x}(b))=c \\
+    &\simeq\sum_{b:B(x)}f_{x}(b)=c \\
+    &\equiv \fib_{f_x}(c)\rlap{.}
+  \end{align*}
+\end{beweis}
+
+\begin{lemma}
+  \label{sigma-fiberwise-equiv}
+  Seien $B,C:A\to\mU$ und $f:(x:A)\to B(x)\to C(x)$.
+  $(x:A)\to \isEquiv(f)$ gilt genau dann wenn $\sum_{x:A}f_x$ Äquivalenz ist.
+\end{lemma}
+
+\begin{beweis}
+  Eine Richtung hatten wir bereits gezeigt.
+  Sei also $\sum_{x:A}f_x$ Äquivalenz.
+  Nach \Cref{total-fiberwise-sigma-equiv} sind nun die Fasern der $f_x$ genau dann kontrahierbar,
+  wenn die Fasern von $\sum_{x:A}f_x$ das sind.
+\end{beweis}
+
+\begin{theorem}
+  \label{gleichheitssatz}
+  Sei $A$ ein Typ und $G:A\to A\to \mU$ mit $r:(x:A)\to G(x,x)$.
+  Dann ist $G(x,y)$ genau dann für alle $x,y:A$ zu $x=y$ äquivalent, wenn
+  \[
+    \sum_{x:A}G(x,y)
+  \]
+  für alle $y$ kontrahierbar ist.
+\end{theorem}
+
+\begin{beweis}
+  Anwenden von \Cref{sigma-fiberwise-equiv} auf die Abbildung
+  $e:(p:x=y)\to G(x,y)$ gegeben durch $e(\refl)\colonequiv r_x$.
+\end{beweis}
+
+\subsection{Funktionsextensionalität und Univalenz}
 
 Mit dem Begriff der Äquivalenz, können wir nun auch \begriff{Funktionsextensionalität} einführen:
 
