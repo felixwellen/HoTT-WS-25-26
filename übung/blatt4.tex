@@ -5,11 +5,58 @@
 
 \setcounter{blattnummer}{4}
 \setcounter{aufgabennummer}{0}
+\setlength{\belowdisplayskip}{1pt}
 
 \blatt
 
+\aufgabe{Fasernder Ersatz}
+  Sei \(f : A \to B\) eine Funktion.
+\begin{enumerate}[(a)]
+  \item
+    Konstruiere eine Äquivalenz \(e : A \simeq \sum_{y : B}\fib_f(y)\) und eine Homotopie \(H : f \sim \pi_1 \circ e\).
+    \[\begin{tikzcd}
+      A & & \sum_{y : B}\fib_f(y) \\
+      & B
+      \arrow[from=1-1,to=1-3,"e"]
+      \arrow[to=2-2,from=1-3,"\pi_1"]
+      \arrow[from=1-1,to=2-2,"f"']
+    \end{tikzcd}\]
+  \item
+    Folgere, dass \(f\) eine Äquivalenz ist, falls \(f\) kontrahierbar ist.
+\end{enumerate}
+
+\aufgabe{\(n\)-Typen sind stabil unter abhängigen Summen}
+Sei \(A\) ein \(n\)-Typ und \(B : A \to \mU\) eine Familie von \(n\)-Typen, gelte also, dass \(B(x)\) für jedes \(x : A\) ein \(n\)-Typ ist.
+Zeige, dass \(\sum_{x : A}B(x)\) ein \(n\)-Typ ist.
+
 \aufgabe{}
-Sei $f:A\to B$ eine kontrahierbare Funktion.
-Zeige, dass $f$ eine Äquivalenz ist.
+Sei \(f : A \to B\) eine Äquivalenz und \(C : B \to \mU\).
+Zeige, dass die Abbildung
+\[(x,c) \mapsto (f(x),c) : \sum_{x:A}C(f(x)) \to \sum_{y:B}C(y)\]
+eine Äquivalenz ist.
+
+\aufgabe{Gleichheit in Koprodukten}
+  Seien \(A\) und \(B\) Typen.
+  % Finde folgende Äquivalenzen für die Gleichheitstypen von \(A \sqcup B\).
+  % \begin{align*}
+  %   (\iota_1(x) = \iota_1(x')) & \simeq (x=x'), \\
+  %   (\iota_1(x) = \iota_2(y')) & \simeq \leer, \\
+  %   (\iota_2(y) = \iota_1(x')) & \simeq \leer, \\
+  %   (\iota_2(y) = \iota_2(y')) & \simeq (y=y').
+  % \end{align*}
+  Wir definieren \(G_\sqcup : (A \sqcup B) \to (A\sqcup B) \to \mU\) per Induktion durch
+  \setlength{\belowdisplayskip}{1em}
+  \begin{align*}
+    G_\sqcup(\iota_1(a),\iota_1(a')) & \colonequiv (a=a'), \\
+    G_\sqcup(\iota_1(a),\iota_2(b')) & \colonequiv \leer, \\
+    G_\sqcup(\iota_2(b),\iota_1(a')) & \colonequiv \leer, \\
+    G_\sqcup(\iota_2(b),\iota_2(b')) & \colonequiv (b=b').
+  \end{align*}
+  Zeige, dass \(G(x,y) \simeq (x = y)\) für alle \(x,y : A \sqcup B\).
+
+\aufgabe{Gleichheit in Fasern}
+  Seien \(f : A \to B\), \(b : B\) und \((a,p), (a',p') : \fib_f(b)\) gegeben.
+  Zeige, dass \[((a,p) = (a',p')) \simeq \sum_{q : a = a'}\ap_f(q)^{-1}\kon p = p'.\]
+
 
 \end{document}
