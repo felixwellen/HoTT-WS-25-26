@@ -381,10 +381,10 @@ der Äquivalenzen als Abbildungen mit kontrahierbaren Fasern charakterisiert.
 \end{theorem}
 
 \begin{beweis}
-  Sei $f:A\to B$ kontrahierbar.
+\ignore{  Sei $f:A\to B$ kontrahierbar.
   Durch die Kontraktionszentren der Fasern ist eine Abbildung $g:B\to A$ gegeben, damit haben wir auch direkt $p:(y:B)\to f(g(y))=y$.
   Für $x:A$ ist $g(f(x))$ also das Kontraktionszentrum der Faser von $f$ über $f(x)$,
-  d.h.\ wir haben $g(f(x))=x$, da die Faser insbesondere eine Aussage ist und $x$ durch $(x,\refl_{f(x)})$ in der Faser liegt.
+  d.h.\ wir haben $g(f(x))=x$, da die Faser insbesondere eine Aussage ist und $x$ durch $(x,\refl_{f(x)})$ in der Faser liegt.}
 
   Sei nun $f:A\to B$ eine Äquivalenz.
   Sei $y:B$. Für die Faser von $f$ ist haben wir
@@ -419,8 +419,7 @@ Dazu führen wir zunächst mehr Hilfsfunktionen für den Umgang mit abhängigen 
 
 \begin{beweis}
   \begin{enumerate}[(a)]
-  \item   Es ist $(u,c)\mapsto (\pi_1(u),(\pi_2(u),\transp_C(p_u)(c)))$ eine Quasi-Inverse, wobei $p:(u:(x:A)\times B(x))\to u=(\pi_1(u),\pi_2(u))$ durch $p(x,b)\colonequiv \refl$ gegeben ist.
-  Beide Homotopien sind direkt durch Induktion über das Argument und anwenden von $(\_,\_)_=$ gegeben.
+  \item   Es ist $((x,b),c)\mapsto (x,(b,c))$ eine Quasi-Inverse.
 \item   Direkte Rechnung zeigt, dass die gegebene Abbildung selbstinvers ist.
 \item Übungsblatt 4.
   \end{enumerate}
@@ -432,16 +431,40 @@ dass kontrahierbare Typen in gewissem Sinn neutral bzgl.\ $\sum$ sind:
 \begin{lemma}
   Sei $B:A\to\mU$.
   \begin{enumerate}[(a)]
-  \item Ist jedes $B(x)$ kontrahierbar, so ist $\pi_1:\sum_{x:A}B(x)\simeq A$ eine Äquivalenz.
+  \item Ist jedes $B(x)$ kontrahierbar, so ist $\pi_1:\left(\sum_{x:A}B(x)\right)\simeq A$ eine Äquivalenz.
   \item Ist $A$ kontrahierbar mit Zentrum $a:A$ und Kontraktion $k:(x:A)\to x=a$ die Abbildung
-    $(x,b)\mapsto \transp_B(k_x)(b) : \sum_{x:A}B(x)\simeq B(a)$ eine Äquivalenz.
+    $(x,b)\mapsto \transp_B(k_x)(b) : \left(\sum_{x:A}B(x)\right)\simeq B(a)$ eine Äquivalenz.
   \end{enumerate}
 \end{lemma}
+
+Nun wollen wir noch zeigen, dass die Abbildung $(\_,\_)_=$ eine Äquivalenz ist:
+
+\begin{lemma}
+  Seien $B:A\to\mU$ und $x,y:A$, $u:B(x)$, $v:B(y)$. Dann ist die Abbildung
+  \begin{align*}
+    &(\_,\_)_=:\left(\sum_{p:x=y}\transp_B(p)(u)=v\right) \to (x,u)=(y,v)\rlap{,}
+  \end{align*}
+  gegeben durch $(\refl_x,\refl_u)_=\colonequiv \refl_{(x,u)}$, eine Äquivalenz.
+\end{lemma}
+
+\begin{beweis}
+  Wir verallgemeinern den Typ einer möglichen Quasi-Inversen leicht, um später Gleichheitsinduktion anwenden zu können - suchen also eine Funktion:
+  \[
+     \varphi:(q:w=z) \to \sum_{p\pi_1(w)=\pi_1(z)}\transp_B(p)(\pi_2(w))=\pi_2(z)
+  \]
+  Eine solche Abbildung ist durch $\varphi(\refl_w)\colonequiv (\refl_{\pi_1(w)},\refl_{\pi_2(w)})$ gegeben.
+  Wir rechnen nach: \[((\_,\_)_=\circ \varphi)(\refl_{w})\equiv \refl_{(\pi_1(w),\pi_2(w))} \]
+  Also ist $(\_,\_)_=\circ \varphi'\sim\id$ wobei $\varphi': (x,u)=(y,v)\to \sum_{p:x=y}\transp_B(p)(u)=v$ gegeben ist durch $\varphi'(p)\colonequiv \varphi(p)$.
+
+  Es bleibt $\varphi\circ (\_,\_)_=$ zu konstruieren.
+  Wir zeigen zunächst: $(p:x=y)\to (q:\transp_B(p)(u)=v)\to \varphi((p,q)_=)=(p,q)$.
+  Das folgt durch Induktion über $p$ und $q$ und direkte Rechnung.
+\end{beweis}
 
 \begin{lemma}
   \label{total-fiberwise-sigma-equiv}
   Seien $B,C:A\to\mU$ und $f:(x:A)\to B(x)\to C(x)$.
-  Dann gibt es eine kanonische Äquivalenz:
+  Dann gibt es eine Äquivalenz:
   \[
     \fib_{\sum_{x:A}f_x}(x,c)\simeq \fib_{f_x}(c)\rlap{.}
   \]
@@ -464,7 +487,7 @@ dass kontrahierbare Typen in gewissem Sinn neutral bzgl.\ $\sum$ sind:
 \begin{lemma}
   \label{sigma-fiberwise-equiv}
   Seien $B,C:A\to\mU$ und $f:(x:A)\to B(x)\to C(x)$.
-  $(x:A)\to \isEquiv(f)$ gilt genau dann wenn $\sum_{x:A}f_x$ Äquivalenz ist.
+  $(x:A)\to \isEquiv(f_x)$ gilt genau dann wenn $\sum_{x:A}f_x$ Äquivalenz ist.
 \end{lemma}
 
 \begin{beweis}
