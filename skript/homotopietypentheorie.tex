@@ -336,9 +336,9 @@ dass eine Äquivalenz $f:A\simeq B$ durch ``$\ap$'' auf Gleichheitstypen wieder 
 \begin{beweis}
   Wir verwenden Induktion über den Homotopielevel $n$.
   Sei also zunächst $n\equiv -2$.
-  Wir hatten bereits auf Übungsblatt 2 gesehen, dass kontrahierbare Typen Äquivalenz zum Typ $\eins$ sind.
-  Also haben wir auch $\varphi:B\simeq \eins$. Es bleibt also zu zeigen, dass daraus die Kontrahierbarkeit von $B$ folgt. Wir haben $(x:\eins)\to x=\ast$, was wir auch als $\id_\eins\sim(x\mapsto \ast)\equiv: c_{\ast}$ schreiben können.
-  Daraus bekommen wir: $\varphi\sim c_{\ast}$ und damit $\varphi^{-1}\circ\varphi=\varphi^{-1}\circ c_\ast$. Darauf kommt man jetzt durch Konkatenation mit $\varphi^{-1}\circ\varphi\sim\id$ auf $\id\sim \varphi^{-1} \circ c_\ast$ - was eine Kontraktion auf $\varphi^{-1}(\ast)$ entspricht.
+  Wir hatten bereits auf Übungsblatt 2 gesehen, dass kontrahierbare Typen äquivalent zum Typ $\eins$ sind.
+  Also haben wir auch $\varphi:B\simeq \eins$. Es bleibt zu zeigen, dass daraus die Kontrahierbarkeit von $B$ folgt. Wir haben $(x:\eins)\to x=\ast$, was wir auch als $\id_\eins\sim(x\mapsto \ast)\equiv: c_{\ast}$ schreiben können.
+  Daraus bekommen wir: $\varphi\sim c_{\ast}$ und damit $\varphi^{-1}\circ\varphi \sim \varphi^{-1}\circ c_\ast$. Darauf kommt man jetzt durch Konkatenation mit $\varphi^{-1}\circ\varphi\sim\id$ auf $\id\sim \varphi^{-1} \circ c_\ast$ -- was einer Kontraktion auf $\varphi^{-1}(\ast)$ entspricht.
 
   Sei nun $n\equiv k+1$.
   Wir haben eine Äquivalenz $f:A\simeq B$ und $A$ ist ein $n$-Typ.
@@ -387,7 +387,7 @@ der Äquivalenzen als Abbildungen mit kontrahierbaren Fasern charakterisiert.
   d.h.\ wir haben $g(f(x))=x$, da die Faser insbesondere eine Aussage ist und $x$ durch $(x,\refl_{f(x)})$ in der Faser liegt.}
 
   Sei nun $f:A\to B$ eine Äquivalenz.
-  Sei $y:B$. Für die Faser von $f$ ist haben wir
+  Sei $y:B$. Für die Faser von $f$ haben wir
   \[
     \left(\sum_{x:A}f(x)=y\right)\simeq \left(\sum_{x:A}f(x)=f(f^{-1}(y))\right)\simeq \left(\sum_{x:A}x=f^{-1}(y)\right)\simeq\eins\rlap{.}
     \]
@@ -487,7 +487,7 @@ Nun wollen wir noch zeigen, dass die Abbildung $(\_,\_)_=$ eine Äquivalenz ist:
 \begin{lemma}
   \label{sigma-fiberwise-equiv}
   Seien $B,C:A\to\mU$ und $f:(x:A)\to B(x)\to C(x)$.
-  $(x:A)\to \isEquiv(f_x)$ gilt genau dann wenn $\sum_{x:A}f_x$ Äquivalenz ist.
+  Genau dann gilt $(x:A)\to \isEquiv(f_x)$, wenn $\sum_{x:A}f_x$ eine Äquivalenz ist.
 \end{lemma}
 
 \begin{beweis}
