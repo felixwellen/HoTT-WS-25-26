@@ -121,6 +121,8 @@ tr-r≈ _ refl refl = refl
 data Σ (A : 𝒰) (B : A → 𝒰) : 𝒰 where
   _,_ : (x : A) (y : B x) → Σ A B
 
+infixr 2 _,_
+
 π₁ : {A : 𝒰} {B : A → 𝒰} → Σ A B → A
 π₁ (x , y) = x
 
@@ -184,14 +186,149 @@ isnType→isSnType (S n) h x y = isnType→isSnType n (h x y)
 _~_ : {A B : 𝒰} (f g : A → B) → 𝒰
 f ~ g = (x : _) → f x ≈ g x
 
+_∙~_ : {A B : 𝒰} {f g h : A → B} → f ~ g → g ~ h → f ~ h
+H ∙~ K = λ x → H x ∙ K x
+
+refl~ : {A B : 𝒰} {f : A → B} → f ~ f
+refl~ = λ x → refl
+
+_⁻¹~ : {A B : 𝒰} {f g : A → B} → f ~ g → g ~ f
+H ⁻¹~ = λ x → H x ⁻¹
+
+ap~ : {A B C : 𝒰} {f g : A → B} (h : B → C) → f ~ g → h ∘ f ~ h ∘ g
+ap~ h H = λ x → ap h (H x)
+
+precomp~ : {A B C : 𝒰} {f g : A → B} (h : C → A) → f ~ g → f ∘ h ~ g ∘ h
+precomp~ h H = λ x → H (h x)
+
 qInv : {A B : 𝒰} (f : A → B) → 𝒰
 qInv {A} {B} f = Σ (B → A) (λ g → (g ∘ f ~ id A) × (f ∘ g ~ id B))
 
 isEquiv : {A B : 𝒰} (f : A → B) → 𝒰
 isEquiv {A} {B} f = (Σ (B → A) (λ g → g ∘ f ~ id A)) × (Σ (B → A) (λ h → (f ∘ h ~ id B)))
 
+idEquiv : (A : 𝒰) → isEquiv (id A)
+idEquiv A = ((id A) , refl~) , ((id A) , refl~)
+
 qInv→isEquiv : {A B : 𝒰} (f : A → B) → qInv f → isEquiv f
 qInv→isEquiv f (g , (g∘f~id , f∘g~id)) = (g , g∘f~id) , (g , f∘g~id)
 
+equiv-linv-rinv :
+  {A B : 𝒰} (f : A → B) (l : B → A)
+  → isEquiv f → l ∘ f ~ id _ → f ∘ l ~ id _
+equiv-linv-rinv {A} {B} f l ((lf , p) , (rf , q)) l∘f~id =
+  λ (x : B) →  ap (f ∘ l) (q x ⁻¹)
+             ∙ ap f (l∘f~id (rf x))
+             ∙ q x
+
 isEquiv→qInv : {A B : 𝒰} (f : A → B) → isEquiv f → qInv f
-isEquiv→qInv f ((g , p) , (h , q)) = {!!}
+isEquiv→qInv f isEquivf@((g , p) , (h , q)) = g , (p , (equiv-linv-rinv f g isEquivf p))
+
+logicalEquiv→Equiv : {A B : 𝒰} → isProp A → isProp B → (f : A → B) → (g : B → A) → isEquiv f
+logicalEquiv→Equiv isPropA isPropB f g =
+  (g , (λ x → isPropA (g (f x)) x)) , (g , (λ x → isPropB (f (g x)) x))
+
+_≃_ : (A B : 𝒰) → 𝒰    -- \simeq für "≃"
+A ≃ B = Σ (A → B) (λ f → isEquiv f)
+
+
+{-
+  Wir führen nun sogenanntes "Equational reasoning" ein - d.h. wir wollen
+  Gleichungsketten als    x₀ ≈⟨ p₀ ⟩ x₁ ≈⟨ p₁ ⟩ x₂ ... xₙ₋₁ ≈⟨ pₙ ⟩ xₙ ≈∎
+  schreiben. Das können wir durch folgende Auswertungsreihenfolge realisieren:
+
+      x₀ ≈⟨ p₀ ⟩ (x₁ ≈⟨ p₁ ⟩ (x₂ ... (xₙ₋₁ ≈⟨ pₙ ⟩ (xₙ ≈∎))...)
+
+  Analoges definieren wir für "≃" und "~".
+-}
+
+infixr 4 _≈⟨_⟩_
+_≈⟨_⟩_ : {A : 𝒰} {y : A} {z : A} (x : A) (p : x ≈ y) (q : y ≈ z) → x ≈ z  -- \< für ⟨, \> für ⟩
+x ≈⟨ p ⟩ q = p ∙ q
+
+infix 5 _≈∎
+_≈∎ : {A : 𝒰} → (x : A) → x ≈ x
+x ≈∎ = refl
+
+infixr 4 _~⟨_⟩_
+_~⟨_⟩_ : {A B : 𝒰} {g h : A → B} (f : A → B) (H : f ~ g) (K : g ~ h) → f ~ h  -- \< für ⟨, \> für ⟩
+x ~⟨ H ⟩ K = H ∙~ K
+
+infix 5 _~∎
+_~∎ : {A B : 𝒰} → (f : A → B) → f ~ f
+x ~∎ = λ x → refl
+
+{- Komposition von Äquivalenzen können wir nicht einfach auch mit "∘" bezeichnen wie in der Vorlesung
+   Stattdessen hängen wir einfach "≃" an...
+   Außerdem zeigen wir in der Konstruktion beispielhaft die Verwendung der neuen Syntax.
+-}
+_∘≃_ : {A B C : 𝒰} → B ≃ C → A ≃ B → A ≃ C
+(g , eg) ∘≃ (f , ef) = (g ∘ f) , ((f⁻¹ ∘ g⁻¹ ,
+                                   λ x →
+                                   ((f⁻¹ ∘ g⁻¹) ∘ g ∘ f) x ≈⟨ ap (π₁ fQ) (π₁ (π₂ gQ) (f x)) ⟩
+                                   f⁻¹ (f x)               ≈⟨ π₁ (π₂ fQ) x ⟩
+                                   x                       ≈∎  ) ,
+                                   (f⁻¹ ∘ g⁻¹ ,
+                                    (g ∘ f) ∘ f⁻¹ ∘ g⁻¹  ~⟨ precomp~ g⁻¹ (ap~ g (π₂ (π₂ fQ))) ⟩
+                                    g ∘ g⁻¹              ~⟨ π₂ (π₂ gQ) ⟩
+                                    id _                 ~∎))
+  where
+     gQ : qInv g
+     gQ = isEquiv→qInv g eg
+     g⁻¹ = π₁ gQ
+
+     fQ : qInv f
+     fQ = isEquiv→qInv f ef
+     f⁻¹ = π₁ fQ
+
+
+infixr 3 _≃⟨_⟩_
+_≃⟨_⟩_ : {B C : 𝒰} (A : 𝒰) (f : A ≃ B) (g : B ≃ C) → A ≃ C  -- \< für ⟨, \> für ⟩
+A ≃⟨ f ⟩ g = g ∘≃ f
+
+infix 4 _≃∎
+_≃∎ : (A : 𝒰) → A ≃ A
+A ≃∎ = id A , idEquiv A
+
+
+
+{-
+     A
+    f↓ ↘gf
+     B─g→C
+     hg↘ ↓h
+         D
+
+-}
+
+6-for-2 : {A B C D : 𝒰} → (f : A → B) → (g : B → C) → (h : C → D)
+          → isEquiv (g ∘ f) → isEquiv (h ∘ g)
+          → isEquiv f × (isEquiv g × isEquiv h)
+6-for-2 f g h isEgf isEhg = isEf , (isEg , isEh)
+  where gfQ : qInv (g ∘ f)
+        hgQ : qInv (h ∘ g)
+        gfQ = isEquiv→qInv (g ∘ f) isEgf
+        hgQ = isEquiv→qInv (h ∘ g) isEhg
+        ⟨gf⟩⁻¹ = π₁ gfQ
+        ⟨hg⟩⁻¹ = π₁ hgQ
+
+        isEg : isEquiv g
+        isEg = (⟨hg⟩⁻¹ ∘ h , π₁ (π₂ hgQ)) , (f ∘ ⟨gf⟩⁻¹) , π₂ (π₂ gfQ)
+        gQ = isEquiv→qInv g isEg
+        g⁻¹ = π₁ gQ
+
+        isEf : isEquiv f
+        isEf = ((⟨gf⟩⁻¹ ∘ g) , π₁ (π₂ gfQ)) ,
+               (⟨gf⟩⁻¹ ∘ g ,
+                 f ∘ ⟨gf⟩⁻¹ ∘ g             ~⟨ precomp~ (f ∘ ⟨gf⟩⁻¹ ∘ g) (π₁ (π₂ gQ) ⁻¹~) ⟩
+                 g⁻¹ ∘ (g ∘ f ∘ ⟨gf⟩⁻¹) ∘ g ~⟨ precomp~ g (ap~ g⁻¹ (π₂ (π₂ gfQ))) ⟩
+                 g⁻¹ ∘ g                    ~⟨ π₁ (π₂ gQ) ⟩
+                 id _ ~∎)
+
+        isEh : isEquiv h
+        isEh = (g ∘ ⟨hg⟩⁻¹ ,
+                 (g ∘ ⟨hg⟩⁻¹) ∘ h               ~⟨ ap~ ((g ∘ ⟨hg⟩⁻¹) ∘ h) (π₂ (π₂ gQ) ⁻¹~)  ⟩
+                 g ∘ (⟨hg⟩⁻¹ ∘ h ∘ g) ∘ g⁻¹     ~⟨ precomp~ g⁻¹ (ap~ g (π₁ (π₂ hgQ))) ⟩
+                 g ∘ g⁻¹                        ~⟨ π₂ (π₂ gQ) ⟩
+                 id _ ~∎) ,
+               (g ∘ ⟨hg⟩⁻¹ , π₂ (π₂ hgQ))
