@@ -332,3 +332,20 @@ A ≃∎ = id A , idEquiv A
                  g ∘ g⁻¹                        ~⟨ π₂ (π₂ gQ) ⟩
                  id _ ~∎) ,
                (g ∘ ⟨hg⟩⁻¹ , π₂ (π₂ hgQ))
+
+
+{-
+  Funktionsextensionalität
+-}
+
+happly : {A : 𝒰} {B : A → 𝒰} (f g : (x : A) → B x) → f ≈ g → (x : A) → f x ≈ g x
+happly f g p = λ x → ap (λ h → h x) p
+
+postulate
+  happlyIsEquiv : {A : 𝒰} {B : A → 𝒰} {f g : (x : A) → B x} → isEquiv (happly f g)
+
+funext : {A B : 𝒰} {f g : A → B} → f ~ g → f ≈ g
+funext {f = f} {g = g} = π₁ (isEquiv→qInv (happly f g) happlyIsEquiv)
+
+isPropIsContr : (A : 𝒰) → isProp (isContr A)
+isPropIsContr A (x , p) (y , q) = Σ-≈ (q x , {!q x!})

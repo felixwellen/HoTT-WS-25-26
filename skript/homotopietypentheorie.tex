@@ -212,6 +212,7 @@ Das werden wir allerdings erst später zeigen können.
     Dann ist $t:A\to\eins$, gegeben durch $t(\ast)\colonequiv a$, eine Äquivalenz.
   \item Seien $A,B$ Aussagen und $f:A\to B$.
     Gibt es $g:B\to A$, dann ist $f$ bereits eine Äquivalenz.
+  \item Seien $A:\mU$ und $B:A\to\mU$. Dann ist $\transp_B(p)$ für alle $p:x=_Ay$ eine Äquivalenz.
   \end{enumerate}
 \end{beispiel}
 
@@ -514,14 +515,118 @@ Nun wollen wir noch zeigen, dass die Abbildung $(\_,\_)_=$ eine Äquivalenz ist:
 
 \subsection{Funktionsextensionalität und Univalenz}
 
-Mit dem Begriff der Äquivalenz, können wir nun auch \begriff{Funktionsextensionalität} einführen:
+Wir werden zunächst durch das \begriff{Funktionsextensionalitäts-Axiom} Gleichheiten von Funktionen charakterisieren.
+Streng genommen, kann man dieses Axiom aus dem Univalenzaxiom, das wir später in diesem Abschnitt sehen werden folgern.
+Allerdings ist dieser Fakt etwas zufällig und nicht hilfreich.
+Wir werden einfach beide Axiome annehmen.
 
 \begin{axiom}
-  Für $A,B:\mU$ ist durch:
+  Für $A:\mU$, $B:A\to\mU$ und $f,g:(x:A)\to B(x)$ ist durch:
   \begin{align*}
-    &f=_{A\to B}g \to f\sim g \\
+    &f=_{\prod_{x:A}B(x)}g \to f\sim g \\
     &\refl\mapsto (x\mapsto \refl)
   \end{align*}
   eine Funktion gegeben. Wir fordern, dass diese Funktion eine Äquivalenz ist.
-  Die Inverse bezeichnen wir mit $\funext$\index{$\funext$}.
+  Die Inverse bezeichnen wir mit \[\funext:f\sim g\to f=g\]\index{$\funext$}
+  und sprechen von \begriff{Funktionsextensionalität}.
 \end{axiom}
+
+
+\begin{lemma}
+  Seien $B,C:A\to\mU$ und $f:(x:A) \to B(x)\simeq C(x)$.
+  Dann haben wir
+  \[
+     \left(\prod_{x:A}B(x)\right)\simeq \left(\prod_{x:A}C(x)\right)
+  \]
+  gegeben durch: $h\mapsto (x\mapsto f_x(h_x))$.
+  Für konstante Typen $B,C:\mU$ und $f:B\simeq C$ spezialisiert die Konstruktion zur Äquivalenz:
+  \[
+    f\circ\_ : (A\to B) \simeq (A\to C)\rlap{.}
+    \]
+    und analog haben wir für $f:A^\prime\to A$
+    \begin{align*}
+    &\_\circ f:\left(\prod_{x:A}B(x)\right)\simeq \prod_{y:A^\prime}B(f(y))\quad\text{ und } \\
+    &\_\circ f:(A\to B) \simeq (A'\to B)\rlap{.}    
+    \end{align*}
+\end{lemma}
+
+\begin{lemma}
+  Seien $A,B$ Typen.
+  \begin{enumerate}
+  \item Für $P:A\to\mU$ mit $(x:A)\to \isProp(P(x))$ haben wir $\isProp(\prod_{x:A}P(x))$.
+  \item $\isProp(\isProp(A))$.
+  \item $\isProp(\isContr(A))$.
+  \item Für $f:A\to B$ haben wir $\isProp(\isEquiv(f))$.
+  \item $\isProp(\isNType{n}(A))$.
+  \item Dass $f:A\to B$ $n$-abgeschnitten ist, ist eine Aussage.
+  \item Wir haben:
+    \[
+      (A\simeq B)\equiv \left(\sum_{f:A\to B}\isEquiv(f)\right)\simeq \left(\sum_{f:A\to B}\text{$f$ kontrahierbar}\right)\rlap{.}
+    \]
+  \end{enumerate}
+\end{lemma}
+
+\begin{beweis}
+  Wird noch vervollständigt...
+  \begin{enumerate}
+  \item 
+  \item 
+  \item 
+  \item Es reicht zu zeigen: $\isEquiv(f)\to \isContr(\isEquiv(f))$.
+    Wir nehmen also an, $f$ ist Äquivalenz und wollen zeigen, dass
+    \[
+      \left(\sum_{g:B\to A}gf\sim \id\right) \times \sum_{h:B\to A}fh\sim\id
+      \]
+      kontrahierbar ist. Das können wir komponentenweise lösen:
+      \begin{align*}
+        \left(\sum_{g:B\to A}gf\sim \id\right)&\simeq\sum_{g:B\to A}gf=\id \\
+        &\simeq\sum_{g:B\to A}g=f^{-1} \\
+        &\simeq\eins\rlap{.}
+      \end{align*}
+      Analog: $\left(\sum_{h:B\to A}fh\sim\id\right)\simeq \eins$.
+  \end{enumerate}
+\end{beweis}
+
+\begin{beispiel}
+$\zwei\simeq (\zwei\simeq\zwei)$  
+\end{beispiel}
+
+\begin{definition}
+  Seien $A,B:\mU$. Für $p:A=_\mU B$ ist durch den \begriff{Universentransport}
+  \[
+    \transp_{(X:\mU)\mapsto X}(p):A\simeq B
+  \]
+  eine Äquivalenz gegeben.
+\end{definition}
+
+\begin{axiom}
+  Wir nehmen von nun an, dass das \begriff{Univalenzaxiom} gilt: Der Universentransport
+  \[
+     \transp_{\id_\mU}:(A=_{\mU}B)\to A\simeq B
+     \]
+     ist eine Äquivalenz. Die Quasi-Inverse bezeichnen wir mit $\ua\equiv \ua_{A,B}:A\simeq B\to A=_\mU B$\index{$\ua$}.
+\end{axiom}
+
+\begin{lemma}
+  Seien $A,B,C:\mU$, $f:A\simeq B$ und $g:B\simeq C$. Es gelten:
+  \begin{enumerate}
+  \item $\ua(\id_A)=\refl_A$
+  \item $\ua(f\circ g)=\ua(f)\kon \ua(g)$
+  \item $\ua(f^{-1})=\ua(f)^{-1}$
+  \end{enumerate}
+\end{lemma}
+
+\begin{beweis}
+  \begin{enumerate}
+  \item Es gilt $\transp_{\id_\mU}(\refl_A)=\id_A$ und damit $\ua(\id_A)=\ua(\transp_{\id_\mU}(\refl_A))=\refl_A$.
+  \item Seien $p\colonequiv\ua(f)$ und $q\colonequiv\ua(g)$. Dann gilt $\transp_{\id_\mU}(p)=f$ und $\transp_{\id_\mU}(q)=g$ und damit:
+    \[
+      \ua(f\circ g)=\ua(\transp_{\id_\mU}(p)\circ \transp_{\id_\mU}(q))=\ua(\transp_{\id_\mU}(p\kon q))=p\kon q=\ua(f)\kon\ua(g)
+    \]
+  \item Sei $p\colonequiv\ua(f)$, dann gilt:
+    \[
+      \ua(f^{-1})=\ua(\transp_{\id_\mU}(p)^{-1})=\ua(\transp_{\id_\mU}(p^{-1}))=p^{-1}=\ua(f)^{-1}
+    \]
+  \end{enumerate}
+\end{beweis}
+
