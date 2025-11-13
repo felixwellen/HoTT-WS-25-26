@@ -567,11 +567,12 @@ Wir werden einfach beide Axiome annehmen.
 \end{lemma}
 
 \begin{beweis}
-  Wird noch vervollständigt...
   \begin{enumerate}
-  \item 
-  \item 
-  \item 
+  \item Sei $\varphi:(x:A)\to (p\ q : P(x))\to p=q$. Für alle $f,g:(x:A)\to P(x)$ haben wir
+    \[(x:A)\mapsto \varphi_{x,f(x),g(x)} :\left(\prod_{x:A}f(x)= g(x)\right)\equiv (f\sim g)\]
+    --- also mit $\funext$ auch $f=g$ und damit die gewünschte Aussage.
+  \item Übungsblatt 5.
+  \item Übungsblatt 5.
   \item Es reicht zu zeigen: $\isEquiv(f)\to \isContr(\isEquiv(f))$.
     Wir nehmen also an, $f$ ist Äquivalenz und wollen zeigen, dass
     \[
@@ -584,10 +585,23 @@ Wir werden einfach beide Axiome annehmen.
         &\simeq\eins\rlap{.}
       \end{align*}
       Analog: $\left(\sum_{h:B\to A}fh\sim\id\right)\simeq \eins$.
+    \item Übungsblatt 5.
+    \item Folgt aus (a) und (e).
+    \item Nun sind nach (d) und (f) die beiden Typen $\isEquiv(f)$ und $(f\text{ kontrahierbar})$ Aussagen. Wir haben bereits in \Cref{isequiv-iscontr-fib} (und auf Übungsblatt 4) gelernt, dass es Abbildungen zwischen diesen beiden Typen gibt. Diese Abbildungen sind also Äquivalenzen. Schließlich können wir $\sum$ auf die Familie $\isEquiv(f)\simeq(f\text{ kontrahierbar})$ anwenden.
   \end{enumerate}
 \end{beweis}
 
+\begin{lemma}
+  Seien $A:\mU$ und $P:A\to\mU$ mit $(x:A)\to \isProp(P(x))$.
+  Für $x,y:A$, $u:P(x)$, $v:P(y)$ und $p:x=_A y$ gibt es $(x,u)=(y,v)$.
+\end{lemma}
+
+\begin{beweis}
+  Übungsblatt 5.
+\end{beweis}
+
 \begin{beispiel}
+  \label{automorphismen-zwei}
 $\zwei\simeq (\zwei\simeq\zwei)$  
 \end{beispiel}
 
@@ -605,7 +619,12 @@ $\zwei\simeq (\zwei\simeq\zwei)$
      \transp_{\id_\mU}:(A=_{\mU}B)\to A\simeq B
      \]
      ist eine Äquivalenz. Die Quasi-Inverse bezeichnen wir mit $\ua\equiv \ua_{A,B}:A\simeq B\to A=_\mU B$\index{$\ua$}.
+     Wir fordern Univalenz für jedes Universum.
 \end{axiom}
+
+\begin{bemerkung}
+  $\mU$ ist keine Menge, wegen \Cref{automorphismen-zwei}.
+\end{bemerkung}
 
 \begin{lemma}
   Seien $A,B,C:\mU$, $f:A\simeq B$ und $g:B\simeq C$. Es gelten:
@@ -630,3 +649,67 @@ $\zwei\simeq (\zwei\simeq\zwei)$
   \end{enumerate}
 \end{beweis}
 
+\begin{lemma}
+  \label{transport-in-funktionstypen}
+  Seien $B,C:A\to\mU$. Dann ist für alle $p:x=_Ay$ und $f:B(x)\to C(x)$:
+  \[
+    \transp_{x\mapsto B(x)\to C(x)}(p)(f)=\transp_C(p)\circ f \circ \transp_B(p)^{-1}\rlap{.}
+  \]
+\end{lemma}
+
+\begin{beweis}
+  Induktion über $p$.
+\end{beweis}
+
+Wir wenden uns nun den Typen
+\[
+  \sum_{A':\mU}A'\to A\quad\text{ und }\quad\sum_{A':\mU}A\to A'
+  \]
+  zu.
+
+\begin{theorem}[Objektklassifikation]
+  \index{Objektklassifikation}
+  Für alle $A:\mU$ habe wir die folgende Äquivalenz:
+  \[
+     (A',f)\mapsto \fib_f:\left(\sum_{A':\mU}A'\to A\right)\simeq (A\to\mU)
+  \]
+  mit der Inversen $(B:A\to\mU)\mapsto ((x:A)\times B(x), \pi_1)$.
+\end{theorem}
+
+\begin{beweis}
+  Sei $B:A\to\mU$. Wir wollen für die Faser von $\pi_1:(x:A)\times B(x) \to A$ zeigen:
+  \[
+    \fib_{\pi_1}(x)=_\mU B(x)\rlap{.}
+  \]
+  Mit \Cref{total-fiberwise-sigma-equiv} können wir die Fasern der sehr ähnlichen Abbildung
+  \[
+    f\colonequiv\sum_{x:A}((b:B(x))\mapsto \ast) : \left(\sum_{x:A}B(x)\right)\to \sum_{x:A}\eins
+    \]
+    mit $\fib_f(x,\ast)\simeq \fib_{(b:B(x))\mapsto \ast}(\ast)$ berechnen --- der Typ $\fib_{(b:B(x))\mapsto \ast}(\ast)$ ist die Summe über einen kon\-tra\-hier\-ba\-ren Typ, also äquivalent zu $B(x)$.
+    Es bleibt noch die Frage zu klären, ob es genügt die Faser von $f$ statt $\pi_1$ zu berechnen.
+    Nun ist $(f,(x:A)\times\eins)=(\pi_1,A)$ im Typ $(X:\mU)\times (\left(\sum_{x:A}B(x)\right)\to X)$,
+    also haben wir durch $\ap_\fib$ und Univalenz die gewünschte Gleichheit $\fib_{\pi_1}(x)=\fib_f(x,\ast)=B(x)$.
+
+    Sei nun andererseits $g:A'\to A$. Wir haben von Übungsblatt 4, Aufgabe 1 eine Äquivalenz
+    \[
+      A'\simeq \sum_{x:A}\fib_g(x)
+      \]
+      und sind damit mit Univalenz fertig.
+\end{beweis}
+
+\begin{bemerkung}
+  Wir können mittels Univalenz das Induktionsprinzip für Gleichheit auf Äquivalenzen übertragen.
+  Wir bezeichnen das als \begriff{Äquivalenzinduktion}.
+  Es gilt also das folgende: Sei $B:(A\ B :\mU)\to A\simeq B\to \mU$.
+  Dann haben wir für $r:B(A,A,\id_A)$ bereits
+  \[
+     \elim_\simeq(r):\prod_{A,B:\mU}\prod_{f:A\simeq B}B(A,B,f)\rlap{.}
+  \]
+\end{bemerkung}
+
+\begin{bemerkung}
+  Viele der vergangenen Beweise hätten wir auch mit Univalenz (oder Äquivalenzinduktion) schnell erledigen können.
+  So ist es etwa durch Äquivalenzinduktion klar, dass $\ap_f$ eine Äquivalenz, wenn $f$ eine Äquivalenz ist.
+\end{bemerkung}
+
+\subsection{Das Struktuidentitätsprinzip}
