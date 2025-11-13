@@ -7,8 +7,8 @@
 
 \RequirePackage[utf8]{inputenc}
 %\RequirePackage[ngerman]{babel}
-\RequirePackage{enumerate}
 \RequirePackage[shortlabels]{enumitem}
+  \setlist[enumerate,1]{label=(\alph*)}
 \RequirePackage[symbol]{footmisc}
 \RequirePackage{amsmath,amsthm,amssymb,amscd,color,graphicx,environ}
 \RequirePackage{mathtools}
