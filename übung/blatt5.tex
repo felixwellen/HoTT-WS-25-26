@@ -1,0 +1,20 @@
+% latexmk -pdf -pvc blatt5.tex
+\documentclass{hott-übung}
+
+\begin{document}
+
+\setcounter{blattnummer}{5}
+\setcounter{aufgabennummer}{0}
+\setlength{\belowdisplayskip}{1pt}
+
+\blatt
+
+\aufgabe{}
+  Seien $A,B$ Typen. Zeige:
+  \begin{enumerate}
+  \item $\isProp(\isProp(A))$.
+  \item $\isProp(\isContr(A))$.
+  \item $\isProp(\isNType{n}(A))$.
+  \end{enumerate}
+
+\end{document}
