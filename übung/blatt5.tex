@@ -5,28 +5,40 @@
 
 \setcounter{blattnummer}{5}
 \setcounter{aufgabennummer}{0}
-\setlength{\belowdisplayskip}{1pt}
 
 \blatt
 
 \aufgabe{}
-  Seien $A:\mU$ und $P:A\to\mU$ mit $(x:A)\to \isProp(P(x))$.
-  Für $x,y:A$, $u:P(x)$, $v:P(y)$ gilt
-  \[
-    (x=_A y)\simeq ((x,u)=(y,v))\rlap{.}
-  \]
+Ist \(P : A \to \mU\) eine Familie von Propositionen, so ist für alle \(z,w : \sum_{x : A}P(x)\)
+\[(z = w) \simeq (\pi_1(z) = \pi_1(w)).\]
+
+\vspace{-1em}
 
 \aufgabe{}
-  Seien $A,B$ Typen. Zeige:
-  \begin{enumerate}
-  \item $\isProp(\isProp(A))$.
-  \item $\isProp(\isContr(A))$.
-  \item $\isProp(\isNType{n}(A))$.
-  \end{enumerate}
-  \emph{Hinweis: Lemma 2.3.10 aus dem Skript kann helfen.}
-
-\aufgabe{}
-Seien $A:\mU$ und $B:A\to\mU$ sodass $B(x)$ für jedes $x:A$ ein $n$-Typ ist.
-Zeige, dass dann auch $(x:A)\to B(x)$ ein $n$-Typ ist.
+Sei \(A:\mU\) und \(B : A \to \mU\) eine Familie von \(n\)-Typen.
+Zeige, dass $(x:A)\to B(x)$ ein $n$-Typ ist.
   
+\aufgabe{}
+Sei $A$ ein Typ. Zeige, dass \(\isNType{n}(A)\) eine Aussage ist.
+\emph{Hinweis: Blatt 3 Aufgabe 1.}
+  % \begin{enumerate}
+  % \item $\isProp(\isProp(A))$.
+  % \item $\isProp(\isContr(A))$.
+  % \item $\isProp(\isNType{n}(A))$.
+  % \end{enumerate}
+  % \emph{Hinweis: Lemma 2.3.10 aus dem Skript kann helfen.}
+
+\aufgabe{}
+Zeige, dass eine Funktion \(f : A \to B\) genau dann \((n+1)\)-abgeschnitten ist, wenn
+\[\ap_f : (x=y) \to (f(x) = f(y))\]
+für alle \(x,y : A\) schon \(n\)-abgeschnitten ist.
+\emph{Hinweis: Blatt 4 Aufgabe 5.}
+
+\aufgabe{}
+  \begin{enumerate}
+    \item Zeige, dass der Typ \(\sum_{A:\mU}\isContr(A)\) der kontrahierbaren Typen kontrahierbar ist.
+    \item Zeige für alle \(n \geq -2\), dass der Typ \(\sum_{A:\mU}\isNType{n}(A)\) der \(n\)-Typen ein \((n+1)\)-Typ ist.
+  \end{enumerate}
+
+
 \end{document}
