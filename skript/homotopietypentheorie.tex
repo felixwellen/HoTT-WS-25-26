@@ -712,4 +712,61 @@ Wir wenden uns nun den Typen
   So ist es etwa durch Äquivalenzinduktion klar, dass $\ap_f$ eine Äquivalenz, wenn $f$ eine Äquivalenz ist.
 \end{bemerkung}
 
+\subsection{Veraussagung und zusammenhängende Typen}
+
+Wir werden später noch sehen, wie die folgenden Regeln in ein allgemeines Schema passen.
+\begin{regeln}
+  Sei $A$ ein Typ
+  \begin{itemize}
+  \item Es gibt einen Typen $\|A\|$, die \begriff{Veraussagung}\index{$\|A\|$} von $A$.
+  \item Für jedes $a:A$ gibt es $|a|:\|A\|$. 
+  \item Für $x,y:\|A\|$ gibt es $x=_{\|A\|}y$.
+  \item Für eine Aussage $P$ und $f:A\to P$ gibt es $\elim_P(f):\|A\|\to P$
+     und $(x:A)\to f(x)=\elim_P(f)(|x|)$.
+  \end{itemize}
+\end{regeln}
+
+\begin{definition}
+  Seien $A$ ein Typ und $x:A$.
+  $\BAut_A(x)\colonequiv \sum_{y:A}\|x=y\|$.  
+\end{definition}
+
+\begin{definition}
+  \begin{enumerate}
+  \item Ein \begriff{punktierter Typ} ist ein Element von $\sum_{A:\mU}A$, also ein Typ $A$ zusammen mit einem Element $a:A$. 
+  \item Ein punktierter Typ $(A,\ast)$ heißt \begriff{zusammenhängend}, wenn $(x:A)\to \|\ast=x\|$ gilt.
+  \end{enumerate}
+\end{definition}
+
+\begin{beispiel}
+  \begin{enumerate}[(a)]
+  \item $(\eins,\ast)$ ist zusammenhängend.
+  \item $(\zwei,0_\zwei)$ ist nicht zusammenhängend.
+  \item Seien $A:\mU$ und $x:A$, dann ist $\BAut_A(x)$ punktiert durch $(x,|\refl_x|)$
+    und zusammenhängend, denn:
+    Sei $(y,p):\BAut_A(x)$, also $y:A$ und $p:\|y=x\|$.
+    Da wir die Aussage $(x,|\refl|)=(y,p)$ zeigen wollen, können wir $q:y=x$ verwenden.
+    Damit sind wir aber bereits fertig, weil $\|x=\_\|$ eine Familie von Aussagen ist.
+  \end{enumerate}
+\end{beispiel}
+
+\begin{bemerkung}
+  Die Abbildung $\pi_1:\BAut_A(x)\to A$ ist eine Einbettung.
+\end{bemerkung}
+
+\begin{beweis}
+  Wir hatten bereits gezeigt, dass die Fasern von $\pi_1$ der abhängige Typ sind, über den aufsummiert wurde. Diese Fasern sind per Konstruktion Aussagen.
+\end{beweis}
+
+\begin{definition}
+  Sei $(A,\ast)$ punktierter Typ.
+  Dann ist $\Omega(A,\ast)\colonequiv (\ast=\ast)$ der \begriff{Schleifenraum}\index{$\Omega(A,\ast)$} von $(A,\ast)$.
+\end{definition}
+
+\begin{bemerkung}
+  Sei $M:\nType{0}$ eine Menge.
+  Dann ist
+  \[\Omega(\BAut_{\nType{0}}(M),\ast)\simeq (M\simeq M)\]
+\end{bemerkung}
+
 \subsection{Das Struktuidentitätsprinzip}
