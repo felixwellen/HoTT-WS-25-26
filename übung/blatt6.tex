@@ -1,0 +1,38 @@
+% latexmk -pdf -pvc blatt6.tex
+\documentclass{hott-übung}
+
+\begin{document}
+
+\setcounter{blattnummer}{6}
+\setcounter{aufgabennummer}{0}
+
+\blatt
+
+\aufgabe{}
+Sei $A:\mU$ und $t\colonequiv \ast\mapsto A: \eins\to \mU$.
+Es gilt $\BAut_\mU(A)\simeq \im(t)$.
+
+\aufgabe{}
+  \begin{enumerate}[(a)]
+  \item Sei $f:A\to B$. $f$ kann wie folgt faktorisiert werden:
+  \begin{center}
+    \begin{tikzcd}
+      A\ar[dr,"l",swap]\ar[rr,"f"] & & B \\
+      & \im(f)\ar[ru,"r",swap] &
+    \end{tikzcd}
+  \end{center}
+  wobei $l$ surjektiv und $r$ eine Einbettung ist.
+\item Gegeben sei das folgende Diagramm:
+  \begin{center}
+    \begin{tikzcd}
+      A\ar[r,"t"]\ar[d,"l",swap] & B\ar[d,"r"] \\
+      C\ar[r,"b",swap]\ar[ur,dotted,"d"] & D
+    \end{tikzcd}
+  \end{center}
+  Es gelte $rt=bl$ und weiter seien $l$ surjektiv und $r$ eine Einbettung.
+  Dann ist der Typ der ``lifts'', also diagonalen $d:C\to B$ sodass $rd=b$ und $dl=t$ gelten,
+  kontrahierbar.
+  \end{enumerate}
+
+
+\end{document}

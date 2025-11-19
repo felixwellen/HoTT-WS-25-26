@@ -693,18 +693,19 @@ Wir wenden uns nun den Typen
     Sei nun andererseits $g:A'\to A$. Wir haben von Übungsblatt 4, Aufgabe 1 eine Äquivalenz
     \[
       A'\simeq \sum_{x:A}\fib_g(x)
-      \]
-      und sind damit mit Univalenz fertig.
+    \]
+    und sind damit mit Univalenz fertig.
 \end{beweis}
 
 \begin{bemerkung}
   Wir können mittels Univalenz das Induktionsprinzip für Gleichheit auf Äquivalenzen übertragen.
   Wir bezeichnen das als \begriff{Äquivalenzinduktion}.
-  Es gilt also das folgende: Sei $B:(A\ B :\mU)\to A\simeq B\to \mU$.
-  Dann haben wir für $r:B(A,A,\id_A)$ bereits
+  Es gilt also das folgende: Sei $P:(A\ B :\mU)\to A\simeq B\to \mU$.
+  Dann haben wir für $r_A:P(A,A,\id_A)$ bereits
   \[
-     \elim_\simeq(r):\prod_{A,B:\mU}\prod_{f:A\simeq B}B(A,B,f)\rlap{.}
-  \]
+     \elim_\simeq(r_{\_}):\prod_{A,B:\mU}\prod_{f:A\simeq B}P(A,B,f)\rlap{.}
+     \]
+     und $\elim_\simeq(r)(A,A,\id_A)=r_A$.
 \end{bemerkung}
 
 \begin{bemerkung}
@@ -712,13 +713,38 @@ Wir wenden uns nun den Typen
   So ist es etwa durch Äquivalenzinduktion klar, dass $\ap_f$ eine Äquivalenz, wenn $f$ eine Äquivalenz ist.
 \end{bemerkung}
 
+Die Univalenz unserer Universen überträgt sich auf diverse andere Typen.
+Ein erstes Beispiel ist die Bemerkung weiter unten, für die wir noch ein Lemma brauchen.
+
+\begin{lemma}
+  Wenn $f:A\to B$ eine Einbettung ist,
+  dann ist $\ap_f:x=y\to f(x)=f(y)$ eine Äquivalenz.
+\end{lemma}
+
+\begin{beweis}
+  Aus Aufgabe 4, Blatt 5 folgt (durch Einsetzen $n\equiv -2$):
+  Ist $f:A\to B$ (-1)-abgeschnitten (also Einbettung), dann ist $\ap_f:x=y\to f(x)=f(y)$ (-2)-abgeschnitten, also kontrahierbar und damit Äquivalenz.
+\end{beweis}
+
+\begin{bemerkung}
+  Seien $M,N$ Mengen, also Elemente des Typs $\nType{0}$, dann ist
+  $(M=_{\nType{0}}N)\simeq (\pi_1(M)\simeq \pi_1(N))$.
+\end{bemerkung}
+
+\begin{beweis}
+  $\pi_1:(M:\mU)\times \isSet(M)\to \mU$ ist eine Einbettung ---
+  wir haben $\fib_{\pi_1}(M)\simeq \isSet(M)$, was eine Aussage ist.
+\end{beweis}
+
 \subsection{Veraussagung und zusammenhängende Typen}
 
 Wir werden später noch sehen, wie die folgenden Regeln in ein allgemeines Schema passen.
 \begin{regeln}
   Sei $A$ ein Typ
   \begin{itemize}
-  \item Es gibt einen Typen $\|A\|$, die \begriff{Veraussagung}\index{$\|A\|$} von $A$.
+  \item Es gibt einen Typen $\|A\|$, die \begriff{Veraussagung}\index{$\|A\|$}\footnote{
+    In der Literatur ``propositional truncation''.}
+    von $A$.
   \item Für jedes $a:A$ gibt es $|a|:\|A\|$. 
   \item Für $x,y:\|A\|$ gibt es $x=_{\|A\|}y$.
   \item Für eine Aussage $P$ und $f:A\to P$ gibt es $\elim_P(f):\|A\|\to P$
@@ -726,22 +752,33 @@ Wir werden später noch sehen, wie die folgenden Regeln in ein allgemeines Schem
   \end{itemize}
 \end{regeln}
 
-\begin{definition}
-  Seien $A$ ein Typ und $x:A$.
-  $\BAut_A(x)\colonequiv \sum_{y:A}\|x=y\|$.  
-\end{definition}
+\begin{bemerkung}
+  \begin{enumerate}[(a)]
+  \item Für jedes $A$ ist $\|A\|$ eine Aussage.
+  \item Für $f:A\to B$ gibt es stets $\|A\|\to\|B\|$.
+  \end{enumerate}
+\end{bemerkung}
+
+\begin{beweis}  
+  (b): Wir haben $|\_|\circ f:A\to \|B\|$ und damit $\elim(|\_|\circ f):\|A\|\to \|B\|$.
+\end{beweis}
 
 \begin{definition}
   \begin{enumerate}
-  \item Ein \begriff{punktierter Typ} ist ein Element von $\sum_{A:\mU}A$, also ein Typ $A$ zusammen mit einem Element $a:A$. 
+  \item Ein \begriff{punktierter Typ} ist ein Element von $\sum_{A:\mU}A$, also ein Typ $A$ zusammen mit einem Element $a:A$. Wir sagen auch ``Sei $A$ punktierter Typ'' und meinen damit $A:\mU$ und $\ast:A$.
   \item Ein punktierter Typ $(A,\ast)$ heißt \begriff{zusammenhängend}, wenn $(x:A)\to \|\ast=x\|$ gilt.
+  \item Seien $A$ ein Typ und $x:A$.
+  Dann ist 
+  \[\BAut_A(x)\colonequiv \sum_{y:A}\|x=y\|\]
+  ein Typ, den wir auch \begriff{Zusammenhangskomponente} von $x$ in $A$ nennen.
+  $\BAut_A(x)$ ist durch $(x,|\refl_x|)$ punktiert.
   \end{enumerate}
 \end{definition}
 
 \begin{beispiel}
   \begin{enumerate}[(a)]
-  \item $(\eins,\ast)$ ist zusammenhängend.
-  \item $(\zwei,0_\zwei)$ ist nicht zusammenhängend.
+  \item $(\eins,\ast)$ ist zusammenhängend. Jeder kontrahierbare Typ ist zusammenhängend.
+  \item $(\zwei,0_\zwei)$ ist nicht zusammenhängend. Um das zu sehen wollen wir $\neg(0_\zwei= 1_\zwei)$ verwenden. Wenn $\zwei$ zusammenhängend wäre, hätten wir $\|0_\zwei=1_\zwei\|$.
   \item Seien $A:\mU$ und $x:A$, dann ist $\BAut_A(x)$ punktiert durch $(x,|\refl_x|)$
     und zusammenhängend, denn:
     Sei $(y,p):\BAut_A(x)$, also $y:A$ und $p:\|y=x\|$.
@@ -764,9 +801,76 @@ Wir werden später noch sehen, wie die folgenden Regeln in ein allgemeines Schem
 \end{definition}
 
 \begin{bemerkung}
-  Sei $M:\nType{0}$ eine Menge.
+  \begin{enumerate}
+  \item Sei $A:\mU$, dann gilt 
+    \[\Omega(\BAut_{\mU}(A),\ast)\simeq (A\simeq A)\rlap{.}\]
+  \item Sei $M:\nType{0}$ eine Menge.
   Dann ist
-  \[\Omega(\BAut_{\nType{0}}(M),\ast)\simeq (M\simeq M)\]
+  \[\Omega(\BAut_{\nType{0}}(M),\ast)\simeq (M\simeq M)\rlap{.}\]
+  Für $M\equiv \zwei$ wissen wir, dass die rechte Seite nicht kontrahierbar ist.
+  \end{enumerate}
 \end{bemerkung}
+
+\begin{beweis}
+  \begin{enumerate}
+  \item Da $\pi_1$ eine Einbettung ist, haben wir eine Äquivalenz
+    \[\ap_{\pi_1}:\ast=_{\BAut}\ast\simeq (\pi_1(\ast)=\pi_1(\ast))\equiv (A=_\mU A)\simeq (A\simeq A)\rlap{.} \]
+  \item Wie oben bekommen wir eine Äquivalenz
+    $\ap_{\pi_1}:(\ast=_{\BAut}\ast)\simeq (M=_{\nType{0}}M).$
+    Nun ist aber auch $\pi_1:\nType{0}\to \mU$ eine Einbettung.
+    Also ist $(M=_{\nType{0}}M)\simeq (M=_\mU M)$.
+  \end{enumerate}
+\end{beweis}
+
+\begin{definition}
+  \begin{enumerate}[(a)]
+  \item Seien $A:\mU$ und $P:A\to\mU$. Wir verwenden folgende Notation\index{$\exists$}
+  \[
+    \left(\exists x:A.P(x)\right)\colonequiv \left\|\sum_{x:A}P(x)\right\|\rlap{.}
+  \]  
+  \item Eine Abbildung $f:A\to B$ heißt \begriff{surjektiv}, wenn gilt:
+  \[
+    \prod_{y:B}\exists x:A.f(x)=y\quad\text{ bzw.\ }\quad \prod_{y:B}\|\fib_f(y)\|
+  \]
+\item Sei $f:A\to B$. Das \begriff{Bild} von $f$ ist wie folgt definiert\index{$\im$}:
+  \[
+    \im(f)\colonequiv \sum_{y:B}\exists x:A.f(x)=y
+  \]
+  \end{enumerate}
+\end{definition}
+
+\begin{beispiel}
+  \begin{enumerate}[(a)]
+  \item Sei $A$ punktiert. Dann ist jede Abbildung $A\to \eins$ surjektiv.
+  \item Sei $f:\eins\to A$ und $A$ punktiert und zusammenhängend. Dann ist $f$ surjektiv.
+  \end{enumerate}
+\end{beispiel}
+
+\begin{lemma}
+  \begin{enumerate}[(a)]
+  \item Sei $f:A\to B$. $f$ kann wie folgt faktorisiert werden:
+  \begin{center}
+    \begin{tikzcd}
+      A\ar[dr,"l",swap]\ar[rr,"f"] & & B \\
+      & \im(f)\ar[ru,"r",swap] &
+    \end{tikzcd}
+  \end{center}
+  wobei $l$ surjektiv und $r$ eine Einbettung ist.
+\item Gegeben sei das folgende Diagramm:
+  \begin{center}
+    \begin{tikzcd}
+      A\ar[r,"t"]\ar[d,"l",swap] & B\ar[d,"r"] \\
+      C\ar[r,"b",swap]\ar[ur,dotted,"d"] & D
+    \end{tikzcd}
+  \end{center}
+  Es gelte $rt=bl$ und weiter seien $l$ surjektiv und $r$ eine Einbettung.
+  Dann ist der Typ der ``lifts'', also diagonalen $d:C\to B$ sodass $rd=b$ und $dl=t$ gelten,
+  kontrahierbar.
+  \end{enumerate}
+\end{lemma}
+
+\begin{beweis}
+  Übungsblatt 6.
+\end{beweis}
 
 \subsection{Das Struktuidentitätsprinzip}
