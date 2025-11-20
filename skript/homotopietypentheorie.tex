@@ -766,10 +766,10 @@ Wir werden später noch sehen, wie die folgenden Regeln in ein allgemeines Schem
 \begin{definition}
   \begin{enumerate}
   \item Ein \begriff{punktierter Typ} ist ein Element von $\sum_{A:\mU}A$, also ein Typ $A$ zusammen mit einem Element $a:A$. Wir sagen auch ``Sei $A$ punktierter Typ'' und meinen damit $A:\mU$ und $\ast:A$.
-  \item Ein punktierter Typ $(A,\ast)$ heißt \begriff{zusammenhängend}, wenn $(x:A)\to \|\ast=x\|$ gilt.
+  \item Ein punktierter Typ $(A,\ast)$ heißt \begriff{zusammenhängend}, wenn $(x:A)\to \|x=\ast\|$ gilt.
   \item Seien $A$ ein Typ und $x:A$.
   Dann ist 
-  \[\BAut_A(x)\colonequiv \sum_{y:A}\|x=y\|\]
+  \[\BAut_A(x)\colonequiv \sum_{y:A}\|y=x\|\]
   ein Typ, den wir auch \begriff{Zusammenhangskomponente} von $x$ in $A$ nennen.
   $\BAut_A(x)$ ist durch $(x,|\refl_x|)$ punktiert.
   \end{enumerate}
@@ -778,12 +778,12 @@ Wir werden später noch sehen, wie die folgenden Regeln in ein allgemeines Schem
 \begin{beispiel}
   \begin{enumerate}[(a)]
   \item $(\eins,\ast)$ ist zusammenhängend. Jeder kontrahierbare Typ ist zusammenhängend.
-  \item $(\zwei,0_\zwei)$ ist nicht zusammenhängend. Um das zu sehen wollen wir $\neg(0_\zwei= 1_\zwei)$ verwenden. Wenn $\zwei$ zusammenhängend wäre, hätten wir $\|0_\zwei=1_\zwei\|$.
+  \item $(\zwei,0_\zwei)$ ist nicht zusammenhängend. Um das zu sehen wollen wir $\neg(1_\zwei= 0_\zwei)$ verwenden. Wenn $\zwei$ zusammenhängend wäre, hätten wir $\|1_\zwei=0_\zwei\|$.
   \item Seien $A:\mU$ und $x:A$, dann ist $\BAut_A(x)$ punktiert durch $(x,|\refl_x|)$
     und zusammenhängend, denn:
     Sei $(y,p):\BAut_A(x)$, also $y:A$ und $p:\|y=x\|$.
     Da wir die Aussage $(x,|\refl|)=(y,p)$ zeigen wollen, können wir $q:y=x$ verwenden.
-    Damit sind wir aber bereits fertig, weil $\|x=\_\|$ eine Familie von Aussagen ist.
+    Damit sind wir aber bereits fertig, weil $\|\_=x\|$ eine Familie von Aussagen ist.
   \end{enumerate}
 \end{beispiel}
 
@@ -873,4 +873,41 @@ Wir werden später noch sehen, wie die folgenden Regeln in ein allgemeines Schem
   Übungsblatt 6.
 \end{beweis}
 
-\subsection{Das Struktuidentitätsprinzip}
+\begin{lemma}
+  Ein Typ $A$ ist genau dann kontrahierbar, wenn $A$ eine Aussage ist und $\|A\|$ gilt.
+\end{lemma}
+
+\begin{beweis}
+  Sei $A$ kontrahierbar auf $\ast:A$, dann ist $|\ast|:\|A\|$ und $A$ ist eine Aussage.
+  Sei $A$ eine Aussage und $z:\|A\|$. Wir wollen $\isContr(A)$, was eine Aussage ist.
+  Wir haben $p:A\to \isContr(A)$, da $A$ Aussage ist, also auch $\elim_{\|\_\|}(p):\|A\|\to \isContr(A)$. Und damit $\elim_{\|\_\|}(p)(z):\isContr(A)$.
+\end{beweis}
+
+\begin{lemma}
+  Sei $f:A\to B$. Dann sind äquivalent:
+  \begin{enumerate}[(i)]
+  \item $f$ ist eine Äquivalenz.
+  \item $f$ ist eine surjektive Einbettung.
+  \item $f$ ist surjektiv und $\ap_f:x=y\to f(x)=f(y)$ ist für alle $x,y:A$ eine Äquivalenz.
+  \end{enumerate}
+\end{lemma}
+
+\begin{beweis}
+  $f$ ist genau dann Äquivalenz, wenn alle Fasern $\fib_f(y)$ kontrahierbar sind.
+  Ein Typ ist aber genau dann kontrahierbar, wenn $\|\fib_f(y)\|$ und $\fib_f(y)$ eine Aussage ist ---
+  das ist aber schon (ii), also die Bedingung, dass $f$ surjektive Einbettung ist.
+  (iii) ist nur eine Umformulierung, die Verwendet, dass $f$ genau dann eine Einbettung ist, wenn alle $\ap_f:x=y\to f(x)=f(y)$ Äquivalenzen sind.
+\end{beweis}
+
+\ignore{
+\begin{bemerkung}
+    Wenn $A$ und $B$ punktiert und zusammenhängend sind, ist $f$ genau dann eine Äquivalenz,
+  wenn $\ap_f:\ast=\ast\to f(\ast)=f(\ast)$ eine Äquivalenz ist.
+\end{bemerkung}
+
+\begin{beweis}
+  Übungsblatt 6.
+\end{beweis}
+}
+
+\subsection{Das Strukturidentitätsprinzip}
