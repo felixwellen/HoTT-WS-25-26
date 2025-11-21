@@ -77,10 +77,11 @@ Dafür benötigen wir noch eine Verallgemeinerung des Anwendens von Funktionen a
     \isNType{(n+1)}(A)&\colonequiv (x\ y : A)\to \isNType{n}(x=y)
   \end{align*}
   $0$-Typen werden auch \begriff{Mengen} genannt und $\isNType{0}(A)$ wird auch als $\isSet(A)$\index{$\isSet(A)$} geschrieben.
-  Wir formen auch den Typ aller Typen mit einem gegebenen Level $n:\N_{-2}$\index{$\mathrm{Typ}$}:
+  Wir formen auch den Typ aller Typen mit einem gegebenen Level $n:\N_{-2}$\index{$\mathrm{Typ}$}\index{$\nType{n}$}:
   \[
-    \mathrm{Typ}_n\colonequiv (A : \mU) \times \isNType{n}(A)\rlap{.}
-  \]
+    \nType{n}\colonequiv\mathrm{Typ}_n\colonequiv (A : \mU) \times \isNType{n}(A)\rlap{.}
+    \]
+    Insbesondere schreiben wir $\Prop$ für $\nType{(-1)}$ und $\Set$ für $\nType{0}$\index{$\Prop$}\index{$\Set$}.
 \end{definition}
 
 \begin{beispiel}
@@ -900,14 +901,130 @@ Wir werden später noch sehen, wie die folgenden Regeln in ein allgemeines Schem
 \end{beweis}
 
 \ignore{
+  \begin{bemerkung}
+      Wenn $A$ und $B$ punktiert und zusammenhängend sind, ist $f$ genau dann eine Äquivalenz,
+    wenn $\ap_f:\ast=\ast\to f(\ast)=f(\ast)$ eine Äquivalenz ist.
+  \end{bemerkung}
+
+  \begin{beweis}
+    Übungsblatt 6.
+  \end{beweis}
+}
+
+Wir können nun alle grundlegenden Operation der Logik in Typentheorie ausdrücken:
+
+\begin{definition}
+  Seien $A,B:\Prop$ und $P:X\to \Prop$.
+  \begin{center}
+    \begin{tabular}{c|c}
+      Logiknotation & Bedeutung \\
+      \midrule
+      $\top$ & $\eins$ \\
+      $\bot$ & $\emptyset$ \\
+      $\neg A$ & $A\to \emptyset$ \\
+      $A\vee B$ & $\|A\sqcup B\|$ \\
+      $A\wedge B$ & $A\times B$ \\
+      $\forall x:X.P(x)$ & $(x:X)\to P(x)$ \\
+      $\exists x:X.P(x)$ & $\|(x:X)\times P(x)\|$
+    \end{tabular}
+  \end{center}
+\end{definition}
+
+\subsection{Das Strukturidentitätsprinzip}
+Wir wollen in diesem Abschnitt untersuchen, was es für algebraische Strukturen bedeutet gleich zu sein.
+
+\begin{definition}
+  Seien $M:\Set$ eine Menge und $\ast$ eine Verknüpfung auf $M$, also eine Funktion $\_\ast\_:M\to M\to M$.
+  \begin{enumerate}[(a)]
+  \item Ein Paar $(M,\ast)$ heißt \begriff{Magma}.
+  \item Ein Magma $(M,\ast)$, sodass
+    \[
+    \mathrm{assoc}(\ast)\colonequiv \forall a,b,c:M.(a\ast b)\ast c=a\ast (b\ast c)
+    \]
+    gilt heißt \begriff{Halbgruppe}.
+  \item Eine Halbgruppe $(M,\ast)$ zusammen mit $e:M$ heißt \begriff{Monoid},
+    wenn
+    \[
+      \mathrm{unit}(\ast,e)\colonequiv \forall a:M.a\ast e=a\wedge e\ast a=a\rlap{.}
+    \]
+  \item Ein Monoid $(M,\ast,e)$ zusammen mit $\_^{-1}:M\to M$ heißt \begriff{Gruppe},
+    wenn
+    \[
+      \mathrm{inv}(\ast,e,\_^{-1})\colonequiv \forall a:M.a\ast a^{-1}=e\wedge a^{-1}\ast a=e
+      \]
+      gilt.
+  \end{enumerate}
+  Wir verwenden die folgenden Bezeichner für die entsprechenden Typen:
+  \begin{align*}
+    \mathrm{Magma}&\colonequiv \sum_{M:\Set}M\to M\to M \\
+    \mathrm{HGr}&\colonequiv \sum_{(M,\ast):\mathrm{Magma}}\mathrm{assoc}(\ast)\\
+    \mathrm{Mon}&\colonequiv \sum_{(M,\ast):\mathrm{HGr}}\sum_{e:M}\mathrm{unit}(\ast,e) \\
+    \mathrm{Gr}&\colonequiv \sum_{(M,\ast,e):\mathrm{Mon}}\sum_{\_^{-1}:M\to M}\mathrm{inv}(\ast,e,\_^{-1})
+  \end{align*}    
+\end{definition}
+
 \begin{bemerkung}
-    Wenn $A$ und $B$ punktiert und zusammenhängend sind, ist $f$ genau dann eine Äquivalenz,
-  wenn $\ap_f:\ast=\ast\to f(\ast)=f(\ast)$ eine Äquivalenz ist.
+  \label{monoid-hgruppe-gruppe-aussagen}
+  In der Situation der Definition sind die Typen
+  \[
+     \sum_{e:M}\mathrm{unit}(\ast,e)\quad \text{ und }\quad \sum_{\_^{-1}:M\to M}\mathrm{inv}(\ast,e,\_^{-1})
+     \]
+     Aussagen.
+     Damit sind die Projektionen der Typen $\mathrm{Mon},\mathrm{HGr},\mathrm{Gr}$ nach $\mathrm{Magma}$ alle Einbettungen.
 \end{bemerkung}
 
 \begin{beweis}
-  Übungsblatt 6.
-\end{beweis}
-}
+  $\mathrm{unit}(\ast,e)$ ist eine Aussage. Um zu sehen dass  $\sum_{e:M}\mathrm{unit}(\ast,e)$ eine Aussage ist, reicht es also zu zeigen, dass je zwei $e,e^\prime:M$ mit $\mathrm{\ast,e}$, $\mathrm{\ast,e^\prime}$ gleich sind. Das folgt aus direkter Rechnung: $e=e\ast e^\prime =e^\prime$.
 
-\subsection{Das Strukturidentitätsprinzip}
+  $\mathrm{inv}(\ast,e,\_^{-1})$ ist eine Aussage. Um zu sehen, dass $\sum_{\_^{-1}:M\to M}\mathrm{inv}(\ast,e,\_^{-1})$ eine Aussage ist, reicht es also zu zeigen, dass für $\_^{-1},\_^{\overline{-1}}:M\to M$ mit $\mathrm{inv}(\ast,e,\_^{-1})$, $\mathrm{inv}(\ast,e,\_^{\overline{-1}})$ bereits $\_^{-1}=\_^{\overline{-1}}$ gilt. Dies durch Funktionsextensionalität und Rechnung:
+  \begin{align*}
+    a\ast a^{-1} &= a\ast a^{\overline{-1}} \\
+    a^{-1}\ast (a\ast a^{-1}) &= a^{-1}\ast (a\ast a^{\overline{-1}}) \\
+    (a^{-1}\ast a)\ast a^{-1} &= (a^{-1}\ast a)\ast a^{\overline{-1}} \\
+    e\ast a^{-1} &= e\ast a^{\overline{-1}} \\
+     a^{-1} &= a^{\overline{-1}} \\
+  \end{align*}
+\end{beweis}
+
+\begin{beispiel}
+  \begin{enumerate}
+  \item $(\N,+,0)$ ist ein Monoid.
+  \item $(\Prop,\wedge,\top)$ und $(\Prop,\vee,\bot)$ sind Monoide --- die dafür nötigen logischen Gesetze haben wir allerdings noch nicht bewiesen.
+  \item Seien $M:\Set$, dann ist $(M\to M, \circ,\id_M)$ ein Monoid.
+  \item Sei $A$ punktierter 1-Typ. Dann ist $(\Omega(A,\ast),\kon,\refl,\_^{-1})$ eine Gruppe.
+  \end{enumerate}
+\end{beispiel}
+
+\begin{definition}
+  Seien $(M,\ast),(N,\ast)$ Magmen, Halbgruppen, Monoide oder Gruppen.
+  Eine Abbildung $f:M\to N$ heißt \begriff{Homomorphismus}, wenn gilt:
+  \[
+    \forall a,b:M.f(a\ast b) =f(a)\ast f(b)
+    \]
+    $f$ heißt \begriff{Isomorphismus}, wenn $f$ zusätzlich eine Äquivalenz ist.
+    Wir schreiben $\Hom(M,N)$ und $\Iso(M,N)$\index{$\Hom$}\index{$\Iso$} für die entsprechenden Typen aller Homo- und Isomorphismen.
+\end{definition}
+
+\begin{theorem}
+  Seien $(M,\ast),(N,\ast^\prime)$ Magmen, Halbgruppen, Monoide oder Gruppen, dann gilt:
+  \[
+    ((M,\ast)=(N,\ast^\prime))\simeq \Iso(M,N)
+  \]
+  Der Gleichheitstyp bezieht sich auf den Typ der Magmen, der wegen \Cref{monoid-hgruppe-gruppe-aussagen} auch der Gleichheitstyp in den Halgruppen, Monoiden und Gruppen ist.
+\end{theorem}
+
+\begin{beweis}
+  Wir berechnen:
+  \begin{align*}
+    ((M,\ast)=_{\mathrm{Magma}}(N,\ast^\prime)) &\simeq \sum_{p:M=_{\Set}N}\transp_{\_\to\_\to\_}(p)(\ast)=\ast^\prime \\
+    &\simeq\sum_{e:M\simeq N}\transp_{\_\to\_\to\_}(\ua(e))(\ast)=\ast^\prime \\
+    &\simeq\sum_{e:M\simeq N}\transp_{\_\to(\_\to\_)}(\ua(e))(\ast)=\ast^\prime \\
+    &\simeq\sum_{e:M\simeq N}\transp_{\_\to\_}(\ua(e))\circ \ast\circ\transp_{\id_\mU}(\ua(e))^{-1}=\ast^\prime \\
+    &\simeq\sum_{e:M\simeq N}\transp_{\_\to\_}(\ua(e))\circ \ast\circ e^{-1}=\ast^\prime \\
+    &\simeq\sum_{e:M\simeq N}(\transp_{\id_\mU}(\ua(e))\circ \_\circ\transp_{\id_\mU}(\ua(e))^{-1})\circ \ast\circ e^{-1}=\ast^\prime \\
+    &\simeq\sum_{e:M\simeq N}(e\circ \_\circ e^{-1})\circ \ast\circ e^{-1}=\ast^\prime \\
+    &\simeq\sum_{e:M\simeq N}\prod_{a,b:N}e(e^{-1}(a)\ast e^{-1}(b))=a\ast^\prime b \\
+    &\simeq\sum_{e:M\simeq N}\prod_{a,b:M}e(a\ast b)=e(a)\ast^\prime e(b) \\
+    &\equiv\Iso(M,N)
+  \end{align*}
+\end{beweis}

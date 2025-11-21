@@ -16,6 +16,7 @@ Eine Liste aller Symbole sollte im Index sein.
 \end{center}
 
 \subsubsection{Abkürzungen}
+(nicht vollständig)
 \begin{center}
   \begin{tabular}{ll}
     Original & Abkürzung \\
@@ -28,6 +29,12 @@ Eine Liste aller Symbole sollte im Index sein.
     $\sum_{x:A}\sum_{y:A}B(x,y)$ & $\sum_{x,y:A}B(x,y)$
   \end{tabular}
 \end{center}
+Statt $(x,p):(x:A)\times B(x)$ schreiben wir auch einfach $x:(x:A)\times B(x)$,
+wenn $B(y)$ für jedes $y:A$ eine Aussage ist. Wir schreiben auch einfach nur $x$, wenn wir $(x,p):(x:A)\times B(x)$ verwenden.
+Insbesondere schreiben wir zum Beispiel $f$ für eine Äquivalenz $(f,p):A\simeq B$.
+
+Für $\sum_{x:\sum_{y:A}C(y)}B(x)$, 
+schreiben wir auch $\sum_{(y,c):\sum_{y:A}C(y)}B((y,c))$.
 
 \subsubsection{Prioritäten}
 ``Höhere Priorität'' bedeutet Vorrang beim Lesen eines Ausdrucks: Wenn ``$\_\ast\_$'' höhere Priorität hat als ``$\_\vee\_$'', dann ist $a\ast b \vee c$ das gleiche wie $(a\ast b) \vee c$.
