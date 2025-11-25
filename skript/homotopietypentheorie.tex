@@ -442,6 +442,7 @@ dass kontrahierbare Typen in gewissem Sinn neutral bzgl.\ $\sum$ sind:
 Nun wollen wir noch zeigen, dass die Abbildung $(\_,\_)_=$ eine Äquivalenz ist:
 
 \begin{lemma}
+  \label{sigma-gleichheitstyp}
   Seien $B:A\to\mU$ und $x,y:A$, $u:B(x)$, $v:B(y)$. Dann ist die Abbildung
   \begin{align*}
     &(\_,\_)_=:\left(\sum_{p:x=y}\transp_B(p)(u)=v\right) \to (x,u)=(y,v)\rlap{,}
@@ -668,8 +669,24 @@ Wir wenden uns nun den Typen
   \]
   zu.
 
+\begin{lemma}
+  Für $(B,f),(C,g):\sum_{A':\mU}A'\to A$ gilt:
+  \[
+    ((B,f)=(C,g)) \simeq \sum_{e:B\simeq C}f=g\circ e
+  \]
+  und für $(B,f),(C,g):\sum_{A^\prime:\mU}A\to A^\prime$
+  \[
+    ((B,f)=(C,g))\simeq \sum_{e:B\simeq C}e\circ f=g
+  \]
+\end{lemma}
+
+\begin{beweis}
+  Rechnung mit \Cref{sigma-gleichheitstyp} und Univalenz.
+\end{beweis}
+
 \begin{theorem}[Objektklassifikation]
   \index{Objektklassifikation}
+  \label{objektklassifikation}
   Für alle $A:\mU$ haben wir die Äquivalenz
   \[
      (A',f)\mapsto \fib_f:\left(\sum_{A':\mU}A'\to A\right)\simeq (A\to\mU),
@@ -1062,7 +1079,10 @@ Später werden wir noch weitere Möglichkeiten sehen solche 1-Typen zu konstruie
       & \forall t,t^\prime:T. \exists g:G. t^\prime = g\cdot t\rlap{,}
     \end{align*}
     und $\|T\|$ gilt.
-    Wir bezeichnen mit $\Tors{G}$\index{$\Tors{G}$} den Typ der $G$-Torsoren,
+    Wir bezeichnen mit
+    \[
+    \Tors{G}\colonequiv (T:\Set)\times (\_\cdot\_:G\to T\to T)\times (t:\|T\|)\times (\text{$\_\cdot\_$ ist frei und transitiv})\]
+    \index{$\Tors{G}$} den Typ der $G$-Torsoren,
     der durch die Operation $g\cdot h\coloneq g\ast h$ von $G$ auf $G$ punktiert ist.
   \end{enumerate}
 \end{definition}
@@ -1075,5 +1095,46 @@ Später werden wir noch weitere Möglichkeiten sehen solche 1-Typen zu konstruie
 \end{theorem}
 
 \begin{beweis}
-  
+  Wir rechnen für $T,T^\prime:\Tors{G}$ direkt:
+  \begin{align*}
+    (T,\cdot,t,\_)=(T^\prime,\cdot^\prime,t^\prime,\_) &\simeq (p:T=T^\prime) \times \transp_{G\to\_\to\_}(p)(\cdot)=\cdot^\prime \\
+    &\simeq  (e:T\simeq T^\prime)\times \transp_{G\to\_\to\_}(\ua(e))(\cdot)=\cdot^\prime \\
+    &\simeq  (e:T\simeq T^\prime)\times \forall g:G,t^\prime:T^\prime. e(g\cdot (e^{-1}(t^\prime)))=g\cdot^\prime t^\prime \\
+    &\simeq  (e:T\simeq T^\prime)\times \forall g:G,t:T. e(g\cdot t)=g\cdot^\prime e(t)
+  \end{align*}
+  Gleichheiten von $G$-Torsoren entsprechen also wie erwartet Isomorphismen.
+  D.h.\ wir können den Beweis beenden, indem wir zeigen, dass Isomorphismen des trivialen $G$-Torsors homomorph Elementen von $G$ entsprechen.
 \end{beweis}
+
+\begin{bemerkung}
+  \begin{enumerate}[(a)]
+  \item Punktierte Typen $X$ mit der Eigenschaft $\Omega(X)=G$ nennt man auch \begriff{Entschleifung} von $G$.
+  \item Zusammenhängende Entschleifungen sind eindeutig.
+  \item Es ist auch möglich, Gruppenhomomorphismen zu entschleifen.
+  \item Wir haben bisher verschwiegen, dass für $G:\mU_i$ der Typ $\Tors{G}$ nach unserer Konstruktion in $U_{i+1}$ liegt. Das werden wir später beheben können.
+  \end{enumerate}
+\end{bemerkung}
+
+\begin{definition}
+  Wir bezeichnen den Typ der punktierten Typen wie folgt: $\mU_\ast\colonequiv (X:\mU)\times X$.
+  Seien $(X,\ast),(Y,\ast)$ punktierte Typen.
+  \begin{enumerate}[(a)]
+  \item Eine Abbildung $f:X\to Y$ zusammen mit $p_f:f(\ast)=\ast$ ist eine \begriff{punktierte Abbildung}. Wir bezeichnen den Typ der punktierten Abbildungen mit $(X,\ast)\to_\ast (Y,\ast)\colonequiv (f:X\to Y)\times (f(\ast)=\ast)$\index{$\to_\ast$}.
+  \item Eine Äquivalenz $e:X\simeq Y$ zusammen mit $p_e:e(\ast)=\ast$ ist eine \begriff{punktierte Äquivalenz}.
+    Wir bezeichnen den Typ der punktierten Äquivalenzen mit $(X,\ast)\simeq_\ast (Y,\ast)\colonequiv (e:X\simeq Y)\times (e(\ast)=\ast)$\index{$\simeq_\ast$}.
+  \end{enumerate}
+\end{definition}
+
+\begin{bemerkung}
+  Seien $X,Y:\mU_\ast$. Dann gilt:
+  \[
+    (X=_{\mU_\ast}Y)\simeq (X\simeq_\ast Y)\rlap{.}
+  \]
+\end{bemerkung}
+
+\begin{beweis}
+  \Cref{sigma-gleichheitstyp}.
+\end{beweis}
+
+
+\subsection{Höhere Induktive Typen (HITs)}
