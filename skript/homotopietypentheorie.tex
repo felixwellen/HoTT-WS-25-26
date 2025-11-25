@@ -914,7 +914,7 @@ Wir werden später noch sehen, wie die folgenden Regeln in ein allgemeines Schem
 Wir können nun alle grundlegenden Operation der Logik in Typentheorie ausdrücken:
 
 \begin{definition}
-  Seien $A,B:\Prop$ und $P:X\to \Prop$.
+  Seien $A,B:\Prop$ und $P:X\to \Prop$\index{$\top$}\index{$\bot$}\index{$\wedge$}\index{$\vee$}\index{$\Rightarrow$}\index{$\Leftrightarrow$}.
   \begin{center}
     \begin{tabular}{c|c}
       Logiknotation & Bedeutung \\
@@ -924,6 +924,8 @@ Wir können nun alle grundlegenden Operation der Logik in Typentheorie ausdrück
       $\neg A$ & $A\to \emptyset$ \\
       $A\vee B$ & $\|A\sqcup B\|$ \\
       $A\wedge B$ & $A\times B$ \\
+      $A\Rightarrow B$ & $A\to B$ \\
+      $A\Leftrightarrow B$ & $(A\to B)\times (B\to A)$ \\
       $\forall x:X.P(x)$ & $(x:X)\to P(x)$ \\
       $\exists x:X.P(x)$ & $\|(x:X)\times P(x)\|$
     \end{tabular}
@@ -1027,4 +1029,49 @@ Wir wollen in diesem Abschnitt untersuchen, was es für algebraische Strukturen 
     &\simeq\sum_{e:M\simeq N}\prod_{a,b:M}e(a\ast b)=e(a)\ast^\prime e(b) \\
     &\equiv\Iso(M,N)
   \end{align*}
+\end{beweis}
+
+\textbf{Frage: } Gibt es für eine Gruppe $G$ einen punktierten 1-Typen $BG$,
+sodass $\Omega(BG,\ast)$ als Gruppe isomorph zu $G$ ist?
+Diese Frage werden wir positiv beantworten und der Weg wird sein,
+eine algebraische Struktur zu finden, sodass deren Automorphismengruppe der gegebenen Gruppe entspricht.
+Später werden wir noch weitere Möglichkeiten sehen solche 1-Typen zu konstruieren.
+
+\begin{definition}
+  \begin{enumerate}[(a)]
+  \item Sei $(G,\ast)$ eine Gruppe und $M$ eine Menge.
+  Eine \begriff{Operation} von $G$ auf $M$ ist eine Abbildung
+  \[
+    \_\cdot\_ : G \to M\to M
+    \]
+    sodass gelten:
+    \begin{align*}
+      & \forall g,h:G, m:M. (g \ast h) \cdot m = g \cdot (h \cdot m) \\
+      & \forall m:M. e\cdot m = m\rlap{.}
+    \end{align*}
+    Eine Menge $M$ zusammen mit einer $G$ Operation auf $M$ nennt man auch \begriff{$G$-Menge}.
+  \item Ein Morphismus von $G$-Mengen $M,N$ ist eine Abbildung $f:M\to N$ sodass
+    \[
+      \forall g:G, m:M. f(g\cdot m)=g\cdot f(m)\rlap{.}
+    \]
+  \item Eine $G$-Menge $T$ heißt \begriff{$G$-Torsor}, wenn $G$ frei und transitiv operiert, d.h.\
+    \begin{align*}
+      & \forall g,h:G. (g\cdot\_=h\cdot\_) \Rightarrow g=h\\
+      & \forall t,t^\prime:T. \exists g:G. t^\prime = g\cdot t\rlap{,}
+    \end{align*}
+    und $\|T\|$ gilt.
+    Wir bezeichnen mit $\Tors{G}$\index{$\Tors{G}$} den Typ der $G$-Torsoren,
+    der durch die Operation $g\cdot h\coloneq g\ast h$ von $G$ auf $G$ punktiert ist.
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+  Sei $(G,\ast)$ eine Gruppe, dann haben wir einen Isomorphismus von Gruppen:
+  \[
+     (\Omega(\Tors{G}),\kon) \to (G,\ast)
+  \]
+\end{theorem}
+
+\begin{beweis}
+  
 \end{beweis}
