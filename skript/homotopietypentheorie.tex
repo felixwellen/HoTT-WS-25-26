@@ -517,7 +517,7 @@ Nun wollen wir noch zeigen, dass die Abbildung $(\_,\_)_=$ eine Äquivalenz ist:
 \subsection{Funktionsextensionalität und Univalenz}
 
 Wir werden zunächst durch das \begriff{Funktionsextensionalitäts-Axiom} Gleichheiten von Funktionen charakterisieren.
-Streng genommen, kann man dieses Axiom aus dem Univalenzaxiom, das wir später in diesem Abschnitt sehen werden folgern.
+Streng genommen kann man dieses Axiom aus dem Univalenzaxiom, das wir später in diesem Abschnitt sehen werden, folgern.
 Allerdings ist dieser Fakt etwas zufällig und nicht hilfreich.
 Wir werden einfach beide Axiome annehmen.
 
@@ -670,9 +670,9 @@ Wir wenden uns nun den Typen
 
 \begin{theorem}[Objektklassifikation]
   \index{Objektklassifikation}
-  Für alle $A:\mU$ habe wir die folgende Äquivalenz:
+  Für alle $A:\mU$ haben wir die Äquivalenz
   \[
-     (A',f)\mapsto \fib_f:\left(\sum_{A':\mU}A'\to A\right)\simeq (A\to\mU)
+     (A',f)\mapsto \fib_f:\left(\sum_{A':\mU}A'\to A\right)\simeq (A\to\mU),
   \]
   mit der Inversen $(B:A\to\mU)\mapsto ((x:A)\times B(x), \pi_1)$.
 \end{theorem}
@@ -704,14 +704,14 @@ Wir wenden uns nun den Typen
   Es gilt also das folgende: Sei $P:(A\ B :\mU)\to A\simeq B\to \mU$.
   Dann haben wir für $r_A:P(A,A,\id_A)$ bereits
   \[
-     \elim_\simeq(r_{\_}):\prod_{A,B:\mU}\prod_{f:A\simeq B}P(A,B,f)\rlap{.}
+     \elim_\simeq(r):\prod_{A,B:\mU}\prod_{f:A\simeq B}P(A,B,f)\rlap{.}
      \]
      und $\elim_\simeq(r)(A,A,\id_A)=r_A$.
 \end{bemerkung}
 
 \begin{bemerkung}
   Viele der vergangenen Beweise hätten wir auch mit Univalenz (oder Äquivalenzinduktion) schnell erledigen können.
-  So ist es etwa durch Äquivalenzinduktion klar, dass $\ap_f$ eine Äquivalenz, wenn $f$ eine Äquivalenz ist.
+  So ist es etwa durch Äquivalenzinduktion klar, dass $\ap_f$ eine Äquivalenz ist, wenn $f$ eine Äquivalenz ist.
 \end{bemerkung}
 
 Die Univalenz unserer Universen überträgt sich auf diverse andere Typen.
@@ -741,19 +741,20 @@ Ein erstes Beispiel ist die Bemerkung weiter unten, für die wir noch ein Lemma 
 
 Wir werden später noch sehen, wie die folgenden Regeln in ein allgemeines Schema passen.
 \begin{regeln}
-  Sei $A$ ein Typ
+  Sei $A$ ein Typ.
   \begin{itemize}
   \item Es gibt einen Typen $\|A\|$, die \begriff{Veraussagung}\index{$\|A\|$}\footnote{
     In der Literatur ``propositional truncation''.}
     von $A$.
   \item Für jedes $a:A$ gibt es $|a|:\|A\|$. 
   \item Für $x,y:\|A\|$ gibt es $x=_{\|A\|}y$.
-  \item Für eine Aussage $P$ und $f:A\to P$ gibt es $\elim_P(f):\|A\|\to P$
-     und $(x:A)\to f(x)=\elim_P(f)(|x|)$.
+  \item Für eine Aussage $P$ und $f:A\to P$ gibt es $\elim_{\|A\|,P}(f):\|A\|\to P$
+     und $(x:A)\to f(x)=\elim_{\|A\|,P}(f)(|x|)$.
   \end{itemize}
 \end{regeln}
 
 \begin{bemerkung}
+  \label{Veraussagung-Funktorialität}
   \begin{enumerate}[(a)]
   \item Für jedes $A$ ist $\|A\|$ eine Aussage.
   \item Für $f:A\to B$ gibt es stets $\|A\|\to\|B\|$.
@@ -761,7 +762,7 @@ Wir werden später noch sehen, wie die folgenden Regeln in ein allgemeines Schem
 \end{bemerkung}
 
 \begin{beweis}  
-  (b): Wir haben $|\_|\circ f:A\to \|B\|$ und damit $\elim(|\_|\circ f):\|A\|\to \|B\|$.
+  (b): Wir haben $|\_|\circ f:A\to \|B\|$ und damit $\elim_{\|A\|}(|\_|\circ f):\|A\|\to \|B\|$.
 \end{beweis}
 
 \begin{definition}
@@ -781,10 +782,9 @@ Wir werden später noch sehen, wie die folgenden Regeln in ein allgemeines Schem
   \item $(\eins,\ast)$ ist zusammenhängend. Jeder kontrahierbare Typ ist zusammenhängend.
   \item $(\zwei,0_\zwei)$ ist nicht zusammenhängend. Um das zu sehen wollen wir $\neg(1_\zwei= 0_\zwei)$ verwenden. Wenn $\zwei$ zusammenhängend wäre, hätten wir $\|1_\zwei=0_\zwei\|$.
   \item Seien $A:\mU$ und $x:A$, dann ist $\BAut_A(x)$ punktiert durch $(x,|\refl_x|)$
-    und zusammenhängend, denn:
-    Sei $(y,p):\BAut_A(x)$, also $y:A$ und $p:\|y=x\|$.
-    Da wir die Aussage $(x,|\refl|)=(y,p)$ zeigen wollen, können wir $q:y=x$ verwenden.
-    Damit sind wir aber bereits fertig, weil $\|\_=x\|$ eine Familie von Aussagen ist.
+    und zusammenhängend.
+    Denn ist $(y,p):\BAut_A(x)$ beliebig, also $y:A$ und $p:\|y=x\|$, so wollen wir die Aussage \[\|(y,p)=(x,|\refl|)\|\] zeigen.
+    Da \(\|\_=x\|\) eine Familie von Aussagen ist, haben wir \(y=x \to (y,p) = (x,|\refl|)\), mit \(p\) sind wir daher fertig wegen \Cref{Veraussagung-Funktorialität}.
   \end{enumerate}
 \end{beispiel}
 
@@ -825,7 +825,7 @@ Wir werden später noch sehen, wie die folgenden Regeln in ein allgemeines Schem
 
 \begin{definition}
   \begin{enumerate}[(a)]
-  \item Seien $A:\mU$ und $P:A\to\mU$. Wir verwenden folgende Notation\index{$\exists$}
+  \item Seien $A:\mU$ und $P:A\to\mU$. Wir verwenden folgende Notation\index{$\exists$}:
   \[
     \left(\exists x:A.P(x)\right)\colonequiv \left\|\sum_{x:A}P(x)\right\|\rlap{.}
   \]  
@@ -865,7 +865,7 @@ Wir werden später noch sehen, wie die folgenden Regeln in ein allgemeines Schem
     \end{tikzcd}
   \end{center}
   Es gelte $rt=bl$ und weiter seien $l$ surjektiv und $r$ eine Einbettung.
-  Dann ist der Typ der ``lifts'', also diagonalen $d:C\to B$ sodass $rd=b$ und $dl=t$ gelten,
+  Dann ist der Typ der ``lifts'', also der diagonalen Abbildungen $d:C\to B$, für die wir $rd=b$ und $dl=t$ haben,
   kontrahierbar.
   \end{enumerate}
 \end{lemma}
@@ -880,8 +880,8 @@ Wir werden später noch sehen, wie die folgenden Regeln in ein allgemeines Schem
 
 \begin{beweis}
   Sei $A$ kontrahierbar auf $\ast:A$, dann ist $|\ast|:\|A\|$ und $A$ ist eine Aussage.
-  Sei $A$ eine Aussage und $z:\|A\|$. Wir wollen $\isContr(A)$, was eine Aussage ist.
-  Wir haben $p:A\to \isContr(A)$, da $A$ Aussage ist, also auch $\elim_{\|\_\|}(p):\|A\|\to \isContr(A)$. Und damit $\elim_{\|\_\|}(p)(z):\isContr(A)$.
+  Sei $A$ eine Aussage und $z:\|A\|$. Wir wollen $\isContr(A)$ zeigen, was eine Aussage ist.
+  Wir haben $p:A\to \isContr(A)$, da $A$ eine Aussage ist, also auch $\elim_{\|\_\|}(p):\|A\|\to \isContr(A)$. Und damit $\elim_{\|\_\|}(p)(z):\isContr(A)$.
 \end{beweis}
 
 \begin{lemma}
@@ -933,7 +933,7 @@ Wir können nun alle grundlegenden Operation der Logik in Typentheorie ausdrück
 \end{definition}
 
 \subsection{Das Strukturidentitätsprinzip}
-Wir wollen in diesem Abschnitt untersuchen, was es für algebraische Strukturen bedeutet gleich zu sein.
+Wir wollen in diesem Abschnitt untersuchen, was es für algebraische Strukturen bedeutet, gleich zu sein.
 
 \begin{definition}
   Seien $M:\Set$ eine Menge und $\ast$ eine Verknüpfung auf $M$, also eine Funktion $\_\ast\_:M\to M\to M$.
@@ -943,7 +943,7 @@ Wir wollen in diesem Abschnitt untersuchen, was es für algebraische Strukturen 
     \[
     \mathrm{assoc}(\ast)\colonequiv \forall a,b,c:M.(a\ast b)\ast c=a\ast (b\ast c)
     \]
-    gilt heißt \begriff{Halbgruppe}.
+    gilt, heißt \begriff{Halbgruppe}.
   \item Eine Halbgruppe $(M,\ast)$ zusammen mit $e:M$ heißt \begriff{Monoid},
     wenn
     \[
@@ -978,7 +978,9 @@ Wir wollen in diesem Abschnitt untersuchen, was es für algebraische Strukturen 
 \begin{beweis}
   $\mathrm{unit}(\ast,e)$ ist eine Aussage. Um zu sehen dass  $\sum_{e:M}\mathrm{unit}(\ast,e)$ eine Aussage ist, reicht es also zu zeigen, dass je zwei $e,e^\prime:M$ mit $\mathrm{\ast,e}$, $\mathrm{\ast,e^\prime}$ gleich sind. Das folgt aus direkter Rechnung: $e=e\ast e^\prime =e^\prime$.
 
-  $\mathrm{inv}(\ast,e,\_^{-1})$ ist eine Aussage. Um zu sehen, dass $\sum_{\_^{-1}:M\to M}\mathrm{inv}(\ast,e,\_^{-1})$ eine Aussage ist, reicht es also zu zeigen, dass für $\_^{-1},\_^{\overline{-1}}:M\to M$ mit $\mathrm{inv}(\ast,e,\_^{-1})$, $\mathrm{inv}(\ast,e,\_^{\overline{-1}})$ bereits $\_^{-1}=\_^{\overline{-1}}$ gilt. Dies durch Funktionsextensionalität und Rechnung:
+  Es ist $\mathrm{inv}(\ast,e,\_^{-1})$ eine Aussage.
+  Um zu sehen, dass $\sum_{\_^{-1}:M\to M}\mathrm{inv}(\ast,e,\_^{-1})$ eine Aussage ist, reicht es also zu zeigen, dass für $\_^{-1},\_^{\overline{-1}}:M\to M$ mit $\mathrm{inv}(\ast,e,\_^{-1})$, $\mathrm{inv}(\ast,e,\_^{\overline{-1}})$ bereits $\_^{-1}=\_^{\overline{-1}}$ gilt.
+  Dies folgt durch Funktionsextensionalität und Rechnung:
   \begin{align*}
     a\ast a^{-1} &= a\ast a^{\overline{-1}} \\
     a^{-1}\ast (a\ast a^{-1}) &= a^{-1}\ast (a\ast a^{\overline{-1}}) \\
@@ -998,7 +1000,7 @@ Wir wollen in diesem Abschnitt untersuchen, was es für algebraische Strukturen 
 \end{beispiel}
 
 \begin{definition}
-  Seien $(M,\ast),(N,\ast)$ Magmen, Halbgruppen, Monoide oder Gruppen.
+  Seien $(M,\ast),(N,\ast)$ Magmen, Halbgruppen, oder Gruppen.
   Eine Abbildung $f:M\to N$ heißt \begriff{Homomorphismus}, wenn gilt:
   \[
     \forall a,b:M.f(a\ast b) =f(a)\ast f(b)
@@ -1008,11 +1010,11 @@ Wir wollen in diesem Abschnitt untersuchen, was es für algebraische Strukturen 
 \end{definition}
 
 \begin{theorem}
-  Seien $(M,\ast),(N,\ast^\prime)$ Magmen, Halbgruppen, Monoide oder Gruppen, dann gilt:
+  Seien $(M,\ast),(N,\ast^\prime)$ Magmen, Halbgruppen, oder Gruppen, dann gilt:
   \[
     ((M,\ast)=(N,\ast^\prime))\simeq \Iso(M,N)
   \]
-  Der Gleichheitstyp bezieht sich auf den Typ der Magmen, der wegen \Cref{monoid-hgruppe-gruppe-aussagen} auch der Gleichheitstyp in den Halgruppen, Monoiden und Gruppen ist.
+  Der Gleichheitstyp bezieht sich auf den Typ der Magmen, der wegen \Cref{monoid-hgruppe-gruppe-aussagen} auch der Gleichheitstyp in den Halbgruppen, und Gruppen ist.
 \end{theorem}
 
 \begin{beweis}
