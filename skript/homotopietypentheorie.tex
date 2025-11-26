@@ -1195,6 +1195,18 @@ Wir wollen zunächst sehen, wie sich Elimination in konstanten Typfamilien verh�
   Die dadurch gegebene Äquivalenz bildet $\_\mapsto \ast$ auf $\refl_\ast$ ab.
 \end{beweis}
 
+\begin{beispiel}
+  Wir können wie folgt einen abhängigen Typen über $S^1$ definieren:
+  \begin{align*}
+    &D:S^1\to \mU \\
+    &D(\ast)\colonequiv \zwei \\
+    &D(l)\coloneq \ua(s)
+  \end{align*}
+  bzw.\ $D\colonequiv \elim_{S^1}(\zwei,\ua(s))$.
+  Dann sehen wir $l\neq \refl$, denn $l=\refl$ führt zu $\transp_D(l)=\transp_D(\refl)=\id_\zwei$, aber wir haben auch $\transp_D(l)=\transp_{\id_\mU}(\ap_D(l))=\transp_{\id_\mU}(\ua(s))=s$.
+  Damit ist $S^1$ keine Menge.
+\end{beispiel}
+
 \textbf{Frage: } Gibt es auch einen (höheren) Induktiven Typ $I$, sodass $(I\to A)\simeq (x,y:A) \times (x=y)$? Ja:
 
 \begin{regeln}
