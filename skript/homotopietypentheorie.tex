@@ -1122,6 +1122,7 @@ Später werden wir noch weitere Möglichkeiten sehen solche 1-Typen zu konstruie
   \item Eine Abbildung $f:X\to Y$ zusammen mit $p_f:f(\ast)=\ast$ ist eine \begriff{punktierte Abbildung}. Wir bezeichnen den Typ der punktierten Abbildungen mit $(X,\ast)\to_\ast (Y,\ast)\colonequiv (f:X\to Y)\times (f(\ast)=\ast)$\index{$\to_\ast$}.
   \item Eine Äquivalenz $e:X\simeq Y$ zusammen mit $p_e:e(\ast)=\ast$ ist eine \begriff{punktierte Äquivalenz}.
     Wir bezeichnen den Typ der punktierten Äquivalenzen mit $(X,\ast)\simeq_\ast (Y,\ast)\colonequiv (e:X\simeq Y)\times (e(\ast)=\ast)$\index{$\simeq_\ast$}.
+  \item Diese Typen sind durch die konstante Abbildung punktiert.
   \end{enumerate}
 \end{definition}
 
@@ -1138,3 +1139,102 @@ Später werden wir noch weitere Möglichkeiten sehen solche 1-Typen zu konstruie
 
 
 \subsection{Höhere Induktive Typen (HITs)}
+Höhere induktive Typen haben neben Konstruktoren der Bauart, die wir bereits von den Induktiven Typen kennen, sogenannte \begriff{höhere Konstruktoren},
+deren Werte in Gleichheitstypen des höheren induktiven Typs liegen.
+Zunächst betrachten wir den Typ $S¹$.
+Dieser hat wie der Typ $\eins$ einen Punkt-Konstruktor $\ast:S^1$ und zusätzlich einen höheren Konstruktor $l:\ast =_{S^1}\ast$.
+
+\begin{regeln}
+  \begin{itemize}
+  \item Es gibt den Typ $S^1$, den \begriff{Kreis}\index{$S^1$}.
+  \item Es gibt $\ast:S^1$ und $l:\ast=_{S^1}\ast$.
+  \item Sei $B:S^1\to \mU$. Für $b_\ast:B(\ast)$ und $b_l:\transp_B(l)(b_\ast)=b_\ast$
+    gibt es $\elim_{S^1}(b_\ast,b_l):(x:S^1)\to B(x)$.
+  \item Es gilt: $\elim_{S^1}(b_\ast,b_l)(\ast)\equiv b_\ast$ und $\apd_{\elim_{S^1}(b_\ast,b_l)}(l)=b_l$.
+  \end{itemize}
+\end{regeln}
+
+Wir wollen zunächst sehen, wie sich Elimination in konstanten Typfamilien verhält.
+
+\begin{bemerkung}
+  Für einen Typen $A$, $a:A$ und $k:a=a$ haben wir $f\colonequiv \elim_{S^1}(a,k):S^1\to A$ sodass
+  $f(\ast)\equiv a$ und $\ap_f(l)=k$.
+\end{bemerkung}
+
+\begin{beweis}
+  Für $\ap_f(l)=k$ müssen wir zeigen: $\apd_{f}(l)=\ap_f(l)$, was per Induktion folgt.
+\end{beweis}
+
+\begin{lemma}
+  Sei $A:\mU$. Es gilt
+  \[
+    (S^1\to A) \simeq (a:A)\times (a=a)
+  \]
+  Wenn $A$ punktiert ist gilt:
+  \[
+    (S^1\to_\ast A)\simeq_\ast \Omega(A,\ast)
+  \]
+\end{lemma}
+
+\begin{beweis}
+  Sei $A:\mU$. 
+  Für $\varphi:(a:A)\times (a=a) \to (S^1\to A)$ verwenden wir $\elim_{S^1}$.
+  Für $\psi:(S^1\to A) \to (a:A)\times (a=a)$ werten wir $f:S^1\to A$ bei $\ast$ aus und wenden $\ap_f$ auf $l:\ast=\ast$ an.
+
+  Dass $\psi\circ \varphi\sim\id$ gilt, folgt aus der Berechnungsregel von $S^1$.
+  Für $\varphi\circ \psi\sim\id$ müssen wir prüfen, dass zwei Funktionen $f,g:S^1\to A$ bereits gleich sind, wenn $f(\ast)\equiv g(\ast)$ und $\ap_f(l)=\ap_g(l)$ gilt.
+  Mit Funktionsextensionalität reicht es $(x:S^1)\to f(x)=g(x)$ zu zeigen, worauf wir $S^1$-Induktion anwenden.
+  Damit ist zu zeigen: $\refl_{f(\ast)}:f(\ast)=g(\ast)$ und $\transp_{f(\_)=g(\_)}(l)(\refl_{f(\ast)})=\refl_{f(\ast)}$, which amounts to $\ap_f(l)^{-1}\kon \refl\kon \ap_g(l)=\refl$. So we can construct a witness using the assumption $\ap_f(l)=\ap_g(l)$.
+  \begin{align*}
+    (S^1\to_\ast A)&\equiv (f:S^1\to A)\times f(\ast)=\ast \\
+    &\simeq (a:A)\times (a=a) \times (a=\ast) \\
+    &\simeq (a:A)\times (a=\ast) \times (a=a) \\
+    &\simeq (a:A)\times (a=\ast) \times (\ast=\ast) \\
+    &\simeq (\ast=\ast) 
+  \end{align*}
+  Die dadurch gegebene Äquivalenz bildet $\_\mapsto \ast$ auf $\refl_\ast$ ab.
+\end{beweis}
+
+\textbf{Frage: } Gibt es auch einen (höheren) Induktiven Typ $I$, sodass $(I\to A)\simeq (x,y:A) \times (x=y)$? Ja:
+
+\begin{regeln}
+  \begin{itemize}
+  \item Es gibt den Typ $I$, das \begriff{Intervall}\index{$I$}.
+  \item Es gibt $0_I:I$, $1_I:I$ und $i:0_I=1_I$.
+  \item Sei $B:I\to \mU$. Für $b_0:B(0_I)$, $b_1:B(1_I)$ und $b_i:\transp_B(i)(b_0)=b_1$
+    gibt es $\elim_I(b_0,b_1,b_i):(x:I)\to B(x)$.
+  \item Es gilt: $\elim_I(b_0,b_1,b_i)(0_I)\equiv b_0$, $\elim_I(b_0,b_1,b_i)(1_I)\equiv b_1$ und
+    $\apd_{\elim_I(b_0,b_1,b_i)}(i)=b_i$.
+  \end{itemize}
+\end{regeln}
+
+\begin{bemerkung}
+  \begin{enumerate}[(a)]
+  \item Es gilt $(I\to A)\simeq (x,y:A) \times (x=y)$.
+  \item $I$ ist kontrahierbar.
+  \item Aus den Regeln für $I$ kann Funktionsextensionalität gefolgert werden.
+  \end{enumerate}
+\end{bemerkung}
+
+Mit der Veraussagung haben wir beliebige Typen in Aussagen verwandelt --- das werden wir jetzt auf höherem Homotopielevel wiederholen:
+
+\begin{regeln}
+Kommt noch.  
+\end{regeln}
+
+In der Mathematik werden häufig Quotienten gebildet.
+Das bedeutet, dass neue Gleichheiten zwischen den Elementen eines Typs eingeführt werden.
+Wir können Quotienten also durch höhere Induktion ausdrücken,
+müssen jedeoch aufpassen, dass mit den neuen Gleichheitstypen nichts wildes passiert.
+Im Fall von Quotienten von Mengen wollen wir etwa, dass die Gleichheitstypen im Quotienten wieder Aussagen sind. Das können wir mit der Mengenabschneidung nachträglich umsetzen.
+
+\begin{regeln}
+  Sei $A$ ein Typ und $R:A\to A\to \mU$.
+  \begin{itemize}
+  \item Es gibt eine Typ $A/R$, den \begriff{Mengenquotienten}\index{$A/R$} von $A$ nach $R$.
+  \item Für $x:A$ gibt es $[x]:A/R$. \\
+   Für $x,y:A$ und $r:R(x,y)$ gibt es $s_r:[x]=_{A/R}[y]$. 
+  \item Sei $B:A/R\to \mU$. Für $b_{[\_]}:(x:A)\to B([x])$, $b_R:(x,y:A)\to (r:R(x,y))\to \transp_B(s_r)(b(x))=b(y)$.
+  \item Es gilt: Kommt noch.
+  \end{itemize}
+\end{regeln}
