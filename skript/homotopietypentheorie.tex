@@ -1228,25 +1228,74 @@ Wir wollen zunächst sehen, wie sich Elimination in konstanten Typfamilien verh�
   \end{enumerate}
 \end{bemerkung}
 
-Mit der Veraussagung haben wir beliebige Typen in Aussagen verwandelt --- das werden wir jetzt auf höherem Homotopielevel wiederholen:
+Wir werden jetzt darauf zusteuern $\Omega(S^1)=\Z$ zu zeigen.
+Dazu brauchen wir die ganzen Zahlen $\Z$, welche wir als Quotient definieren werden.
+Die folgenden Konstruktion ist zwar nicht die allgemeinste, reicht aber für unseren Zweck:
 
-\begin{regeln}
-Kommt noch.  
-\end{regeln}
+\begin{lemma}
+  Sei $A:\Set$ und $\_\sim\_:A\to A\to \Prop$.
+  Weiter sei $n:A\to A$ sodass gilt: $x\sim y\Leftrightarrow n(x)=n(y)$ und für alle $x:A$ ist $n(x)\sim x$ und $n(n(x))=n(x)$.
+  Dann ist die Abbildung
+  \[
+    [\_]:A\to A/\sim \colonequiv \sum_{x:A}n(x)=x
+    \]
+    surjektiv, wir haben $x\sim y\to [x]=[y]$ und es gilt folgendes Induktionsprinzip: Für $B:A/\sim\to \Set$ und $b:(a:A)\to B([a])$ sodass $x\sim y \to b(x)=b(y)$ gibt es $\elim_{/\sim,B}(b):(x:A/\sim )\to B(x)$.
+    Es gilt $\elim_{/\sim,B}(b)([a])\equiv b(a)$.
+\end{lemma}
 
-In der Mathematik werden häufig Quotienten gebildet.
-Das bedeutet, dass neue Gleichheiten zwischen den Elementen eines Typs eingeführt werden.
-Wir können Quotienten also durch höhere Induktion ausdrücken,
-müssen jedeoch aufpassen, dass mit den neuen Gleichheitstypen nichts wildes passiert.
-Im Fall von Quotienten von Mengen wollen wir etwa, dass die Gleichheitstypen im Quotienten wieder Aussagen sind. Das können wir mit der Mengenabschneidung nachträglich umsetzen.
+\begin{beweis}
+  Wir definieren $[x]\colonequiv n(x)$ wobei nach Voraussetzung $n(n(x))=n(x)$ gilt.
 
-\begin{regeln}
-  Sei $A$ ein Typ und $R:A\to A\to \mU$.
-  \begin{itemize}
-  \item Es gibt eine Typ $A/R$, den \begriff{Mengenquotienten}\index{$A/R$} von $A$ nach $R$.
-  \item Für $x:A$ gibt es $[x]:A/R$. \\
-   Für $x,y:A$ und $r:R(x,y)$ gibt es $s_r:[x]=_{A/R}[y]$. 
-  \item Sei $B:A/R\to \mU$. Für $b_{[\_]}:(x:A)\to B([x])$, $b_R:(x,y:A)\to (r:R(x,y))\to \transp_B(s_r)(b(x))=b(y)$.
-  \item Es gilt: Kommt noch.
-  \end{itemize}
-\end{regeln}
+  Seien $B:A/\sim \to \Set$ und $b:(x:A)\to B([x])$ mit $x\sim y \to b(x)=b(y)$.
+  Sei weiter $x:A/\sim$. Nun ist $\pi_1(x):A$ und wir können $\elim_{/\sim,B}(b)(x)\colonequiv b(\pi_1(x))$ setzen, womit die geforderte definitionale Gleichheit gilt.
+\end{beweis}
+
+\begin{definition}
+  Der Typ $\Z$\index{$\Z$} ist gegeben durch $\N\times \N/\sim$, wobei
+  \[
+    (r,k)\sim (m,l) \colonequiv r+l=m+k
+  \]
+  und $n:\N\to\N$ gegeben ist durch
+  \begin{align*}
+    & n(0,0)\colonequiv (0,0) \\
+    & n(S(r),0)\colonequiv (S(r),0) \\
+    & n(0,S(k))\colonequiv (0,S(k)) \\
+    & n(S(r),S(k))\colonequiv n(r,k)    
+  \end{align*}
+\end{definition}
+
+\begin{bemerkung}
+  $\Z$ ist mit der Addition:
+  \[
+    (n,k)+(m,l)\colonequiv (n+m,k+l)
+  \]
+  eine Gruppe. Außerdem gilt: $\Z\simeq \N\sqcup \eins\sqcup \N$, $\Z$ zerfällt also in die positiven und negativen Zahlen und $(0,0)$.
+  Wir können die Nachfolgeroperation auf $\Z$ wie folgt fortsetzen:
+  \[
+    S((n,k))\colonequiv (S(n),k)
+    \]
+    $S:\Z\to\Z$ ist eine Äquivalenz, deren Inverse wir mit $P$ bezeichnen und ``Vorgänger'' nennen.
+\end{bemerkung}
+
+\begin{definition}
+  \begin{enumerate}[(a)]
+  \item Die \begriff{Universelle Überlagerung von $S^1$} ist der folgende abhängige Typ
+    \begin{align*}
+      &C:S^1\to \mU \\
+      &C(\ast)\colonequiv \Z \\
+      &C(l)\colonequiv \ua(S)
+    \end{align*}
+  \item Die \begriff{Windungszahl} ist eine wie folgt gegebene Abbildung:
+  \begin{align*}
+    &\omega:\Omega(S^1)\to \Z \\
+    &\omega(p)\colonequiv \transp_C(p)(0)
+  \end{align*}
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+  Die Windungszahl ist eine Äquivalenz:
+  \[
+    \omega:\Omega(S^1)\simeq \Z
+  \]
+\end{theorem}
