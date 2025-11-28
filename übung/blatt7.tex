@@ -27,6 +27,27 @@ Zeige, dass es dann eine Abbildung $f^\prime:\|A\|\to B$ gibt, sodass das folgen
   \[((M,\cdot,e) =_{\mathrm{Mon}} (N,\cdot,e)) \simeq \Iso((M,\cdot,e),(N,\cdot,e))\]
 
 \aufgabe{}
+Zeige, dass der punktierte Typ \(\Tors{G}\) der \(G\)-Torsoren einer Gruppe \(G\) zusammenhängend ist.
+
+\aufgabe{}
+  Sei \(G\) eine Gruppe, \((BG,\ast)\) eine Entschleifung von \(G\) und $t:G\to \Omega(BG)$ ein Isomorphismus.
+  Es bezeichne \(G\text{-}\Set\) den Typ der \(G\)-Mengen.
+  \begin{enumerate}
+  \item Zeige, dass
+    \begin{align*}
+      d:(BG\to \Set)\to G\text{-}\Set
+      d(\rho)\colonequiv (\rho(\ast),g\mapsto \transp_\rho(t(g)))
+    \end{align*}
+    eine Äquivalenz ist.
+  \item Sei $\rho:BG\to\Set$. Zeige, dass dann für $M\colonequiv \pi_1(d(\rho))$, $\_\cdot\_\colonequiv \pi_2(d(\rho)):G\to M\to M$ gilt:
+    \[
+    \left(\prod_{x:BG}\rho(x)\right) \simeq \sum_{m:M}\prod_{g:G}g\cdot m=m
+    \]
+  \item Sei $\rho:BG\to\Set$ und wie oben eine entsprechende Operation $\_\cdot\_:G\to M\to M$ gegeben.
+    Dann gilt für $Q\colonequiv (x:BG)\times \rho(x)$ und $m:M$, dass $(\ast,m)=(\ast,m)$ der Bahn von $m$ entspricht, also äquivalent ist zu $(m^\prime:M)\times \exists g:G. g\cdot m=m^\prime$.
+  \end{enumerate}
+
+\aufgabe{}
 \begin{enumerate}[(a)]
 \item Konstruiere $p:\id_{S^1}=\id_{S^1}$, sodass $p\neq \refl_\id$ gilt.
 Folgere, dass $S^1\simeq S^1$ keine Menge ist und ein Universum $\mU$, das $S^1$ enthält kein 1-Typ sein kann.
