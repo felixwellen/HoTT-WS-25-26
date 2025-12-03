@@ -1197,6 +1197,7 @@ Wir wollen zunächst sehen, wie sich Elimination in konstanten Typfamilien verh�
 \end{beweis}
 
 \begin{lemma}
+  \label{ua-transport-ap}
   Seien $A:\mU$ und $B:A\to \mU$.
   Für $p:x=y$ haben wir:
   \[
@@ -1282,13 +1283,60 @@ Die folgenden Konstruktion ist zwar nicht die allgemeinste, reicht aber für uns
   \[
     (n,k)+(m,l)\colonequiv (n+m,k+l)
   \]
-  eine Gruppe. Außerdem gilt: $\Z\simeq \N\sqcup \eins\sqcup \N$, $\Z$ zerfällt also in die positiven und negativen Zahlen und $(0,0)$.
+  eine Gruppe. Außerdem gilt: $\Z\simeq \N\sqcup \eins\sqcup \N$, $\Z$ zerfällt also in die positiven und negativen Zahlen und $(0,0)$ und wir können in Konstruktionen eine Fallunterscheidung machen, ob eine ganze Zahl positiv, negativ oder $0$ ist.
   Wir können die Nachfolgeroperation auf $\Z$ wie folgt fortsetzen:
   \[
     S((n,k))\colonequiv (S(n),k)
     \]
     $S:\Z\to\Z$ ist eine Äquivalenz, mit Inverser $P(n,k)\colonequiv (n,S(k))$.
+    Wir verwenden die übliche Schreibweise für ganze Zahlen.
 \end{bemerkung}
+
+\begin{definition}
+  Durch Fallunterscheidung auf positiv, negativ oder 0 und $\N$-Induktion können wir die folgende
+  Definition machen:
+  \begin{align*}
+    l^{k}\colonequiv \left\{ 
+    \begin{array}{ll}
+      k+1> 1, & l^k\kon l \\
+      1, & l \\
+      0, & \refl_\ast \\
+      -1, & l^{-1} \\
+      k-1<-1, & l^k\kon l^{-1} 
+    \end{array}
+    \right. 
+  \end{align*}
+\end{definition}
+
+\begin{lemma}
+  Die folgenden Aussagen nennen wir \begriff{einseitige Gleichheitsinduktion}.
+  Seien $A:\mU$ und $x:A$.
+  Für \[B:(y:A)\to x=y\to \mU\] und $r:(x:A)\to B(x,\refl_x)$ gibt es
+  \[
+    \elim_{=,B}^\prime(r):(y:A)\to (p:x=y)\to B(y,p)
+  \]
+  sodass $\elim_{=,B}^\prime(r)(x,\refl_x)\equiv r_x$.
+  Die analoge Aussage für Motive $B:(x:A)\to x=y\to \mU$ gilt ebenfalls.
+\end{lemma}
+
+\begin{beweis}
+  Wir wenden Gleichheitsinduktion auf folgendes Motiv an:
+  \[
+  C:(x,y : A)\to (p:x=y)\mapsto (D:(u : A)\to x = u\to \mU) \to D(x,\refl_x)\to D(y,p)
+  \]
+  und haben $D\mapsto \id_{B(x,\refl)}:C(x,x,\refl)$. Für die im Lemma gegebenen Daten setzen wir also
+  \[
+  \elim_{=,B}^\prime(r)\colonequiv y,p\mapsto \elim_{=,C}(D\mapsto \id_{D(x,\refl)})(x,y,p)(B)(r_x)
+  \]
+  und es gilt
+  \begin{align*}
+    \elim_{=,B}^\prime(r)(x,\refl_x)&\equiv\elim_{=,C}(D\mapsto \id_{D(x,\refl)})(x,x,\refl)(B)(r_x)\\
+    &\equiv(D\mapsto \id_{D(x,\refl)})(B)(r_x) \\
+    &\equiv\id_{B(x,\refl)}(r_x) \\
+    &\equiv r_x \\
+  \end{align*}
+  Der Beweis der analogen Aussage geht analog.
+\end{beweis}
 
 \begin{definition}
   \begin{enumerate}[(a)]
@@ -1306,9 +1354,63 @@ Die folgenden Konstruktion ist zwar nicht die allgemeinste, reicht aber für uns
   \end{enumerate}
 \end{definition}
 
+\begin{lemma}
+  Für alle $k:\Z$ gilt:
+  \[\omega(l^k)=k\rlap{.}\]
+\end{lemma}
+
+\begin{beweis}
+  Wir machen eine Fallunterscheidung, ob $k$, positiv, negativ oder $0$ ist. Im Fall von positiven und negative Zahlen beweisen wir per Induktion.
+\end{beweis}
+
 \begin{theorem}
   Die Windungszahl ist eine Äquivalenz:
   \[
     \omega:\Omega(S^1)\simeq \Z
-  \]
+    \]
+    mit Inverser $l^{(\_)}$.
+    Diese Äquivalenz setzt sich fort zu
+    \[
+      (x=_{S^1}\ast) \simeq C(x)
+      \]
+      für alle  $x:S^1$.
 \end{theorem}
+
+\begin{beweis}
+  Zunächst definieren wir für alle $x:S^1$ eine Abbildung
+  \[
+    \varphi_x : (x=_{S^1}\ast) \to C(x)
+  \]
+  Für Induktion über $x$, legen wir zunächst $\varphi_\ast(\ast)\colonequiv \omega$ fest und
+  müssen nun etwas in
+  \[\transp_{\_=\ast\to C(\_)}(l)(\omega)=\omega\]
+  konstruieren. Durch Berechnung des Transports links erhalten wir:
+  \[
+  \transp_C(l)\circ \omega \circ (l^{-1}\kon\_) =\omega\rlap{.}
+  \]
+  Nach Definition ist $\omega(p)=\transp_C(p)(0)$.
+  Insgesamt müssen wir also für jedes $p:\ast=\ast$ zeigen:
+  \[
+  \transp_C(l)(\transp_C(l^{-1}\kon p))=\transp_C(p)
+  \]
+  was wegen $\transp_C(l)\circ \transp_C(l^{-1})=\id$ gilt.
+
+  Für eine die Definition einer Abbildung $\psi_x:C(x)\to x=\ast$ durch Induktion über $x$ verwenden wir:
+  \[
+    l^{(\_)}:\Z\to \ast=_{S^1}\ast
+  \]
+  für den Fall $x\equiv\ast$.
+  Damit ist $\psi_\ast$ festgelegt und wir müssen noch konstruieren:
+  \[
+    \transp_{C(\_)\to\_=\ast}(l)(l^{(\_)})=l^{(\_)}
+    \]
+    Wir berechnen:
+    \begin{align*}
+      \transp_{C(\_)\to\_=\ast}(l)(l^{(\_)})&=\transp_{\_=\ast}(l)\circ l^{(\_)} \circ \transp_C(l)^{-1} \\
+      &=(l\kon\_)\circ l^{(\_)}\circ S^{-1} \\
+      &=l^{(\_)}
+    \end{align*}
+
+    Nun ergibt sich $\psi_x\circ\varphi_x\sim\id$ durch einseitige Gleichheitsinduktion und
+    damit dass $\varphi_x$ eine Äquivalenz ist durch $S^1$-Induktion.
+\end{beweis}
