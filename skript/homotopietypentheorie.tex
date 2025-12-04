@@ -1139,7 +1139,7 @@ Später werden wir noch weitere Möglichkeiten sehen solche 1-Typen zu konstruie
 
 
 \subsection{Höhere Induktive Typen (HITs)}
-Höhere induktive Typen haben neben Konstruktoren der Bauart, die wir bereits von den Induktiven Typen kennen, sogenannte \begriff{höhere Konstruktoren},
+Höhere induktive Typen haben neben Konstruktoren der Bauart, die wir bereits von den induktiven Typen kennen, sogenannte \begriff{höhere Konstruktoren},
 deren Werte in Gleichheitstypen des höheren induktiven Typs liegen.
 Zunächst betrachten wir den Typ $S¹$.
 Dieser hat wie der Typ $\eins$ einen Punkt-Konstruktor $\ast:S^1$ und zusätzlich einen höheren Konstruktor $l:\ast =_{S^1}\ast$.
@@ -1157,22 +1157,22 @@ Dieser hat wie der Typ $\eins$ einen Punkt-Konstruktor $\ast:S^1$ und zusätzlic
 Wir wollen zunächst sehen, wie sich Elimination in konstanten Typfamilien verhält.
 
 \begin{bemerkung}
-  Für einen Typen $A$, $a:A$ und $k:a=a$ haben wir $f\colonequiv \elim_{S^1}(a,k):S^1\to A$ sodass
+  Für $A : \mU$, $a:A$ und $k:a=a$ haben wir $f\colonequiv \elim_{S^1}(a,k):S^1\to A$ sodass
   $f(\ast)\equiv a$ und $\ap_f(l)=k$.
 \end{bemerkung}
 
 \begin{beweis}
-  Für $\ap_f(l)=k$ müssen wir zeigen: $\apd_{f}(l)=\ap_f(l)$, was per Induktion folgt.
+  Für $\ap_f(l)=k$ müssen wir $\apd_{f}(l)=\ap_f(l)$ zeigen, was per Induktion folgt.
 \end{beweis}
 
 \begin{lemma}
   Sei $A:\mU$. Es gilt
   \[
-    (S^1\to A) \simeq (a:A)\times (a=a)
+    (S^1\to A) \simeq (a:A)\times (a=a).
   \]
-  Wenn $A$ punktiert ist gilt:
+  Wenn $A$ punktiert ist gilt
   \[
-    (S^1\to_\ast A)\simeq_\ast \Omega(A,\ast)
+    (S^1\to_\ast A)\simeq_\ast \Omega(A,\ast).
   \]
 \end{lemma}
 
@@ -1185,6 +1185,7 @@ Wir wollen zunächst sehen, wie sich Elimination in konstanten Typfamilien verh�
   Für $\varphi\circ \psi\sim\id$ müssen wir prüfen, dass zwei Funktionen $f,g:S^1\to A$ bereits gleich sind, wenn $f(\ast)\equiv g(\ast)$ und $\ap_f(l)=\ap_g(l)$ gilt.
   Mit Funktionsextensionalität reicht es $(x:S^1)\to f(x)=g(x)$ zu zeigen, worauf wir $S^1$-Induktion anwenden.
   Damit ist zu zeigen: $\refl_{f(\ast)}:f(\ast)=g(\ast)$ und $\transp_{f(\_)=g(\_)}(l)(\refl_{f(\ast)})=\refl_{f(\ast)}$. Wenn wir den Transport berechnen ist das: $\ap_f(l)^{-1}\kon \refl\kon \ap_g(l)=\refl$. Also sind wir mit der Annahme $\ap_f(l)=\ap_g(l)$ fertig.
+
   Für die zweite Aussage berechnen wir:
   \begin{align*}
     (S^1\to_\ast A)&\equiv (f:S^1\to A)\times f(\ast)=\ast \\
@@ -1247,64 +1248,69 @@ Dazu brauchen wir die ganzen Zahlen $\Z$, welche wir als Quotient definieren wer
 Die folgenden Konstruktion ist zwar nicht die allgemeinste, reicht aber für unseren Zweck:
 
 \begin{lemma}
-  Sei $A:\Set$ und $\_\sim\_:A\to A\to \Prop$.\index{$A/\sim$}
+  Sei $A:\Set$ und $\_\sim\_:A\to A\to \Prop$.\index{$A/{\sim}$}
   Weiter sei $v:A\to A$ sodass gilt: $x\sim y\Leftrightarrow v(x)=v(y)$ und für alle $x:A$ ist $v(x)\sim x$ und $v(v(x))=v(x)$.
   Dann ist die Abbildung
   \[
-    [\_]:A\to A/\sim \colonequiv \sum_{x:A}v(x)=x
+    [\_]:A\to A/{\sim} \colonequiv \sum_{x:A}v(x)=x
     \]
-    surjektiv, wir haben $x\sim y\to [x]=[y]$ und es gilt folgendes Induktionsprinzip: Für $B:A/\sim\to \Set$ und $b:(a:A)\to B([a])$ sodass $x\sim y \to b(x)=b(y)$ gibt es $\elim_{/\sim,B}(b):(x:A/\sim )\to B(x)$.
-    Es gilt $\elim_{/\sim,B}(b)([a])\equiv b(a)$.
+    surjektiv, wir haben $x\sim y\to [x]=[y]$ und es gilt folgendes Induktionsprinzip: Für $B:A/{\sim}\to \Set$ und $b:(a:A)\to B([a])$ sodass $x\sim y \to b(x)=b(y)$ gibt es $\elim_{/{\sim},B}(b):(x:A/{\sim} )\to B(x)$.
+    Es gilt $\elim_{/{\sim},B}(b)([a])\equiv b(a)$.
 \end{lemma}
 
 \begin{beweis}
   Wir definieren $[x]\colonequiv v(x)$ wobei nach Voraussetzung $v(v(x))=v(x)$ gilt.
 
-  Seien $B:A/\sim \to \Set$ und $b:(x:A)\to B([x])$ mit $x\sim y \to b(x)=b(y)$.
-  Sei weiter $x:A/\sim$. Rest kommt noch.
+  Seien $B:A/{\sim} \to \Set$ und $b:(x:A)\to B([x])$ mit $x\sim y \to b(x)=b(y)$.
+  Sei weiter $x:A/{\sim}$. Rest kommt noch.
 \end{beweis}
 
 \begin{definition}
-  Der Typ $\Z$\index{$\Z$} ist gegeben durch $\N\times \N/\sim$, wobei
+  Der Typ $\Z$\index{$\Z$} ist gegeben durch $\N\times \N/{\sim}$, wobei
   \[
     (r,k)\sim (m,l) \colonequiv r+l=m+k
   \]
-  und $n:\N\to\N$ gegeben ist durch
+  und $v:\N\times\N \to \N\times\N$ gegeben ist durch:
   \begin{align*}
-    & v(0,0)\colonequiv (0,0) \\
+    & v(0,k)\colonequiv (0,k) \\
     & v(S(r),0)\colonequiv (S(r),0) \\
-    & v(0,S(k))\colonequiv (0,S(k)) \\
-    & v(S(r),S(k))\colonequiv v(r,k)    
+    % & v(0,S(k))\colonequiv (0,S(k)) \\
+    & v(S(r),S(k))\colonequiv v(r,k)
   \end{align*}
 \end{definition}
 
 \begin{bemerkung}
-  $\Z$ ist mit der Addition:
-  \[
-    (n,k)+(m,l)\colonequiv (n+m,k+l)
-  \]
-  eine Gruppe. Außerdem gilt: $\Z\simeq \N\sqcup \eins\sqcup \N$, $\Z$ zerfällt also in die positiven und negativen Zahlen und $(0,0)$ und wir können in Konstruktionen eine Fallunterscheidung machen, ob eine ganze Zahl positiv, negativ oder $0$ ist.
-  Wir können die Nachfolgeroperation auf $\Z$ wie folgt fortsetzen:
-  \[
-    S((n,k))\colonequiv (S(n),k)
-    \]
-    $S:\Z\to\Z$ ist eine Äquivalenz, mit Inverser $P(n,k)\colonequiv (n,S(k))$.
-    Wir verwenden die übliche Schreibweise für ganze Zahlen.
+  \begin{enumerate}
+    \item
+      Die Nachfolgeroperation von \(\N\) lässt sich auf $\Z$ wie folgt fortsetzen:
+      \[ S((n,k))\colonequiv (S(n),k) \]
+      Dann ist $S:\Z\to\Z$ eine Äquivalenz, mit Inverser $P(n,k)\colonequiv (n,S(k))$.
+    \item
+      Es ist $\Z$ ist mit der Addition
+      \[ (n,k)+(m,l)\colonequiv (n+m,k+l) \]
+      eine Gruppe mit neutralem Element \((0,0)\) und Inversem \(-(n,k) \colonequiv (k,n)\).
+    \item
+      Außerdem gilt, dass $\Z\simeq \N\sqcup \eins\sqcup \N$, also zerfällt $\Z$ in die positiven Zahlen, $(0,0)$ und die negativen Zahlen.
+      Wir können daher in Konstruktionen eine Fallunterscheidung machen, ob eine ganze Zahl positiv, negativ oder die Null ist.
+  \end{enumerate}
 \end{bemerkung}
+
+Ab sofort verwenden wir die übliche Schreibweise für ganze Zahlen.
 
 \begin{definition}
   Durch Fallunterscheidung auf positiv, negativ oder 0 und $\N$-Induktion können wir die folgende
   Definition machen:
   \begin{align*}
-    l^{k}\colonequiv \left\{ 
-    \begin{array}{ll}
-      k+1> 1, & l^k\kon l \\
-      1, & l \\
-      0, & \refl_\ast \\
-      -1, & l^{-1} \\
-      k-1<-1, & l^k\kon l^{-1} 
-    \end{array}
-    \right. 
+    l^{n}\colonequiv 
+    \begin{cases}
+      l^{k} \kon l, & n \equiv k+1 \text{ mit $k$ positiv} \\
+      % k+1> 1, & l^k\kon l \\
+      l, & n \equiv 1 \\
+      \refl_\ast, & n \equiv 0 \\
+      l^{-1}, & n \equiv -1 \\
+      l^k\kon l^{-1}, & n \equiv k-1 \text{ mit $k$ negativ} 
+      % k-1<-1, & l^k\kon l^{-1} 
+    \end{cases}
   \end{align*}
 \end{definition}
 
