@@ -1355,12 +1355,22 @@ Die folgenden Konstruktion ist zwar nicht die allgemeinste, reicht aber für uns
 \end{definition}
 
 \begin{lemma}
+  \label{windungszahl-exponentiation}
   Für alle $k:\Z$ gilt:
   \[\omega(l^k)=k\rlap{.}\]
 \end{lemma}
 
 \begin{beweis}
   Wir machen eine Fallunterscheidung, ob $k$, positiv, negativ oder $0$ ist. Im Fall von positiven und negative Zahlen beweisen wir per Induktion.
+\end{beweis}
+
+\begin{bemerkung}
+  Sei $P:S^1\to\Prop$.
+  Dann gilt $(x:S^1)\to P(x)$ bereits, wenn $P(\ast)$ gilt.
+\end{bemerkung}
+
+\begin{beweis}
+  Induktion über $x$.
 \end{beweis}
 
 \begin{theorem}
@@ -1371,7 +1381,7 @@ Die folgenden Konstruktion ist zwar nicht die allgemeinste, reicht aber für uns
     mit Inverser $l^{(\_)}$.
     Diese Äquivalenz setzt sich fort zu
     \[
-      (x=_{S^1}\ast) \simeq C(x)
+      (\ast=_{S^1}x) \simeq C(x)
       \]
       für alle  $x:S^1$.
 \end{theorem}
@@ -1379,38 +1389,38 @@ Die folgenden Konstruktion ist zwar nicht die allgemeinste, reicht aber für uns
 \begin{beweis}
   Zunächst definieren wir für alle $x:S^1$ eine Abbildung
   \[
-    \varphi_x : (x=_{S^1}\ast) \to C(x)
+    \varphi_x : (\ast=_{S^1}x) \to C(x)
   \]
   Für Induktion über $x$, legen wir zunächst $\varphi_\ast(\ast)\colonequiv \omega$ fest und
   müssen nun etwas in
-  \[\transp_{\_=\ast\to C(\_)}(l)(\omega)=\omega\]
+  \[\transp_{\ast=\_\to C(\_)}(l)(\omega)=\omega\]
   konstruieren. Durch Berechnung des Transports links erhalten wir:
   \[
-  \transp_C(l)\circ \omega \circ (l^{-1}\kon\_) =\omega\rlap{.}
+  \transp_C(l)\circ \omega \circ (\_\kon l^{-1}) =\omega\rlap{.}
   \]
   Nach Definition ist $\omega(p)=\transp_C(p)(0)$.
   Insgesamt müssen wir also für jedes $p:\ast=\ast$ zeigen:
   \[
-  \transp_C(l)(\transp_C(l^{-1}\kon p))=\transp_C(p)
+  \transp_C(l)(\transp_C(p\kon l^{-1}))=\transp_C(p)
   \]
   was wegen $\transp_C(l)\circ \transp_C(l^{-1})=\id$ gilt.
 
-  Für eine die Definition einer Abbildung $\psi_x:C(x)\to x=\ast$ durch Induktion über $x$ verwenden wir:
+  Für die Definition einer Abbildung $\psi_x:C(x)\to \ast=x$ durch Induktion über $x$ verwenden wir:
   \[
     l^{(\_)}:\Z\to \ast=_{S^1}\ast
   \]
   für den Fall $x\equiv\ast$.
   Damit ist $\psi_\ast$ festgelegt und wir müssen noch konstruieren:
   \[
-    \transp_{C(\_)\to\_=\ast}(l)(l^{(\_)})=l^{(\_)}
+    \transp_{C(\_)\to\ast=\_}(l)(l^{(\_)})=l^{(\_)}
     \]
     Wir berechnen:
     \begin{align*}
-      \transp_{C(\_)\to\_=\ast}(l)(l^{(\_)})&=\transp_{\_=\ast}(l)\circ l^{(\_)} \circ \transp_C(l)^{-1} \\
-      &=(l\kon\_)\circ l^{(\_)}\circ S^{-1} \\
+      \transp_{C(\_)\to\ast=\_}(l)(l^{(\_)})&=\transp_{\ast=\_}(l)\circ l^{(\_)} \circ \transp_C(l)^{-1} \\
+      &=(\_\kon l)\circ l^{(\_)}\circ S^{-1} \\
       &=l^{(\_)}
     \end{align*}
 
     Nun ergibt sich $\psi_x\circ\varphi_x\sim\id$ durch einseitige Gleichheitsinduktion und
-    damit dass $\varphi_x$ eine Äquivalenz ist durch $S^1$-Induktion.
+    damit dass $\varphi_x$ eine Äquivalenz ist durch \Cref{windungszahl-exponentiation} $S^1$-Induktion.
 \end{beweis}
