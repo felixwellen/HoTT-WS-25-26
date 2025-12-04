@@ -1430,3 +1430,18 @@ Ab sofort verwenden wir die übliche Schreibweise für ganze Zahlen.
     Nun ergibt sich $\psi_x\circ\varphi_x\sim\id$ durch einseitige Gleichheitsinduktion und
     damit dass $\varphi_x$ eine Äquivalenz ist durch \Cref{windungszahl-exponentiation} $S^1$-Induktion.
 \end{beweis}
+
+\begin{regeln}
+  Sei $A:\mU$.
+  \begin{itemize}
+  \item Es gibt den Typ $\Sigma A\equiv\mathrm{Susp}(A)$, die \begriff{Suspension} oder \begriff{Einhängung} von $A$.\index{$\Sigma A$}\index{$\mathrm{Susp}(A)$}.
+  \item Es gibt $N:\Sigma A$, $S:\Sigma A$ und für jedes $a:A$ einen Meridian $m(a):N=S$.
+  \item Sei $B:\Sigma A\to \mU$. Für $b_N:B(N)$, $b_S:B(S)$ und $b_m:(a:A)\to \transp_B(m(a))(b_N)=b_S$
+    gibt es $\elim_{\Sigma,B}(b_N,b_S,b_m):(x:\Sigma A)\to B(x)$
+  \item sodass gilt $\elim_{\Sigma,B}(b_N,b_S,b_m)(N)\equiv b_N$, $\elim_{\Sigma,B}(b_N,b_S,b_m)(S)\equiv b_S$ und $\apd_{\elim_{\Sigma,B}(b_N,b_S,b_m)}(m(a))= b_{m(a)}$.
+  \end{itemize}
+\end{regeln}
+
+\begin{lemma}
+  Für $A,B:\mU$ gilt $(\Sigma A\to B)\simeq (b_N,b_s:B)\times (A\to b_N=b_s)$.
+\end{lemma}
