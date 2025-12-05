@@ -1442,6 +1442,68 @@ Ab sofort verwenden wir die übliche Schreibweise für ganze Zahlen.
   \end{itemize}
 \end{regeln}
 
+Wir betrachten $\Sigma A$ als durch $N$ punktierten Typ.
+
 \begin{lemma}
-  Für $A,B:\mU$ gilt $(\Sigma A\to B)\simeq (b_N,b_s:B)\times (A\to b_N=b_s)$.
+  Für $A,B:\mU$ gilt $(\Sigma A\to B)\simeq (b_N,b_S:B)\times (A\to b_N=b_S)$.
 \end{lemma}
+
+\begin{beispiel}
+  \begin{enumerate}
+  \item $\Sigma \emptyset\simeq \zwei$
+  \item $\Sigma\eins\simeq \eins$
+  \item $\Sigma\zwei\simeq S^1$
+  \end{enumerate}
+\end{beispiel}
+
+\begin{lemma}
+  Seinen $A,B$ punktierte Typen. Dann gilt:
+  \[
+    (\Sigma A\to_\ast B)\simeq (A\to_\ast \Omega(B))\rlap{.}
+  \]
+\end{lemma}
+
+\begin{definition}
+  Sei $A$ punktierter Typ.
+  \begin{enumerate}
+  \item $\Sigma^n A$ ist induktiv gegeben durch $\Sigma^0 A\colonequiv A$ und $\Sigma^{k+1}A\colonequiv \Sigma(\Sigma^k A)$.
+  \item $\Omega^n A$ ist induktiv gegeben durch $\Omega^0 A\colonequiv A$ und $\Omega^{k+1}A\colonequiv \Omega(\Omega^k A)$.
+  \item Für einen Homotopielevel $n\geq -1$ ist die \begriff{$n$-Sphäre} gegeben durch $S^n\colonequiv\Sigma^{n+1}\emptyset$.\index{$S^n$}
+  \end{enumerate}
+\end{definition}
+
+\begin{bemerkung}
+  Sei $A$ punktiert, dann gilt:
+  $(S^n\to_\ast A)\simeq \Omega(A)$
+\end{bemerkung}
+
+\begin{lemma}
+  \label{suspension-aussage}
+  Sei $A$ punktierter Typ und $P:(x:\Sigma A)\to \Prop$.
+  Dann gilt $(x:\Sigma A)\to P(x)$ bereits wenn nur $P(N)$ gilt.
+\end{lemma}
+
+\begin{beweis}
+  Sei $p_N:P(N)$. Wir verwenden Induktion über $x:\Sigma A$.
+  Für $x\equiv N$ haben wir $p_N:P(N)$ und für $x\equiv S$ haben wir $p_S\colonequiv \transp_P(m(\ast))(p_N):P(S)$.
+  Nun gibt es für alle $a:A$ etwas in $\transp_P(m(a))(p_N)=_{P(S)}p_S$, da $P(S)$ eine Aussage ist.
+\end{beweis}
+
+\begin{bemerkung}
+  Für $n>0$ ist $S^n$ ein punktierter, zusammenhängender Typ.
+\end{bemerkung}
+
+\begin{beweis}
+  \Cref{suspension-aussage}
+\end{beweis}
+
+\begin{lemma}
+  Sei $n\geq -2$ ein beliebiger Homotopielevel.
+  $A$ ist genau dann ein $n$-Typ, wenn
+  \begin{align*}
+    &\mathrm{const}:A\to (S^{n+1}\to A) \\
+    &\mathrm{const}(a)\colonequiv x\mapsto a
+  \end{align*}
+  eine Äquivalenz ist.
+\end{lemma}
+
