@@ -1445,23 +1445,84 @@ Ab sofort verwenden wir die übliche Schreibweise für ganze Zahlen.
 Wir betrachten $\Sigma A$ als durch $N$ punktierten Typ.
 
 \begin{lemma}
+  \label{suspension-eindeutigkeitsprinzip}
   Für $A,B:\mU$ gilt $(\Sigma A\to B)\simeq (b_N,b_S:B)\times (A\to b_N=b_S)$.
 \end{lemma}
+
+\begin{beweis}
+  Wir definieren dazu Abbildungen in beide Richtungen.
+  \begin{align*}
+    &\varphi : (\Sigma A\to B)\to (b_N,b_S:B)\times (A\to b_N=b_S) \\
+    &\varphi(f) \colonequiv (f(N),f(S),a\mapsto \ap_f(m(a)))
+  \end{align*}
+  und
+  \begin{align*}
+    &\psi : (b_N,b_S:B)\times (A\to b_N=b_S)\to (\Sigma A\to B) \\
+    &\psi(b_N,b_S,b_m) \colonequiv \elim_{\Sigma,\_\mapsto B}(b_N,b_S,b_m)\rlap{.}
+  \end{align*}
+  Durch die Berechnungsregel von $\Sigma$ gilt $\varphi\circ\psi\sim\id$.
+  Wir zeigen $\psi\circ\varphi\sim\id$ durch $\Sigma$-Induktion mit Motiv:
+  \[
+  C(x:\Sigma A)\colonequiv \elim_\Sigma(f(N),f(S),a\mapsto \ap_f(m(a)))(x)=f(x)
+  \]
+  Die Fälle $x\equiv N$ und $x\equiv S$ sind durch $\refl_{f(N)}$ und $\refl_{f(S)}$ gegeben.
+  Es ist also noch zu zeigen, dass für alle $a:A$ gilt:
+  \[
+  \transp_{C}(m(a))(\refl_{f(N)})=\refl_{f(S)}
+  \]
+  Die linke Seite berechnet sich zu: $\ap_{\elim_\Sigma(f(N),f(S),a\mapsto \ap_f(m(a)))}(m(a))^{-1}\kon\refl_{f(N)}\kon m(a)=\refl_{f(S)}$ und gilt also, wegen $\ap_{\elim_\Sigma(f(N),f(S),a\mapsto \ap_f(m(a)))}(m(a))^{-1}=m(a)^{-1}$.
+\end{beweis}
 
 \begin{beispiel}
   \begin{enumerate}
   \item $\Sigma \emptyset\simeq \zwei$
-  \item $\Sigma\eins\simeq \eins$
-  \item $\Sigma\zwei\simeq S^1$
+  \item $\Sigma\eins\simeq \eins$, denn $\Sigma \eins$ ist dem Intervall sehr ähnlich und ebenfalls kontrahierbar.
+    Um das zu sehen, beweisen wir $(x:\Sigma)\to N=x$ durch $\Sigma$-Induktion.
+    Im Fall $x\equiv N$ haben wir $\refl_N:N=N$, im Fall $x\equiv S$ haben wir $m(\ast):N=S$.
+    Nun müssen wir etwas in $\transp_{N=\_}(m(\ast))(\refl_N)=m(\ast)$ konstruieren.
+    Das geht, weil der Transport sich zu $\refl_N\kon m(\ast)$ berechnet.
+  \item $\Sigma\zwei\simeq S^1$. Dazu definieren wir Abbildungen:
+    \begin{align*}
+      &\psi:S^1\to\Sigma\zwei &\varphi: \Sigma\zwei\to S^1 \\
+      &\psi(\ast)\colonequiv N &\varphi(N)\colonequiv \ast \\
+      &\psi(l)\colonequiv m(0)\kon m(1)^{-1} &\varphi(S)\colonequiv \ast \\
+      & &\varphi(m(0))\coloneq l \\
+      & &\varphi(m(1))\coloneq \refl_\ast
+    \end{align*}
+    Wir beginnen mit $\varphi\circ\psi\sim\id$. Für $x\equiv\ast$ haben wir $\refl_\ast:\varphi(\psi(\ast))=\ast$. Nun müssen wir zeigen: $\transp_{\varphi(\psi\_)=\_}(l)(\refl_\ast)=\refl_\ast$. Die linke Seite ist $\varphi(\psi(l))^{-1}\kon\refl_\ast\kon l=\varphi(m(0)\kon m(1)^{-1})^{-1}\kon\refl\kon l=l^{-1}\kon\refl\kon l=\refl$.
+
+    Nun: $\psi\circ\varphi\sim\id$ per Induktion über $x:\Sigma\zwei$.
+    Im Fall $x\equiv N$ haben wir $\refl_N:\psi(\varphi(N))=N$
+    und im Fall $x\equiv S$ wählen wir $m(1):\psi(\varphi(S))=S$.
+    Durch Berechnung ergeben sich die zwei noch nötigen Gleichheiten:
+    \begin{align*}
+      &\transp_{\psi(\varphi\_)=\_}(m(0))(\refl_N)=\psi(\varphi(m(0)))^{-1}\kon\refl_N\kon m(0)=(m(0)\kon m(1))^{-1}\kon m(1) =m(1) \\
+      &\transp_{\psi(\varphi\_)=\_}(m(1))(\refl_N)=\psi(\varphi(m(1)))^{-1}\kon\refl_N\kon m(1)\refl_N\kon\refl_N\kon m(1)=m(1)
+    \end{align*}
   \end{enumerate}
 \end{beispiel}
 
 \begin{lemma}
+  \label{suspension-schleifenraum-equiv}
   Seinen $A,B$ punktierte Typen. Dann gilt:
   \[
     (\Sigma A\to_\ast B)\simeq (A\to_\ast \Omega(B))\rlap{.}
   \]
 \end{lemma}
+
+\begin{beweis}
+  Wir verwenden \Cref{suspension-eindeutigkeitsprinzip} für die erste Äquivalenz.
+  \begin{align*}
+    (\Sigma A\to_\ast B)&\equiv (f:\Sigma A\to B)\times (f(N)=\ast) \\
+    &\simeq ((b_N,b_S,b_m):(b_N,b_S:B)\times (A\to b_N=b_S))\times (b_N=\ast) \\
+    &\simeq (b_N:B)\times (b_N=\ast)\times (b_S:B)\times (A\to b_N=b_S) \\
+    &\simeq (b_S:B)\times (A\to \ast=b_S) \\
+    &\simeq (b_S:B)\times (f:A\to \ast=b_S) \times (q:\ast=b_S) \times (f(\ast)=q) \\
+    &\simeq (b_S:B)\times (q:\ast=b_S) \times (f:A\to \ast=b_S) \times (f(\ast)=q) \\
+    &\simeq (f:A\to \ast=\ast) \times (f(\ast)=\refl_\ast) \\
+    &\equiv (A\to_\ast \Omega(B))
+  \end{align*}
+\end{beweis}
 
 \begin{definition}
   Sei $A$ punktierter Typ.
@@ -1473,12 +1534,23 @@ Wir betrachten $\Sigma A$ als durch $N$ punktierten Typ.
 \end{definition}
 
 \begin{bemerkung}
-  Sei $A$ punktiert, dann gilt:
-  $(S^n\to_\ast A)\simeq \Omega(A)$
+  Sei $A$ punktiert und $n\geq 0$, dann gilt:
+  $(S^n\to_\ast A)\simeq \Omega^n(A)$
 \end{bemerkung}
 
+\begin{beweis}
+  Iterierte Anwendung von \Cref{suspension-schleifenraum-equiv} liefert:
+  \[
+  (S^n\to_\ast A)\equiv (\Sigma^n\zwei\to_\ast A) \simeq (\zwei\to_\ast\Omega^n(A))
+  \]
+  und
+  \[
+  (\zwei\to_\ast\Omega^n(A))\simeq ((x,y:\Omega^n(A))\times (x=\refl_\ast))\simeq \Omega^n(A)
+  \]
+\end{beweis}
+
 \begin{lemma}
-  \label{suspension-aussage}
+  \label{suspension-aussagenfamilie}
   Sei $A$ punktierter Typ und $P:(x:\Sigma A)\to \Prop$.
   Dann gilt $(x:\Sigma A)\to P(x)$ bereits wenn nur $P(N)$ gilt.
 \end{lemma}
@@ -1494,7 +1566,7 @@ Wir betrachten $\Sigma A$ als durch $N$ punktierten Typ.
 \end{bemerkung}
 
 \begin{beweis}
-  \Cref{suspension-aussage}
+  \Cref{suspension-aussagenfamilie}
 \end{beweis}
 
 \begin{lemma}
@@ -1507,3 +1579,26 @@ Wir betrachten $\Sigma A$ als durch $N$ punktierten Typ.
   eine Äquivalenz ist.
 \end{lemma}
 
+\begin{beweis}
+  Sei $n\equiv -2$. Dann ist $(S^{n+1}\to A )\equiv (\emptyset\to A )\simeq \eins$.
+  Also stimmt die Behauptung.
+
+  Für $n\equiv k+1$ haben wir nach \Cref{suspension-eindeutigkeitsprinzip}:
+  \[ (S^{k+2}\to A) \simeq ((x,y:A)\times (S^{k+1}\to x=y))\]
+  und die Komposition von $\mathrm{const}$ mit dieser Äquivalenz liefert eine Abbildung
+  \begin{align*}
+    &\mathrm{const}^\prime : A\to ((x,y:A)\times (S^{k+1}\to x=y)) \\
+    &\mathrm{const}^\prime(a)\colonequiv (a,a,\mathrm{const} \refl_a)
+  \end{align*}
+  wegen 2-aus-3 für Äquivalenzen reicht es zu zeigen, dass diese Abbildung eine Äquivalenz ist, genau dann wenn $A$ ein $n$-Typ ist.
+  $\const^\prime$ hat $\pi_1$ als Linksinverse.
+  Es reicht also zu zeigen, dass $\pi_1$ genau dann eine Äquivalenz ist, wenn $A$ ein $n$-Typ ist.
+  Die Faser von $\pi_1$ ist
+  \[
+  C_x\colonequiv (y:A)\times (S^{k+1}\to x=y)
+  \]
+  und wir können den Gleichheitssatz anwenden, um zu sehen dass $C_x$ genau dann kontrahierbar ist,
+  wenn $\const:x=y\to (S^{k+1}\to x=y)$ eine Äquivalenz ist.
+  Das ist aber nach Induktionshypothese dazu äquivalent, dass jedes $x=y$ ein $k$-Typ ist,
+  also äquivalent dazu, dass $A$ ein $(k+1)$-Typ ist.
+\end{beweis}
