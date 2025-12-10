@@ -1570,6 +1570,7 @@ Wir betrachten $\Sigma A$ als durch $N$ punktierten Typ.
 \end{beweis}
 
 \begin{lemma}
+  \label{n-typen-sind-Sn+1-null}
   Sei $n\geq -2$ ein beliebiger Homotopielevel.
   $A$ ist genau dann ein $n$-Typ, wenn
   \begin{align*}
@@ -1601,4 +1602,184 @@ Wir betrachten $\Sigma A$ als durch $N$ punktierten Typ.
   wenn $\const:x=y\to (S^{k+1}\to x=y)$ eine Äquivalenz ist.
   Das ist aber nach Induktionshypothese dazu äquivalent, dass jedes $x=y$ ein $k$-Typ ist,
   also äquivalent dazu, dass $A$ ein $(k+1)$-Typ ist.
+\end{beweis}
+
+Ziel: Für beliebigen Typ \(A\) einen ``größten''/universellen \(n\)-Typ \(\|A\|_n\) konstruieren.
+Für \(n\equiv -1\) wollen wir die Veraussagung reproduzieren.
+Für \(n\equiv -2\) können wir stets \(\eins\) wählen.
+
+\begin{regeln}
+  Sei \(A\) ein Typ und \(n, n\geq -1\) ein Homotopielevel.
+  \begin{itemize}
+  \item Es gibt einen Typ \(\|A\|_n\), die \begriff{\(n\)-Abschneidung}\index{\(\|A\|_n\)} von \(A\).
+  \item Für jedes \(a:A\) gibt es \(|a|_n:\|A\|_n\).
+    Für jede Abbildung \(f:S^{n+1}\to \|A\|_n\) gibt es eine \emph{Nabe} \(n(f):\|A\|_n\)
+    und für jedes \(x:S^{n+1}\) eine \emph{Speiche} \(s(f,x):f(x)=n(f)\).
+  \item Sei \(B:\|A\|_n\to\mU\).
+    Für
+    \begin{itemize}
+    \item \(b:(a:A)\to B(|a|_n)\),
+    \item \(b_N:(f:S^{n+1}\to \|A\|_n)\to (r:(x:S^{n+1})\to B(f(x))) \to B(n(f))\) und
+    \item \(b_S:(f:S^{n+1}\to \|A\|_n)\to (r:(x:S^{n+1})\to B(f(x))) \to (x: S^{n+1})\to \transp_B(s(f,x))(r(x))=b_N(f,r)\)
+    \end{itemize}
+    gibt es \(\elim_{\|\_\|_n,B}^\prime(b,b_N,b_S):(x:\|A\|_n)\to B(x)\).
+  \item \dots sodass gilt: \(\elim_{\|\_\|_n,B}^\prime(b,b_N,b_S)(|a|_n)\equiv b(a)\) (Rest wird nicht gebraucht).
+  \end{itemize}
+ebraucht).
+\end{regeln}
+
+\begin{bemerkung}
+  Sei \(n\) Homotopielevel.
+  \(\|A\|_n\) ist \(n\)-Typ.
+\end{bemerkung}
+
+\begin{beweis}
+  Nach \Cref{n-typen-sind-Sn+1-null} reicht es zu zeigen: \(\const:\|A\|_n\to (S^{n+1}\to \|A\|_n))\) ist eine Äquivalenz.
+  Da \(S^{n+1}\) punktiert ist, ist \(\const\) eine Einbettung.
+  Es reicht also zu zeigen, dass \(\const\) surjektiv ist.
+  Und dazu reicht es zu zeigen, dass ein beliebiges \(f:S^{n+1}\to\|A\|_n\) homotop zu \(\const(n(f))\) ist. Genau das ist aber durch \(x\mapsto s(f,x):(x:S^{n+1})\to f(x)=n(f)\) gegeben.
+\end{beweis}
+
+\begin{lemma}
+  \label{abschneidungsinduktion}
+  Seien \(A:\mU\) und \(n\geq -2\) ein Homotopielevel.
+  Sei weiter \(B:\|A\|_n\to \mU\) sodass jedes \(B(x)\) ein \(n\)-Typ ist.
+  Für \(b:(a:A)\to B(|a|_n)\) gibt es \(\elim_{\|\_\|_n,B}:(x:A)\to B(x)\) sodass gilt:
+  \(\elim_{\|\_\|_n,B}(b)(|a|_n)\equiv b(a)\).
+  Wir sprechen auch von \begriff{\(\|\_\|_n\)-Induktion}.
+\end{lemma}
+
+\begin{beweis}
+  Sei \(n\geq -1\).
+  Wir müssen die beiden übrigen Daten aus dem Eliminator konstruieren.
+  Seien also \(f:S^{n+1}\to \|A\|_n\) und \(r:(x:S^{n+1})\to B(f(x))\) gegeben.
+  Wir haben für \(x:S^{n+1}\) stets \(\transp_B(s(f,x))(r(x)):B(n(f))\) und damit eine
+  Funktion \(S^{n+1}\to\|A\|_n\), die nach \Cref{n-typen-sind-Sn+1-null} konstant ist.
+  Es gibt also \(m:B(n(f))\) und \((x:S^{n+1})\to\transp_B(s(f,x))(r(x))=m \).
+  Das sind genau die Daten für den Eliminator.
+\end{beweis}
+
+\begin{lemma}
+  Seien \(A:\mU\), \(n\geq -2\) und \(B:\mU\) ein \(n\)-Typ.
+  Dann gibt es für jedes \(f:A\to B\) genau ein \(\elim_{\|\_\|_n}(f):\|A\|_n\to B\),
+  sodass
+  \begin{center}
+    \begin{tikzcd}
+      A\ar[r,"|\_|_n"]\ar[rd,"f",swap] & \|A\|_n\ar[d,dotted,"\elim(f)"] \\
+      & B
+    \end{tikzcd}
+  \end{center}
+  (definitional) kommutiert. Äquivalent kann das formuliert werden als:
+  Die Abbildung
+  \begin{align*}
+    (\|A\|_n\to B) &\to (A\to B) \\
+    g&\mapsto g\circ |\_|_n
+  \end{align*}
+  ist für alle \(n\)-Typen \(B\) eine Äquivalenz.
+\end{lemma}
+
+\begin{beweis}
+  Spezialisierung von \Cref{abschneidungsinduktion}.
+\end{beweis}
+
+\begin{definition}
+  Wir setzen \(\|\_\|_n\)\index{\(\|\_\|_n\)} auf Abbildungen fort.
+  Für \(f:A\to B\) ist \(\|f\|_n\) gegeben durch \(\elim_{\|\_\|_n}(|\_|_n\circ f):\|A\|_n\to \|B\|_n\).
+\end{definition}
+
+\begin{bemerkung}
+  \begin{enumerate}
+  \item Es gilt \(\|\id_A\|_n=\id_{\|A\|_n}\)
+  \item Für \(f:A\to B\) und \(g:B\to C\) gilt: \(\|g\circ f\|_n=\|g\|_n\circ\|f\|_n\).
+  \item Für alle \(f:A\to B\) per Berechnungsregel ein \(\eta_f:\|f\|_n\circ |\_|_n\sim |\_|_n\circ f\) gegeben, sodass also das folgende Quadrat kommutiert:
+    \begin{center}
+      \begin{tikzcd}
+        A\ar[r,"|\_|_n"]\ar[d,"f",swap] & \|A\|_n\ar[d,"\|A\|_n"] \\
+        B\ar[r,swap,"|\_|_n"] & \|B\|_n
+      \end{tikzcd}
+    \end{center}
+  \item Für \(f,g:A\to B\) und \(H:f\sim g\) gibt es \(\|H\|_n:\|f\|_n\sim\|g\|_n\) sodass gilt
+    \[|H|_n={\|H\|_n}_{|\_|_n}\]
+    bzw \(\|H\|_n(|x|_n)=\ap_{|\_|_n}(H_x)\).
+  \item Wenn \(f:A\simeq B\) eine Äquivalenz ist, dann ist auch \(\|f\|_n\) eine Äquivalenz.
+  \end{enumerate}
+\end{bemerkung}
+
+\begin{beweis}
+  \begin{enumerate}[(a)]
+  \item Per \(\|\_\|_n\)-Induktion und \(\|\id_A\|_n(|x|_n)=\elim(|\_|_n\circ \id_A)(|x|_n)\equiv |x|_n\)
+  \item Per Induktion reicht es zu zeigen:
+    \[\|g\circ f\|_n(|x|_n)=\|g\|_n\circ \|f\|_n(|x|_n)\]
+    Was das gleiche ist wie: \(|g(f(x))|_n=\|g\|_n(|f(x)|_n)=|g(f(x))|_n\)
+  \item 
+  \end{enumerate}
+\end{beweis}
+
+\begin{lemma}
+  \(A\) ist genau dann ein \(n\)-Typ, wenn \(|\_|_n:A\to \|A\|_n\) eine Äquivalenz ist.
+\end{lemma}
+
+\begin{beweis}
+  Wenn \(|\_|_n:A\simeq \|A\|_n\) gilt, dann ist \(A\) äquivalent zum \(n\)-Typ \(\|A\|_n\) und damit selbst ein \(n\)-Typ.
+  Sei nun \(A\) ein \(n\)-Typ.
+  Dann erhalten wir die folgenden Abbildungen:
+  \begin{center}
+    \begin{tikzcd}
+      A\ar[r]\ar[rd,"\id"] & \|A\|_n\ar[d,"\elim(\id)",dotted]\ar[rd,"\|\id\|_n",bend left=30] & \\
+      & A\ar[r] & \|A\|_n
+    \end{tikzcd}
+  \end{center}
+\end{beweis}
+
+\begin{lemma}
+  Sei \(f:A\to B\) und \(B\) ein \(n\)-Typ. Dann ist \(f=|\_|_n\) im Typ \(A^\prime:\mU)\times A\to A^\prime\), wenn die Abbildung
+  \begin{align*}
+    (B\to C) &\to (A\to C) \\
+    g&\mapsto g\circ f
+  \end{align*}
+  ist für alle \(n\)-Typen \(C\) eine Äquivalenz ist.
+\end{lemma}
+
+\begin{beweis}
+  Wie oben.
+\end{beweis}
+
+\begin{lemma}
+  Für Typen \(A,B\) gilt: Die kanonische Abbildung \(\|A\times B\|_n\to \|A\|_n\times \|B\|_n\) ist eine Äquivalenz.
+\end{lemma}
+
+\begin{beweis}
+  Für \(A,B\) ist \(\|A\|_n\times\|B\|_n\) ein \(n\)-Typ (weil \(n\)-Typen sogar unter \(\Sigma\) abgeschlossen sind). Die ``kanonische Abbildung'' ist die durch Induktion gegebene:
+  \begin{center}
+    \begin{tikzcd}
+      A\times B\ar[r,"|\_|_n"]\ar[rd,swap,"|\_|_n\times |\_|_n"] & \|A \times B\|_n\ar[d,dotted] \\
+      & \|A\|_n\times \|B\|_n
+    \end{tikzcd}
+  \end{center}
+  Damit können wir für \(n\)-Typen \(C\) berechnen:
+  \begin{align*}
+    \|A\times B\|_n\to C &\simeq A\times B\to C \\
+                         &\simeq A\to B\to C \\
+                         &\simeq A\to \|B\|_n\to C \\
+                         &\simeq \|A\|_n\to \|B\|_n\to C \\
+                         &\simeq \|A\|_n\times \|B\|_n \to C
+  \end{align*}
+\end{beweis}
+
+\begin{lemma}
+  Sei \(A\) ein Typ. Die kanonische Abbildung
+  \[\|x=_Ay\|_n\to |x|_{n+1}=|y|_{n+1}\]
+  ist eine Äquivalenz.
+\end{lemma}
+
+\begin{beweis}
+  Wir verwenden den Gleichheitssatz für die Famile:
+  \begin{align*}
+    &G:\|A\|_{n+1}\to \|A\|_{n+1}\to \nType{n} \\
+    &G(|x|,|y|)\colonequiv \|x=y\|_n
+  \end{align*}
+  Es ist also zu zeigen, dass \(x:\|A\|_{n+1})\times G(x,y)\) für jedes \(y\) eine Aussage ist.
+  Wir verwenden Induktion über \(y\) und \(x,x^\prime:\|A\|_{n+1}\). 
+  Für \(u,v:A\) mit \(p:|u|=|y|\) und \(q:|v|=|y|\) gibt es \(p\kon q^{-1}:|u|=|v|\) und es bleibt zu zeigen:
+  \[\transp_{\|\_=|y|\|_n}(p\kon q^{-1})(p)=q\]
 \end{beweis}
