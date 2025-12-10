@@ -1731,7 +1731,7 @@ ebraucht).
 \end{beweis}
 
 \begin{lemma}
-  Sei \(f:A\to B\) und \(B\) ein \(n\)-Typ. Dann ist \(B\simeq \|A\|_n\) und genauer \(f=|\_|_n\) im Typ \((A^\prime:\mU)\times A\to A^\prime\), wenn die Abbildung
+  Sei \(f:A\to B\) und \(B\) ein \(n\)-Typ. Dann ist die induzierte Abbildung \(\|A\|_n\to B\) genau dann eine Äquivalenz, wenn die Abbildung
   \begin{align*}
     (B\to C) &\to (A\to C) \\
     g&\mapsto g\circ f
@@ -1744,11 +1744,11 @@ ebraucht).
 \end{beweis}
 
 \begin{lemma}
-  Für Typen \(A,B\) gilt: Die kanonische Abbildung \(\|A\times B\|_n\to \|A\|_n\times \|B\|_n\) ist eine Äquivalenz.
+  Für Typen \(A,B\) gilt: Die induzierte Abbildung \(\|A\times B\|_n\to \|A\|_n\times \|B\|_n\) ist eine Äquivalenz.
 \end{lemma}
 
 \begin{beweis}
-  Für \(A,B\) ist \(\|A\|_n\times\|B\|_n\) ein \(n\)-Typ (weil \(n\)-Typen sogar unter \(\Sigma\) abgeschlossen sind). Die ``kanonische Abbildung'' ist die durch Induktion gegebene:
+  Für \(A,B\) ist \(\|A\|_n\times\|B\|_n\) ein \(n\)-Typ (weil \(n\)-Typen sogar unter \(\Sigma\) abgeschlossen sind). Die induzierte Abbildung ist die durch Induktion gegebene:
   \begin{center}
     \begin{tikzcd}
       A\times B\ar[r,"|\_|_n"]\ar[rd,swap,"|\_|_n\times |\_|_n"] & \|A \times B\|_n\ar[d,dotted] \\
@@ -1766,7 +1766,7 @@ ebraucht).
 \end{beweis}
 
 \begin{lemma}
-  Sei \(A\) ein Typ. Die kanonische Abbildung
+  Sei \(A\) ein Typ. Die induzierte Abbildung
   \[\|x=_Ay\|_n\to |x|_{n+1}=|y|_{n+1}\]
   ist eine Äquivalenz.
 \end{lemma}
