@@ -1634,7 +1634,7 @@ ebraucht).
 \end{bemerkung}
 
 \begin{beweis}
-  Nach \Cref{n-typen-sind-Sn+1-null} reicht es zu zeigen: \(\const:\|A\|_n\to (S^{n+1}\to \|A\|_n))\) ist eine Äquivalenz.
+  Nach \Cref{n-typen-sind-Sn+1-null} reicht es zu zeigen: \(\const:\|A\|_n\to (S^{n+1}\to \|A\|_n)\) ist eine Äquivalenz.
   Da \(S^{n+1}\) punktiert ist, ist \(\const\) eine Einbettung.
   Es reicht also zu zeigen, dass \(\const\) surjektiv ist.
   Und dazu reicht es zu zeigen, dass ein beliebiges \(f:S^{n+1}\to\|A\|_n\) homotop zu \(\const(n(f))\) ist. Genau das ist aber durch \(x\mapsto s(f,x):(x:S^{n+1})\to f(x)=n(f)\) gegeben.
@@ -1698,9 +1698,7 @@ ebraucht).
         B\ar[r,swap,"|\_|_n"] & \|B\|_n
       \end{tikzcd}
     \end{center}
-  \item Für \(f,g:A\to B\) und \(H:f\sim g\) gibt es \(\|H\|_n:\|f\|_n\sim\|g\|_n\) sodass gilt
-    \[|H|_n={\|H\|_n}_{|\_|_n}\]
-    bzw \(\|H\|_n(|x|_n)=\ap_{|\_|_n}(H_x)\).
+  \item Für \(f,g:A\to B\) und \(H:f\sim g\) gibt es \(\|H\|_n:\|f\|_n\sim\|g\|_n\).
   \item Wenn \(f:A\simeq B\) eine Äquivalenz ist, dann ist auch \(\|f\|_n\) eine Äquivalenz.
   \end{enumerate}
 \end{bemerkung}
@@ -1711,7 +1709,8 @@ ebraucht).
   \item Per Induktion reicht es zu zeigen:
     \[\|g\circ f\|_n(|x|_n)=\|g\|_n\circ \|f\|_n(|x|_n)\]
     Was das gleiche ist wie: \(|g(f(x))|_n=\|g\|_n(|f(x)|_n)=|g(f(x))|_n\)
-  \item 
+  \item Die nötigen Gleichheiten gelten definitional nach Definition von \(\|\_\|_n\).
+  \item Gleichheitsinduktion oder direkte Definition: \(\ap_{|\_|_n}\circ H\) (und Induktion).
   \end{enumerate}
 \end{beweis}
 
@@ -1732,7 +1731,7 @@ ebraucht).
 \end{beweis}
 
 \begin{lemma}
-  Sei \(f:A\to B\) und \(B\) ein \(n\)-Typ. Dann ist \(f=|\_|_n\) im Typ \(A^\prime:\mU)\times A\to A^\prime\), wenn die Abbildung
+  Sei \(f:A\to B\) und \(B\) ein \(n\)-Typ. Dann ist \(B\simeq \|A\|_n\) und genauer \(f=|\_|_n\) im Typ \((A^\prime:\mU)\times A\to A^\prime\), wenn die Abbildung
   \begin{align*}
     (B\to C) &\to (A\to C) \\
     g&\mapsto g\circ f
