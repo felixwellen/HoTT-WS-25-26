@@ -1,0 +1,45 @@
+
+\subsection{Homotopiegruppen}
+
+\begin{definition}
+  Sei \(A\) punktierter Typ und \(n:\N\).
+  Dann ist
+  \[\pi_n\colonequiv \|\Omega^n(A)\|_0\]
+  --- was wir für \(n\geq 1\) \begriff{\(n\)-te Homotopiegruppe}\index{\(\pi_n(A)\)} von \(A\) nennen.
+  Für eine punktierte Abbildung \(f:A\to_\ast B\), also \(f:A\to B\) mit \({p:f(\ast)=\ast}\)
+  ist \(\pi_n(f)\)\index{\(\pi_n(f)\)} gegeben durch
+  \begin{align*}
+    \pi_n(f):\pi_n(A)&\to \pi_n(B) \\
+    (l:\ast=_A\ast)&\mapsto p^{-1}\kon l\kon p
+  \end{align*}
+\end{definition}
+
+Um den Namen zu rechtfertigen, sollten wir zeigen, dass es sich bei den \(\pi_n(A)\) um Gruppen handelt.
+Tatsächlich ist \(\pi_n(A)\) für \(n\geq 2\) eine abelsche Gruppe, was wir zunächst als stärkeres Resultat für doppelte Schleifenräume zeigen und als Eckmann-Hilton Argument bekannt ist:
+
+\begin{lemma}
+  \label{eckmann-hilton}
+  Sei \(A\) punktiert. Für \(x,y:\Omega^2(A)\) haben wir \(x\kon y=y\kon x\).
+\end{lemma}
+
+\begin{beweis}
+  
+\end{beweis}
+
+\begin{bemerkung}
+  Sei \(A\) punktierter Typ.
+  \begin{enumerate}[(a)]
+  \item Für \(n\geq 1\) ist \(\pi_n(A)\) eine Gruppe mit der durch Konkatenation von Gleichheiten gegebenen Verknüpfung.
+  \item Für \(n\geq 2\) ist \(\pi_n(A)\) eine abelsche Gruppe\footnote{D.h.\ \(x\kon y=y\kon x\) für alle \(x,y\).}.
+  \item Sei \(f:A\to_\ast B\). Für \(n\geq 1\) ist \(\pi_n(f)\) ein Gruppenhomomorphismus.
+  \end{enumerate}
+\end{bemerkung}
+
+\begin{beweis}
+  \begin{enumerate}[(a)]
+  \item Wir haben die entsprechenden Gesetze bereits für allgemeine Identitätstypen \(x=y\) gezeigt.
+    Nun ist \(\|\Omega^n(A)\|_0\) eine Menge für \(x,y,z:|\Omega^n(A)\|_0\) gilt zum Beispiel Assoziativität per \(\|\_\|_0\)-Induktion und Andwenden von \(|\_|_0\) auf die entsprechende Gleichheit in \(\Omega^n(A)\).
+  \item \Cref{eckmann-hilton}.
+  \item \(f(s\kon t)=p^{-1}\kon s\kon t\kon p=p^{-1}\kon s\kon p\kon p^{-1}\kon t\kon p=f(s)\kon f(t)\)
+  \end{enumerate}
+\end{beweis}

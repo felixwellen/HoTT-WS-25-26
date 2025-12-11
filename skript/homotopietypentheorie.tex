@@ -1669,7 +1669,7 @@ ebraucht).
       & B
     \end{tikzcd}
   \end{center}
-  (definitional) kommutiert. Äquivalent kann das formuliert werden als:
+  definitional kommutiert. Äquivalent kann das formuliert werden als:
   Die Abbildung
   \begin{align*}
     (\|A\|_n\to B) &\to (A\to B) \\
@@ -1679,7 +1679,15 @@ ebraucht).
 \end{lemma}
 
 \begin{beweis}
-  Spezialisierung von \Cref{abschneidungsinduktion}.
+  Durch Spezialisierung von \Cref{abschneidungsinduktion}, bekommen wir eine Funktion \(\elim_{\|\_\|_n,\_\mapsto B}(f)\) und das Dreieck kommutiert definitional nach der Berechnungsregel. Falls es eine weitere Funktion \(g:\|A\|_n\to B\) mit \(p:g\circ |\_|_n = f\) gibt, dann haben wir \(g\circ |\_|_n= \elim(f)\circ  |\_|_n\) und damit per \(\|\_\|_n\)-Induktion bereits \(\elim_{\|\_\|_n}(x\mapsto \ap_{h\mapsto h(x)}(p)) : (x:\|A\|_n)\to g(x)=\elim(f)(x)\). Wir wollen aber auch, dass der Typ
+  \[
+    \sum_{g:\|A\|_n\to B}g\circ |\_|_n\sim f
+  \]
+  kontrahierbar ist --- das ist auch bis auf Äquivalenz die Faser der Abbildung \(\_\circ |\_|_n:(\|A\|_n\to B) \to (A\to B)\).
+  Seien also \(g,g^\prime:\|A\|_n\to B\), \(p:g\circ|\_|_n=f\) und \(q:g\circ|\_|_n=f\).
+  Zunächst haben wir für alle \(f,g,g^\prime\) durch \(\|\_\|_n\)-Induktion eine Funktion \(e:g\circ|\_|_n=g^\prime\circ|\_|_n\to g=g^\prime\). Damit ist noch zu zeigen:
+  \[\transp_{\_\circ|\_|_n=f}(e(p\kon q^{-1}))(p)=q\]
+  Mit einseitiger Gleichheitsinduktion können wir zeigen: \(\ap_{\_\circ|\_|_n=f}(e(s))=s\) für alle \(s:g^{\prime\prime}\circ|\_|_n=f\), wobei wir \(f\) als beweglich auffassen. Damit lässt sich der Transport oben auf der linken Seite wie gewohnt berechnen.
 \end{beweis}
 
 \begin{definition}
