@@ -9,21 +9,30 @@
 \blatt
 
 \aufgabe{}
+Zeige: Ein punktierter Typ \(A\) ist genau dann zusammenhängend, wenn \(\|A\|_0\) kontrahierbar ist.
+
+
+\aufgabe{}
 Für \(n\geq -1\) ist \(|\_|_n:A\to \|A\|_n\) surjektiv.
 
 \aufgabe{}
-Irgendwas mit \(S^n\)
-
-\aufgabe{}
-Irgendwas mit abhängigen summen und abschneidung --- zum Beispiel das:
-Sei \(B:\|A\|_n\to \mU\), dann gilt:
+Sei \(A : \mU\) und \(B : \|A\|_n \to \mU\). Zeige:
 \[\left\|\sum_{x:A}B(|x|_{n})\right\|_n\simeq \sum_{y:\|A\|_n}\|B(x)\|_n\]
-
-
+\emph{Hinweis: Vergleiche mit dem Beweis von \(\|A \times B\|_n \simeq \|A\|_n \times \|B\|_n\).}
 
 \aufgabe{}
-Mengenquotienten?
-Und ein bisschen \(\Z\)?
+Sei \((f,p_f) : (A,a) \to_\ast (B,b)\) eine punktierte Abbildung, also \(p_f : f(a) = b\).
+Wir definieren
+\begin{align*}
+  \Omega f & : \Omega A \to \Omega B \\
+  (\Omega f)(q) & \colonequiv p_f^{-1} \kon \ap_f(q) \kon p_f.
+\end{align*}
+% Außerdem sei \(p_{\Omega f} : p_f^{-1}\kon p_f = \refl_b\) gegeben (wie etwa in Lemma 1.5.10), sodass \((\Omega f,p_{\Omega f}) : \Omega A \to_\ast \Omega B\).
+Zeige: Sind \(A\) und \(B\) zusammenhängend, so ist \(f\) genau dann eine Äquivalenz, wenn \(\Omega f\) eine ist.
+\emph{Hinweis: Lemma 2.4.12.}
+
+\aufgabe{}
+Irgendwas mit \(S^n\)
 
 
 \end{document}
