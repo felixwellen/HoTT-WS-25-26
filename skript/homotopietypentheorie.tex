@@ -1139,8 +1139,10 @@ Später werden wir noch weitere Möglichkeiten sehen solche 1-Typen zu konstruie
 
 
 \subsection{Höhere Induktive Typen (HITs)}
-Höhere induktive Typen haben neben Konstruktoren der Bauart, die wir bereits von den induktiven Typen kennen, sogenannte \begriff{höhere Konstruktoren},
-deren Werte in Gleichheitstypen des höheren induktiven Typs liegen.
+Höhere induktive Typen haben neben Konstruktoren der Bauart, die wir bereits von den induktiven Typen kennen, sogenannte \begriff{höhere Konstruktoren}.
+Deren Werte liegen in Gleichheitstypen des höheren induktiven Typs.
+
+\subsubsection*{Der Kreis}
 Zunächst betrachten wir den Typ $S¹$.
 Dieser hat wie der Typ $\eins$ einen Punkt-Konstruktor $\ast:S^1$ und zusätzlich einen höheren Konstruktor $l:\ast =_{S^1}\ast$.
 
@@ -1380,16 +1382,12 @@ Ab sofort verwenden wir die übliche Schreibweise für ganze Zahlen.
 \end{beweis}
 
 \begin{theorem}
-  Die Windungszahl ist eine Äquivalenz:
-  \[
-    \omega:\Omega(S^1)\simeq \Z
-    \]
-    mit Inverser $l^{(\_)}$.
-    Diese Äquivalenz setzt sich fort zu
-    \[
-      (\ast=_{S^1}x) \simeq C(x)
-      \]
-      für alle  $x:S^1$.
+  Die Windungszahl ist eine Äquivalenz
+  \[ \omega:\Omega(S^1)\simeq \Z \]
+  mit Inverser $l^{(\_)}$.
+  Diese Äquivalenz setzt sich fort zu
+  \[ (\ast=_{S^1}x) \simeq C(x) \]
+  für alle  $x:S^1$.
 \end{theorem}
 
 \begin{beweis}
@@ -1431,13 +1429,16 @@ Ab sofort verwenden wir die übliche Schreibweise für ganze Zahlen.
     damit dass $\varphi_x$ eine Äquivalenz ist durch \Cref{windungszahl-exponentiation} $S^1$-Induktion.
 \end{beweis}
 
+
+\subsubsection*{Einhängungen}
+
 \begin{regeln}
   Sei $A:\mU$.
   \begin{itemize}
-  \item Es gibt den Typ $\Sigma A\equiv\mathrm{Susp}(A)$, die \begriff{Suspension} oder \begriff{Einhängung} von $A$.\index{$\Sigma A$}\index{$\mathrm{Susp}(A)$}.
+  \item Es gibt den Typ $\Sigma A\equiv\mathrm{Susp}(A)$, die \begriff{Suspension} oder \begriff{Einhängung} von $A$.\index{$\Sigma A$}\index{$\mathrm{Susp}(A)$}
   \item Es gibt $N:\Sigma A$, $S:\Sigma A$ und für jedes $a:A$ einen Meridian $m(a):N=S$.
   \item Sei $B:\Sigma A\to \mU$. Für $b_N:B(N)$, $b_S:B(S)$ und $b_m:(a:A)\to \transp_B(m(a))(b_N)=b_S$
-    gibt es $\elim_{\Sigma,B}(b_N,b_S,b_m):(x:\Sigma A)\to B(x)$
+    gibt es $\elim_{\Sigma,B}(b_N,b_S,b_m):(x:\Sigma A)\to B(x)$,
   \item sodass gilt $\elim_{\Sigma,B}(b_N,b_S,b_m)(N)\equiv b_N$, $\elim_{\Sigma,B}(b_N,b_S,b_m)(S)\equiv b_S$ und $\apd_{\elim_{\Sigma,B}(b_N,b_S,b_m)}(m(a))= b_{m(a)}$.
   \end{itemize}
 \end{regeln}
@@ -1566,7 +1567,7 @@ Wir betrachten $\Sigma A$ als durch $N$ punktierten Typ.
 \end{bemerkung}
 
 \begin{beweis}
-  \Cref{suspension-aussagenfamilie}
+  \Cref{suspension-aussagenfamilie}.
 \end{beweis}
 
 \begin{lemma}
@@ -1589,7 +1590,7 @@ Wir betrachten $\Sigma A$ als durch $N$ punktierten Typ.
   und die Komposition von $\mathrm{const}$ mit dieser Äquivalenz liefert eine Abbildung
   \begin{align*}
     &\mathrm{const}^\prime : A\to ((x,y:A)\times (S^{k+1}\to x=y)) \\
-    &\mathrm{const}^\prime(a)\colonequiv (a,a,\mathrm{const} \refl_a)
+    &\mathrm{const}^\prime(a)\colonequiv (a,a,\mathrm{const}(\refl_a))
   \end{align*}
   wegen 2-aus-3 für Äquivalenzen reicht es zu zeigen, dass diese Abbildung eine Äquivalenz ist, genau dann wenn $A$ ein $n$-Typ ist.
   $\const^\prime$ hat $\pi_1$ als Linksinverse.
@@ -1604,7 +1605,8 @@ Wir betrachten $\Sigma A$ als durch $N$ punktierten Typ.
   also äquivalent dazu, dass $A$ ein $(k+1)$-Typ ist.
 \end{beweis}
 
-Ziel: Für beliebigen Typ \(A\) einen ``größten''/universellen \(n\)-Typ \(\|A\|_n\) konstruieren.
+\subsubsection*{Abschneidungen}
+Das Ziel dieses Abschnittes ist es, für einen beliebigen Typ \(A\) einen ``größten''/universellen \(n\)-Typ \(\|A\|_n\) zu konstruieren.
 Für \(n\equiv -1\) wollen wir die Veraussagung reproduzieren.
 Für \(n\equiv -2\) können wir stets \(\eins\) wählen.
 
@@ -1625,7 +1627,6 @@ Für \(n\equiv -2\) können wir stets \(\eins\) wählen.
     gibt es \(\elim_{\|\_\|_n,B}^\prime(b,b_N,b_S):(x:\|A\|_n)\to B(x)\).
   \item \dots sodass gilt: \(\elim_{\|\_\|_n,B}^\prime(b,b_N,b_S)(|a|_n)\equiv b(a)\) (Rest wird nicht gebraucht).
   \end{itemize}
-ebraucht).
 \end{regeln}
 
 \begin{bemerkung}
