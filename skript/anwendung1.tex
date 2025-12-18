@@ -30,14 +30,34 @@ Tatsächlich ist \(\pi_n(A)\) für \(n\geq 2\) eine abelsche Gruppe, was wir zun
 \begin{beweis}
   Wir betrachten die folgenden Situation:
   \begin{center}
-    \begin{tikzcd}
-      & & \\
+    \begin{tikzcd}[nodes={row sep=1.4cm, column sep=1.6cm}]
       x\ar[r,bend left=50,swap,""{name=UL, below},"p"{above}]\ar[r,bend right=50,swap,""{name=DL, above},"q"{below}] & y\ar[r,bend left=50,swap,""{name=UR, below},"s"{above}]\ar[r,bend right=50,swap,""{name=DR, above},"t"{below}] & z \\
-      & &
       \arrow[Rightarrow, from=UL, to=DL, "\alpha"]
       \arrow[Rightarrow, from=UR, to=DR, "\beta"]
     \end{tikzcd}
   \end{center}
+  Wir wollen eine Operation \(\ast\) definieren, die aus diesem Datum eine vertikal konkatenierte Gleichheit von Gleichheiten macht, also etwas dieser Gestalt:
+  \begin{center}
+    \begin{tikzcd}[nodes={row sep=1.4cm, column sep=1.6cm}]
+      x\ar[r,bend left=50,swap,""{name=UL, below},"p\kon s"{above}]\ar[r,bend right=50,swap,""{name=DL, above},"q\kon t"{below}] & z \\
+      \arrow[Rightarrow, from=UL, to=DL, "\alpha\ast\beta"]
+    \end{tikzcd}
+  \end{center}
+  Dazu definieren wir zwei Operation, die eine Gleichheit links bzw.\ rechts an eine Gleichheit von Gleichheiten anhängt, mithilfe zweier Zeugen \(\mathrm{ru}(p):p\kon\refl=p\) und \(\mathrm{lu}(p):\refl\kon p=p\):
+  \begin{align*}
+    \_\kon_l\_ &: (p:x=y)\to s=t \to p\kon s=p\kon t \\
+    \refl\kon_l \beta&\colonequiv \mathrm{lu}(s)\kon\beta \kon\mathrm{lu}(t)^{-1}
+  \end{align*}
+  und 
+  \begin{align*}
+    \_\kon_r\_ &: p=q\to (s:y=z) \to p\kon s=q\kon s \\
+    \alpha\kon_r \refl&\colonequiv \mathrm{ru}(p)\kon\alpha \kon\mathrm{ru}(q)^{-1}
+  \end{align*}
+  Dann bekommen wir zwei Operation
+  \begin{align*}
+    \alpha\ast\beta&\colonequiv (\alpha\kon_r s) \kon (q\kon_l\beta) \\
+    \alpha\ast^\prime\beta&\colonequiv (p\kon_l\beta)\kon (\alpha\kon_r t)
+  \end{align*}
 \end{beweis}
 
 \begin{bemerkung}
@@ -55,21 +75,142 @@ Tatsächlich ist \(\pi_n(A)\) für \(n\geq 2\) eine abelsche Gruppe, was wir zun
   \item \Cref{eckmann-hilton}.
   \end{enumerate}
 \end{beweis}
-\rednote{Stand der Vorlesung.}
+
+\begin{beispiel}
+  \begin{enumerate}[(a)]
+  \item \(\pi_1(S^1)=\Z\)
+  \item \(\pi_1(\BAut_{\mU}(\zwei))=\zwei\)
+  \end{enumerate}
+\end{beispiel}
 
 \begin{definition}
-  Für eine punktierte Abbildung \(f:A\to_\ast B\), also \(f:A\to B\) mit \({p:f(\ast)=\ast}\)
-  ist \(\pi_n(f)\)\index{\(\pi_n(f)\)} gegeben durch
-  \begin{align*}
-    \pi_n(f):\pi_n(A)&\to \pi_n(B) \\
-    (l:\ast=_A\ast)&\mapsto p^{-1}\kon l\kon p
-  \end{align*}
+  Ein Typ \(A\) heißt \begriff{\(n\)-zusammenhängend}, wenn \(\|A\|_n\) kontrahierbar ist.
 \end{definition}
 
 \begin{bemerkung}
- Sei \(f:A\to_\ast B\). Für \(n\geq 1\) ist \(\pi_n(f)\) ein Gruppenhomomorphismus.
+  \begin{enumerate}[(a)]
+  \item Ein punktierter Typ \(A\) ist genau dann zusammenhängend, wenn \(A\) \(0\)-zusammenhängend ist.
+  \item Wenn ein Typ \(A\) \(n\)-zusammenhängend ist, dann ist \(A\) auch \(k\)-zusammenhängend, für alle \(k\leq n\).
+  \end{enumerate}
 \end{bemerkung}
 
 \begin{beweis}
-   \(f(s\kon t)=p^{-1}\kon s\kon t\kon p=p^{-1}\kon s\kon p\kon p^{-1}\kon t\kon p=f(s)\kon f(t)\)
+  \begin{enumerate}[(a)]
+  \item \(((x:A)\to \|x=\ast\|) = (y:\|A\|_0)\to |y|_0=|\ast|\),
+  wobei die rechte Seite bedeutet, dass \(\|A\|_0\) kontrahierbar ist.
+\item Für jeden \(k\)-Typ \(B\) gilt
+  \[(\|\|A\|_n\|_k\to B)\simeq (\|A\|_n\to B)\simeq (A\to B)\]
+  wobei die Komposition dieser Äquivalenzen durch \(\_\circ (|\_|_k \circ |\_|_n)\) gegeben ist.
+  Mit \Cref{n-abschneidung-berechnen} ist also \(\|\|A\|_n\|_k\simeq \|A\|_k\) und damit \(\|A\|_k=\eins\), wenn \(\|A\|_n=\eins\).
+  \end{enumerate}
 \end{beweis}
+
+\begin{lemma}
+  Sei \(A\) punktierter Typ.
+  \begin{enumerate}[(a)]
+  \item \(\Omega\|A\|_{n+1}=\|\Omega(A)\|_n\)
+  \item \(\pi_n(A)=\|\Omega^nA\|_0=\Omega^n\|A\|_n\)
+  \end{enumerate}
+\end{lemma}
+
+\begin{beweis}
+  \begin{enumerate}[(a)]
+  \item Mit \Cref{n-abschneidung-gleichheit}.
+  \item (a) und Induktion.
+  \end{enumerate}
+\end{beweis}
+
+\begin{lemma}
+  \begin{enumerate}[(a)]
+  \item Ist \(A\) ein \(n\)-Typ, dann gilt \(\pi_k(A)=\{0\}\) für \(k>n\).
+  \item Ist \(A\) ein \(n\)-zusammenhängender Typ, so gilt \(\pi_k(A)=\{0\}\) für \(k\leq n\).
+  \end{enumerate}
+\end{lemma}
+
+\begin{theorem}
+  Sei \(A\) \(n\)-zusammenhängend, dann ist \(\Sigma A\) \((n+1)\)-zusammenhängend.
+\end{theorem}
+
+\begin{beweis}
+  Für jeden \((n+1)\)-Typ \(B\) gilt
+  \[(\|A\|_{n+1}\to B)\simeq (\Sigma A\to B) \simeq \left(\sum_{b_N,b_S:B}A\to b_N=b_S\right)\simeq \left(\sum_{b_N,b_S}b_N=b_S\right)\simeq B\]
+\end{beweis}
+
+\begin{korollar}
+  \begin{enumerate}
+  \item \(S^{n+1}\) ist \(n\)-zusammenhängend.
+  \item \(\pi_k(S^n)=\{0\}\) für \(k<n\).
+  \end{enumerate}
+\end{korollar}
+
+\begin{definition}
+  Sei eine punktierte Abbildung \(f:A\to_\ast B\), also \(f:A\to B\) mit \({p:f(\ast)=\ast}\) gegeben.
+  \begin{enumerate}[(a)]
+  \item Es gibt eine induzierte Abbildung
+    \begin{align*}
+      \Omega f : \Omega A &\to \Omega B \\
+      (l:\ast=_A\ast)&\mapsto p^{-1}\kon l\kon p
+    \end{align*}
+  \item Induktiv ist damit auch 
+    \begin{align*}
+      \Omega^{n+1} f &: \Omega^{n+1} A \to \Omega^{n+1} B \\
+      \Omega^{n+1} f&\colonequiv \Omega(\Omega^{n}(f))
+    \end{align*}
+    gegeben.
+  \item \(\pi_n(f)\colonequiv \|\Omega^n(f)\|_0\).
+  \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+  \begin{enumerate}[(a)]
+  \item \(\pi_n(\id)=\id\)
+  \item \(\pi_n(f\circ g)=\pi_n(f)\circ\pi_n(g)\)
+  \item \(\pi_n(f)\) ist für \(n\geq 1\) Gruppenhomomorphismus.
+  \item \(\pi_n\) bildet Äquivalenzen auf Äquivalenzen ab.
+  \end{enumerate}
+\end{lemma}
+
+\begin{beweis}
+  Für (c) berechnen wir zuerst:
+  \(\Omega f(s\kon t)=p^{-1}\kon s\kon t\kon p=p^{-1}\kon s\kon p\kon p^{-1}\kon t\kon p=\Omega f(s)\kon\Omega f(t)\)
+  Das überträgt sich auf \(\Omega^n(f)\) und \(\pi_n(f)\).
+\end{beweis}
+
+\begin{definition}
+  Eine Sequenz
+  \begin{center}
+    \begin{tikzcd}
+      \dots\ar[r,"f_{n-1}"] & A_n\ar[r,"f_n"] & A_{n+1}\ar[r,"f_{n+1}"] &\dots \\
+    \end{tikzcd}
+  \end{center}
+  von punktierten Typen und Abbildungen heißt \begriff{exakt} bei \(A_{n+1}\),
+  wenn \[\im(f_{n})=\ker({f_{n+1}})\colonequiv ((x:A_n)\times f_{n}(x)=\ast)=\fib_{f_n}(\ast)\]
+  gilt. Die Sequenz heißt exakt, wenn sie an jeder Stelle exakt ist. Eine endliche Sequezen
+  \[A_0\to A_1\to \dots \to A_n\]
+  heißt exakt, wenn sie bei \(A_1,\dots, A_{n-1}]\) exakt ist.
+\end{definition}
+
+\begin{lemma}
+  Sei
+  \begin{center}
+    \begin{tikzcd}
+    A\ar[r] & B\ar[r,"f"] & C\ar[r] & D   
+    \end{tikzcd}
+  \end{center}
+  eine exakte Sequenz von Gruppenhomomorphismen.
+  \begin{enumerate}[(a)]
+  \item Wenn \(A=\{0\}\) gilt, dann ist \(f\) eine Einbettung.
+  \item Wenn \(D=\{0\}\) gilt, dann ist \(f\) surjektiv.
+  \item Wenn \(A=\{0\}\) und \(D=\{0\}\) gilt, dann ist \(f\) ein Isomorphismus.
+  \end{enumerate}
+\end{lemma}
+
+\begin{lemma}
+  Für eine punktierte Abbildung \(f:A\to_\ast B\) ist die folgende Sequenz exakt:
+  \begin{center}
+    \begin{tikzcd}
+    \|\fib_f(\ast)\|_0\ar[r,"\|\pi_1\|_0"] & \|A\|_0\ar[r,"\|f\|_0"] & \|B\|_0  
+    \end{tikzcd}
+  \end{center}
+\end{lemma}
+\rednote{Stand der Vorlesung.}
