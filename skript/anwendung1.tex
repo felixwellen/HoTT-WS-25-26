@@ -185,9 +185,8 @@ Tatsächlich ist \(\pi_n(A)\) für \(n\geq 2\) eine abelsche Gruppe, was wir zun
   \end{center}
   von punktierten Typen und Abbildungen heißt \begriff{exakt} bei \(A_{n+1}\),
   wenn \[\im(f_{n})=\ker({f_{n+1}})\colonequiv ((x:A_n)\times f_{n}(x)=\ast)=\fib_{f_n}(\ast)\]
-  gilt. Die Sequenz heißt exakt, wenn sie an jeder Stelle exakt ist. Eine endliche Sequezen
-  \[A_0\to A_1\to \dots \to A_n\]
-  heißt exakt, wenn sie bei \(A_1,\dots, A_{n-1}\) exakt ist.
+  gilt. Die Sequenz heißt exakt, wenn sie an jeder Stelle exakt ist.
+  Sind nicht für alle \(n:\N\) Abbildungen gegeben, so heißt eine Sequenz exakt, sobald sie an jeder Stelle mit komponierbaren Abbildungen exakt ist.
 \end{definition}
 
 \begin{lemma}
@@ -206,6 +205,7 @@ Tatsächlich ist \(\pi_n(A)\) für \(n\geq 2\) eine abelsche Gruppe, was wir zun
 \end{lemma}
 
 \begin{lemma}
+  \label{0-abschneidung-faser-exakt}
   Für eine punktierte Abbildung \(f:A\to_\ast B\) ist die folgende Sequenz exakt:
   \begin{center}
     \begin{tikzcd}
@@ -213,4 +213,90 @@ Tatsächlich ist \(\pi_n(A)\) für \(n\geq 2\) eine abelsche Gruppe, was wir zun
     \end{tikzcd}
   \end{center}
 \end{lemma}
+
+
+\begin{beweis}
+  Sei \(x:\|A\|_0\) mit \(\|f\|_0(f)=\ast\) gegeben.
+  Per Induktion ist \(y:A\) mit \(p:|f(\ast)|=|\ast|\) bzw \(q:\|f(\ast)=\ast\|\).
+  Daraus bekommen wir ein Element der Faser, da wir eine Aussage zeigen wollen.
+\end{beweis}
+
 \rednote{Stand der Vorlesung.}
+
+\begin{definition}
+  Eine Sequenz von punktierten Abbildungen
+  \begin{center}
+    \begin{tikzcd}
+      \dots\ar[r,"f_{n-1}"] & A_n\ar[r,"f_n"] & A_{n+1}\ar[r,"f_{n+1}"] & \dots 
+    \end{tikzcd}
+  \end{center}
+  heißt \begriff{Fasersequenz}, wenn für jedes \(n:\Z\), \(f_{n-1}\) bis auf Äquivalenz die Faser von \(f_n\) ist, es also eine punktierte Äquivalenz \(\fib_{f_n}(\ast)\simeq A_{n-1}\) gibt, sodass
+  \begin{center}
+    \begin{tikzcd}
+      \fib_{f_n}(\ast)\ar[d,"\simeq",swap]\ar[r,"\pi_1"] & A_n \\
+      A_{n-1}\ar[ru,"f_{n-1}",swap]
+    \end{tikzcd}
+  \end{center}
+  (als Diagramm punktierter Abbildungen) kommutiert.
+\end{definition}
+
+\begin{lemma}
+  \label{fasersequenz}
+  Für eine punktierte Abbildung \(f:A\to_\ast B\) gibt es die durch das folgende Diagramm beschriebenen Äquivalenzen und Homotopien:
+  \begin{center}
+    \begin{tikzcd}
+ & \fib_{p_1}(\ast)\ar[r,"p_2"]\ar[d,"\simeq"] & \fib_f(\ast)\ar[r,"p_1"] & A\ar[r,"f"] & B \\
+ \fib_{v}(\ast)\ar[r,"p_3"]\ar[d,"\simeq"] & \Omega B\ar[ru,swap,"v"] &  & & \\
+ \Omega A\ar[ru,"\Omega f\circ(\_)^{-1}",swap]
+    \end{tikzcd}
+  \end{center}
+  wobei \(p_i\) die jeweilige erste Projektion der Faser ist. Durch Iteration ergibt sich also die folgende Fasersequenz:
+  \begin{center}
+    \begin{tikzcd}
+      & & \dots\ar[lld] \\
+      \Omega^2 \fib_f(\ast)\ar[r,"\Omega^2 p_1"] & \Omega A\ar[r,"\Omega^2 f"] & \Omega^2 B\ar[lld] \\
+      \Omega \fib_f(\ast)\ar[r,"\Omega p_1\circ(\_)^{-1}"] & \Omega A\ar[r,"\Omega f\circ(\_)^{-1}"] & \Omega B\ar[lld] \\
+      \fib_f(\ast)\ar[r,"p_1"] & A\ar[r,"f"] & B 
+    \end{tikzcd}
+  \end{center}
+\end{lemma}
+
+\begin{beweis}
+  \begin{align*}
+    \fib_{p_1}(\ast)&\equiv \sum_{(x,p):\fib_f(\ast)}p_1(x,p)=\ast \\
+    &\equiv \sum_{(x,p):\fib_f(\ast)}x=\ast \\
+    &\simeq (x:A)\times (x=\ast)\times (p:f(x)=\ast) \\
+    &\simeq f(\ast)=\ast \\
+    &\simeq \ast=\ast \\
+    &\equiv \Omega B 
+  \end{align*}
+  Wobei die letzte Äquivalenz \(q^{-1}\kon\_\) ist, für das durch die Punktiertheit von \(f\) gegebene \(q:f(\ast)=\ast\).
+  Eine mit der Projektion kommutierende Abbildung \(\Omega B\to \fib_f(\ast)\) ist also durch
+  \[v\colonequiv (l:\Omega B)\mapsto (\ast,q\kon l) \]
+  gegeben.
+\end{beweis}
+
+\begin{theorem}
+  \label{les}
+  Für jede punktierte Abbildung gibt es eine lange exakte Sequenz:
+  \begin{center}
+    \begin{tikzcd}
+      & & \dots\ar[lld] \\
+      \pi_2(\fib_f(\ast))\ar[r,"\pi_2(p_1)"] & \pi_2 A\ar[r,"\pi_2(f)"] & \pi_2(B)\ar[lld] \\
+      \pi_1( \fib_f(\ast))\ar[r,"\pi_1(p_1)\circ(\_)^{-1}"] & \pi_1(A)\ar[r,"\pi_1(f)\circ(\_)^{-1}"] & \pi_1(B)\ar[lld] \\
+      \pi_0(\fib_f(\ast))\ar[r,"\pi_0(p_1)"] & \pi_0(A)\ar[r,"\pi_0(f)"] & \pi_0(B)
+    \end{tikzcd}
+  \end{center}
+\end{theorem}
+
+\begin{beweis}
+  Anwenden von \(\|\_\|_0\) auf die Fasersequenz aus \Cref{fasersequenz} und \Cref{0-abschneidung-faser-exakt}.
+\end{beweis}
+
+\begin{bemerkung}
+  Das Vorzeichen in \Cref{les} lässt sich auch entfernen, ist aber für Funktorialität der Konstruktion nötig.
+\end{bemerkung}
+
+Wir werden nun zur Anwendung der Fasersequenz die sogenannte Hopf-Faserung im nächsten Abschnitt konstruieren. Dazu brauchen wir zunächst mehr Werkzeuge.
+
+\subsection{Pushout und Join}
