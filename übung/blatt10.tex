@@ -9,6 +9,49 @@
 \blatt
 
 \aufgabe{}
+  Für Abbildungen \(f : B \to A\) und \(g : C \to A\) definieren wir den \emph{kanonischen Pullback}
+  \[B \underset{A}{\times} C \colonequiv (x : B) \times (y : C) \times (f(x) = g(y)).\]
+  Gegeben ein kommutatives Quadrat der Form
+  \[\begin{tikzcd}
+  	D & B \\
+  	C & A
+  	\arrow["h", from=1-1, to=1-2]
+  	\arrow["i"', from=1-1, to=2-1]
+  	\arrow["S"{description}, draw=none, from=1-1, to=2-2]
+  	\arrow["f", from=1-2, to=2-2]
+  	\arrow["g"', from=2-1, to=2-2]
+  \end{tikzcd}\]
+  wobei \(S : f\circ h \sim g\circ i\), so erhalten wir eine kanonische Abbildung
+  \[\mathrm{gap} : D \longrightarrow B \underset{A}{\times} C, \, d \mapsto (h(d),i(d),S(d)).\]
+  Falls diese Abbildung eine Äquivalenz ist, so nennen wir das Quadrat ein \emph{Pullback-Quadrat}.
+  \begin{enumerate}
+    \item Zeige, dass ein Quadrat genau dann ein Pullback-Quadrat ist, wenn die Abbildung
+    \[\prod_{x : C} \fib_i(x) \to \fib_f(g(x)), \, (d,p) \mapsto (h(d),S(d)\kon\ap_g(p))\]
+    eine faserweise Äquivalenz ist.
+    \item Betrachte das kommutative Diagram
+    \[\begin{tikzcd}
+    	F & D & B \\
+    	E & C & A
+    	\arrow["k", from=1-1, to=1-2]
+    	\arrow["l"', from=1-1, to=2-1]
+    	\arrow["T"{description}, draw=none, from=1-1, to=2-2]
+    	\arrow["h", from=1-2, to=1-3]
+    	\arrow["i", from=1-2, to=2-2]
+    	\arrow["S"{description}, draw=none, from=1-2, to=2-3]
+    	\arrow["f", from=1-3, to=2-3]
+    	\arrow["j"', from=2-1, to=2-2]
+    	\arrow["g"', from=2-2, to=2-3]
+    \end{tikzcd}\]
+    mit Homotopien \(S : f\circ h \sim g\circ i\) und \(T : i\circ k \sim j \circ l\).
+    Dann ist
+    \[S_k \kon g(T) : f \circ h \circ k \sim g \circ j \circ l\]
+    eine Homotopie, welche die Kommutativität des äußeren Rechtecks bezeugt.
+    Sei außerdem das rechte Quadrat ein Pullback-Quadrat.
+    Zeige, dass in diesem Fall das linke Quadrat genau dann ein Pullback-Quadrat ist, wenn das äußere Rechteck ein Pullback-Quadrat ist.
+
+  \end{enumerate}
+
+\aufgabe{}
 Zeige Pullback-Pasting und wiederhole damit die lange Fasersequenz, ohne die Abbildungen zu prüfen.
 
 \end{document}
