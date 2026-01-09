@@ -1,0 +1,54 @@
+% latexmk -pdf -pvc blatt11.tex
+\documentclass{hott-übung}
+
+\begin{document}
+
+\setcounter{blattnummer}{11}
+\setcounter{aufgabennummer}{0}
+
+\blatt
+
+\aufgabe{}
+Sei \(A\) ein zusammenhängender \(H\)-Raum mit Multiplikation \(\mu : A \times A \to A\).
+Zeige, dass für jedes \(a : A\) die Abbildung \(\mu(a,\_) : A \to A\) eine Äquivalenz ist.
+
+\aufgabe{}
+Zeige, dass \(S^0 \ast A \simeq \Sigma A\).
+
+\aufgabe{Die kleine Hopf-Faserung}
+Konstruiere eine \(H\)-Raumstruktur auf \(S^0\) und folgere die Existenz einer Fasersequenz der Form
+\[\begin{tikzcd}S^0 \arrow[r] & S^1 \arrow[r] & S^1.\end{tikzcd}\]
+Vergleiche zudem die assoziierte Hopf-Faserung mit der \enquote{Orientierungsüberlagerung} \(D : S^1 \to \mU\) aus Beispiel 2.6.5.
+
+\aufgabe{}
+Sei \(S\equiv(A \xleftarrow{f} C \xrightarrow{g} B)\) ein Span.
+Der Typ der Kokegel unter \(S\) mit Spitze \(Y\) sei definiert als
+\[\Cocone_S(Y) \colonequiv (k : A \to Y) \times (l : B \to Y) \times (K : k\circ f \sim l \circ g).\]
+Ein kommutatives Quadrat
+\begin{equation}
+  \label{square}
+  \begin{tikzcd}
+  	C & B \\
+  	A & X
+  	\arrow["g", from=1-1, to=1-2]
+  	\arrow["f"', from=1-1, to=2-1]
+  	\arrow["H"{description}, draw=none, from=1-1, to=2-2]
+  	\arrow["i", from=1-2, to=2-2]
+  	\arrow["j"', from=2-1, to=2-2]
+  \end{tikzcd}
+\end{equation}
+heißt \emph{kokartesisch} (auch genannt \emph{Pushout-Quadrat}), wenn die kanonische Abbildung
+\[\mathrm{cocone} : (X \to Y) \to \Cocone_S(Y), \quad h \mapsto (h\circ i,h\circ j,h(H))\]
+eine Äquivalenz ist.
+Zeige, dass ein kommutatives Quadrat wie in \ref{square} genau dann kokartesisch ist, wenn für jedes \(Y : \mU\) das folgende Quadrat kartesisch ist, wobei \(H^*\colonequiv h \mapsto \funext(h(H))\) ist.
+\[\begin{tikzcd}
+	{Y^X} & {Y^B} \\
+	{Y^A} & {Y^C}
+	\arrow["{\_\circ j}", from=1-1, to=1-2]
+	\arrow["{\_\circ i}"', from=1-1, to=2-1]
+	\arrow["{\_\circ g}", from=1-2, to=2-2]
+	\arrow["{H^*}"{description}, draw=none, from=2-1, to=1-2]
+	\arrow["{\_\circ f}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+
+\end{document}

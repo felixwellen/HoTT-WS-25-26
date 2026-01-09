@@ -13,6 +13,7 @@
 \RequirePackage{amsmath,amsthm,amssymb,amscd,color,graphicx,environ}
 \RequirePackage{mathtools}
 \RequirePackage[protrusion=true,expansion=true]{microtype}
+\RequirePackage{csquotes}
 \RequirePackage{multicol}
 \RequirePackage{xspace}
 \RequirePackage{wrapfig}
