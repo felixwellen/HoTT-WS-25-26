@@ -298,5 +298,60 @@ Tatsächlich ist \(\pi_n(A)\) für \(n\geq 2\) eine abelsche Gruppe, was wir zun
 \end{bemerkung}
 
 Wir werden nun zur Anwendung der Fasersequenz die sogenannte Hopf-Faserung im nächsten Abschnitt konstruieren. Dazu brauchen wir zunächst mehr Werkzeuge.
+Bevor wir uns diesen im nächsten Abschnitt zuwenden, werden wir aber noch \emph{Pullbacks}, auch \emph{Faserprodukt} genannt anschauen.
+Diese Konstruktion aus der Kategorientheorie ist uns bereits in vielen Formen begegnet und liefert noch eine weitere Perspektive auf den Beweis von \Cref{fasersequenz}.
+
+\begin{definition}
+Seien \(A,B,C:\mU\) und \(f:A\to C\), \(g:B\to C\).
+Ein Datum 
+\begin{tikzcd}
+ A\ar[r,"f"] & C & B\ar[l,"g",swap]
+\end{tikzcd}
+heißt \begriff{Kospann}. Der Typ
+\[
+  \mathrm{PB}(f,g)\colonequiv A\times_C B\colonequiv \sum_{x:A}\sum_{y:B}f(x)=g(y)
+\]
+heißt (kanonischer) \begriff{Pullback}\index{\(A\times_C B\)} oder \begriff{Faserprodukt} des Kospanns 
+\begin{tikzcd}
+ A\ar[r,"f"] & C & B\ar[l,"g",swap]
+\end{tikzcd}.
+\end{definition}
+
+\begin{beispiel}
+\begin{enumerate}[(a)]
+\item Eine Faser \(\fib_f(y)\) ist bis auf Äquivalenz der Pullback \(\mathrm{PB}(f,(\_:\eins)\mapsto y)\).
+\item Der Identitätstyp \(x=_A y\) ist äquivalent zum Pullback \(\mathrm{PB}((\_:\eins)\mapsto x, (\_:\eins)\mapsto y)\).
+\end{enumerate}
+\end{beispiel}
+
+
 
 \subsection{Pushout und Join}
+\begin{regeln}
+Seien \(A,B,C\) Typen und \(f:C\to A\), \(g:C\to B\).
+\begin{itemize}
+\item Es gibt den Typ \(A\sqcup_{f,C,g} B\equiv A\sqcup_{C} B\), den \begriff{Pushout}\index{\(A \sqcup_C B\)} des \begriff{Spanns}
+\begin{tikzcd}
+  A & C\ar[l,"f",swap]\ar[r,"g"] & B 
+\end{tikzcd}
+\item 
+\begin{enumerate}[\ ]
+\item Für \(x:A\) gibt es \(\iota_1(x):A\sqcup_C B\), 
+\item für \(y:B\) gibt es \(\iota_2(y):A\sqcup_C B\) 
+\item und für \(z:C\) gibt es \(\mathrm{glue}(z)\equiv \mathrm{g}(z) : \iota_1(f(z))=\iota_2(g(z))\).
+\end{enumerate}
+\item Sei \(E:A\sqcup_C B\to \mU\). Für
+\begin{enumerate}[\ ]
+\item \(e_A:(x:A)\to E(\iota_1(x))\),
+\item \(e_B:(y:B)\to E(\iota_2(y))\) und
+\item \(e_{\mathrm{g}}:(z:C)\to \transp_E(\mathrm{glue}(z))(e_A(f(z)))=e_B(g(z))\)
+\end{enumerate}
+gibt es \(\elim_{\sqcup_{\_},E}(e_A,e_B,e_{\mathrm{g}}):(u:A\sqcup_C B)\to E(u)\).
+\item \dots sodass gilt
+\begin{enumerate}[\ ]
+\item \(\elim_{\sqcup_{\_},E}(e_A,e_B,e_{\mathrm{g}})(\iota_1(x))\equiv e_A(x)\),
+\item \(\elim_{\sqcup_{\_},E}(e_A,e_B,e_{\mathrm{g}})(\iota_2(y))\equiv e_B(y)\) und
+\item \(\apd_{\elim_{\sqcup_{\_},E}(e_A,e_B,e_{\mathrm{g}})}(\mathrm{glue}(z))=e_{\mathrm{g}}(z)\).
+\end{enumerate}
+\end{itemize}
+\end{regeln}
