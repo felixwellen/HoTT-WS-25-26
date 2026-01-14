@@ -323,7 +323,7 @@ heißt (kanonischer) \begriff{Pullback}\index{\(A\times_C B\)} oder \begriff{Fas
 \item Der Identitätstyp \(x=_A y\) ist äquivalent zum Pullback \(\mathrm{PB}((\_:\eins)\mapsto x, (\_:\eins)\mapsto y)\).
 \end{enumerate}
 \end{beispiel}
-
+\rednote{Hier wird in Zukunft noch mehr dazu stehen, was in der Übung zu Pullbacks gemacht wurde.}
 
 
 \subsection{Pushout und Join}
@@ -355,3 +355,55 @@ gibt es \(\elim_{\sqcup_{\_},E}(e_A,e_B,e_{\mathrm{g}}):(u:A\sqcup_C B)\to E(u)\
 \end{enumerate}
 \end{itemize}
 \end{regeln}
+
+\begin{lemma}
+  Sei
+\begin{tikzcd}
+  A & C\ar[l,"f",swap]\ar[r,"g"] & B 
+\end{tikzcd} und für \(Z:\mU\)
+\[
+  \mathrm{Cocone}(f,g)(Z)\colonequiv \sum_{u:A \to Z}\sum_{v:B\to Z} u\circ f\sim v\circ g\rlap{.}
+\]
+  Dann ist
+  \[
+    \varphi\mapsto (\varphi\circ \iota_1,\varphi\circ\iota_2,(x:C)\mapsto \ap_\varphi\mathrm{glue(x)}) : (A\sqcup_C B\to Z)\to \mathrm{Cocone}(f,g)(Z)
+  \]
+  eine Äquivalenz.
+\end{lemma}
+
+\begin{beweis}
+\rednote{Kommt noch}
+\end{beweis}
+
+\begin{bemerkung}
+Sei \(A:\mU\).
+  Die Einhängung von \(A\) hätten wir auch als Pushout von
+\begin{tikzcd}
+  \eins & A\ar[l,swap]\ar[r] & \eins 
+\end{tikzcd}
+definieren können.
+\end{bemerkung}
+
+\begin{definition}
+  Seien \(A,B:\mU\).
+  Der \begriff{Join}\index{\(A\ast B\)} \(A\ast B\) von \(A\) und \(B\) ist der Pushout des Spanns
+\begin{tikzcd}
+  A & A\times B\ar[l,"\pi_1",swap]\ar[r,"\pi_2"] & B 
+\end{tikzcd}.
+\end{definition}
+
+\begin{beispiel}
+\begin{enumerate}[(a)]
+\item \(A\ast\emptyset\simeq A\)
+\item \(\zwei\ast\zwei\simeq S^1\)
+\end{enumerate}
+\end{beispiel}
+
+\begin{lemma}
+  \(A\ast\zwei\simeq \Sigma A\).
+\end{lemma}
+
+\begin{beweis}
+\rednote{Kommt noch}
+\end{beweis}
+
