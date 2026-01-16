@@ -407,3 +407,36 @@ definieren können.
 \rednote{Kommt noch}
 \end{beweis}
 
+\begin{definition}
+  Ein \begriff{H-Raum} ist ein punktierter Typ \(A\) zusammen mit \(\mu:A\to A\to A\)
+  und Homotopien
+  \begin{itemize}
+  \item \(\mu(\_,\ast)\sim\id \),
+  \item \(\mu(\ast,\_)\sim\id \).
+  \end{itemize}
+\end{definition}
+
+\begin{beispiel}
+  \(S^1\) ist ein H-Raum mit der ``komplexen Multiplikation'', also \(\mu:S^1\to S^1\to S^1\) gegeben durch
+  \[\mu(\ast)\colonequiv \id_{S^1}\]
+  und \(\mu(l)\coloneq L\), wobei \(L:\id_{S^1}=\id_{S^1}\) bzw \(L:\id_{S^1}\sim \id_{S^1}\) gegeben ist durch
+  \begin{align*}
+    &L(\ast)\colonequiv l \\
+    &L(l)\coloneq \_ : \transp_{\_=\_}(l)(l)=l
+  \end{align*}
+  wobei \(\_\) ein Zeuge für \(l^{-1}\kon l\kon l=l\) ist. \\
+  Wir konstruieren nun noch die beiden Homotopien.
+  Es gilt \(\mu(\ast,x)=x\) per Definition. \\
+   Die zweite Homotopie, \(\mu(\_,\ast)\sim \id\), konstruieren wir durch Induktion.
+   Für \(x\equiv \ast\) haben wir wieder \(\refl:\mu(\ast,\ast)=\ast\) und müssen also noch zeigen:
+   \[
+      \transp_{\mu(\_,\ast)=\_}(l)(\refl)=\refl
+    \]
+    was wegen \(\ap_{\mu(\_,\ast)}(l)=l\) \rednote{Begründen} gegeben ist. 
+\end{beispiel}
+
+\begin{bemerkung}
+  Für das eben definierte \(\mu:S^1\to S^1\to S^1\) ist \(\mu(x)\) stets eine Äquivalenz.
+  Es reicht das für \(x\equiv \ast\) zu beweisen und durch die H-Raum-Struktur wissen wir, dass \(\mu(\ast)\) homotop zur Identität ist.
+\end{bemerkung}
+
