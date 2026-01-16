@@ -9,21 +9,35 @@
 \blatt
 
 \aufgabe{}
-Zeige: \(\mathrm{Coeq}(
-\begin{tikzcd}
-  \emptyset\ar[r,bend left=20]\ar[r,bend right=20]& A
-\end{tikzcd}
-)\simeq A\).
-
-Zeige: \(\mathrm{Coeq}(
-\begin{tikzcd}
-  1\ar[r,bend left=20]\ar[r,bend right=20]& 1
-\end{tikzcd}
-)\simeq S^1\).
+Sei \(X\) ein Typ und \(A \xleftarrow{f} C \xrightarrow{g} B\) ein Spann.
+Konstruiere Äquivalenzen:
+\begin{enumerate}
+  \item \(\Coeq(\leer \rightrightarrows X)\simeq X\).
+  \item \(\Coeq(1 \rightrightarrows 1)\simeq S^1\).
+  \item \(\Coeq(C \rightrightarrows A\sqcup B) \simeq A \sqcup_C B\).
+  {\tiny Was sind die parallelen Abbildungen?}
+\end{enumerate}
 
 \aufgabe{}
-Sei \(A\) \((n+1)\)-zusammenhängend und punktiert.
-Zeige, dass die Abbildung \(\ast:\eins\to A\) \((n)\)-zusammenhängend ist.
+Im Folgenden sei \(A\) ein Typ und \(n \geq -2\).
+Zeige:
+\begin{enumerate}
+  \item
+    Genau dann ist \(A\) ein \((n+1)\)-zusammenhängender Typ, wenn \(\|A\|\) gilt und \(x=y\) für alle \(x,y : A\) ein \(n\)-zusammenhängender Typ ist.
+  \item
+    Sei \(A\) ein punktierter zusammenhängender Typ.
+    Folgere, dass \(A\) genau dann \((n+1)\)-zusammenhängend ist, falls \(\Omega A\) ein \(n\)-zusammenhängender Typ ist.
+\end{enumerate}  
+Eine Abbildung \(f : B \to A\) heißt \emph{\(n\)-zusammenhängend}, wenn \(\fib_f(a)\) für jedes \(a : A\) ein \(n\)-zusammenhängender Typ ist.
+\begin{enumerate}[resume]
+  \item
+    Sei \(f : B \to_\ast A\) eine punktierte Abbildung zwischen zusammenhängenden punktierten Typen.
+    Folgere, dass \(f\) genau dann \((n+1)\)-zusammenhängend ist, wenn \(\Omega f\) eine \(n\)-zusammenhängende Abbildung ist.
+    \tiny{Lange Fasersequenz!}
+\end{enumerate}
+
+% Sei \(A\) ein punktierter \((n+1)\)-zusammenhängender Typ.
+% Zeige, dass \(\ast : \eins \to_* A\) eine \(n\)-zusammenhängende Abbildung ist.
 
 \aufgabe{}
 Folgere aus der Existenz der Hopf-Faserung \(\Omega^3 S^3\simeq \Omega^3 S^2 \).
