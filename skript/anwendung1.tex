@@ -440,3 +440,52 @@ definieren können.
   Es reicht das für \(x\equiv \ast\) zu beweisen und durch die H-Raum-Struktur wissen wir, dass \(\mu(\ast)\) homotop zur Identität ist.
 \end{bemerkung}
 
+\begin{definition}
+  Die \begriff{Hopf-Faserung} ist der folgende abhängige Typ \(H:S^2\to \mU\),
+  gegeben durch (\(\elim_{\Sigma S^1}\)):
+  \begin{align*}
+    &H(N) \colonequiv S^1 \\
+    &H(S) \colonequiv S^1 \\
+    &H(m(x)) \coloneq \mathrm{ua}(\mu(x,\_))
+  \end{align*}
+\end{definition}
+
+\begin{theorem}
+  Für den Totalraum der Hopf-Faserung gilt:
+  \[
+    \sum_{x:S^2}H(x) \simeq S^3
+  \]
+  und die Faser von \(\pi_1:\sum_{x:S^2}H(x)\to S^2\) ist \(S^1\).
+  Damit ist eine Fasersequenz
+  \[
+     S^1\to S^3\to S^2
+   \]
+   gegeben.
+\end{theorem}
+
+Wir werden im Beweis etwas vorgreifen und Sätze verwenden, die wir erst im Anschluss beweisen.
+
+\begin{beweis}
+  \rednote{Kommt noch}.
+\end{beweis}
+
+Wir führen nun einen höheren induktiven Typen ein, den Coequalizer, der etwas minimalistischer als der Pushout ist. Es reicht jedoch, zum Beispiel die Kommutativität von abhängigen Summen mit Coequalizern zu zeigen, um diese auch für Pushouts zu erhalten.
+
+\begin{regeln}
+  Seien \(A,B\) Typen und \(f,g:A\to B\) Abbildungen.
+  \begin{itemize}
+  \item Es gibt einen Typ \(\Coeq(f,g)\), den \begriff{Coequalizer} von \(f\) und \(g\).
+  \item Es gibt \(\iota:B\to \Coeq(f,g)\) und \(\glue:(a:A)\to \iota(f(a))=\iota(g(a))\).
+  \item Sei \(C:\Coeq(f,g)\to \mU\). Für
+    \begin{enumerate}[\ ]
+    \item \(c_B:(b:B)\to C(b)\) und
+    \item \(c_g:(a:A)\to \transp_C(\glue(a))(c_B(f(a)))=c_B(g(a))\)
+    \end{enumerate}
+    gibt es \(\elim_{\Coeq(f,g)}(c_B,c_g):(x:\Coeq(f,g))\to C(x)\).
+  \item \dots sodass gilt
+    \begin{enumerate}[\ ]
+    \item \(\elim_{\Coeq(f,g)}(c_B,c_g)(\iota(b))\equiv c_B(b)\)
+    \item \(\apd_{\elim_{\Coeq(f,g)}(c_B,c_g)}(\glue(a))=c_g(a)\)
+    \end{enumerate}
+  \end{itemize}
+\end{regeln}
