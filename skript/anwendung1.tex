@@ -441,6 +441,7 @@ definieren können.
 \end{bemerkung}
 
 \begin{definition}
+  \label{hopf-faserung}
   Die \begriff{Hopf-Faserung} ist der folgende abhängige Typ \(H:S^2\to \mU\),
   gegeben durch (\(\elim_{\Sigma S^1}\)):
   \begin{align*}
@@ -466,7 +467,28 @@ definieren können.
 Wir werden im Beweis etwas vorgreifen und Sätze verwenden, die wir erst im Anschluss beweisen.
 
 \begin{beweis}
-  \rednote{Kommt noch}.
+  Wir zeigen etwas allgemeiner wie die Konstruktion für einen beliebigen H-Raum \((A,\mu,e)\) funktioniert, anstatt speziell für \((S^1,\mu,\ast)\).
+  Wir haben das folgende Diagramm:
+  \begin{center}
+  \begin{tikzcd}
+    A\ar[d] & A\times A\ar[r,"\mu"]\ar[l,"\pi_2"]\ar[d,"\pi_1"] & A\ar[d] \\
+    1 & A\ar[r]\ar[l] & 1
+  \end{tikzcd}    
+\end{center}
+Der Pushout der unteren Zeile ist \(\Sigma A\).
+Um zu sehen, dass der Pushout der oberen Zeile äquivalent zum Join \(A\ast A\) ist,
+betrachten wir das folgende Diagramm:
+\begin{center}
+  \begin{tikzcd}
+    A\ar[d,"\id"] & A\times A\ar[r,"\mu"]\ar[l,"\pi_2"]\ar[d,"\mu\times\id"] & A\ar[d,"\id"] \\
+    A & A\times A\ar[r,"\pi_1"]\ar[l,"\pi_2"] & A    
+  \end{tikzcd}
+\end{center}
+Da alle vertikalen Abbildunge Äquivalenzen sind, bekommen wir auch eine Äquivalenz zwischen den Pushouts der beiden Zeilen.
+
+Nun fehlt noch, dass der Totalraum der Hopf-Faserung aus \Cref{hopf-faserung}
+tatsächlich der Pushout der Pushout der oberen Zeile im Diagramm ist.
+Das werden wir in \Cref{pushout-descent} in größerer Allgemeinheit klären.
 \end{beweis}
 
 Wir führen nun einen höheren induktiven Typen ein, den Coequalizer, der etwas minimalistischer als der Pushout ist. Es reicht jedoch, zum Beispiel die Kommutativität von abhängigen Summen mit Coequalizern zu zeigen, um diese auch für Pushouts zu erhalten.
@@ -489,3 +511,88 @@ Wir führen nun einen höheren induktiven Typen ein, den Coequalizer, der etwas 
     \end{enumerate}
   \end{itemize}
 \end{regeln}
+
+\begin{definition}
+  Seien \(A,B\) Typen und \(f,g:A\to B\) Abbildungen.
+  Der Typ der \begriff{Kokegel} mit Spitze \(Z:\mU\) für diese Daten ist gegeben als:
+  \[
+    \Cocone(f,g)(Z)\colonequiv \Cocone(
+    \begin{tikzcd}
+      A\ar[r,shift left=1ex,"f"]\ar[r,shift right=1ex,"g",swap] & B
+    \end{tikzcd}
+    )(Z)\colonequiv \sum_{v:B\to Z} v\circ f\sim v\circ g
+  \]
+\end{definition}
+
+\begin{lemma}
+  \label{ump-coeq}
+  Seien \(A,B\) Typen und \(f,g:A\to B\) Abbildungen.
+  \begin{enumerate}[(a)]
+  \item Die Abbildung
+    \[
+      (\_\circ \iota,\_(\glue)):(\Coeq(f,g)\to Z)\to \Cocone(f,g)(Z)
+    \]
+    ist für alle \(Z:\mU\) eine Äquivalenz.
+  \item Sei \(v,H\) ein Kokegel. Wenn die Abbildung
+    \[
+      (\_\circ v,\_(H)):(C\to Z)\to \Cocone(f,g)(Z)
+    \]
+    für alle \(Z:\mU\) eine Äquivalenz ist, dann ist \((v,H)=(\iota,\glue)\)
+    und insbesondere also \(\Coeq(f,g)=C\).
+  \end{enumerate}
+\end{lemma}
+
+\begin{definition}
+  Seien \(A,B\) Typen und \(f,g:A\to B\) Abbildungen.
+  Ein Kokegel \((v,H)\) heißt \begriff{Coequalizer} von
+      \begin{tikzcd}
+      A\ar[r,shift left=1ex,"f"]\ar[r,shift right=1ex,"g",swap] & B
+    \end{tikzcd}
+    wenn er die Eigenschaft aus \Cref{ump-coeq} (b) erfüllt.
+\end{definition}
+
+\begin{theorem}
+  Seien \(A,B\) Typen, \(f,g:A\to B\) Abbildungen und \(C:B\to\mU\) mit \(e:(a:A)\to C(f(a))\simeq C(g(b))\) gegeben. Dann ist für
+  \begin{align*}
+    &\tilde{C}:\Coeq(f,g)\to \mU \\
+    &\tilde{C}(\iota(b))\colonequiv C(b) \\
+    &\tilde{C}(\glue(a))\coloneq \ua(e_a)
+  \end{align*}
+  der Kokegel
+  \begin{center}
+    \begin{tikzcd}
+      \sum_{b:B}C(b)\ar[r] & \sum_{x:\Coeq(f,g)}C(x)
+    \end{tikzcd}
+  \end{center}
+  ein Coequalizer von
+  \begin{center}
+    \begin{tikzcd}
+      \sum_{a:A}C(f(a))\ar[r,shift left=1ex,"f\times\id"]\ar[r,shift right=1ex,"g\times e",swap] & \sum_{b:B}C(b)
+    \end{tikzcd}
+  \end{center}
+  wobei \(f\times\id (a,c)\colonequiv (f(a),c) \) und \(g\times e(a,c)\colonequiv (g(a),e_a(c))\) ist.
+\end{theorem}
+
+\begin{korollar}
+  \label{pushout-descent}
+  Seien
+  \begin{tikzcd}
+    A& C\ar[l,"f"]\ar[r,"g"]& B 
+  \end{tikzcd}
+  ein Spann und \(E_A:A\to \mU\), \(E_B:B\to \mU\) und \(e_{\glue}:(c:C)\to E_A(f(c))\simeq E_B(g(c))\).
+  Dann ist für
+    \begin{align*}
+      &E:A\sqcup_C B\to \mU \\
+      &E(\iota_1(a))\colonequiv E_A(a) \\
+      &E(\iota_2(b))\colonequiv E_B(b)\\
+      &E(\glue(c))\coloneq \ua(e_{\glue}(c))
+    \end{align*}
+    das folgende Quadrat ein Pushout:
+    \begin{center}
+      \begin{tikzcd}
+        \sum_{c:C}E_A(f(c))\ar[r]\ar[d] & \sum_{a:A}E_A(a)\ar[d] \\
+        \sum_{b:B}E_B(b)\ar[r] & \sum_{x:A\sqcup_C B}E(x)
+      \end{tikzcd}
+    \end{center}
+    In diesem Sinn kommutieren also Pushout und abhängige Summe.
+\end{korollar}
