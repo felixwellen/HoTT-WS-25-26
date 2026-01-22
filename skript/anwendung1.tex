@@ -221,8 +221,6 @@ Tatsächlich ist \(\pi_n(A)\) für \(n\geq 2\) eine abelsche Gruppe, was wir zun
   Daraus bekommen wir ein Element der Faser, da wir eine Aussage zeigen wollen.
 \end{beweis}
 
-\rednote{Stand der Vorlesung.}
-
 \begin{definition}
   Eine Sequenz von punktierten Abbildungen
   \begin{center}
@@ -596,3 +594,26 @@ Wir führen nun einen höheren induktiven Typen ein, den Coequalizer, der etwas 
     \end{center}
     In diesem Sinn kommutieren also Pushout und abhängige Summe.
 \end{korollar}
+
+\subsection{Freudenthals Einhängungssatz}
+
+\begin{definition}
+  Eine Abbildung \(f:A\to B\) heißt \begriff{\(n\)-zusammenhängend},
+  wenn alle Fasern von \(f\) \(n\)-zusammenhängend sind, also \(\|\fib_f(y)\|_{n}\)
+  für alle \(y:B\) kontrahierbar ist.
+\end{definition}
+
+\begin{theorem}
+  Sei \(X\) punktiert und \(n\)-zusammenhängend für ein \(n\geq 0\).
+  Sei weiter \(\sigma:X\to\Omega\Sigma X\) gegeben durch
+  \[
+    \sigma(x)\colonequiv m(x)\kon m(\ast)^{-1}
+  \]
+  wobei \(m:X\to N=_{\Sigma X}S\) der höhere Konstruktor der Einhängung ist.
+  Dann ist \(\sigma\) \(2n\)-zusammenhängend.
+\end{theorem}
+
+\rednote{Details kommen noch, die Vorlesung war aber sehr nah am HoTT-Book, Abschnitt 8.6}
+
+\rednote{Stand der Vorlesung.}
+
