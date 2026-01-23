@@ -1,0 +1,58 @@
+\subsection{Kohomologie von Sphären}
+
+Wir wenden uns nun einer anderen Invariante zu, die für Sphären und ähnliche Typen einfacher zu berechnen ist als die Homotopiegruppen im vorangegangenen Kapitel.
+Diese Invariante wird eine Sequenz abelscher Gruppen sein, die Kohomologie genannt wird.
+Als Vorabeit werden wir zunächst Eilenberg-MacLane Räume für \(\Z\) betrachten.
+
+\begin{definition}
+  Für \(n\in\Z\) sei
+  \begin{align*}
+    &K(\Z,n)\colonequiv \|S^n\|_n &\text{falls \(n>0\)}\\
+    &K(\Z,0)\colonequiv \Z \\
+    &K(\Z,n)\colonequiv \eins &\text{falls \(n<0\)}
+  \end{align*}
+  \(K(\Z,n)\) heißt \(n\)-ter \begriff{Eilenberg--MacLane--Raum}\index{\(K(\Z,n)\)} oder
+  \(n\)-te \begriff{Entschleifung} von \(\Z\).
+\end{definition}
+
+\begin{lemma}
+  \begin{enumerate}
+  \item Für alle \(n\in\Z\) gilt:
+    \[
+      \Omega K(\Z,n+1)=K(\Z,n)
+    \]
+  \item \(K(\Z,n)\) ist punktiert und für \(n\geq 0\) \(n\)-abgeschnitten und \((n-1)\)-zusammenhängend.
+  \item \(\pi_k(K(\Z,n))\) ist \(\Z\) falls \(k=n\) gilt und sonst \(\eins\).
+  \end{enumerate}
+\end{lemma}
+
+\begin{beweis}
+  \begin{enumerate}
+  \item Für \(n\geq 2\) können wir \Cref{freudenthal} verwenden um eine Äquivalenz
+    \[
+      \|S^n\|_n\simeq \Omega\|S^{n+1}\|_{n+1}
+    \]
+    zu bekommen. Den Fall \(n=1\) werden wir später klären und alle anderen Fälle sind bereits berechnet.
+  \item \(K(\Z,n)\) ist punktiert durch \(|\ast|_n:\|S^n\|_n\) bzw.\ \(0:\Z\) und \(\ast:\eins\).
+    \(K(\Z,n)\) ist \((n-1)\)-zusammenhängend, da \(\|S^n\|_n\) \((n-1)\)-zusammenhängend ist.
+  \end{enumerate}
+\end{beweis}
+
+\begin{definition}
+  Sei \(X:\mU\) und \(n\in\Z\). Dann ist
+  \[
+    H^n(X)\colonequiv H^n(X,\Z)\colonequiv \|X\to K(\Z,n)\|_0
+  \]
+  die \(n\)-te \begriff{Kohomologiegruppe}\index{\(H^n(X)\)}\index{\(H^n(X,\Z)\)} von \(X\) (mit Koeffizienten in \(\Z\)).
+\end{definition}
+
+\begin{beispiel}
+  \begin{enumerate}[(a)]
+  \item \(H^n(\emptyset)\equiv \|\emptyset\to K(\Z,n)\|_0=\|\eins\|_0=\eins\)
+  \item \(H^n(\eins)=\|\eins\to K(\Z,n)\|_0=\|K(\Z,n)\|_0\) das ist \(\Z\) für \(n=0\) und sonst \(\eins\).
+  \item \(H^n(\zwei)=\|\zwei\to K(\Z,n)\|_0=\|K(\Z,n)\times K(\Z,n)\|_0=\|K(\Z,n)\|_0\times \|K(\Z,n)\|_0 \). Das ist \(\Z\times\Z\) für \(n=0\) und sonst \(\eins\)
+  \item \(H^1(S^1)=\zwei\). (Übungsblatt 13)
+  \end{enumerate}
+\end{beispiel}
+
+
