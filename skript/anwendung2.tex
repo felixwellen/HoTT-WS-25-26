@@ -55,4 +55,18 @@ Als Vorabeit werden wir zunächst Eilenberg-MacLane Räume für \(\Z\) betrachte
   \end{enumerate}
 \end{beispiel}
 
+\begin{bemerkung}
+  Sei \(k\geq 0\), dann ist
+  \[
+    H^n(X)\equiv \|X\to K(\Z,n)\|_0=\|X\to \Omega^k K(\Z,n+k)\|_0=\|\Omega^k(X\to  K(\Z,n+k))\|_0\equiv\pi_k(X\to  K(\Z,n+k))
+  \]
+  Kohomologiegruppen sind also stets Homotopiegruppen von beliebig hohem Grad.
+\end{bemerkung}
 
+\begin{lemma}
+  \begin{enumerate}
+  \item \(H^n(X)\) ist stets eine abelsche Gruppe.
+  \item Für \(f:X\to Y\) ist durch \(f^\ast\colonequiv \|\_\circ f\|_0:H^n(Y)\to H^n(X)\) ein Gruppenhomorphismus gegeben.
+  \item Es gelten \(\id^\ast=\id\) und \((g\circ f)^\ast=f^\ast\circ g^\ast\).
+  \end{enumerate}
+\end{lemma}
