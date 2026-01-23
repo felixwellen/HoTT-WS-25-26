@@ -604,6 +604,7 @@ Wir führen nun einen höheren induktiven Typen ein, den Coequalizer, der etwas 
 \end{definition}
 
 \begin{theorem}
+  \label{freudenthal}
   Sei \(X\) punktiert und \(n\)-zusammenhängend für ein \(n\geq 0\).
   Sei weiter \(\sigma:X\to\Omega\Sigma X\) gegeben durch
   \[
@@ -613,7 +614,35 @@ Wir führen nun einen höheren induktiven Typen ein, den Coequalizer, der etwas 
   Dann ist \(\sigma\) \(2n\)-zusammenhängend.
 \end{theorem}
 
-\rednote{Details kommen noch, die Vorlesung war aber sehr nah am HoTT-Book, Abschnitt 8.6}
+\begin{korollar}
+  \begin{enumerate}[(a)]
+  \item Für \(k\leq 2n-2\) gilt \(\pi_{k+1}(S^{n+1})=\pi_k(S^n)\).
+  \item Es gilt \(\pi_n(S^n)=\Z\) für alle \(n\geq 1\).
+  \end{enumerate}
+\end{korollar}
 
-\rednote{Stand der Vorlesung.}
+\begin{beweis}
+  \begin{enumerate}[(a)]
+  \item \(S^n\) ist stets \((n-1)\)-zusammenhängend, also ist nach \Cref{freudenthal} die Abbildung
+    \(\sigma:S^n\to \Omega S^{n+1}\) stets \(2(n-1)\)-zusammenhägend.
+    Demnach ist
+    \[
+      \|\sigma\|_k:\|S^n\|_k\to \|\Omega S^{n+1}\|_k
+    \]
+    eine Äquivalenz.
+    Also gilt:
+    \begin{align*}
+      \pi_k(S^n)&\equiv \|\Omega^k S^n\|_0 \\
+                &\simeq \Omega^k\|S^n\|_k \\
+                &\simeq \Omega^k\|\Omega S^{n+1}\|_k \\
+                &\simeq \|\Omega^{k+1}S^{n+1}\|_0 \\
+                &\equiv \pi_{k+1}(S^{n+1})
+    \end{align*}
+  \item Das folgt aus (a) und \(\pi_2(S^2)=\Z\), \(\pi_1(S^1)=\Z\).
+  \end{enumerate}
+\end{beweis}
+
+Insbesondere wissen wir jetzt, dass \(S^n\simeq S^m\) nur genau dann gilt, wenn \(n=m\) ist.
+
+\rednote{Details kommen noch, die Vorlesung war aber sehr nah am HoTT-Book, Abschnitt 8.6}
 
