@@ -32,7 +32,27 @@ Als Vorabeit werden wir zunächst Eilenberg-MacLane Räume für \(\Z\) betrachte
     \[
       \|S^n\|_n\simeq \Omega\|S^{n+1}\|_{n+1}
     \]
-    zu bekommen. Den Fall \(n=1\) werden wir später klären und alle anderen Fälle sind bereits berechnet.
+    zu bekommen. Für \(n<1\) haben wir bereits alle Fälle berechnet, es bleibt also der Fall \(n=1\).
+    Das heißt wir wollen \(S^1=\Omega\|S^2\|_2(=\|\Omega S^2\|_1) \) zeigen.
+    Dazu verwenden wir die Abbildung \(f\) in der Fasersequenz der Hopf-Faserung:
+    \begin{center}
+      \begin{tikzcd}
+            & \Omega^2 S^3\ar[r] & \Omega^2 S^2 \ar[dll,"\Omega f\circ \_^{-1}"] \\
+        \Omega S^1\ar[r] & \Omega S^3\ar[r] & \Omega S^2\ar[dll,"f"] \\
+        S^1\ar[r] & S^3\ar[r] & S^2 
+      \end{tikzcd}
+    \end{center}
+    Weil \(\Omega S^3\) und \(\Omega^2 S^3\) jeweils \(0\)-zusammenhängend sind, ist
+    \(\|\Omega f\circ \_^{-1}\|_0 \) und damit auch \(\|\Omega f\|_0\) eine Äquivalenz.
+    Daraus folgt bereits, dass auch \(\Omega \|f\|_1:\Omega\|S^1\|_1\to \Omega\|\Omega S^2\|_1\) eine Äquivalenz ist,
+    mit der Kommutativität des folgenden Diagramms für beliebige \(g:A\to_\ast B\):
+    \begin{center}
+      \begin{tikzcd}
+        \|\Omega A\|_0\ar[d,"\simeq"]\ar[r,"\|\Omega f\|_0"] & \|\Omega B\|_0\ar[d,"\simeq"] \\
+        \Omega\|A\|_1\ar[r,"\Omega \|f\|_1"] & \Omega\|B\|_1
+      \end{tikzcd}
+    \end{center}
+    (Die wir hier nicht nachrechnen). Da \(\Omega \|f\|_1\) eine Äquivalenz ist und \(\|S^1\|_1=S^1\) und \(\|\Omega S^2\|_1\) beide \(0\)-zusammenhängend sind, folgt dass auch \(\|f\|_1\) eine Äquivalenz ist.
   \item \(K(\Z,n)\) ist punktiert durch \(|\ast|_n:\|S^n\|_n\) bzw.\ \(0:\Z\) und \(\ast:\eins\).
     \(K(\Z,n)\) ist \((n-1)\)-zusammenhängend, da \(\|S^n\|_n\) \((n-1)\)-zusammenhängend ist.
   \end{enumerate}
@@ -70,3 +90,19 @@ Als Vorabeit werden wir zunächst Eilenberg-MacLane Räume für \(\Z\) betrachte
   \item Es gelten \(\id^\ast=\id\) und \((g\circ f)^\ast=f^\ast\circ g^\ast\).
   \end{enumerate}
 \end{lemma}
+
+\begin{theorem}
+  Sei \(
+  \begin{tikzcd}
+    A& C\ar[l,"f",swap]\ar[r,"g"] & B
+  \end{tikzcd}
+  \). Dann gibt es eine lange exakte Sequenz von Kohomologiegruppen:
+  \begin{center}
+    \begin{tikzcd}
+      \dots\ar[r] & H^{n-1}(A)\oplus H^n(B)\ar[r,"g^\ast-f^\ast"] & H^{n-1}(C)\ar[dll] \\
+      H^n(A\sqcup_C B)\ar[r] & H^n(A)\oplus H^n(B)\ar[r,"g^\ast-f^\ast"] & H^n(C)\ar[dll] \\
+      H^{n+1}(A\sqcup_C B)\ar[r] & H^{n+1}(A)\oplus H^{n+1}(B)\ar[r,"g^\ast-f^\ast"] & \dots,
+    \end{tikzcd}
+  \end{center}
+  die \begriff{Mayer-Vietoris-Sequenz}. Wobei wir ``\(\oplus\)'' für das binäre Produkt von Gruppen schreiben und ``\(g^\ast-f^\ast\)'' statt ``\((g^\ast)^{-1}\kon f^\ast\)'', weil alle beteiligten Gruppen abelsch sind. 
+\end{theorem}
