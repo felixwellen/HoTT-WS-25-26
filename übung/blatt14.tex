@@ -9,19 +9,40 @@
 \blatt
 
 \aufgabe{}
+Wir definieren die strikte Ordnungsrelation \(<\) auf \(\N\) per Induktion durch
+\begin{align*}
+  (0 < 0) &\colonequiv \leer, & (0 < n + 1) &\colonequiv \eins, \\
+  (m + 1 < 0) &\colonequiv \leer, & (m + 1 < n + 1) &\colonequiv m < n.
+\end{align*}
+Für \(n : \N\) war die standard-endliche Menge mit \(n\) Elementen durch
+\[\{0,\dots,n-1\} \equiv \sum_{k : \N} k < n\]
+gegeben. Weiter sei der abhängige Typ \(\mathrm{Fin} : \N \to \mU\) per Induktion definiert durch
+\begin{align*}
+\mathrm{Fin}(0) \colonequiv \leer, && \mathrm{Fin}(n+1) \colonequiv \eins \sqcup \mathrm{Fin}(n).
+\end{align*}
 \begin{enumerate}
-\item Zeige, dass \(S^1\vee S^1\) ein endlicher CW-Komplex ist.
-\item Berechne \(H^1(S^1\vee S^1)\) und folgere \(\neg \forall n:\N.(S^1\vee S^1\simeq S^n)\).
+  \item
+    Finde eine Äquivalenz \(\mathrm{Fin}(n) \simeq \{0,\dots,n-1\}\) für alle \(n : \N\).
+  \item
+    Zeige, dass jeder endliche Typ \(E\) das \emph{Auswahlaxiom} erfüllt:
+    Für alle \(A : E \to \mU\) gilt
+    \[\prod_{x:E}\|A(x)\| \to \|\prod_{x:E}A(x)\|.\]
 \end{enumerate}
 
-\aufgabe{?}
-Zeige, dass endliche Typen das Auswahlaxiom erfüllen: \\
-Sei \(E\) endlicher Typ, dann gilt für jedes \(A:E\to \mU\):
-\[
-  \prod_{x:E}\|A(x)\| \to \|\prod_{x:E}A(x)\|
-\]
+\aufgabe{}
+\begin{enumerate}
+\item Zeige, dass \(S^1\vee S^1\) ein endlicher CW-Komplex ist.
+\item Berechne \(H^1(S^1\vee S^1)\) und folgere \(\forall n:\N.\neg (S^1\vee S^1\simeq S^n)\).
+  {\tiny Tipp: Mayer-Vietoris.}
+\end{enumerate}
 
-\aufgabe{?}
+\aufgabe{}
+Es sei \(d : S^1 \to S^1\) die \enquote{Orientierungsüberlagerung} aus Aufgabe 4 von Blatt 7.
+\begin{enumerate}
+  \item Unter Verwendung des Isomorphismus \(H^1(S^1) \simeq \Z\) aus Aufgabe 1 von Blatt 13, berechne das Bild der induzierten Abbildung \(d^* : H^1(S^1) \to H^1(S^1)\).
+  \item Es sei \(\mathrm{RP}^2\) der Pushout von \(S^1 \xleftarrow{d} S^1 \to \eins\).
+    Berechne \(H^1(\mathrm{RP}^2)\).
+\end{enumerate}
 
 
 \end{document}
