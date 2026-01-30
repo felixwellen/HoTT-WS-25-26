@@ -106,3 +106,28 @@ Als Vorabeit werden wir zunächst Eilenberg-MacLane Räume für \(\Z\) betrachte
   \end{center}
   die \begriff{Mayer-Vietoris-Sequenz}. Wobei wir ``\(\oplus\)'' für das binäre Produkt von Gruppen schreiben und ``\(g^\ast-f^\ast\)'' statt ``\((g^\ast)^{-1}\kon f^\ast\)'', weil alle beteiligten Gruppen abelsch sind. 
 \end{theorem}
+
+\subsection{Kohomologie endlicher CW-Komplexe}
+
+Wir folgen nun \url{https://arxiv.org/pdf/1802.02191}.
+
+\begin{definition}
+  \begin{enumerate}
+  \item Ein Typ \(X\) heißt \begriff{endlich}, wenn \(\|X=\{0,\dots,n\}\), wobei \(\{0,\dots,n\}\) die \begriff{standard-endliche Menge} mit \(n+1\) Elementen bezeichnet, die gegeben ist durch
+    \[\{0,\dots,n\}\colonequiv \sum_{k:\N}k\leq n\rlap{.}\]
+  \item Eine Aussage \(P\) heißt \begriff{entscheidbar}, wenn \(P\vee \neg P\) gilt.
+  \item Eine \begriff{entscheidbare Menge} ist eine Menge \(M\), sodass \(x=_My\) stets eine entscheidbare Aussage ist.
+  \end{enumerate}
+\end{definition}
+
+\begin{beispiel}
+  \begin{enumerate}
+  \item \(\N\) ist entscheidbare Menge.
+  \item Jeder endliche Typ ist entscheidbare Menge.
+  \end{enumerate}
+\end{beispiel}
+
+\begin{bemerkung}
+  Für einen endlichen Typ \(X\) ist es im Allgemeinen nicht der Fall, dass für eine Menge \(V\) mit Surjektion \(X\to V\), \(V\) wieder endlicher Typ ist.
+  Es ist im Allgemeinen auch nicht der Fall, dass ein \(U\) mit einer Einbettung \(U\to X\) wieder endlich ist.
+\end{bemerkung}
