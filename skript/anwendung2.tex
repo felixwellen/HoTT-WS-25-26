@@ -113,8 +113,8 @@ Wir folgen nun \url{https://arxiv.org/pdf/1802.02191}.
 
 \begin{definition}
   \begin{enumerate}
-  \item Ein Typ \(X\) heißt \begriff{endlich}, wenn \(\|X=\{0,\dots,n\}\), wobei \(\{0,\dots,n\}\) die \begriff{standard-endliche Menge} mit \(n+1\) Elementen bezeichnet, die gegeben ist durch
-    \[\{0,\dots,n\}\colonequiv \sum_{k:\N}k\leq n\rlap{.}\]
+  \item Ein Typ \(X\) heißt \begriff{endlich}, wenn \(\|X=\{0,\dots,n-1\}\|\), wobei \(\{0,\dots,n-1\}\) die \begriff{standard-endliche Menge} mit \(n\) Elementen bezeichnet, die gegeben ist durch
+    \[\{0,\dots,n-1\}\colonequiv \sum_{k:\N}k< n\rlap{.}\]
   \item Eine Aussage \(P\) heißt \begriff{entscheidbar}, wenn \(P\vee \neg P\) gilt.
   \item Eine \begriff{entscheidbare Menge} ist eine Menge \(M\), sodass \(x=_My\) stets eine entscheidbare Aussage ist.
   \end{enumerate}
@@ -122,8 +122,8 @@ Wir folgen nun \url{https://arxiv.org/pdf/1802.02191}.
 
 \begin{beispiel}
   \begin{enumerate}
-  \item \(\N\) ist entscheidbare Menge.
-  \item Jeder endliche Typ ist entscheidbare Menge.
+  \item \(\N\) ist eine entscheidbare Menge.
+  \item Jeder endliche Typ ist eine entscheidbare Menge.
   \end{enumerate}
 \end{beispiel}
 
@@ -131,3 +131,60 @@ Wir folgen nun \url{https://arxiv.org/pdf/1802.02191}.
   Für einen endlichen Typ \(X\) ist es im Allgemeinen nicht der Fall, dass für eine Menge \(V\) mit Surjektion \(X\to V\), \(V\) wieder endlicher Typ ist.
   Es ist im Allgemeinen auch nicht der Fall, dass ein \(U\) mit einer Einbettung \(U\to X\) wieder endlich ist.
 \end{bemerkung}
+
+\begin{bemerkung}
+  Sei \(M\) eine entscheidbare Menge. Dann kann \(f:M\to X\) durch Fallunterscheidung definiert werden:
+  Für gegebenes \(x:M\) reicht es jeweils \(f\) für \(y=x\) und für \(y\neq x\) anzugeben.
+\end{bemerkung}
+
+\begin{definition}
+  Sei \(I\) ein Typ und \(X:I\to \mU\) sodass \(X_i\) für alle \(i:I\) punktiert ist.
+  Dann ist der \begriff{Wedge}\index{\(\bigvee_{i:I}X_i\)} \(\bigvee_{i:I}X_i\) gegeben durch den folgenden Pushout:
+  \begin{center}
+    \begin{tikzcd}
+      I\ar[r]\ar[d] & \sum_{i:I}X_i\ar[d] \\
+      \eins\ar[r] & \bigvee_{i:I}X_i
+    \end{tikzcd}
+  \end{center}
+  weiter gibt es für \(j:I\) eine Inklusionsabbildung:
+  \[
+    \iota_j:X_j\to \sum_{i:I}X_i\to \bigvee_{i:I}X_i
+  \]
+  Falls \(I\) entscheidbare Menge ist, können wir für \(j:I\) eine Abbildung
+  \(t_j:\sum_{i:I}X_i \to X_j\) durch Fallunterscheidung definieren und damit eine Projektion:
+  \[
+    \pi_j:\bigvee_{i:I}X_i \to X_j
+  \]
+  Im Fall \(I=\zwei\) schreiben wir auch \(X_0\vee X_1\)\index{\(\vee\)} statt \(\bigvee_{i:\zwei}X_i}\).
+\end{definition}
+
+\begin{definition}
+  \begin{enumerate}
+  \item Ein Paar \(A,\alpha\) heißt \begriff{endliches CW-Komplex-Datum}, wenn es \(N:\N\) gibt und \(A_i\) für \(0\leq i \leq N\) endlich ist und weiter \(\alpha_{n+1}:A_{n+1}\times S^n\to X_n\), wobei \(X_n\) gegeben ist durch den Pushout:
+    \begin{center}
+      \begin{tikzcd}
+        A_{n+1}\times S^n\ar[r]\ar[d] & X_n\ar[d]  \\
+        A_{n+1}\ar[r] & X_{n+1}
+      \end{tikzcd}
+    \end{center}
+    und \(X_0\colonequiv A_0\).
+  \item Ein Typ \(X\) ist eine \begriff{endlicher CW-Komplex}, wenn es ein endliches CW-Komplex-Datum \((A,\alpha)\) gibt, sodass \(X=X_N\) gilt mit der Notation aus (a).
+  \end{enumerate}
+\end{definition}
+
+\begin{beispiel}
+  \begin{enumerate}
+  \item Endliche Typen sind endliche CW-Komplexe.
+  \item \(S^n\) ist endlicher CW-Komplex, gegeben durch
+    \[
+      A_0\colonequiv \eins,A_1\colonequiv \emptyset,\dots,A_{n-1}\colonequiv \emptyset,A_n\colonequiv \eins
+    \]
+    zusammen mit den eindeutig bestimmten Abbildungen \(\alpha\).
+  \item Der Torus, \(T^2\) ist gegeben durch
+    \[
+      A_0\colonequiv\eins, A_1\colonequiv \zwei, A_2\colonequiv \eins
+    \]
+    und der Abbildung \(\alpha_{2}:A_2\times S^1\to X_2=S^1\vee S^1\), die \(l:\ast=_{S^1}\ast\) auf
+    \(aba^{-1}b^{-1}\) abbildet, wobei \(a\colonequiv \iota_1(l)\) und \(b\colonequiv \iota_2(l)\).
+  \end{enumerate}
+\end{beispiel}
