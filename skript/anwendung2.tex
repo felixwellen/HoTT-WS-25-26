@@ -100,12 +100,71 @@ Als Vorabeit werden wir zunächst Eilenberg-MacLane Räume für \(\Z\) betrachte
   \begin{center}
     \begin{tikzcd}
       \dots\ar[r] & H^{n-1}(A)\oplus H^n(B)\ar[r,"g^\ast-f^\ast"] & H^{n-1}(C)\ar[dll] \\
-      H^n(A\sqcup_C B)\ar[r] & H^n(A)\oplus H^n(B)\ar[r,"g^\ast-f^\ast"] & H^n(C)\ar[dll] \\
-      H^{n+1}(A\sqcup_C B)\ar[r] & H^{n+1}(A)\oplus H^{n+1}(B)\ar[r,"g^\ast-f^\ast"] & \dots,
+      H^n(A\sqcup_C B)\ar[r] & H^n(A)\oplus H^n(B)\ar[r,"g^\ast-f^\ast"] & H^n(C)
     \end{tikzcd}
   \end{center}
   die \begriff{Mayer-Vietoris-Sequenz}. Wobei wir ``\(\oplus\)'' für das binäre Produkt von Gruppen schreiben und ``\(g^\ast-f^\ast\)'' statt ``\((g^\ast)^{-1}\kon f^\ast\)'', weil alle beteiligten Gruppen abelsch sind. 
 \end{satz}
+
+\begin{beweis}
+  Wir betrachten zunächst drei allgemeine Aussagen über Pullbacks, die wir schließlich einsetzen werden um eine Fasersequenz zu konstruieren, sodass wir mit \Cref{faser-les} eine lange exakte Sequenz von Homotopiegruppen und damit auch Kohomologiegruppen bekommen.
+  \begin{enumerate}
+  \item Wenn
+    \begin{center}
+      \begin{tikzcd}
+        C\ar[r]\ar[d] & B\ar[d] \\
+        A\ar[r] & P
+      \end{tikzcd}
+    \end{center}
+    ein Pushout ist, dann ist für alle \(Z:\mU\)
+    \begin{center}
+      \begin{tikzcd}
+        Z^P\ar[r]\ar[d] & Z^B\ar[d] \\
+        Z^A\ar[r] & Z^C
+      \end{tikzcd}
+    \end{center}
+    ein Pullback.
+  \item Wenn 
+    \begin{center}
+      \begin{tikzcd}
+        P\ar[r]\ar[d] & B\ar[d,"g"] \\
+        A\ar[r,"f"] & C
+      \end{tikzcd}
+    \end{center}
+    ein Pullback ist, dann auch
+    \begin{center}
+      \begin{tikzcd}
+        P\ar[r]\ar[d,swap] & C\ar[d,"\Delta"] \\
+        A\times B\ar[r,"f\times g"] & C\times C
+      \end{tikzcd}
+    \end{center}
+  \item Für jeden punktierten Typ \(X\) ist
+    \begin{center}
+      \begin{tikzcd}
+        \Omega X\ar[r]\ar[d] & \eins\ar[d,"\ast"] \\
+        \Omega X\times \Omega X\ar[r,"\_^{-1}\kon\_"] & \Omega X
+      \end{tikzcd}
+    \end{center}
+     stets ein Pullback.    
+   \end{enumerate}
+   Wir verwenden nun (a) mit \(Z\equiv K(\Z,n)\) für ein beliebiges \(n:\N\) und dem gegebenen Pushout um ein Pullback-Quadrat zu erhalten:
+   \begin{center}
+      \begin{tikzcd}
+        K(\Z,n)^{A\sqcup_C B}\ar[r]\ar[d] & K(\Z,n)^B\ar[d,"\_\circ g"] \\
+        K(\Z,n)^A\ar[r,"\_\circ f",swap] & K(\Z,n)^C
+      \end{tikzcd}
+    \end{center}
+    Wir wenden (b) auf diesen Pullback an.
+    Es gilt \(K(\Z,n)^C=\Omega \left(K(\Z,n+1)^C\right)\), also erhalten wir mit (c) und Pullback-Pasting den Pullback
+    \begin{center}
+      \begin{tikzcd}
+        K(\Z,n)^{A\sqcup_C B}\ar[r]\ar[d] & \eins\ar[d] \\
+        K(\Z,n)^A\ar[r,"\_\circ g - \_\circ f",swap]K(\Z,n)^B & K(\Z,n)^C
+      \end{tikzcd}
+    \end{center}
+    Das ist eine Fasersequenz, auf die wir \Cref{faser-les} anwenden,
+    um die lange exakte Sequenz von Ko\-homolo\-gie\-grup\-pen wie oben beschrieben zu erhalten. 
+\end{beweis}
 
 \subsection{Kohomologie endlicher CW-Komplexe}
 
@@ -155,7 +214,7 @@ Wir folgen nun \url{https://arxiv.org/pdf/1802.02191}.
   \[
     \pi_j:\bigvee_{i:I}X_i \to X_j
   \]
-  Im Fall \(I=\zwei\) schreiben wir auch \(X_0\vee X_1\)\index{\(\vee\)} statt \(\bigvee_{i:\zwei}X_i}\).
+  Im Fall \(I=\zwei\) schreiben wir auch \(X_0\vee X_1\)\index{\(\vee\)} statt \(\bigvee_{i:\zwei}X_i\).
 \end{definition}
 
 \begin{definition}
