@@ -43,16 +43,16 @@
 
 \theorembodyfont{}
 \theoremstyle{break}
-    \newtheorem{theorem}{Satz}[subsection]
-    \newtheorem{lemma}[theorem]{Lemma}
-    \newtheorem{definition}[theorem]{Definition}
-    \newtheorem{bemerkung}[theorem]{Bemerkung}
-    \newtheorem{konvention}[theorem]{Konvention}
-    \newtheorem{regeln}[theorem]{Regeln}
-    \newtheorem{axiom}[theorem]{Axiom}
-    \newtheorem{fakt}[theorem]{Fakt}
-    \newtheorem{beispiel}[theorem]{Beispiel}
-    \newtheorem{korollar}[theorem]{Korollar}
+    \newtheorem{satz}{Satz}[subsection]
+    \newtheorem{lemma}[satz]{Lemma}
+    \newtheorem{definition}[satz]{Definition}
+    \newtheorem{bemerkung}[satz]{Bemerkung}
+    \newtheorem{konvention}[satz]{Konvention}
+    \newtheorem{regeln}[satz]{Regeln}
+    \newtheorem{axiom}[satz]{Axiom}
+    \newtheorem{fakt}[satz]{Fakt}
+    \newtheorem{beispiel}[satz]{Beispiel}
+    \newtheorem{korollar}[satz]{Korollar}
 
 \theoremstyle{nonumberplain}
 \theoremsymbol{\ensuremath{\Box}}

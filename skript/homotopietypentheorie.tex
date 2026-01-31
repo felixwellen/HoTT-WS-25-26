@@ -316,10 +316,10 @@ dass eine Äquivalenz $f:A\simeq B$ durch ``$\ap$'' auf Gleichheitstypen wieder 
   Mit dem letzteren auch $f^{-1}(L)\kon H:(f^{-1}\circ g)\sim \id$ und $L_{f^{-1}}\kon K:(g\circ f^{-1})\sim\id$.
 \end{beweis}
 
-\begin{theorem}
+\begin{satz}
   \label{ap-equiv}
   Seien $f:A\simeq B$ eine Äquivalenz und $x,y:A$. Dann ist $\ap_f:x=y\to f(x)=f(y)$ auch eine Äquivalenz.  
-\end{theorem}
+\end{satz}
 
 \begin{beweis}
   Wir wenden \Cref{2-6} an auf die Abbildungen $\ap_f:x=y\to f(x)=f(y)$, $\ap_g:f(x)=f(y)\to gf(x)=gf(y)$ und $\ap_f:gf(x)=gf(y)\to fgf(x)=fgf(y)$.
@@ -377,10 +377,10 @@ der Äquivalenzen als Abbildungen mit kontrahierbaren Fasern charakterisiert.
     eine Quasi-Inverse zu $\sum_{x:A}e(x)$ ist.
 \end{beweis}
 
-\begin{theorem}
+\begin{satz}
   \label{isequiv-iscontr-fib}
   Eine Funktion $A\to B$ ist genau dann eine Äquivalenz, wenn sie kontrahierbar ist.
-\end{theorem}
+\end{satz}
 
 \begin{beweis}
 \ignore{  Sei $f:A\to B$ kontrahierbar.
@@ -500,7 +500,7 @@ Nun wollen wir noch zeigen, dass die Abbildung $(\_,\_)_=$ eine Äquivalenz ist:
   wenn die Fasern von $\sum_{x:A}f_x$ das sind.
 \end{beweis}
 
-\begin{theorem}
+\begin{satz}
   \label{gleichheitssatz}
   Sei $A$ ein Typ und $G:A\to A\to \mU$ mit $r:(x:A)\to G(x,x)$.
   Dann ist $G(x,y)$ genau dann für alle $x,y:A$ zu $x=y$ äquivalent, wenn
@@ -508,7 +508,7 @@ Nun wollen wir noch zeigen, dass die Abbildung $(\_,\_)_=$ eine Äquivalenz ist:
     \sum_{x:A}G(x,y)
   \]
   für alle $y$ kontrahierbar ist.
-\end{theorem}
+\end{satz}
 
 \begin{beweis}
   Anwenden von \Cref{sigma-fiberwise-equiv} auf die Abbildung
@@ -684,7 +684,7 @@ Wir wenden uns nun den Typen
   Rechnung mit \Cref{sigma-gleichheitstyp} und Univalenz.
 \end{beweis}
 
-\begin{theorem}[Objektklassifikation]
+\begin{satz}[Objektklassifikation]
   \index{Objektklassifikation}
   \label{objektklassifikation}
   Für alle $A:\mU$ haben wir die Äquivalenz
@@ -692,7 +692,7 @@ Wir wenden uns nun den Typen
      (A',f)\mapsto \fib_f:\left(\sum_{A':\mU}A'\to A\right)\simeq (A\to\mU),
   \]
   mit der Inversen $(B:A\to\mU)\mapsto ((x:A)\times B(x), \pi_1)$.
-\end{theorem}
+\end{satz}
 
 \begin{beweis}
   Sei $B:A\to\mU$. Wir wollen für die Faser von $\pi_1:(x:A)\times B(x) \to A$ zeigen:
@@ -1026,13 +1026,13 @@ Wir wollen in diesem Abschnitt untersuchen, was es für algebraische Strukturen 
     Wir schreiben $\Hom(M,N)$ und $\Iso(M,N)$\index{$\Hom$}\index{$\Iso$} für die entsprechenden Typen aller Homo- und Isomorphismen.
 \end{definition}
 
-\begin{theorem}
+\begin{satz}
   Seien $(M,\ast),(N,\ast^\prime)$ Magmen, Halbgruppen, oder Gruppen, dann gilt:
   \[
     ((M,\ast)=(N,\ast^\prime))\simeq \Iso(M,N)
   \]
   Der Gleichheitstyp bezieht sich auf den Typ der Magmen, der wegen \Cref{monoid-hgruppe-gruppe-aussagen} auch der Gleichheitstyp in den Halbgruppen, und Gruppen ist.
-\end{theorem}
+\end{satz}
 
 \begin{beweis}
   Wir berechnen:
@@ -1087,12 +1087,12 @@ Später werden wir noch weitere Möglichkeiten sehen solche 1-Typen zu konstruie
   \end{enumerate}
 \end{definition}
 
-\begin{theorem}
+\begin{satz}
   Sei $(G,\ast)$ eine Gruppe, dann haben wir einen Isomorphismus von Gruppen:
   \[
      (\Omega(\Tors{G}),\kon) \to (G,\ast)
   \]
-\end{theorem}
+\end{satz}
 
 \begin{beweis}
   Wir rechnen für $T,T^\prime:\Tors{G}$ direkt:
@@ -1381,14 +1381,14 @@ Ab sofort verwenden wir die übliche Schreibweise für ganze Zahlen.
   Induktion über $x$.
 \end{beweis}
 
-\begin{theorem}
+\begin{satz}
   Die Windungszahl ist eine Äquivalenz
   \[ \omega:\Omega(S^1)\simeq \Z \]
   mit Inverser $l^{(\_)}$.
   Diese Äquivalenz setzt sich fort zu
   \[ (\ast=_{S^1}x) \simeq C(x) \]
   für alle  $x:S^1$.
-\end{theorem}
+\end{satz}
 
 \begin{beweis}
   Zunächst definieren wir für alle $x:S^1$ eine Abbildung
