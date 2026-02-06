@@ -159,7 +159,7 @@ Als Vorabeit werden wir zunächst Eilenberg-MacLane Räume für \(\Z\) betrachte
     \begin{center}
       \begin{tikzcd}
         K(\Z,n)^{A\sqcup_C B}\ar[r]\ar[d] & \eins\ar[d] \\
-        K(\Z,n)^A\ar[r,"\_\circ g - \_\circ f",swap]K(\Z,n)^B & K(\Z,n)^C
+        K(\Z,n)^A\times K(\Z,n)^B\ar[r,"\_\circ g - \_\circ f",swap] & K(\Z,n)^C
       \end{tikzcd}
     \end{center}
     Das ist eine Fasersequenz, auf die wir \Cref{faser-les} anwenden,
@@ -247,3 +247,60 @@ Wir folgen nun \url{https://arxiv.org/pdf/1802.02191}.
     \(aba^{-1}b^{-1}\) abbildet, wobei \(a\colonequiv \iota_1(l)\) und \(b\colonequiv \iota_2(l)\).
   \end{enumerate}
 \end{beispiel}
+
+\begin{definition}
+  Sei \(n>0\).
+  Der \begriff{Abbildungsgrad} von Funktionen \(f:S^n\to S^n\) ist eine Abbildung
+  \(\mathrm{deg}:(S^n\to S^n)\to \Z\), die durch die folgenden Eigenschaften eindeutig bestimmt ist:
+  \begin{enumerate}[(i)]
+  \item \(\mathrm{deg}(\id_{S^n})=1\)
+  \item \(\mathrm{deg}(g\circ f)=\mathrm{deg}(g)\cdot \mathrm{deg}(f)\)
+  \item \(\mathrm{deg}(f:S^1\to S^1)\) ist die Windungszahl (wobei \(\|S^1\to S^1\|_0\) identifizert wird mit \(\Omega(S^1)\)).
+  \item \(\mathrm{deg}(\sigma f)=\mathrm{deg}(f)\)
+  \end{enumerate}
+\end{definition}
+
+Wir beweisen hier nicht, dass eine solche Funktion \(\mathrm{deg}\) tatsächlich existiert --- etwas mehr dazu findet sich in \url{https://arxiv.org/pdf/1802.02191}.
+
+\begin{definition}
+  Sei \(A,\alpha\) ein endliches CW-Komplex-Datum.
+  \begin{enumerate}[(a)]
+  \item Der zelluläre Komplex zu \((A,\alpha)\) ist eine Sequenz abelscher Gruppen, die gegeben ist durch
+    \begin{center}
+      \begin{tikzcd}
+        0\ar[r] & \Z[A_N]\ar[r,"\partial_N"] & Z[A_{N-1}]\ar[r,"\partial_{N-1}"] & \dots
+        \ar[r,"\partial_{1}"] & \Z[A_0]\ar[r] & \Z\ar[r] & 0
+      \end{tikzcd}
+    \end{center}
+    wobei die Abbildungen wie folgt gegeben sind.
+    Die Abbildung \(\Z[A_0]\to \Z\) summiert Koeffizienten, alle weiteren Abbildungen sind entweder \(0\) oder \begriff{Randabbildungen} \(\partial_i\).
+    Diese sind gegeben, für \(a:A_{n+1}\) 
+    \[
+      \partial_{n+1}(a)\colonequiv \sum_{b_j:A_{n}}c(a,b_j)\cdot b_j
+      \]
+      (hier ist mit ``\(\sum\)'' tatsächlich eine gewöhliche Summe gemeint)
+      wobei sich die Koeffizienten \(c(a,b_j)\) durch den Grad der Abbildung
+      \begin{center}
+        \begin{tikzcd}
+          S^n\ar[r,"\alpha_{n+1}(a)"] & X_n\ar[r] &X_n/X_{n-1}\simeq \bigvee_{A_n}S^n\ar[r] & S^n
+        \end{tikzcd}
+      \end{center}
+      gegeben ist.
+    \item Die \begriff{zelluläre Kohomologie} des durch \((A,\alpha)\) gegebenen CW-Komplexes \(X\) schreiben wir als \(H^n_c(X)\) und ist gegeben durch \(\mathrm{Kern}\partial_{n+1}^\vee/\mathrm{Bild}\partial_n^\vee\), wobei \(\_^\vee\) durch Dualisieren gegeben ist -- also \(A^\vee\colonequiv \mathrm{hom}(A,\Z)\) und für Abbildungen entsprechend, die durch Präkomposition gegebene Abbildung.
+  \end{enumerate}
+\end{definition}
+
+\begin{beispiel}
+  \(H^0_c(T^2)=0\), \(H^1_c(T^2)=\Z^2\), \(H^2_c(T^2)=\Z\).
+\end{beispiel}
+
+\begin{definition}
+  Die reduzierte Kohomologie eines punktierten Typen \(X\) ist gegeben durch
+  \[
+    H^n_{\mathrm{red}}(X)\colonequiv \|X\to_\ast K(\Z,n)\|_0
+  \]
+\end{definition}
+
+\begin{fakt}
+  Für endliche CW-Komplexe \(X\) gilt: \(H^n_c(X)=H^n_{\mathrm{red}}(X)\).
+\end{fakt}
