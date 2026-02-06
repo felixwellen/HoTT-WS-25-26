@@ -1,0 +1,107 @@
+Die Synthetische Algebraische Topologie ermöglicht es, topologische Räume und Homotopietypen zugleich zu verweden. In Homotopietypentheorie sehen wir sonst nur die Seite der Homotopietypen und können manche klassischen Konstruktionen, wie etwa projektive Räume oder Matrizengruppen nicht direkt übersetzen. In der Synthetischen Algebraischen Topologie ist das möglich, ihre Anfänge sind unter dem Namen ``Synthetic Stone Duality'' hier zu finden: \href{https://felix-cherubini.de/condensed.pdf}{https://felix-cherubini.de/condensed.pdf}.
+
+\begin{definition}
+  \begin{enumerate}[(a)]
+  \item Ein \begriff{Turm} \((X_i)_{i:\N}\) ist eine Folge von Typen zusammen mit Abbildungen wie folgt:
+    \begin{center}
+      \begin{tikzcd}
+        X_0& X_1\ar[l,"p_1"] & X_2\ar[l,"p_2"] & \dots\ar[l,"p_3"]
+      \end{tikzcd}
+    \end{center}
+    (wobei wir die Abbildungen \(p_i\) in der Notation unterdrücken)
+  \item Der \begriff{sequentielle Limes} eines Turms \((X_i)_{i:\N}\) ist gegeben durch
+    \[
+      \lim_{i:\N}X_i\colonequiv \left(\alpha : \prod_{i:\N}X_i\right)\times\left(\prod_{i:\N}p_{i+1}(\alpha_{i+1})=\alpha_i\right)
+      \]
+    \item Ein Typ \(X\) ist ein \begriff{Stone-Raum}, wenn ein Turm \((X_i)_{i:\N}\) existiert, sodass die \(X_i\) endlich sind und \(X=\lim_{i:\N}X_i\) gilt.
+      Wir schreiben \(\mathrm{Stone}\colonequiv (S:\mU)\times(\text{S ist Stone-Raum})\) für den Typ der Stone-Räume.
+  \end{enumerate}
+\end{definition}
+
+\begin{beispiel}
+  \begin{enumerate}[(a)]
+  \item Jeder endliche Typ ist Stone-Raum.
+  \item \(\N_\infty\colonequiv \lim_{i:\N}\{1,\dots,i\}\) ist ein Stone-Raum, wobei die Abbildungen \(p_{i+1}\) jeweils das größte Element, \(i+1\) auf \(i\) abbilden und sonst die Identität sind.
+  \item \(C\colonequiv 2^\N\) ist ein Stone-Raum, der sogenannte \begriff{Cantor-Raum}, der als limes der endlichen Bitfolgen durch \(\lim_{i:\N}2^{\{0,\dots,i\}}\) gegeben ist. Die Abbildunge sind hier Einschränkungen.
+    In der Vorlesung hatte ich an dieser Stelle noch \href{https://math.andrej.com/2007/09/28/seemingly-impossible-functional-programs/}{https://math.andrej.com/2007/09/28/seemingly-impossible-functional-programs/} erwähnt.
+  \end{enumerate}
+\end{beispiel}
+
+Die folgenden Axiome gelten in einem speziellen Model der Homotopietypentheorie, das den ``light condensed anima'' von Peter Scholze und Dustin Clausen entspricht.
+Sie erlauben es, von den eben definierten Stone-Räumen zu zeigen, dass sich Abbildungen zwischen Stone Räumen wie stetige Abbildungen verhalten. Dabei geht man von der Topologie aus, die diese Räume als sequenzieller Limes topologischer Räume hätten, als produkt endlicher, und damit kompakter, Räume sind diese also zum Beispiel kompakt.
+
+\begin{axiom}
+  \begin{enumerate}[(1)]
+  \item \begin{enumerate}[(a)]
+    \item \textbf{Scott-Continuity:} Jede Abbildung \(\lim_{i:\N}S_i\to 2\) mit endlichen \(S_i\) faktorisiert bereits über ein \(S_k\).
+    \item \textbf{Markovs Prinzip:} Sei \(\alpha:2^\N\) und \(\alpha\neq 0\), dann gilt \(\exists.i:\N.\alpha(i)=1\).
+    \end{enumerate}
+  \item \textbf{Weak König's Lemma:} Wenn \((S_i)_{i:\N}\) Turm endlicher Typen ist und \(\|S_i\|\) für alle \(i:\N\) gilt, dann \(\|\lim_{i:\N}S_i\|\).
+  \item \textbf{Lokale Auswahl:} Sei \(S:\mathrm{Stone}\) und \(E:S\to\mU\) mit
+    \((x:S)\to \|E_x\|\), dann existiert \(T:\mathrm{Stone}\) mit Surjektion \(t:T\to S\) sodass \((y:T)\to R_{t(y)}\).
+  \item \textbf{Abhängige Auswahl}. (``Dependent Choice'')
+  \end{enumerate}
+\end{axiom}
+
+\begin{definition}
+  Ein \begriff{kompakter Hausdorff-Raum} ist eine Menge \(X\), sodass alle Gleichheitstypen \(x=_Xy\) Stone-Räume sind und \(S:\mathrm{Stone}\) existiert zusammen mit einer Surjektion \(S\to X\). 
+\end{definition}
+
+\begin{beispiel}
+  \begin{enumerate}[(a)]
+  \item Das Einheitsintervall \(\mathbb{I}\colonequiv [0,1] \colonequiv C/\sim\) wobei \(\sim\) erzeugt ist durch
+    \[
+    a_0\dots a_n0111\dots \sim a_0\dots a_n1000\dots
+    \]
+    ist ein kompakter Hausdorff-Raum.
+  \item Wir können durch Pushout den kompakten Hausdorff-Raum \([-1,1]\) definieren und darauf partielle Addition, Multiplikation und ``\(\leq\)'' definieren.
+  \item \(\mathbb{S}^1\colonequiv \{(x,y):[-1,1]^2\mid x^2+y^2=1\} \) ist kompakter Hausdorff-Raum.
+  \item \(\mathbb{D}^2\colonequiv \{(x,y):[-1,1]^2\mid x^2+y^2\leq 1\}\) ist kompakter Hausdorff-Raum.
+  \end{enumerate}
+\end{beispiel}
+
+\begin{bemerkung}
+  Jede Abbildung \(f:\mathbb{I}\to \zwei\) ist konstant --- \(\mathbb{I}\) ist also in diesem Sinn topologisch zusammenhängend.
+\end{bemerkung}
+
+\begin{beweis}
+  Mit Axiom 1a.
+\end{beweis}
+
+Das Folgende ist analog zu den Abschneidungen.
+Dort waren die n-Typen, Typen, für die Abbildungen von \(S^{n+1}\) immer konstant sind --- die Rolle von \(S^{n+1}\) übernimmt hier das Intervall.
+
+\begin{fakt}
+  Es gibt eine Abbildung \(\shape:\mU\to \mU\), den \begriff{Shape} zusammen mit
+  einer Abbildung \(\sigma_A:A\to \shape A\) für jedes \(A:\mU\), sodass gilt:
+  \begin{enumerate}[(i)]
+  \item \(\sigma_A\) ist genau dann eine Äquivalenz, wenn die Abbildung
+    \[
+    x\mapsto (\_\mapsto x):A\to (\mathbb{I}\to A)
+    \]
+    eine Äquivalenz ist.
+  \item Sei \(B:\shape A\to \mU\) so, dass \(\sigma_{B(x)}\) stets eine Äquivalenz ist, dann ist
+    \[
+    \_\circ\sigma_A:\prod_{x:A}B(\sigma_A(x)) \to \prod_{y:\shape A}B(y)
+    \]
+    eine Äquivalenz.
+  \end{enumerate}
+\end{fakt}
+
+Das kann man so verstehen, dass \(\shape X\) der Homotopietyp von \(X\) ist, wenn \(X\) ein hinreichend guter topologischer Raum ist. Es ist momentan noch offen, in welchem Umfang das genau gilt.
+
+\begin{fakt}
+  Es gelten: \(\shape\mathbb{S}^1=S^1\), \(\shape \mathbb{D}^2=\shape \mathbb I=\eins\).
+\end{fakt}
+
+\begin{satz}[Brouwers Fixpunktsatz]
+  Sei \(f:\mathbb{D}^2\to \mathbb{D}^2\), dann existiert \(x:\mathbb{D}^2\) sodass \(f(x)=x\).
+\end{satz}
+
+\begin{beweis}
+  Es stellt sich raus, dass die Aussage \(\exists x:\mathbb{D}^2.f(x)=x\) ihrer doppelten Negation entspricht --- das gilt allgemeiner für Existenz von Elementen eines kompakten Hausdorff-Raums, die eine abgeschlossene Bedingung erfüllen sollen.
+  Das heißt, wir können annehmen, dass \(f(x)\neq x\) gilt und sind fertig, wenn wir zu einem Wiederspruch kommen --- das entspricht auch dem gängigen, klassischen Beweis des Fixpunktsatzes.
+  Da \(x\) und \(f(x)\) verschieden sind, können wir eine eindeutige Gerade durch diese Beiden Punkte konstruieren und damit den Schnittpunkt dieser Gerade mit \(\mathbb{S}^1\), auf den wir treffen, wenn wir die Gerade von \(f(x)\) in Richtung \(x\) ablaufen. Das liefert eine Funktion \(d:\mathbb{D}^2\to \mathbb{S}^1\), die auf \(\mathbb{S}^1\) die Identität ist.
+  Bezeichne \(\iota:\mathbb{S}^1\to \mathbb{D}^2\) die Inklusion, dann haben wir
+  \(\shape d\circ\shape \iota=\id\), was nicht sein kann.
+\end{beweis}
