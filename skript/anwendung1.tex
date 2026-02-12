@@ -15,7 +15,7 @@ zu der wir durch die Homo\-to\-pie\-ty\-pen\-theo\-rie Zugang haben.
 \begin{definition}
   Sei \(A\) punktierter Typ und \(n:\N\).
   Dann ist
-  \[\pi_n\colonequiv \|\Omega^n(A)\|_0\]
+  \[\pi_n(A)\colonequiv \|\Omega^n(A)\|_0\]
   --- was wir für \(n\geq 1\) die \begriff{\(n\)-te Homotopiegruppe}\index{\(\pi_n(A)\)} von \(A\) nennen.
 \end{definition}
 
@@ -71,7 +71,7 @@ Tatsächlich ist \(\pi_n(A)\) für \(n\geq 2\) eine abelsche Gruppe, was wir zun
 \begin{beweis}
   \begin{enumerate}[(a)]
   \item Wir haben die entsprechenden Gesetze bereits für allgemeine Identitätstypen \(x=y\) gezeigt.
-    Nun ist \(\|\Omega^n(A)\|_0\) eine Menge für \(x,y,z:|\Omega^n(A)\|_0\) gilt zum Beispiel Assoziativität per \(\|\_\|_0\)-Induktion und Andwenden von \(|\_|_0\) auf die entsprechende Gleichheit in \(\Omega^n(A)\).
+    Nun ist \(\|\Omega^n(A)\|_0\) eine Menge für \(x,y,z:\|\Omega^n(A)\|_0\) gilt zum Beispiel Assoziativität per \(\|\_\|_0\)-Induktion und Andwenden von \(|\_|_0\) auf die entsprechende Gleichheit in \(\Omega^n(A)\).
   \item \Cref{eckmann-hilton}.
   \end{enumerate}
 \end{beweis}
@@ -96,9 +96,9 @@ Tatsächlich ist \(\pi_n(A)\) für \(n\geq 2\) eine abelsche Gruppe, was wir zun
 
 \begin{beweis}
   \begin{enumerate}[(a)]
-  \item \(((x:A)\to \|x=\ast\|) = (y:\|A\|_0)\to |y|_0=|\ast|\),
+  \item \(((x:A)\to \|x=\ast\|_{-1}) = (x:A)\to |x|_0=|{\ast}|_0\),
   wobei die rechte Seite bedeutet, dass \(\|A\|_0\) kontrahierbar ist.
-\item Für jeden \(k\)-Typ \(B\) gilt
+  \item Für jeden \(k\)-Typ \(B\) gilt
   \[(\|\|A\|_n\|_k\to B)\simeq (\|A\|_n\to B)\simeq (A\to B)\]
   wobei die Komposition dieser Äquivalenzen durch \(\_\circ (|\_|_k \circ |\_|_n)\) gegeben ist.
   Mit \Cref{n-abschneidung-berechnen} ist also \(\|\|A\|_n\|_k\simeq \|A\|_k\) und damit \(\|A\|_k=\eins\), wenn \(\|A\|_n=\eins\).
@@ -172,7 +172,7 @@ Tatsächlich ist \(\pi_n(A)\) für \(n\geq 2\) eine abelsche Gruppe, was wir zun
 
 \begin{beweis}
   Für (c) berechnen wir zuerst:
-  \(\Omega f(s\kon t)=p^{-1}\kon s\kon t\kon p=p^{-1}\kon s\kon p\kon p^{-1}\kon t\kon p=\Omega f(s)\kon\Omega f(t)\)
+  \(\Omega f(s\kon t)=p^{-1}\kon s\kon t\kon p=p^{-1}\kon s\kon p\kon p^{-1}\kon t\kon p=\Omega f(s)\kon\Omega f(t)\).
   Das überträgt sich auf \(\Omega^n(f)\) und \(\pi_n(f)\).
 \end{beweis}
 
@@ -216,7 +216,7 @@ Tatsächlich ist \(\pi_n(A)\) für \(n\geq 2\) eine abelsche Gruppe, was wir zun
 
 
 \begin{beweis}
-  Sei \(x:\|A\|_0\) mit \(\|f\|_0(f)=\ast\) gegeben.
+  Sei \(x:\|A\|_0\) mit \(\|f\|_0(x)=\ast\) gegeben.
   Per Induktion ist \(y:A\) mit \(p:|f(\ast)|=|\ast|\) bzw \(q:\|f(\ast)=\ast\|\).
   Daraus bekommen wir ein Element der Faser, da wir eine Aussage zeigen wollen.
 \end{beweis}
@@ -485,7 +485,7 @@ betrachten wir das folgende Diagramm:
 Da alle vertikalen Abbildunge Äquivalenzen sind, bekommen wir auch eine Äquivalenz zwischen den Pushouts der beiden Zeilen.
 
 Nun fehlt noch, dass der Totalraum der Hopf-Faserung aus \Cref{hopf-faserung}
-tatsächlich der Pushout der Pushout der oberen Zeile im Diagramm ist.
+tatsächlich der Pushout der oberen Zeile im Diagramm ist.
 Das werden wir in \Cref{pushout-descent} in größerer Allgemeinheit klären.
 \end{beweis}
 
@@ -559,7 +559,7 @@ Wir führen nun einen höheren induktiven Typen ein, den Coequalizer, der etwas 
   der Kokegel
   \begin{center}
     \begin{tikzcd}
-      \sum_{b:B}C(b)\ar[r] & \sum_{x:\Coeq(f,g)}C(x)
+        \sum_{b:B}C(b)\ar[r] & \sum_{x:\Coeq(f,g)}\tilde{C}(x)
     \end{tikzcd}
   \end{center}
   ein Coequalizer von
