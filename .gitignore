@@ -1,6 +1,3 @@
-## ignore agda interface files
-*.agdai
-
 ## ignore latex SAVE-ERROR
 *.bbl-SAVE-ERROR
 
